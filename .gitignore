@@ -1,0 +1,9 @@
+.idea/
+node_modules/
+public/**/static/
+public/**/index.html
+public/**/service-worker.js
+public/**/asset-manifest.json
+
+!**/favicon.ico
+!**/manifest.json

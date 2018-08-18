@@ -1,0 +1,43 @@
+.currencyRate {
+  &__title {
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+
+    & .ant-form-item {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.currencyForm {
+  &__header {
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #001529;
+  }
+
+  &__content {
+    margin-top: 20px;
+  }
+
+  &__actions {
+    margin-top: 20px;
+
+    & .ant-btn {
+      border-color: #001529;
+      background: #001529;
+      color: #ffffffa6;
+
+      &:hover, &:focus {
+        background: #001529;
+        color: #fff;
+      }
+    }
+  }
+}
