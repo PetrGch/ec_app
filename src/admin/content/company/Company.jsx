@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Icon, Button } from 'antd';
 
-import {companyColumnConfig, mockData} from "./companyColumnConfig";
+import {companyColumnConfig} from "./companyColumnConfig";
 
 import './company.less';
 import {getAllCompanies} from "../../../action/admin";
@@ -41,7 +41,7 @@ class Company extends React.Component {
         <div>
           <Table
             className="companyAdmin__table"
-            dataSource={mockData}
+            dataSource={companies}
             columns={this.columnConfig}
             size="small"
           />

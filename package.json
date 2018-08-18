@@ -4,14 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "node ./server/",
-    "webpack": "webpack --config config/webpackConfig/webpack.config.dev.js",
-    "dev": "node ./config/webpackConfig/start.js",
-    "prod": "node ./config/webpackConfig/build.js",
-    "lint": "./node_modules/.bin/eslint -c ./config/.eslintrc.js --ext .js --ext .jsx src",
-    "lintf": "./node_modules/.bin/eslint --fix -c ./config/.eslintrc.js --ext .js --ext .jsx src",
-    "stylelint": "./node_modules/stylelint/bin/stylelint.js src/*.less --config config/.stylelintrc",
-    "stylelintf": "./node_modules/stylelint/bin/stylelint.js src/*.less --config config/.stylelintrc --fix"
+    "dev": "npm-run-all --parallel dev:*",
+    "dev:app": "webpack --config config/webpackConfig/webpack.config.dev.js",
+    "dev:server": "webpack --config config/webpackConfig/webpack.config.server.js",
+    "dev:run": "nodemon --exec babel-node public/server.js",
+
+    "prod": "npm-run-all prod:*",
+    "prod:build": "webpack --config config/webpackConfig/webpack.config.prod.js && webpack --config config/webpackConfig/webpack.config.server.js",
+    "prod:run": "nodemon --exec babel-node public/server.js",
+
+    "test": "npm-run-all test:*",
+    "test:lint": "./node_modules/.bin/eslint -c ./config/.eslintrc.js --ext .js --ext .jsx src",
+    "test:lintf": "./node_modules/.bin/eslint --fix -c ./config/.eslintrc.js --ext .js --ext .jsx src",
+    "test:stylelint": "./node_modules/stylelint/bin/stylelint.js src/*.less --config config/.stylelintrc",
+    "test:stylelintf": "./node_modules/stylelint/bin/stylelint.js src/*.less --config config/.stylelintrc --fix"
   },
   "author": "",
   "license": "ISC",
@@ -42,6 +48,7 @@
     "jest": "20.0.4",
     "less": "^3.0.4",
     "moment": "^2.22.2",
+    "npm-run-all": "^4.1.3",
     "object-assign": "4.1.1",
     "promise": "8.0.1",
     "prop-types": "^15.6.2",
@@ -61,7 +68,8 @@
     "stylelint-config-standard": "^18.2.0",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.6.2",
-    "webpack": "3.8.1",
+    "webpack": "^3.8.1",
+    "webpack-hot-middleware": "^2.22.3",
     "webpack-manifest-plugin": "1.3.2",
     "whatwg-fetch": "2.0.3"
   },
@@ -77,6 +85,7 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-react": "^7.10.0",
     "eslint-plugin-standard": "^3.1.0",
-    "less-loader": "^4.1.0"
+    "less-loader": "^4.1.0",
+    "webpack-dev-middleware": "^3.1.3"
   }
 }

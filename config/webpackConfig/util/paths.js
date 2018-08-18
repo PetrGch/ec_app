@@ -49,6 +49,7 @@ function getServedPath(appPackageJson) {
 // config after eject: we're in ./util/
 module.exports = {
     appIndexJs: resolveApp('src/index.js'),
+    serverIndexJs: resolveApp('server/index.js'),
     appBuild: resolveApp('public'),
     appBuildDev: resolveApp('public/dev'),
     servedPath: getServedPath(resolveApp('package.json')),
