@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import {Route, Switch, withRouter} from 'react-router-dom';
 import {notification} from 'antd';
 
+import ExchangeCompany from '../exchangeCompany/ExchangeCompany';
 import Login from '../common/AA/Login';
 import Admin from '../admin/Admin';
 import PrivateRoute from '../router/PrivateRoute';
-import ExchangeCompany from '../exchangeCompany/ExchangeCompany';
 import NotFound from '../common/404/NotFound';
 import {getCurrentUser} from '../common/util/APIUtil';
 import LoadingIndicator from '../common/LoadingIndicator';
@@ -31,22 +31,6 @@ class App extends React.Component {
     this.loadCurrentUser = this.loadCurrentUser.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
-    this.listenAdminKeyCombination = this.listenAdminKeyCombination.bind(this);
-  }
-
-  listenAdminKeyCombination(event) {
-    if (event.keyCode === 65 && event.ctrlKey && event.shiftKey) {
-      this.props.history.push("/admin");
-    }
-  }
-
-  componentWillMount() {
-    this.loadCurrentUser();
-    window.addEventListener("keydown", this.listenAdminKeyCombination);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("keydown", this.listenAdminKeyCombination);
   }
 
   loadCurrentUser(resolve, reject) {

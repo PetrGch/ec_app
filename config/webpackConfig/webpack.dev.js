@@ -1,32 +1,27 @@
-'use strict';
-
-process.env.BABEL_ENV = 'development';
-process.env.NODE_ENV = 'development';
-
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
-const getClientEnvironment = require('./util/env');
+
 const paths = require('./util/paths');
 
-const publicPath = '/';
-const publicUrl = '';
-const env = getClientEnvironment(publicUrl);
+process.env.NODE_PATH = (process.env.NODE_PATH || '');
+process.env.NODE_ENV = 'development';
 
 module.exports = {
     devtool: 'cheap-module-source-map',
+
     entry: paths.appIndexJs,
+
     output: {
         pathinfo: true,
         path: paths.appBuildDev,
         filename: 'static/js/bundle.js',
         chunkFilename: 'static/js/[name].chunk.js',
-        publicPath: publicPath
+        publicPath: '/'
     },
+
     resolve: {
         modules: ['node_modules', paths.appNodeModules].concat(
             process.env.NODE_PATH.split(path.delimiter).filter(Boolean)
@@ -36,7 +31,14 @@ module.exports = {
             new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
         ],
     },
+
     watch: true,
+
+    watchOptions: {
+        aggregateTimeout: 100,
+        ignored: /node_modules/
+    },
+
     module: {
         strictExportPresence: true,
         rules: [
@@ -53,12 +55,16 @@ module.exports = {
                     {
                         test: /\.(js|jsx|mjs)$/,
                         include: paths.appSrc,
-                        loader: require.resolve('babel-loader'),
-                        options: {
-                            babelrc: false,
-                            presets: [require.resolve('babel-preset-react-app'), 'env', 'react', 'es2017'],
-                            cacheDirectory: true,
-                        },
+                        exclude: /node_modules/,
+                        use: [
+                            {
+                                loader: 'babel-loader',
+                                options: {
+                                    cacheDirectory: true
+                                }
+                            },
+
+                        ],
                     },
                     {
                         test: /\.less$/,
@@ -84,23 +90,31 @@ module.exports = {
                         options: {
                             name: 'static/media/[name].[hash:8].[ext]',
                         },
-                    },
-                ],
-            },
-        ],
+                    }
+                ]
+            }
+        ]
     },
+
     plugins: [
-        new InterpolateHtmlPlugin(env.raw),
         new HtmlWebpackPlugin({
             inject: true,
             template: paths.appHtml,
+            title: 'Excurrate',
+            PUBLIC_URL: ""
         }),
-        new webpack.NamedModulesPlugin(),
-        new webpack.DefinePlugin(env.stringified),
-        new CaseSensitivePathsPlugin(),
-        new WatchMissingNodeModulesPlugin(paths.appNodeModules),
+        new webpack.DefinePlugin({
+            __isBrowser__: "true"
+        }),
+        //
+        // Analyzer
+        //
+        // new BundleAnalyzerPlugin({
+        //     analyzerPort: 8888
+        // }),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     ],
+
     node: {
         dgram: 'empty',
         fs: 'empty',
@@ -108,6 +122,7 @@ module.exports = {
         tls: 'empty',
         child_process: 'empty',
     },
+
     performance: {
         hints: false,
     },

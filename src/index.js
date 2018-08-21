@@ -7,7 +7,8 @@ import configureStore from './store/configureStore';
 import App from './app/App';
 
 import './index.less';
-import registerServiceWorker from "./registerServiceWorker";
+
+console.log('hi there')
 
 const store = configureStore();
 
@@ -20,4 +21,4 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
-registerServiceWorker();
+// registerServiceWorker();
