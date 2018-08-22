@@ -8,8 +8,7 @@
     "dev:build-dev": "webpack --config config/webpackConfig/webpack.dev.js",
     "dev:build-server": "webpack --config config/webpackConfig/webpack.server.js",
     "dev:start": "nodemon ./public/server/serverBundle.js",
-
-    "prod": "npm-run-all --parallel dev:*",
+    "prod": "npm-run-all --parallel prod:*",
     "prod:build-prod": "webpack --config config/webpackConfig/webpack.prod.js",
     "prod:build-server": "webpack --config config/webpackConfig/webpack.server.js",
     "prod:start": "nodemon ./public/server/serverBundle.js"

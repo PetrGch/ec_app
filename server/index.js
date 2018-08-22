@@ -15,7 +15,7 @@ const store = configureStore();
 
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
-const sourceDirectory = 'production' === 'production' ? 'prod' : 'dev';
+const sourceDirectory = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
 
 app.use(express.static(resolveApp(`./public/${sourceDirectory}`)));
 
