@@ -33,9 +33,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "style-loader": "^0.22.1",
-    "url-loader": "^1.1.1"
-  },
-  "devDependencies": {
+    "url-loader": "^1.1.1",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-plugin-css-modules-transform": "^1.6.1",
@@ -50,5 +48,8 @@
     "webpack-bundle-analyzer": "^2.13.1",
     "webpack-manifest-plugin": "^2.0.3",
     "webpack-node-externals": "^1.7.2"
+  },
+  "devDependencies": {
+
   }
 }
