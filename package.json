@@ -11,7 +11,7 @@
     "prod": "npm-run-all --parallel prod:*",
     "prod:build-prod": "webpack --config config/webpackConfig/webpack.prod.js",
     "prod:build-server": "webpack --config config/webpackConfig/webpack.server.js",
-    "prod:start": "nodemon ./public/server/serverBundle.js"
+    "prod:start": "NODE_PATH=production nodemon ./public/server/serverBundle.js"
   },
   "author": "",
   "license": "ISC",

@@ -4,7 +4,6 @@ const nodeExternals = require('webpack-node-externals');
 
 const paths = require('./util/paths');
 
-const NODE_ENV = process.env.NODE_ENV || 'development';
 process.env.NODE_PATH = (process.env.NODE_PATH || '');
 
 module.exports = {
@@ -67,7 +66,6 @@ module.exports = {
 
     plugins: [
         new webpack.DefinePlugin({
-            NODE_ENV: JSON.stringify(NODE_ENV),
             __isBrowser__: "false"
         })
     ]
