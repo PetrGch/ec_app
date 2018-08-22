@@ -15,7 +15,7 @@ const store = configureStore();
 
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
-
+console.log(path.join(__dirname, 'public'));
 const sourceDirectory = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
 
 app.use(express.static(`http://excurrate.com:8082/public/${sourceDirectory}`));
