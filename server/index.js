@@ -15,10 +15,9 @@ const store = configureStore();
 
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
-console.log(path.join(__dirname, 'public'));
 const sourceDirectory = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
 
-app.use(express.static(`http://excurrate.com:8082/public/${sourceDirectory}`));
+app.use(express.static(resolveApp(`./public/${sourceDirectory}`)));
 
 app.get('/*', (req, res) => {
     console.log(sourceDirectory);
@@ -30,7 +29,7 @@ app.get('/*', (req, res) => {
             </StaticRouter>
         </Provider>
     );
-    const indexFile = `http://excurrate.com:8082/public/${sourceDirectory}/index.html`;
+    const indexFile = resolveApp(`./public/${sourceDirectory}/index.html`);
     fs.readFile(indexFile, 'utf8', (err, data) => {
         if (err) {
             console.error('Something went wrong:', err);
