@@ -14,6 +14,8 @@ process.env.NODE_PATH = (process.env.NODE_PATH || '');
 process.env.NODE_ENV = 'development';
 
 const publicPath = paths.servedPath;
+const publicUrl = publicPath.slice(0, -1);
+console.log(publicUrl) // TODO delete or replace on something meaningful
 const shouldUseRelativeAssetPaths = publicPath === './';
 const cssFilename = 'static/css/[name].[contenthash:8].css';
 const extractTextPluginOptions = shouldUseRelativeAssetPaths
