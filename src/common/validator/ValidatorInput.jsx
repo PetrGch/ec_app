@@ -3,7 +3,7 @@ import React from 'react';
 import './validatorInput.less';
 import {validationForOnBlur, validatorForOnChange} from "./validationRules";
 
-export default class ValidatorInput extends React.Component {
+export default class ValidatorInput extends React.PureComponent {
   constructor(props) {
     super(props);
 

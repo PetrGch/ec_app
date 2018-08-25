@@ -14,7 +14,7 @@ function nullValidator(field, subField) {
   return null;
 }
 
-export default class WorkingTime extends React.Component {
+export default class WorkingTime extends React.PureComponent {
   constructor(props) {
     super(props);
 

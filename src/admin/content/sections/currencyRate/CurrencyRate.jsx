@@ -9,7 +9,7 @@ import {
   changeCurrencyValue, selectUnselectCurrency, setInitialCurrencyState
 } from "../../../../action/currencyRate";
 
-export default class CurrencyRate extends React.Component {
+export default class CurrencyRate extends React.PureComponent {
   constructor(props) {
     super(props);
 

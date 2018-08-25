@@ -20,7 +20,7 @@ import './admin.less';
 
 const { Content } = Layout;
 
-class Admin extends React.Component {
+class Admin extends React.PureComponent {
   render() {
     const { onLogout } = this.props;
 

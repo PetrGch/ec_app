@@ -38,13 +38,13 @@ module.exports = {
     serverIndexJs: resolveApp('server/index.js'),
     appPublic: resolveApp('public/server'),
     servedPath: getServedPath(resolveApp('package.json')),
+    devServerContentBase: resolveApp('build'),
 
 
     appBuild: resolveApp('public'),
     appServer: resolveApp('src'),
     appNodeModules: resolveApp('node_modules'),
     appPackageJson: resolveApp('package.json'),
-    devServerContentBase: resolveApp('build'),
     dotenv: resolveApp('.env'),
     yarnLockFile: resolveApp('yarn.lock'),
     testsSetup: resolveApp('src/setupTests.js'),

@@ -1,0 +1,33 @@
+@import "../../util/variable";
+
+.ec-button {
+  height: 32px;
+  padding: 0 15px;
+  line-height: 1.5;
+  border: 1px solid @primary-gray;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-size: 14px;
+  background: @primary-white;
+  cursor: pointer;
+  transition: all .2s;
+
+  &:hover, &:focus {
+    border-color: @primary-green;
+    color: @primary-green;
+  }
+
+  &--size {
+    &-large {
+      padding: 0 15px;
+      font-size: 16px;
+      height: 40px;
+    }
+
+    &-small {
+      padding: 0 7px;
+      font-size: 14px;
+      height: 24px;
+    }
+  }
+}

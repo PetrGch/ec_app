@@ -12,7 +12,7 @@ import {getCurrentUser} from '../common/util/APIUtil';
 import LoadingIndicator from '../common/LoadingIndicator';
 import {ACCESS_TOKEN} from '../common/util/AppConstance';
 
-class App extends React.Component {
+class App extends React.PureComponent {
   constructor(props) {
     super(props);
 

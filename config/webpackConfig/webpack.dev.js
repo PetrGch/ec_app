@@ -32,8 +32,6 @@ module.exports = {
         ],
     },
 
-    watch: true,
-
     watchOptions: {
         aggregateTimeout: 100,
         ignored: /node_modules/
@@ -125,5 +123,14 @@ module.exports = {
 
     performance: {
         hints: false,
+    },
+
+    devServer: {
+        contentBase: paths.devServerContentBase,
+        proxy: {
+            "/api": "http://localhost:3000"
+        },
+        compress: true,
+        port: 9000,
     },
 };

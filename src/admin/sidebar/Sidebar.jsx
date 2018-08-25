@@ -8,7 +8,7 @@ import './sidebar.less';
 const {SubMenu, Item} = Menu;
 const {Sider} = Layout;
 
-class Sidebar extends React.Component {
+class Sidebar extends React.PureComponent {
   constructor(props) {
     super(props);
 

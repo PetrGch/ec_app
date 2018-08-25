@@ -1,0 +1,67 @@
+@import "../../util/variable";
+
+.ec-dropdown {
+  display: inline-flex;
+  flex-direction: column;
+
+  &__handler {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    line-height: 1.5;
+    padding: 0 15px;
+    border: 1px solid @primary-gray;
+    border-radius: 4px;
+    white-space: nowrap;
+    font-size: 14px;
+    background: @primary-white;
+    cursor: pointer;
+    transition: all .2s ease;
+
+    &--size {
+      &-large {
+        padding: 0 16px;
+        font-size: 18px;
+        height: 42px;
+      }
+
+      &-small {
+        padding: 0 7px;
+        font-size: 14px;
+        height: 24px;
+      }
+    }
+  }
+
+  &__list {
+    width: 100%;
+    overflow-y: auto;
+    border: 1px solid @primary-gray;
+    border-radius: 4px;
+    transition: all .2s ease;
+
+    &--hidden {
+      &-true {
+        max-height: 0;
+        opacity: 0;
+      }
+
+      &-false {
+        max-height: 200px;
+        opacity: 1;
+      }
+    }
+  }
+
+  &:hover {
+    & .ec-dropdown {
+      &__handler {
+        border: 1px solid @primary-green;
+      }
+
+      &__list {
+        border: 1px solid @primary-green;
+      }
+    }
+  }
+}

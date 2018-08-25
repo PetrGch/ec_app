@@ -9,7 +9,7 @@ import './login.less';
 
 const FormItem = Form.Item;
 
-class LoginForm extends React.Component {
+class LoginForm extends React.PureComponent {
   constructor(props) {
     super(props);
 

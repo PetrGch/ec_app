@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -158,22 +159,22 @@ module.exports = {
         new ExtractTextPlugin({
             filename: cssFilename,
         }),
-        // new SWPrecacheWebpackPlugin({
-        //     dontCacheBustUrlsMatching: /\.\w{8}\./,
-        //     filename: 'service-worker.js',
-        //     logger(message) {
-        //         if (message.indexOf('Total precache size is') === 0) {
-        //             return;
-        //         }
-        //         if (message.indexOf('Skipping static resource') === 0) {
-        //             return;
-        //         }
-        //     },
-        //     minify: true,
-        //     navigateFallback: publicUrl + '/index.html',
-        //     navigateFallbackWhitelist: [/^(?!\/__).*/],
-        //     staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
-        // }),
+        new SWPrecacheWebpackPlugin({
+            dontCacheBustUrlsMatching: /\.\w{8}\./,
+            filename: 'service-worker.js',
+            logger(message) {
+                if (message.indexOf('Total precache size is') === 0) {
+                    return;
+                }
+                if (message.indexOf('Skipping static resource') === 0) {
+                    return;
+                }
+            },
+            minify: true,
+            navigateFallback: publicUrl + '/index.html',
+            navigateFallbackWhitelist: [/^(?!\/__).*/],
+            staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+        }),
         new ManifestPlugin({
             fileName: 'asset-manifest.json',
         }),

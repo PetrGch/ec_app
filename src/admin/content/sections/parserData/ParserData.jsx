@@ -13,7 +13,7 @@ function nullValidator(field, subField, defaultValue = "") {
   return defaultValue;
 }
 
-export default class ParserData extends React.Component {
+export default class ParserData extends React.PureComponent {
   constructor(props) {
     super(props);
 

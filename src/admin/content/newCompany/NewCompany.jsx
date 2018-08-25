@@ -2,7 +2,7 @@ import React from 'react';
 import {Icon} from "antd";
 import NewCompanyData from "../sections/newCompanyData/NewCompanyData";
 
-export default class NewCompany extends React.Component {
+export default class NewCompany extends React.PureComponent {
   render() {
     const { dispatch, newCompany } = this.props;
 

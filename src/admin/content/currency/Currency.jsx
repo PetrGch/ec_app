@@ -5,7 +5,7 @@ import {mockData} from "../company/companyColumnConfig";
 import {currencyColumnConfig} from "./currencyColumnConfig";
 import {getAllCompanies} from "../../../action/admin";
 
-export default class Currency extends React.Component {
+export default class Currency extends React.PureComponent {
   constructor(props) {
     super(props);
 

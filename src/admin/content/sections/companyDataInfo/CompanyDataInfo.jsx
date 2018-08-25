@@ -8,7 +8,7 @@ import ValidatorInput from "../../../../common/validator/ValidatorInput";
 
 const { TextArea } = Input;
 
-export default class CompanyDataInfo extends React.Component {
+export default class CompanyDataInfo extends React.PureComponent {
   constructor(props) {
     super(props);
 

@@ -7,7 +7,7 @@ import {editParserService} from "./editCurrencyService";
 
 import './editedParserForm.less';
 
-export default class EditedParserForm extends React.Component {
+export default class EditedParserForm extends React.PureComponent {
   constructor(props) {
     super(props);
 

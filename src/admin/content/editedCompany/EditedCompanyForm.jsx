@@ -9,7 +9,7 @@ import './editedCompanyForm.less';
 import {setInitialCompanyMainInfoState} from "../../../action/companyMainInfo";
 import {nullValidator} from "../../../common/util/valueValidator";
 
-export default class EditedCompanyForm extends React.Component {
+export default class EditedCompanyForm extends React.PureComponent {
   constructor(props) {
     super(props);
 

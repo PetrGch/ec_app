@@ -6,7 +6,7 @@ import {companyColumnConfig} from "./companyColumnConfig";
 import './company.less';
 import {getAllCompanies} from "../../../action/admin";
 
-class Company extends React.Component {
+class Company extends React.PureComponent {
   constructor(props) {
     super(props);
 

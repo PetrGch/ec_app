@@ -3,7 +3,7 @@ import {Icon, Row, Col, Button} from 'antd';
 import {editCommentaryService} from "./editCommentaryService";
 import CommentaryData from "../sections/commentaryData/CommentaryData";
 
-export default class EditedCommentaryForm extends React.Component {
+export default class EditedCommentaryForm extends React.PureComponent {
   get editCommentaryService() {
     return editCommentaryService;
   }

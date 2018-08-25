@@ -7,7 +7,7 @@ import WorkingTime from "./workingTime/WorkingTime";
 import {nullValidator} from "../../../../common/util/valueValidator";
 import ValidatorInput from "../../../../common/validator/ValidatorInput";
 
-export default class CompanyMainInfo extends React.Component {
+export default class CompanyMainInfo extends React.PureComponent {
   constructor(props) {
     super(props);
 

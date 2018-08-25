@@ -5,7 +5,7 @@ import {editCurrencyService} from "./editCurrencyService";
 import CurrencyRate from "../sections/currencyRate/CurrencyRate";
 import {setInitialCurrencyState} from "../../../action/currencyRate";
 
-export default class EditedCurrencyForm extends React.Component {
+export default class EditedCurrencyForm extends React.PureComponent {
   constructor(props) {
     super(props);
 

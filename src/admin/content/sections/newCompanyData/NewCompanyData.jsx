@@ -7,7 +7,7 @@ import {editNewCompanyService} from "../../newCompany/editNewCompanyService";
 import './newCompanyData.less';
 import CompanyDataInfo from "../companyDataInfo/CompanyDataInfo";
 
-export default class NewCompanyData extends React.Component {
+export default class NewCompanyData extends React.PureComponent {
   constructor(props) {
     super(props);
 
