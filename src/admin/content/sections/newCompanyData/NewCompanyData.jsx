@@ -1,11 +1,11 @@
 import React from 'react';
-import CompanyMainInfo from "../companyMainInfo/CompanyMainInfo";
-import {Button} from "antd";
-import {setInitialCompanyMainInfoState} from "../../../../action/companyMainInfo";
-import {editNewCompanyService} from "../../newCompany/editNewCompanyService";
+import CompanyMainInfo from '../companyMainInfo/CompanyMainInfo';
+import {Button} from 'antd';
+import {setInitialCompanyMainInfoState} from '../../../../action/companyMainInfo';
+import {editNewCompanyService} from '../../newCompany/editNewCompanyService';
 
 import './newCompanyData.less';
-import CompanyDataInfo from "../companyDataInfo/CompanyDataInfo";
+import CompanyDataInfo from '../companyDataInfo/CompanyDataInfo';
 
 export default class NewCompanyData extends React.PureComponent {
   constructor(props) {
@@ -21,7 +21,7 @@ export default class NewCompanyData extends React.PureComponent {
 
   componentDidMount() {
     const { newCompany } = this.props;
-    this.setState({initialCompanyMainInfo: JSON.stringify(newCompany)})
+    this.setState({initialCompanyMainInfo: JSON.stringify(newCompany)});
   }
 
   componentWillUnmount() {

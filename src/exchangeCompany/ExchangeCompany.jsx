@@ -1,8 +1,8 @@
 import React from 'react';
-import {Route, Switch} from "react-router-dom";
+import {Route, Switch} from 'react-router-dom';
 
-import NotFound from "../common/404/NotFound";
-import EcHomePage from "./EcHomePage/EcHomePage";
+import NotFound from '../common/404/NotFound';
+import EcHomePage from './EcHomePage/EcHomePage';
 
 export default class ExchangeCompany extends React.PureComponent {
   render() {

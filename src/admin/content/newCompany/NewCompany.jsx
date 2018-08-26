@@ -1,6 +1,6 @@
 import React from 'react';
-import {Icon} from "antd";
-import NewCompanyData from "../sections/newCompanyData/NewCompanyData";
+import {Icon} from 'antd';
+import NewCompanyData from '../sections/newCompanyData/NewCompanyData';
 
 export default class NewCompany extends React.PureComponent {
   render() {

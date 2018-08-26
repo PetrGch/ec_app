@@ -1,12 +1,12 @@
 import React from 'react';
-import {Input, Row, Col, Checkbox} from "antd";
-import {changeParserValue} from "../../../../action/parser";
+import {Input, Row, Col, Checkbox} from 'antd';
+import {changeParserValue} from '../../../../action/parser';
 
 import './ParserData.less';
-import moment from "moment/moment";
-import ValidatorInput from "../../../../common/validator/ValidatorInput";
+import moment from 'moment/moment';
+import ValidatorInput from '../../../../common/validator/ValidatorInput';
 
-function nullValidator(field, subField, defaultValue = "") {
+function nullValidator(field, subField, defaultValue = '') {
   if (field && field[subField]) {
     return field[subField];
   }
@@ -39,7 +39,7 @@ export default class ParserData extends React.PureComponent {
             <Col span={7}>
               <ValidatorInput
                 InputComponent={Input}
-                value={nullValidator(parserData, "url")}
+                value={nullValidator(parserData, 'url')}
                 placeholder="URL"
                 name="url"
                 validationOption={{length: 120}}
@@ -50,7 +50,7 @@ export default class ParserData extends React.PureComponent {
             <Col span={7}>
               <ValidatorInput
                 InputComponent={Input}
-                value={nullValidator(parserData, "parameters")}
+                value={nullValidator(parserData, 'parameters')}
                 placeholder="Parameters"
                 name="parameters"
                 validationOption={{length: 120}}
@@ -63,7 +63,7 @@ export default class ParserData extends React.PureComponent {
             <Col span={7}>
               <ValidatorInput
                 InputComponent={Input}
-                value={nullValidator(parserData, "rowSelector")}
+                value={nullValidator(parserData, 'rowSelector')}
                 placeholder="Row selector"
                 name="rowSelector"
                 validationOption={{length: 60}}
@@ -78,7 +78,7 @@ export default class ParserData extends React.PureComponent {
             <Col span={7}>
               <ValidatorInput
                 InputComponent={Input}
-                value={nullValidator(parserData, "currencyAmountSelector")}
+                value={nullValidator(parserData, 'currencyAmountSelector')}
                 placeholder="Currency amount"
                 name="currencyAmountSelector"
                 validationOption={{length: 60}}
@@ -89,7 +89,7 @@ export default class ParserData extends React.PureComponent {
             <Col span={7}>
               <ValidatorInput
                 InputComponent={Input}
-                value={nullValidator(parserData, "currencyTypeSelector")}
+                value={nullValidator(parserData, 'currencyTypeSelector')}
                 placeholder="Currency type"
                 name="currencyTypeSelector"
                 validationOption={{length: 60}}
@@ -102,7 +102,7 @@ export default class ParserData extends React.PureComponent {
             <Col span={7}>
               <ValidatorInput
                 InputComponent={Input}
-                value={nullValidator(parserData, "buySelector")}
+                value={nullValidator(parserData, 'buySelector')}
                 placeholder="Buy selector"
                 name="buySelector"
                 validationOption={{length: 60}}
@@ -113,7 +113,7 @@ export default class ParserData extends React.PureComponent {
             <Col span={7}>
               <ValidatorInput
                 InputComponent={Input}
-                value={nullValidator(parserData, "sellSelector")}
+                value={nullValidator(parserData, 'sellSelector')}
                 placeholder="Sell selector"
                 name="sellSelector"
                 validationOption={{length: 60}}
@@ -124,7 +124,7 @@ export default class ParserData extends React.PureComponent {
           <Checkbox
             name="active"
             onChange={this.handleValueOnChange}
-            checked={nullValidator(parserData, "active", false)}
+            checked={nullValidator(parserData, 'active', false)}
           >Active</Checkbox>
         </div>
       </div>

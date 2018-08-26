@@ -1,8 +1,8 @@
 import React from 'react';
 import { Table, Icon } from 'antd';
 
-import {commentaryColumnConfig} from "./commentaryColumnConfig";
-import {getAllCompanies} from "../../../action/admin";
+import {commentaryColumnConfig} from './commentaryColumnConfig';
+import {getAllCompanies} from '../../../action/admin';
 
 export default class Commentary extends React.PureComponent {
   constructor(props) {

@@ -6,7 +6,7 @@ export function selectUnselectCurrency(companies, action) {
         tempCurrencies.push({
           currencyName: action.currency.currencyName,
           currencyType: action.currency.currencyType
-        })
+        });
       } else {
         tempCurrencies = tempCurrencies.filter(c => c.currencyType !== action.currency.currencyType);
       }
@@ -23,7 +23,7 @@ export function changeCurrencyValue(companies, action) {
         if (c.currencyType === action.currencyType) {
           c[action.fieldName] = Number(action.value);
         }
-      })
+      });
     }
     return company;
   });
@@ -35,7 +35,7 @@ export function changeParserValue(companies, action) {
       if (!company.exchangeCompanyParseData) {
         company.exchangeCompanyParseData = {};
       }
-      company.exchangeCompanyParseData[action.fieldName] = action.value
+      company.exchangeCompanyParseData[action.fieldName] = action.value;
     }
     return company;
   });
@@ -67,7 +67,7 @@ export function deleteCommentaryById(companies, action) {
       });
     }
     return company;
-  })
+  });
 }
 
 export function changeCompanyMainInfoValue(companies, action) {
@@ -76,7 +76,7 @@ export function changeCompanyMainInfoValue(companies, action) {
       company[action.fieldName] = action.value;
     }
     return company;
-  })
+  });
 }
 
 export function setInitialCompanyMainInfoState(companies, action) {
@@ -94,7 +94,7 @@ export function changeWorkingTimeValue(companies, action) {
       company.workingTime[action.fieldName] = action.value;
     }
     return company;
-  })
+  });
 }
 
 export function changeCompanyDataInfoValue(companies, action) {
@@ -103,5 +103,5 @@ export function changeCompanyDataInfoValue(companies, action) {
       company.exchangeCompanyDetail[action.fieldName] = action.value;
     }
     return company;
-  })
+  });
 }

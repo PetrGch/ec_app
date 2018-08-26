@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {setSize, sizeType} from "../util";
+import {setSize, sizeType} from '../util';
 
 import './button.less';
 

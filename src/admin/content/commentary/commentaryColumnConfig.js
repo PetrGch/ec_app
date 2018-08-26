@@ -1,29 +1,31 @@
+/* eslint-disable */
 import React from 'react';
-import {Link} from "react-router-dom";
+import { Link } from 'react-router-dom';
+/* eslint-enable */
 
 export const commentaryColumnConfig = () => [
   {
-    key: "name",
-    title: "Company name",
-    dataIndex: "name",
+    key: 'name',
+    title: 'Company name',
+    dataIndex: 'name',
     render: (text, record) => (
       <Link to={`/admin/commentary/${record.id}`}>{text}</Link>
     )
   },
   {
-    key: "address",
-    title: "Address",
-    dataIndex: "address"
+    key: 'address',
+    title: 'Address',
+    dataIndex: 'address'
   },
   {
-    key: "createdAt",
-    title: "Created at",
-    dataIndex: "createdAt"
+    key: 'createdAt',
+    title: 'Created at',
+    dataIndex: 'createdAt'
   },
   {
-    key: "updatedAt",
-    title: "Updated at",
-    dataIndex: "updatedAt",
+    key: 'updatedAt',
+    title: 'Updated at',
+    dataIndex: 'updatedAt',
   }
 ];
 

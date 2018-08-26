@@ -1,7 +1,7 @@
 import {ACCESS_TOKEN, API_URL} from './AppConstance';
 
-export const JSON_RES_TYPE = "json";
-export const TEXT_RES_TYPE = "text";
+export const JSON_RES_TYPE = 'json';
+export const TEXT_RES_TYPE = 'text';
 
 export const request = (options, resType = JSON_RES_TYPE) => {
   const headers = new Headers({
@@ -24,14 +24,14 @@ export const request = (options, resType = JSON_RES_TYPE) => {
             return Promise.reject(text);
           }
           return text;
-        })
+        });
       }
       return response.json().then(json => {
         if (!response.ok) {
           return Promise.reject(json);
         }
         return json;
-      })
+      });
     });
 };
 

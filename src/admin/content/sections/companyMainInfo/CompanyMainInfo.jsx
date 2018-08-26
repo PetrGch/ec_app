@@ -1,11 +1,11 @@
 import React from 'react';
-import {Col, Input, Rate, Row} from "antd";
-import {changeCompanyMainInfoValue} from "../../../../action/companyMainInfo";
+import {Col, Input, Rate, Row} from 'antd';
+import {changeCompanyMainInfoValue} from '../../../../action/companyMainInfo';
 
 import './companyMainInfo.less';
-import WorkingTime from "./workingTime/WorkingTime";
-import {nullValidator} from "../../../../common/util/valueValidator";
-import ValidatorInput from "../../../../common/validator/ValidatorInput";
+import WorkingTime from './workingTime/WorkingTime';
+import {nullValidator} from '../../../../common/util/valueValidator';
+import ValidatorInput from '../../../../common/validator/ValidatorInput';
 
 export default class CompanyMainInfo extends React.PureComponent {
   constructor(props) {
@@ -21,7 +21,7 @@ export default class CompanyMainInfo extends React.PureComponent {
   }
 
   handleOnChangeForRate(value) {
-    const NAME = "rating";
+    const NAME = 'rating';
     const { dispatch, companyId, isNewCompany } = this.props;
     dispatch(changeCompanyMainInfoValue(companyId, NAME, value, isNewCompany));
   }
@@ -36,7 +36,7 @@ export default class CompanyMainInfo extends React.PureComponent {
           <Col span={7}>
             <ValidatorInput
               InputComponent={Input}
-              value={nullValidator(company, "name")}
+              value={nullValidator(company, 'name')}
               placeholder="Company name"
               name="name"
               onChange={this.handleValueOnChange}
@@ -47,7 +47,7 @@ export default class CompanyMainInfo extends React.PureComponent {
           <Col span={7}>
             <ValidatorInput
               InputComponent={Input}
-              value={nullValidator(company, "address")}
+              value={nullValidator(company, 'address')}
               placeholder="Address company"
               name="address"
               onChange={this.handleValueOnChange}
@@ -60,7 +60,7 @@ export default class CompanyMainInfo extends React.PureComponent {
           <Col span={7}>
             <ValidatorInput
               InputComponent={Input}
-              value={nullValidator(company, "coordinateX")}
+              value={nullValidator(company, 'coordinateX')}
               placeholder="Coordinate X"
               name="coordinateX"
               onChange={this.handleValueOnChange}
@@ -71,7 +71,7 @@ export default class CompanyMainInfo extends React.PureComponent {
           <Col span={7}>
             <ValidatorInput
               InputComponent={Input}
-              value={nullValidator(company, "coordinateY")}
+              value={nullValidator(company, 'coordinateY')}
               placeholder="Coordinate Y"
               name="coordinateY"
               onChange={this.handleValueOnChange}
@@ -82,7 +82,7 @@ export default class CompanyMainInfo extends React.PureComponent {
         <Row>
           <Rate
             allowHalf
-            value={nullValidator(company, "rating", 0)}
+            value={nullValidator(company, 'rating', 0)}
             onChange={this.handleOnChangeForRate} />
         </Row>
 
@@ -90,7 +90,7 @@ export default class CompanyMainInfo extends React.PureComponent {
           companyId={company.id}
           dispatch={dispatch}
           isNewCompany={isNewCompany}
-          workingTime={nullValidator(company, "workingTime")}
+          workingTime={nullValidator(company, 'workingTime')}
         />
       </div>
     );

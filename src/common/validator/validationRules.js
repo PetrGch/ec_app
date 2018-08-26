@@ -9,10 +9,10 @@ const onChangeRules = {
 
 const onBlurRules = {
   isRequired: function (value) {
-    return {status: value !== "", message: "This field is required"}
+    return {status: value !== '', message: 'This field is required'};
   },
   email: function (value) {
-    return {status: /^$|^.*@.*\..*$/.test(value), message: "Incorrect email format"}
+    return {status: /^$|^.*@.*\..*$/.test(value), message: 'Incorrect email format'};
   }
 };
 
@@ -21,7 +21,7 @@ export function validatorForOnChange(value, validationOption) {
   const rulesName = Object.keys(validationOption);
   return rulesName.every(rule => {
     return onChangeRules[rule] ? onChangeRules[rule](value, validationOption[rule]) : true;
-  })
+  });
 }
 
 export function validationForOnBlur(value, validationOprion) {
@@ -31,9 +31,9 @@ export function validationForOnBlur(value, validationOprion) {
       ? onBlurRules[rule](value, validationOprion[rule])
       : false;
     if (validationResult && !validationResult.status) {
-      return [...ruleAcc, validationResult]
+      return [...ruleAcc, validationResult];
     }
 
     return ruleAcc;
-  }, [])
+  }, []);
 }

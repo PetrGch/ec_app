@@ -1,17 +1,17 @@
-import {connect} from "react-redux";
+import {connect} from 'react-redux';
 
-import Currency from "./Currency";
+import Currency from './Currency';
 
 const mapStateToProps = state => {
   return {
     companies: state.admin.companies
-  }
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     dispatch: dispatch
-  }
+  };
 };
 
 export default connect(

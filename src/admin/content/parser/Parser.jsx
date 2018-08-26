@@ -1,9 +1,9 @@
 import React from 'react';
 import { Table, Icon } from 'antd';
 
-import {mockData} from "../company/companyColumnConfig";
-import {getAllCompanies} from "../../../action/admin";
-import {parserColumnConfig} from "./parserColumnConfig";
+import {mockData} from '../company/companyColumnConfig';
+import {getAllCompanies} from '../../../action/admin';
+import {parserColumnConfig} from './parserColumnConfig';
 
 export default class Parser extends React.PureComponent {
   constructor(props) {

@@ -1,6 +1,6 @@
 import React from 'react';
-import EcMainContent from "./EcMainContent/EcMainContent";
-import EcSideBar from "./EcSideBar/EcSideBar";
+import EcMainContent from './EcMainContent/EcMainContent';
+import EcSideBar from './EcSideBar/EcSideBar';
 
 import './ecContent.less';
 

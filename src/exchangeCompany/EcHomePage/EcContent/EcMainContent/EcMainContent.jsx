@@ -1,9 +1,9 @@
 import React from 'react';
 
-import BlockWrapper from "../../../../common/BlockWrapper/BlockWrapper";
+import BlockWrapper from '../../../../common/BlockWrapper/BlockWrapper';
 
 import './ecMainContent.less';
-import EcCalculator from "./EcCalculator/EcCalculator";
+import EcCalculator from './EcCalculator/EcCalculator';
 
 export default class EcMainContent extends React.PureComponent {
   render() {

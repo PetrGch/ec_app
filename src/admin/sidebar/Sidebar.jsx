@@ -1,7 +1,7 @@
 import React from 'react';
-import {Layout, Menu, Icon, Button} from "antd";
-import {withRouter} from "react-router-dom";
-import PropTypes from "prop-types";
+import {Layout, Menu, Icon, Button} from 'antd';
+import {withRouter} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import './sidebar.less';
 
@@ -18,13 +18,13 @@ class Sidebar extends React.PureComponent {
   handleOnSelect({key}) {
     const {history, onLogout} = this.props;
     switch (key) {
-      case "company":
-      case "currency":
-      case "parser":
-      case "commentary":
+      case 'company':
+      case 'currency':
+      case 'parser':
+      case 'commentary':
         history.push(`/admin/${key}`);
         break;
-      case "logout":
+      case 'logout':
         onLogout('/');
         break;
     }

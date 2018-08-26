@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {setSize, sizeType} from "../util";
+import {setSize, sizeType} from '../util';
 
 import './dropdown.less';
 
@@ -8,17 +8,17 @@ function Item({index, value, selectedItem, selectItem}) {
   const takeSelectData = () => {
     selectItem({index, value});
   };
-  const isActive = selectedItem.index === index || selectedItem.index === "DEFAULT";
+  const isActive = selectedItem.index === index || selectedItem.index === 'DEFAULT';
   return (
     <li
       className={`ec-dropdownList__item ec-dropdownList__item--active-${isActive}`}
       onClick={takeSelectData}
     >{value}</li>
-  )
+  );
 }
 
 function prepopulateSelectedValue(list, selectedIndex) {
-  let selectedItem = {value: "Select value", index: "DEFAULT"};
+  let selectedItem = {value: 'Select value', index: 'DEFAULT'};
   if (Array.isArray(list) && list.length !== 0) {
     if (selectedIndex) {
       list.some(item => {
@@ -54,7 +54,7 @@ export default class Dropdown extends React.PureComponent {
   mouseOverHandler() {
     const { isListHidden } = this.state;
     if (isListHidden) {
-      this.setState({isListHidden: false})
+      this.setState({isListHidden: false});
     }
   }
 
@@ -62,7 +62,7 @@ export default class Dropdown extends React.PureComponent {
   mouseOutHandler() {
     const { isListHidden } = this.state;
     if (!isListHidden) {
-      this.setState({isListHidden: true})
+      this.setState({isListHidden: true});
     }
   }
 
@@ -85,7 +85,7 @@ export default class Dropdown extends React.PureComponent {
           selectItem={this.selectItem}
           selectedItem={selectedItem}
         />
-      ))
+      ));
     }
     return list;
   }

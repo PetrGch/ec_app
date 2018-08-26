@@ -1,5 +1,5 @@
 import React from 'react';
-import {currencyType} from "../currencyType";
+import {currencyType} from '../currencyType';
 
 import './CurrencyFlag.less';
 

@@ -1,20 +1,20 @@
 import {DELETE_COMPANY_BY_ID, GET_ALL_COMPANIES} from '../constant/admin';
-import {mockData} from "../admin/content/company/companyColumnConfig";
-import {CHANGE_CURRENCY_VALUE, SELECT_UNSELECT_CURRENCY, SET_INITIAL_CURRENCY_STATE} from "../constant/currencyRate";
+import {mockData} from '../admin/content/company/companyColumnConfig';
+import {CHANGE_CURRENCY_VALUE, SELECT_UNSELECT_CURRENCY, SET_INITIAL_CURRENCY_STATE} from '../constant/currencyRate';
 import {
   changeCompanyDataInfoValue,
   changeCompanyMainInfoValue,
   changeCurrencyValue, changeParserValue, changeWorkingTimeValue, deleteCommentaryById, selectUnselectCurrency,
   setInitialCompanyMainInfoState,
   setInitialCurrencyState, setInitialParserState
-} from "./dataProcessors";
-import {CHANGE_PARSER_VALUE, SET_INITIAL_PARSER_STATE} from "../constant/parser";
-import {DELETE_COMMENTARY_BY_ID} from "../constant/commentary";
+} from './dataProcessors';
+import {CHANGE_PARSER_VALUE, SET_INITIAL_PARSER_STATE} from '../constant/parser';
+import {DELETE_COMMENTARY_BY_ID} from '../constant/commentary';
 import {
   CHANGE_COMPANY_MAIN_INFO_VALUE, CHANGE_WORKING_TIME_VALUE,
   SET_INITIAL_COMPANY_MAIN_INFO_STATE
-} from "../constant/companyMainInfo";
-import {CHANGE_COMPANY_DATA_INFO_VALUE} from "../constant/companyDataInfo";
+} from '../constant/companyMainInfo';
+import {CHANGE_COMPANY_DATA_INFO_VALUE} from '../constant/companyDataInfo';
 
 const initialState = {
   companies: [],
@@ -54,7 +54,7 @@ export default function admin(state = initialState, action) {
     case CHANGE_COMPANY_MAIN_INFO_VALUE:
       if (action.isNewCompany) {
         const newCompany = {...state.newCompany};
-        if (!!action.value) {
+        if (action.value) {
           newCompany[action.fieldName] = action.value;
         } else {
           delete newCompany[action.fieldName];
@@ -65,18 +65,18 @@ export default function admin(state = initialState, action) {
     case CHANGE_WORKING_TIME_VALUE:
       if (action.isNewCompany) {
         const newCompany = {...state.newCompany};
-        if (!!action.value) {
+        if (action.value) {
           newCompany.workingTime[action.fieldName] = action.value;
         } else {
           delete newCompany.workingTime[action.fieldName];
         }
-        return {...state, newCompany}
+        return {...state, newCompany};
       }
       return {...state, companies: changeWorkingTimeValue(state.companies, action)};
     case CHANGE_COMPANY_DATA_INFO_VALUE:
       if (action.isNewCompany) {
         const newCompany = {...state.newCompany};
-        if (!!action.value) {
+        if (action.value) {
           newCompany.exchangeCompanyDetail[action.fieldName] = action.value;
         } else {
           delete newCompany.exchangeCompanyDetail[action.fieldName];

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Icon, Row, Col, Button} from 'antd';
-import {editCommentaryService} from "./editCommentaryService";
-import CommentaryData from "../sections/commentaryData/CommentaryData";
+import {editCommentaryService} from './editCommentaryService';
+import CommentaryData from '../sections/commentaryData/CommentaryData';
 
 export default class EditedCommentaryForm extends React.PureComponent {
   get editCommentaryService() {
@@ -28,6 +28,6 @@ export default class EditedCommentaryForm extends React.PureComponent {
           />
         </div>
       </div>
-      : <Alert message="Commentaries don't exist" type="error" />
+      : <Alert message="Commentaries don't exist" type="error" />;
   }
 }

@@ -1,10 +1,10 @@
 import React from 'react';
-import {Col, Input, Row} from "antd";
+import {Col, Input, Row} from 'antd';
 
 import './companyDataInfo.less';
-import {changeCompanyDataInfoValue} from "../../../../action/companyDataInfo";
-import {nullValidator} from "../../../../common/util/valueValidator";
-import ValidatorInput from "../../../../common/validator/ValidatorInput";
+import {changeCompanyDataInfoValue} from '../../../../action/companyDataInfo';
+import {nullValidator} from '../../../../common/util/valueValidator';
+import ValidatorInput from '../../../../common/validator/ValidatorInput';
 
 const { TextArea } = Input;
 
@@ -30,7 +30,7 @@ export default class CompanyDataInfo extends React.PureComponent {
           <Col span={7}>
             <ValidatorInput
               InputComponent={Input}
-              value={nullValidator(exchangeCompanyDetail, "email")}
+              value={nullValidator(exchangeCompanyDetail, 'email')}
               placeholder="Email"
               name="email"
               validationOption={{length: 50, email: true, validateInput}}
@@ -45,7 +45,7 @@ export default class CompanyDataInfo extends React.PureComponent {
           <Col span={7}>
             <ValidatorInput
               InputComponent={Input}
-              value={nullValidator(exchangeCompanyDetail, "phone")}
+              value={nullValidator(exchangeCompanyDetail, 'phone')}
               placeholder="Phone"
               name="phone"
               validationOption={{length: 20, isNumeric: true}}
@@ -60,7 +60,7 @@ export default class CompanyDataInfo extends React.PureComponent {
           <Col span={7}>
             <ValidatorInput
               InputComponent={Input}
-              value={nullValidator(exchangeCompanyDetail, "website")}
+              value={nullValidator(exchangeCompanyDetail, 'website')}
               placeholder="Website"
               name="website"
               validationOption={{length: 50}}
@@ -75,7 +75,7 @@ export default class CompanyDataInfo extends React.PureComponent {
           <Col span={7}>
             <ValidatorInput
               InputComponent={TextArea}
-              value={nullValidator(exchangeCompanyDetail, "description")}
+              value={nullValidator(exchangeCompanyDetail, 'description')}
               rows={6}
               name="description"
               placeholder="Description"

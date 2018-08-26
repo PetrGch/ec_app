@@ -1,14 +1,14 @@
-import {DELETE_COMMENTARY_BY_ID} from "../constant/commentary";
-import {notification} from "antd/lib/index";
-import {request} from "../common/util/APIUtil";
-import {API_URL} from "../common/util/AppConstance";
+import {DELETE_COMMENTARY_BY_ID} from '../constant/commentary';
+import {notification} from 'antd/lib/index';
+import {request} from '../common/util/APIUtil';
+import {API_URL} from '../common/util/AppConstance';
 
 export function deleteCommentaryById(companyId, commentaryId) {
   return (dispatch) => {
     request({
       url: `${API_URL}/commentary/${commentaryId}`,
       method: 'DELETE'
-    }).then(response => {
+    }).then(() => {
       dispatch({
         type: DELETE_COMMENTARY_BY_ID,
         commentaryId: commentaryId,
@@ -24,5 +24,5 @@ export function deleteCommentaryById(companyId, commentaryId) {
         description: error.message || 'Sorry! Something went wrong. Please try again!'
       });
     });
-  }
+  };
 }

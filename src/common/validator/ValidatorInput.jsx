@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './validatorInput.less';
-import {validationForOnBlur, validatorForOnChange} from "./validationRules";
+import {validationForOnBlur, validatorForOnChange} from './validationRules';
 
 export default class ValidatorInput extends React.PureComponent {
   constructor(props) {
@@ -19,7 +19,7 @@ export default class ValidatorInput extends React.PureComponent {
     const { name, value } = event.target;
     const { onChange, validationOption } = this.props;
 
-    if (typeof onChange === "function") {
+    if (typeof onChange === 'function') {
       if (validationOption && validatorForOnChange(value, validationOption)) {
         onChange(name, value);
       } else if (!validationOption) {
@@ -36,10 +36,10 @@ export default class ValidatorInput extends React.PureComponent {
 
     if (validationOption && !isError && invalidFileds.length !== 0) {
       this.setState({isError: true});
-      validationOption.validateInput(name, true)
+      validationOption.validateInput(name, true);
     } else if (validationOption && isError && invalidFileds.length === 0) {
       this.setState({isError: false});
-      validationOption.validateInput(name, false)
+      validationOption.validateInput(name, false);
     }
   }
 
@@ -56,7 +56,7 @@ export default class ValidatorInput extends React.PureComponent {
         onBlur={this.handleValueOnBlur}
         rows={rows}
       />
-    </div>
+    </div>;
   }
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import EcCalculatorNavigation from "./EcCalculatorNavigation/EcCalculatorNavigation";
+import EcCalculatorNavigation from './EcCalculatorNavigation/EcCalculatorNavigation';
 
 import './ecCalculator.less';
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Table, Icon, Button } from 'antd';
 
-import {companyColumnConfig} from "./companyColumnConfig";
+import {companyColumnConfig} from './companyColumnConfig';
 
 import './company.less';
-import {getAllCompanies} from "../../../action/admin";
+import {getAllCompanies} from '../../../action/admin';
 
 class Company extends React.PureComponent {
   constructor(props) {

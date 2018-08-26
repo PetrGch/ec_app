@@ -1,8 +1,8 @@
 import React from 'react';
-import {Alert, Avatar, Card, Icon} from "antd";
+import {Alert, Avatar, Card, Icon} from 'antd';
 
 import './CommentaryData.less';
-import {deleteCommentaryById} from "../../../../action/commentary";
+import {deleteCommentaryById} from '../../../../action/commentary';
 
 const {Meta} = Card;
 

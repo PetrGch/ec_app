@@ -1,12 +1,12 @@
 import React from 'react';
-import {generateUniqueId} from "../../util/autoGenerator";
+import {generateUniqueId} from '../../util/autoGenerator';
 
 import './radio.less';
-import {setSize, sizeType} from "../util";
+import {setSize, sizeType} from '../util';
 
 export default class Radio extends React.PureComponent {
   get uid() {
-    return generateUniqueId()
+    return generateUniqueId();
   }
 
   render() {

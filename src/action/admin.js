@@ -1,6 +1,6 @@
-import {DELETE_COMPANY_BY_ID, GET_ALL_COMPANIES, TOGGLE_FLAG} from '../constant/admin';
-import {request} from "../common/util/APIUtil";
-import {API_URL} from "../common/util/AppConstance";
+import {DELETE_COMPANY_BY_ID, GET_ALL_COMPANIES} from '../constant/admin';
+import {request} from '../common/util/APIUtil';
+import {API_URL} from '../common/util/AppConstance';
 
 export function deleteCompanyById(companyId) {
   return (dispatch) => {
@@ -11,9 +11,9 @@ export function deleteCompanyById(companyId) {
       dispatch({
         type: DELETE_COMPANY_BY_ID,
         companyId: companyId
-      })
-    })
-  }
+      });
+    });
+  };
 }
 
 export function getAllCompanies() {
@@ -25,7 +25,7 @@ export function getAllCompanies() {
       dispatch({
         type: GET_ALL_COMPANIES,
         companies
-      })
-    })
-  }
+      });
+    });
+  };
 }

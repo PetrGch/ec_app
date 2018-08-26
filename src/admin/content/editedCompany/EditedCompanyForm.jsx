@@ -1,13 +1,13 @@
 import React from 'react';
 import {Alert, Button, Col, Icon, Row} from 'antd';
 
-import {editCompanyService} from "./editCompanyService";
-import CompanyMainInfo from "../sections/companyMainInfo/CompanyMainInfo";
-import CompanyDataInfo from "../sections/companyDataInfo/CompanyDataInfo";
+import {editCompanyService} from './editCompanyService';
+import CompanyMainInfo from '../sections/companyMainInfo/CompanyMainInfo';
+import CompanyDataInfo from '../sections/companyDataInfo/CompanyDataInfo';
 
 import './editedCompanyForm.less';
-import {setInitialCompanyMainInfoState} from "../../../action/companyMainInfo";
-import {nullValidator} from "../../../common/util/valueValidator";
+import {setInitialCompanyMainInfoState} from '../../../action/companyMainInfo';
+import {nullValidator} from '../../../common/util/valueValidator';
 
 export default class EditedCompanyForm extends React.PureComponent {
   constructor(props) {
@@ -26,7 +26,7 @@ export default class EditedCompanyForm extends React.PureComponent {
 
   componentDidMount() {
     const company = this.getCompanyById;
-    this.setState({initialCompanyInfo: JSON.stringify(company)})
+    this.setState({initialCompanyInfo: JSON.stringify(company)});
   }
 
   componentWillUnmount() {
@@ -39,9 +39,9 @@ export default class EditedCompanyForm extends React.PureComponent {
     const { match: {params}, companies } = props;
     const company = editCompanyService.selectCompanyById(companies, params.id);
     if (JSON.stringify(company) !== state.initialCompanyInfo) {
-      return {isUpdateButtonDisable: false}
+      return {isUpdateButtonDisable: false};
     } else {
-      return {isUpdateButtonDisable: true}
+      return {isUpdateButtonDisable: true};
     }
   }
 
@@ -60,7 +60,7 @@ export default class EditedCompanyForm extends React.PureComponent {
   validateInput(fieldName, isNotValid) {
     const { invalidFields } = this.state;
     if (isNotValid && invalidFields.indexOf(fieldName) === -1) {
-      this.setState({invalidFields: [...invalidFields, fieldName]})
+      this.setState({invalidFields: [...invalidFields, fieldName]});
     } else if (!isNotValid && invalidFields.indexOf(fieldName) !== -1) {
       const newInvalidFields = invalidFields.filter(r => r !== fieldName);
       this.setState({invalidFields: newInvalidFields});
@@ -95,7 +95,7 @@ export default class EditedCompanyForm extends React.PureComponent {
           />
           <CompanyDataInfo
             companyId={params.id}
-            exchangeCompanyDetail={nullValidator(company, "exchangeCompanyDetail")}
+            exchangeCompanyDetail={nullValidator(company, 'exchangeCompanyDetail')}
             dispatch={dispatch}
             validateInput={this.validateInput}
           />
@@ -120,6 +120,6 @@ export default class EditedCompanyForm extends React.PureComponent {
           </Row>
         </div>
       </div>
-      : <Alert message="This company doesn't exist" type="error" />
+      : <Alert message="This company doesn't exist" type="error" />;
   }
 }

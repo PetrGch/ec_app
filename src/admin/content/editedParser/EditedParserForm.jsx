@@ -1,9 +1,9 @@
 import React from 'react';
 import {Icon, Row, Col, Button, Alert, notification} from 'antd';
 
-import ParserData from "../sections/parserData/ParserData";
-import {setInitialParserState} from "../../../action/parser";
-import {editParserService} from "./editCurrencyService";
+import ParserData from '../sections/parserData/ParserData';
+import {setInitialParserState} from '../../../action/parser';
+import {editParserService} from './editCurrencyService';
 
 import './editedParserForm.less';
 
@@ -25,7 +25,7 @@ export default class EditedParserForm extends React.PureComponent {
 
   componentDidMount() {
     const company = this.getCompanyById;
-    this.setState({initialParserData: JSON.stringify(company.exchangeCompanyParseData)})
+    this.setState({initialParserData: JSON.stringify(company.exchangeCompanyParseData)});
   }
 
   componentWillUnmount() {
@@ -39,9 +39,9 @@ export default class EditedParserForm extends React.PureComponent {
     const company = editParserService.selectCompanyById(companies, params.id);
     if (company.exchangeCompanyParseData &&
       JSON.stringify(company.exchangeCompanyParseData) !== state.initialParserData) {
-      return {isUpdateButtonDisable: false}
+      return {isUpdateButtonDisable: false};
     } else {
-      return {isUpdateButtonDisable: true}
+      return {isUpdateButtonDisable: true};
     }
   }
 
@@ -138,6 +138,6 @@ export default class EditedParserForm extends React.PureComponent {
           </Row>
         </div>
       </div>
-      : <Alert message="Parser information doesn't exist" type="error" />
+      : <Alert message="Parser information doesn't exist" type="error" />;
   }
 }

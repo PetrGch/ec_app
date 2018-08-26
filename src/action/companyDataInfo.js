@@ -1,4 +1,4 @@
-import {CHANGE_COMPANY_DATA_INFO_VALUE, SET_INITIAL_COMPANY_DATA_INFO_STATE} from "../constant/companyDataInfo";
+import {CHANGE_COMPANY_DATA_INFO_VALUE, SET_INITIAL_COMPANY_DATA_INFO_STATE} from '../constant/companyDataInfo';
 
 export function changeCompanyDataInfoValue(companyId, fieldName, value, isNewCompany) {
   return {
@@ -7,14 +7,14 @@ export function changeCompanyDataInfoValue(companyId, fieldName, value, isNewCom
     fieldName: fieldName,
     value: value,
     isNewCompany: isNewCompany
-  }
+  };
 }
 
 export function setInitialCompanyDataInfoState(companyId, companyMainInfo, isNewCompany) {
   return {
     type: SET_INITIAL_COMPANY_DATA_INFO_STATE,
-    companyId, companyId,
+    companyId: companyId,
     companyMainInfo: companyMainInfo,
     isNewCompany: isNewCompany
-  }
+  };
 }

@@ -1,20 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Layout} from 'antd';
-import {Route, Switch, withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
-import Sidebar from "./sidebar/Sidebar";
-import PreviewAdminPage from "./content/PreviewAdminPage";
-import CompanyContainer from "./content/company/CompanyContainer";
-import CurrencyContainer from "./content/currency/CurrencyContainer";
-import ParserContainer from "./content/parser/ParserContainer";
-import CommentaryContainer from "./content/commentary/CommentaryContainer";
-import EditedCompanyContainer from "./content/editedCompany/EditedCompanyContainer";
-import EditedCurrencyContainer from "./content/editedCurrency/EditedCurrencyContainer";
-import EditedParserContainer from "./content/editedParser/EditedParserContainer";
-import EditedCommentaryContainer from "./content/editedCommentary/EditedCommentaryContainer";
-import NewCompanyContainer from "./content/newCompany/NewCompanyContainer";
-import NotFound from "../common/404/NotFound";
+import PreviewAdminPage from './content/PreviewAdminPage';
+import CompanyContainer from './content/company/CompanyContainer';
+import CurrencyContainer from './content/currency/CurrencyContainer';
+import ParserContainer from './content/parser/ParserContainer';
+import CommentaryContainer from './content/commentary/CommentaryContainer';
+import EditedCompanyContainer from './content/editedCompany/EditedCompanyContainer';
+import EditedCurrencyContainer from './content/editedCurrency/EditedCurrencyContainer';
+import EditedParserContainer from './content/editedParser/EditedParserContainer';
+import EditedCommentaryContainer from './content/editedCommentary/EditedCommentaryContainer';
+import NewCompanyContainer from './content/newCompany/NewCompanyContainer';
+import NotFound from '../common/404/NotFound';
 
 import './admin.less';
 

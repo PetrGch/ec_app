@@ -1,7 +1,7 @@
 import {
   CHANGE_COMPANY_MAIN_INFO_VALUE, CHANGE_WORKING_TIME_VALUE,
   SET_INITIAL_COMPANY_MAIN_INFO_STATE
-} from "../constant/companyMainInfo";
+} from '../constant/companyMainInfo';
 
 export function changeCompanyMainInfoValue(companyId, fieldName, value, isNewCompany = false) {
   return {
@@ -10,16 +10,16 @@ export function changeCompanyMainInfoValue(companyId, fieldName, value, isNewCom
     fieldName: fieldName,
     value: value,
     isNewCompany: isNewCompany
-  }
+  };
 }
 
 export function setInitialCompanyMainInfoState(companyId, companyMainInfo, isNewCompany = false) {
   return {
     type: SET_INITIAL_COMPANY_MAIN_INFO_STATE,
-    companyId, companyId,
+    companyId: companyId,
     companyMainInfo: companyMainInfo,
     isNewCompany: isNewCompany
-  }
+  };
 }
 
 export function changeWorkingTimeValue(companyId, fieldName, value, isNewCompany = false) {
@@ -29,5 +29,5 @@ export function changeWorkingTimeValue(companyId, fieldName, value, isNewCompany
     fieldName: fieldName,
     value: value,
     isNewCompany: isNewCompany
-  }
+  };
 }

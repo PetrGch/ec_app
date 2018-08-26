@@ -1,6 +1,6 @@
-import {notification} from "antd/lib/index";
-import {API_URL} from "../../../common/util/AppConstance";
-import {request} from "../../../common/util/APIUtil";
+import {notification} from 'antd/lib/index';
+import {API_URL} from '../../../common/util/AppConstance';
+import {request} from '../../../common/util/APIUtil';
 
 export const editCommentaryService = {
   selectCompanyById: function selectCompanyById(companies, id) {

@@ -1,15 +1,15 @@
 import React from 'react';
-import moment from "moment";
-import {Col, Row, TimePicker} from "antd";
+import moment from 'moment';
+import {Col, Row, TimePicker} from 'antd';
 
-import {changeWorkingTimeValue} from "../../../../../action/companyMainInfo";
-import {workingTimeDays} from "./workingTimeDays";
+import {changeWorkingTimeValue} from '../../../../../action/companyMainInfo';
+import {workingTimeDays} from './workingTimeDays';
 
 import './workingTime.less';
 
 function nullValidator(field, subField) {
   if (field && field[subField]) {
-    return moment(field[subField], "HH:mm:ss");
+    return moment(field[subField], 'HH:mm:ss');
   }
   return null;
 }
@@ -34,27 +34,27 @@ export default class WorkingTime extends React.PureComponent {
       const valueTo = nullValidator(workingTime, day.typeTo);
       return (
         <Row key={index} type="flex" justify="space-between" align="middle">
-          <Col span={4}>{day.titleFrom}{day.isRequired ? "*" : ""}:</Col>
+          <Col span={4}>{day.titleFrom}{day.isRequired ? '*' : ''}:</Col>
           <Col span={7}>
             <TimePicker
               value={valueFrom}
               minuteStep={15}
               secondStep={10}
-              onChange={(moment, time) => {this.handleWorkingTimeChange(moment, time, day.typeFrom)}}
+              onChange={(moment, time) => {this.handleWorkingTimeChange(moment, time, day.typeFrom);}}
             />
           </Col>
-          <Col span={4}>{day.titleTo}{day.isRequired ? "*" : ""}:</Col>
+          <Col span={4}>{day.titleTo}{day.isRequired ? '*' : ''}:</Col>
           <Col span={7}>
             <TimePicker
               value={valueTo}
               minuteStep={15}
               secondStep={10}
-              onChange={(moment, time) => {this.handleWorkingTimeChange(moment, time, day.typeTo)}}
+              onChange={(moment, time) => {this.handleWorkingTimeChange(moment, time, day.typeTo);}}
             />
           </Col>
         </Row>
       );
-    })
+    });
   }
 
   render() {

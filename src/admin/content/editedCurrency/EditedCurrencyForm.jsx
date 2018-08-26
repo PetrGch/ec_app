@@ -1,9 +1,9 @@
 import React from 'react';
 import {Icon, Row, Col, Button, Alert} from 'antd';
 
-import {editCurrencyService} from "./editCurrencyService";
-import CurrencyRate from "../sections/currencyRate/CurrencyRate";
-import {setInitialCurrencyState} from "../../../action/currencyRate";
+import {editCurrencyService} from './editCurrencyService';
+import CurrencyRate from '../sections/currencyRate/CurrencyRate';
+import {setInitialCurrencyState} from '../../../action/currencyRate';
 
 export default class EditedCurrencyForm extends React.PureComponent {
   constructor(props) {
@@ -20,7 +20,7 @@ export default class EditedCurrencyForm extends React.PureComponent {
 
   componentDidMount() {
     const company = this.getCompanyById;
-    this.setState({initialCurrencyData: JSON.stringify(company.currencyRates)})
+    this.setState({initialCurrencyData: JSON.stringify(company.currencyRates)});
   }
 
   componentWillUnmount() {
@@ -33,9 +33,9 @@ export default class EditedCurrencyForm extends React.PureComponent {
     const { match: {params}, companies } = props;
     const company = editCurrencyService.selectCompanyById(companies, params.id);
     if (JSON.stringify(company.currencyRates) !== state.initialCurrencyData) {
-      return {isUpdateButtonDisable: false}
+      return {isUpdateButtonDisable: false};
     } else {
-      return {isUpdateButtonDisable: true}
+      return {isUpdateButtonDisable: true};
     }
   }
 
@@ -94,6 +94,6 @@ export default class EditedCurrencyForm extends React.PureComponent {
           </Row>
         </div>
       </div>
-      : <Alert message="Currency information doesn't exist" type="error" />
+      : <Alert message="Currency information doesn't exist" type="error" />;
   }
 }

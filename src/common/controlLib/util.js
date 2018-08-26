@@ -6,9 +6,9 @@ export const sizeType = {
 
 export function setSize(blockName, size) {
   if (size === sizeType.LG) {
-    return `${blockName}--size-${sizeType.LG}`
+    return `${blockName}--size-${sizeType.LG}`;
   } else if (size === sizeType.SM) {
-    return `${blockName}--size-${sizeType.SM}`
+    return `${blockName}--size-${sizeType.SM}`;
   }
-  return `${blockName}--size-${sizeType.MD}`
+  return `${blockName}--size-${sizeType.MD}`;
 }

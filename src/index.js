@@ -7,7 +7,7 @@ import configureStore from './store/configureStore';
 import App from './app/App';
 
 import './index.less';
-import registerServiceWorker from "./registerServiceWorker";
+import registerServiceWorker from './registerServiceWorker';
 
 const store = configureStore();
 
