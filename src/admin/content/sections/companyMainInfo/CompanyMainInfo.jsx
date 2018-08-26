@@ -5,7 +5,7 @@ import {changeCompanyMainInfoValue} from '../../../../action/companyMainInfo';
 import './companyMainInfo.less';
 import WorkingTime from './workingTime/WorkingTime';
 import {nullValidator} from '../../../../common/util/valueValidator';
-import ValidatorInput from '../../../../common/validator/ValidatorInput';
+import ValidatorInput from '../../../../common/controlLib/ValidatorInput/ValidatorInput';
 
 export default class CompanyMainInfo extends React.PureComponent {
   constructor(props) {

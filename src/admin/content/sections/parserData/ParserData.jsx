@@ -4,7 +4,7 @@ import {changeParserValue} from '../../../../action/parser';
 
 import './ParserData.less';
 import moment from 'moment/moment';
-import ValidatorInput from '../../../../common/validator/ValidatorInput';
+import ValidatorInput from '../../../../common/controlLib/ValidatorInput/ValidatorInput';
 
 function nullValidator(field, subField, defaultValue = '') {
   if (field && field[subField]) {

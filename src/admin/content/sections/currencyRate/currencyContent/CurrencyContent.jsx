@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input, Row, Col } from 'antd';
 import {nullValidator} from '../../../../../common/util/valueValidator';
-import ValidatorInput from '../../../../../common/validator/ValidatorInput';
+import ValidatorInput from '../../../../../common/controlLib/ValidatorInput/ValidatorInput';
 
 export default function CurrencyContent({currencyRate, handleValueOnChange}) {
   const mapedCurrency = currencyRate.map((currency, index) => {

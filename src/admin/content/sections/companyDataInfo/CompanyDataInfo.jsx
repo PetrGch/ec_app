@@ -4,7 +4,7 @@ import {Col, Input, Row} from 'antd';
 import './companyDataInfo.less';
 import {changeCompanyDataInfoValue} from '../../../../action/companyDataInfo';
 import {nullValidator} from '../../../../common/util/valueValidator';
-import ValidatorInput from '../../../../common/validator/ValidatorInput';
+import ValidatorInput from '../../../../common/controlLib/ValidatorInput/ValidatorInput';
 
 const { TextArea } = Input;
 

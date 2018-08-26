@@ -44,17 +44,15 @@ export default class ValidatorInput extends React.PureComponent {
   }
 
   render() {
-    const { InputComponent, value, placeholder, name, rows } = this.props;
+    const { InputComponent, value, ...rest } = this.props;
     const { isError } = this.state;
 
     return InputComponent && <div className={`validatorInput validatorInput_isError--${isError}`}>
       <InputComponent
+        {...rest}
         value={value}
-        placeholder={placeholder}
-        name={name}
         onChange={this.handleValueOnChange}
         onBlur={this.handleValueOnBlur}
-        rows={rows}
       />
     </div>;
   }

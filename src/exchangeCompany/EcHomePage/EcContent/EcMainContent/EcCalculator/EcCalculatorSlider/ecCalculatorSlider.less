@@ -1,0 +1,48 @@
+@import '../../../../../../common/util/variable';
+
+.ecCalculatorSlider {
+  flex: 1;
+  margin-left: 30px;
+
+  &__input {
+    width: 200px;
+    margin-bottom: 30px;
+  }
+
+  // todo Delete after antd library will be extract
+  &__slider {
+    & .ant-slider {
+      &-rail {
+        height: 6px;
+        border-radius: 4px;
+      }
+      &-handle {
+        width: 18px;
+        height: 18px;
+        margin-top: -6px;
+        border: solid 2px @primary-green;
+      }
+
+      &-handle {
+        &:focus {
+          border-color: @primary-greenDark;
+          box-shadow: 0 0 0 5px @primary-green;
+          outline: none;
+        }
+
+        &.ant-tooltip-open {
+          border: solid 2px @primary-greenDark;
+        }
+      }
+
+      &:hover .ant-slider-handle:not(.ant-tooltip-open) {
+        border-color: @primary-greenDark;
+      }
+
+      &-track, &:hover .ant-slider-track {
+        border-color: @primary-greenDark;
+        background-color: @primary-greenDark;
+      }
+    }
+  }
+}

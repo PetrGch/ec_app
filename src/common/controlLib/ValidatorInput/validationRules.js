@@ -3,7 +3,7 @@ const onChangeRules = {
     return value.length <= params;
   },
   isNumeric: function (value) {
-    return /^$|^[0-9]+((\.)|(\.[0-9]+)?)$/.test(value);
+    return /^$|^[0-9]+(((\.)|(\.[0-9]+)?)|((\,)|(\,[0-9]+)?))$/.test(value);
   }
 };
 

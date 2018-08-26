@@ -17,6 +17,18 @@ const menu = [
   {
     index: 'GBR',
     value: 'GBR'
+  },
+  {
+    index: 'EUR_1',
+    value: 'EUR - Dollar USA'
+  },
+  {
+    index: 'USD_1',
+    value: 'USD'
+  },
+  {
+    index: 'GBR_1',
+    value: 'GBR'
   }
 ];
 
