@@ -10,12 +10,20 @@ export default class Radio extends React.PureComponent {
   }
 
   render() {
-    const { name, children, className, size } = this.props;
+    const { name, children, className, size, checked, value, onChange } = this.props;
     const uid = this.uid;
 
     return (
       <div className={`ec-radio ${setSize('ec-radio', size)} ${className}`}>
-        <input className='ec-radio__input' type="radio" id={uid} name={name}/>
+        <input
+          id={uid}
+          type="radio"
+          value={value}
+          name={name}
+          checked={checked}
+          className='ec-radio__input'
+          onChange={onChange}
+        />
         <label htmlFor={uid}>
           {children}
         </label>

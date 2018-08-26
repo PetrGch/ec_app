@@ -12,3 +12,17 @@ export function setSize(blockName, size) {
   }
   return `${blockName}--size-${sizeType.MD}`;
 }
+
+export function setStripe(blockName, stripe) {
+  if (stripe) {
+    return `${blockName}--stripe-true`;
+  }
+  return "";
+}
+
+export function setHeaderRow(blockName, isHeader) {
+  if (isHeader) {
+    return `${blockName}--isHeader-true`;
+  }
+  return `${blockName}--isHeader-false`;
+}

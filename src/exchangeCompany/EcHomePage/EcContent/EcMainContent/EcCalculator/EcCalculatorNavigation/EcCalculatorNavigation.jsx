@@ -34,11 +34,25 @@ const menu = [
 
 export default class EcCalculatorNavigation extends React.PureComponent {
   render() {
+    const { isBuyStatus, changeBuyStatus } = this.props;
+
     return (
       <div className="ecCalculatorNavigation">
         <div className="ecCalculatorNavigation__action">
-          <Radio size={sizeType.LG} name={'sellBuy'}>Buy</Radio>
-          <Radio size={sizeType.LG} name={'sellBuy'}>Sell</Radio>
+          <Radio
+            value="buy"
+            size={sizeType.LG}
+            checked={isBuyStatus}
+            name={'sellBuy'}
+            onChange={changeBuyStatus}
+          >Buy</Radio>
+          <Radio
+            value="sell"
+            size={sizeType.LG}
+            checked={!isBuyStatus}
+            name={'sellBuy'}
+            onChange={changeBuyStatus}
+          >Sell</Radio>
         </div>
         <div className="ecCalculatorNavigation__currency">
           <Dropdown

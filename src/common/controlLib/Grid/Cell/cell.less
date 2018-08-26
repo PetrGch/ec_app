@@ -1,0 +1,28 @@
+@import "../../../util/variable";
+
+.ec-cell {
+  height: 40px;
+  padding: 0 15px;
+  font-size: 16px;
+  border-bottom: 1px solid @primary-gray;
+
+  &--isHeader {
+    &-true {
+      font-weight: 700;
+    }
+  }
+
+  &--size {
+    &-large {
+      padding: 0 15px;
+      font-size: 18px;
+      height: 46px;
+    }
+
+    &-small {
+      padding: 0 7px;
+      font-size: 14px;
+      height: 34px;
+    }
+  }
+}
