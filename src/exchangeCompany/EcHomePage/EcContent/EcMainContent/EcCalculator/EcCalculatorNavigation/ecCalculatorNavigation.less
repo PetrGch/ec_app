@@ -1,3 +1,24 @@
-.ecCalculatorNavigation {
+@import '../../../../../../common/util/variable';
 
+.ecCalculatorNavigation {
+  display: inline-flex;
+  flex-direction: column;
+
+  &__action {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 16px;
+    margin-bottom: 30px;
+    border: 1px solid @primary-gray;
+    border-radius: 6px;
+    transition: border .2s ease;
+
+    &:hover {
+      border: 1px solid @primary-green;
+    }
+  }
+
+  & .ec-dropdown {
+    width: 250px;
+  }
 }

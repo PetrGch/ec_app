@@ -4,30 +4,53 @@ import {setSize, sizeType} from "../util";
 
 import './dropdown.less';
 
+function Item({index, value, selectedItem, selectItem}) {
+  const takeSelectData = () => {
+    selectItem({index, value});
+  };
+  const isActive = selectedItem.index === index || selectedItem.index === "DEFAULT";
+  return (
+    <li
+      className={`ec-dropdownList__item ec-dropdownList__item--active-${isActive}`}
+      onClick={takeSelectData}
+    >{value}</li>
+  )
+}
+
+function prepopulateSelectedValue(list, selectedIndex) {
+  let selectedItem = {value: "Select value", index: "DEFAULT"};
+  if (Array.isArray(list) && list.length !== 0) {
+    if (selectedIndex) {
+      list.some(item => {
+        if (item.index === selectedIndex) {
+          selectedItem = item;
+          return true;
+        }
+        return false;
+      });
+    } else {
+      selectedItem = list[0];
+    }
+  }
+
+  return selectedItem;
+}
+
 export default class Dropdown extends React.PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
       isListHidden: true,
+      selectedItem: prepopulateSelectedValue(props.list, props.selectedIndex)
     };
-
-    // this.wrapperRef = React.createRef();
 
     this.mouseOverHandler = this.mouseOverHandler.bind(this);
     this.mouseOutHandler = this.mouseOutHandler.bind(this);
-    // this.clickHandler = this.clickHandler.bind(this);
-    // this.outsideClickHandler = this.outsideClickHandler.bind(this);
+    this.selectItem = this.selectItem.bind(this);
   }
 
-  // componentDidMount() {
-  //   document.addEventListener('mousedown', this.outsideClickHandler);
-  // }
-  //
-  // componentWillUnmount() {
-  //   document.removeEventListener('mousedown', this.outsideClickHandler);
-  // }
-
+  // todo Define why it staggering constantly
   mouseOverHandler() {
     const { isListHidden } = this.state;
     if (isListHidden) {
@@ -35,6 +58,7 @@ export default class Dropdown extends React.PureComponent {
     }
   }
 
+  // todo Define why it staggering constantly
   mouseOutHandler() {
     const { isListHidden } = this.state;
     if (!isListHidden) {
@@ -42,49 +66,51 @@ export default class Dropdown extends React.PureComponent {
     }
   }
 
-  // clickHandler() {
-  //   // const { isListHidden } = this.state;
-  //   // if (isListHidden) {
-  //   //   this.setState({isListHidden: false})
-  //   // } else {
-  //   //   this.setState({isListHidden: true})
-  //   // }
-  // }
-  //
-  // outsideClickHandler(event) {
-  //   const { isListHidden } = this.state;
-  //   console.log("you clicked inside of me")
-  //   if (this.wrapperRef && !this.wrapperRef.current.contains(event.target) && !isListHidden) {
-  //     // this.setState({isListHidden: true})
-  //     console.log('You clicked outside of me!');
-  //   }
-  // }
+  selectItem(item) {
+    this.setState({
+      selectedItem: item
+    });
+  }
 
   get list() {
     const { list } = this.props;
+    const { selectedItem } = this.state;
+    if (Array.isArray(list)) {
 
+      return list.map(item => (
+        <Item
+          key={item.index}
+          index={item.index}
+          value={item.value}
+          selectItem={this.selectItem}
+          selectedItem={selectedItem}
+        />
+      ))
+    }
     return list;
   }
 
   render() {
-    const { children, size } = this.props;
-    const { isListHidden } = this.state;
+    const { children, size, className } = this.props;
+    const { isListHidden, selectedItem } = this.state;
 
     return (
       <div
-        className="ec-dropdown"
-        onMouseOver={this.mouseOverHandler}
+        className={`ec-dropdown ${className}`}
+        onMouseOverCapture={this.mouseOverHandler}
         onMouseOut={this.mouseOutHandler}
-        // onClick={this.clickHandler}
-        // ref={this.wrapperRef}
       >
-        <div className={`ec-dropdown__handler ${setSize('ec-dropdown__handler', size)}`} >
-          {children}
+        <div
+          className={`ec-dropdown__handler ec-dropdown__handler--hidden-${isListHidden} ${setSize('ec-dropdown__handler', size)}`}
+        >
+          {children || selectedItem.value}
         </div>
         <div
           className={`ec-dropdown__list ec-dropdown__list--hidden-${isListHidden}`}
         >
-          {this.list}
+          <ul className="ec-dropdownList">
+            {this.list}
+          </ul>
         </div>
       </div>
     );
