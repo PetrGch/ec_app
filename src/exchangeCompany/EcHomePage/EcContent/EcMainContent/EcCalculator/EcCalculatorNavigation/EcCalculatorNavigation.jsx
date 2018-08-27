@@ -4,6 +4,7 @@ import {sizeType} from '../../../../../../common/controlLib/util';
 import {Dropdown, Radio} from '../../../../../../common/controlLib';
 
 import './ecCalculatorNavigation.less';
+import {setBuyStatus} from "../../../../../../action/ecHomePage";
 
 const menu = [
   {
@@ -34,7 +35,14 @@ const menu = [
 
 export default class EcCalculatorNavigation extends React.PureComponent {
   render() {
-    const { isBuyStatus, changeBuyStatus } = this.props;
+    const { dispatch, isBuyStatus } = this.props;
+    const changeBuyStatus = (event) => {
+      if (event.target && event.target.value === "sell") {
+        dispatch(setBuyStatus(false));
+      } else if (event.target && event.target.value === "buy") {
+        dispatch(setBuyStatus(true));
+      }
+    };
 
     return (
       <div className="ecCalculatorNavigation">

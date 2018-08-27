@@ -1,10 +1,6 @@
-export const baseCurrencyGridConfig = (isBuy) => {
-  if (isBuy) {
-    return baseCurrencyBuy;
-  }
-
-  return baseCurrencySell;
-};
+export const baseCurrencyGridConfig = (isBuy) => (
+  isBuy ? baseCurrencyBuy : baseCurrencySell
+);
 
 const baseCurrencySell = [
   {

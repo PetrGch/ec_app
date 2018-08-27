@@ -5,32 +5,15 @@ import EcSideBar from './EcSideBar/EcSideBar';
 import './ecContent.less';
 
 export default class EcContent extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isBuyStatus: true
-    };
-
-    this.changeBuyStatus = this.changeBuyStatus.bind(this);
-  }
-
-  changeBuyStatus(event) {
-    if (event.target && event.target.value === "sell") {
-      this.setState({isBuyStatus: false});
-    } else if (event.target && event.target.value === "buy") {
-      this.setState({isBuyStatus: true});
-    }
-  }
-
   render() {
-    const { isBuyStatus } = this.state;
+    const { dispatch, ecHomePage: { currencyAmount, isBuyStatus } } = this.props;
 
     return (
       <content className="ecContent">
         <EcMainContent
+          dispatch={dispatch}
           isBuyStatus={isBuyStatus}
-          changeBuyStatus={this.changeBuyStatus}
+          currencyAmount={currencyAmount}
         />
         <EcSideBar
           isBuyStatus={isBuyStatus}

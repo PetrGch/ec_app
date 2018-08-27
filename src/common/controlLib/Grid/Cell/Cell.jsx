@@ -4,21 +4,33 @@ import {setHeaderRow, setSize, sizeType} from "../../util";
 
 import './cell.less';
 
+function renderHeader(record, configItem) {
+  const { title, renderTitle } = configItem;
+
+  if (renderTitle && typeof renderTitle === "function") {
+    return renderTitle(record, configItem);
+  }
+  return title || "";
+}
+
+function renderBody(record, configItem) {
+  const { renderCell, key } = configItem;
+
+  if (renderCell && typeof renderCell === "function") {
+    return renderCell(record, configItem);
+  }
+
+  return (key && record[key]) || "";
+}
+
 export default class Cell extends React.PureComponent {
   get cell() {
     const { record, configItem, isHeader } = this.props;
-    const { title, key, renderCell, renderTitle } = configItem;
     if (isHeader) {
-      if (renderTitle && typeof renderTitle === "function") {
-        return renderTitle(record, configItem);
-      }
-      return title || "";
-    }
-    if (renderCell && typeof renderCell === "function") {
-      renderCell(record, configItem);
+      return renderHeader(record, configItem);
     }
 
-    return (key && record[key]) || "";
+    return renderBody(record, configItem);
   }
 
   render() {

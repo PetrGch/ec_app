@@ -1,9 +1,10 @@
 import React from 'react';
-
 import {Slider} from "antd";
+
 import {InputValidator, Input} from "../../../../../../common/controlLib";
 import {cashFormatter, cashReformatter} from "../../../../../../common/util/formatter/formatter";
 import {sizeType} from "../../../../../../common/controlLib/util";
+import {setSumAmount} from "../../../../../../action/ecHomePage";
 
 import './ecCalculatorSlider.less';
 
@@ -11,16 +12,13 @@ export default class EcCalculatorSlider extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      sliderValue: 1
-    };
-
     this.changeSliderValueHandler = this.changeSliderValueHandler.bind(this);
     this.changeInputValueHandler = this.changeInputValueHandler.bind(this);
   }
 
   changeSliderValueHandler(value) {
-    this.setState({sliderValue: cashReformatter(value)});
+    const { dispatch } = this.props;
+    dispatch(setSumAmount(cashReformatter(value)));
   }
 
   changeInputValueHandler(name, value) {
@@ -28,7 +26,7 @@ export default class EcCalculatorSlider extends React.PureComponent {
   }
 
   render() {
-    const { sliderValue } = this.state;
+    const { currencyAmount } = this.props;
 
     return (
       <div className="ecCalculatorSlider">
@@ -36,7 +34,7 @@ export default class EcCalculatorSlider extends React.PureComponent {
           <InputValidator
             InputComponent={Input}
             type="text"
-            value={sliderValue}
+            value={currencyAmount}
             placeholder="1000"
             validationOption={{length: 7, isNumeric: true}}
             formatter={cashFormatter}
@@ -50,7 +48,7 @@ export default class EcCalculatorSlider extends React.PureComponent {
             max={1000}
             step={10}
             onChange={this.changeSliderValueHandler}
-            value={sliderValue}
+            value={currencyAmount}
           />
         </div>
       </div>

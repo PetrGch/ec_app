@@ -8,7 +8,7 @@ import './ecCalculator.less';
 
 export default class EcCalculator extends React.PureComponent {
   render() {
-    const { isBuyStatus, changeBuyStatus } = this.props;
+    const { dispatch, currencyAmount, isBuyStatus } = this.props;
 
     return (
       <div className="ecCalculator">
@@ -17,10 +17,13 @@ export default class EcCalculator extends React.PureComponent {
         </h1>
         <div className="ecCalculator__content">
           <EcCalculatorNavigation
+            dispatch={dispatch}
             isBuyStatus={isBuyStatus}
-            changeBuyStatus={changeBuyStatus}
           />
-          <EcCalculatorSlider/>
+          <EcCalculatorSlider
+            dispatch={dispatch}
+            currencyAmount={currencyAmount}
+          />
         </div>
       </div>
     );
