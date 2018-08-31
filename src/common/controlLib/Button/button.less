@@ -13,8 +13,17 @@
   transition: all .2s;
 
   &:hover, &:focus {
+    outline-color: @primary-green;
     border-color: @primary-green;
     color: @primary-green;
+  }
+
+  &--isActive {
+    &-true {
+      outline-color: @primary-green;
+      border-color: @primary-green;
+      color: @primary-green;
+    }
   }
 
   &--size {

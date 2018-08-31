@@ -1,10 +1,25 @@
+@import "../../../../../common/util/variable";
+
 .ecCurrencyMainTable {
+  &__gridPanel {
+    margin-bottom: 20px;
+  }
+
   &__companyName, &__updateTime {
     display: flex;
     flex-direction: column;
 
     & span:last-child {
       font-size: 14px;
+    }
+  }
+  
+  &__titleName {
+    cursor: pointer;
+    transition: color .2s;
+
+    &:hover {
+      color: @primary-green;
     }
   }
 
@@ -28,6 +43,22 @@
     & .ec-cell:nth-of-type(5) {
       width: 156px;
       text-align: center;
+    }
+  }
+}
+
+.ecCurrencyMainTableGridPanel {
+  display: flex;
+  justify-content: space-between;
+
+  &--position {
+    &-left {
+      display: flex;
+      align-items: center;
+
+      & .ec-button {
+        margin-right: 20px;
+      }
     }
   }
 }

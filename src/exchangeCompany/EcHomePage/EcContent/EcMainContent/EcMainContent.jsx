@@ -1,10 +1,11 @@
 import React from 'react';
 
 import BlockWrapper from '../../../../common/BlockWrapper/BlockWrapper';
-
-import './ecMainContent.less';
 import EcCalculator from './EcCalculator/EcCalculator';
 import EcCurrencyMainTable from "./EcCurrencyMainTable/EcCurrencyMainTable";
+import {ecCurrencyMainTableRecord} from "./EcCurrencyMainTable/ecCurrencyMainTableConfig";
+
+import './ecMainContent.less';
 
 export default class EcMainContent extends React.PureComponent {
   render() {
@@ -21,6 +22,7 @@ export default class EcMainContent extends React.PureComponent {
         </BlockWrapper>
         <BlockWrapper>
           <EcCurrencyMainTable
+            records={ecCurrencyMainTableRecord}
             currencyAmount={currencyAmount}
             isBuyStatus={isBuyStatus}
           />

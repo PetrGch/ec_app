@@ -73,3 +73,10 @@ export function renderClass(isHeader, config) {
   }
   return config.className;
 }
+
+export function renderTitle(record, config, clickNameEvent) {
+  return (<div
+    className="ecCurrencyMainTable__titleName"
+    onClick={clickNameEvent}
+  >{config.title || ''}</div>);
+}

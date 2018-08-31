@@ -1,0 +1,92 @@
+@import "../../util/variable";
+
+.ec-checkbox {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  box-sizing: border-box;
+  font-size: 16px;
+
+  &__img {
+    position: absolute;
+    left: -8px;
+    height: 39px;
+  }
+
+  &__label {
+    margin-left: 30px;
+  }
+
+  &__input {
+    position: relative;
+    display: none;
+
+    & ~ label {
+      cursor: pointer;
+      transition: all .2s ease;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        border: 1px solid @primary-gray;
+        border-radius: 4px;
+        background: @primary-white;
+        transition: all .2s ease;
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 8px;
+        height: 8px;
+        background: @primary-white;
+        transition: all .2s ease;
+      }
+    }
+
+    &:checked {
+      & ~ label {
+        color: @primary-green;
+
+        &:before {
+          border: 2px solid @primary-green;
+        }
+
+        &:after {
+          background: @primary-green;
+        }
+      }
+    }
+  }
+
+  &--size {
+    &-large {
+      font-size: 18px;
+    }
+
+    &-small {
+      font-size: 14px;
+    }
+  }
+
+  &:hover {
+    & .ec-radio {
+      &__input {
+        & ~ label {
+          color: @primary-green;
+
+          &:before {
+            border: 2px solid @primary-green;
+          }
+        }
+      }
+    }
+  }
+}
