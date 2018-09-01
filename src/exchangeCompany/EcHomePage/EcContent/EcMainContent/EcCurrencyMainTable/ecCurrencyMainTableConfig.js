@@ -113,6 +113,7 @@ export const ecCurrencyMainTableRecord = [
     sellPrice: "1200",
     updatedAt: "2018-07-08T14:55:28Z",
     rating: 3,
+    address: "somewhere there",
     coordinateX: "50.094031",
     coordinateY: "19.983692"
   },
