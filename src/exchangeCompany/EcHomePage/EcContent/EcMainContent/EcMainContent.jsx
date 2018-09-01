@@ -8,6 +8,7 @@ import EcMainMap from "./EcMainMap/EcMainMap";
 
 import './ecMainContent.less';
 
+
 export default class EcMainContent extends React.PureComponent {
   render() {
     const { dispatch, currencyAmount, isBuyStatus } = this.props;

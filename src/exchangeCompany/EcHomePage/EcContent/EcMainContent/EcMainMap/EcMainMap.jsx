@@ -1,16 +1,15 @@
 import React from 'react';
-import L from 'leaflet';
-import {Map, TileLayer, Marker, Popup} from 'react-leaflet';
 
 import {sortedByPrice} from "../EcCurrencyMainTable/ecCurrencyMainTableUtil";
 
-import mapMarker from './map-marker.svg';
+import mapMarkerIcon from './map-marker.svg';
 
 import './ecMainMap.less';
 
-const iconPerson = new L.Icon({
-  iconUrl: mapMarker,
-  iconRetinaUrl: mapMarker,
+function mapMarker(L) {
+  return new L.Icon({
+  iconUrl: mapMarkerIcon,
+  iconRetinaUrl: mapMarkerIcon,
 
   iconSize:     [50, 60],
   iconAnchor:   [40, 58],
@@ -18,14 +17,15 @@ const iconPerson = new L.Icon({
 
   className: 'ecMainMapMarker'
 });
+}
 
-function Markers({records}) {
+function Markers({records, Marker, Popup, mapMarker}) {
   return records.filter(record => {
     return record.coordinateX && record.coordinateY;
   }).map(record => (
     <Marker
       key={`${record.coordinateX}-${record.coordinateY}`}
-      icon={ iconPerson }
+      icon={ mapMarker }
       position={[record.coordinateX, record.coordinateY]}
     >
       <Popup>
@@ -69,17 +69,23 @@ export default class EcMainMap extends React.PureComponent {
   render() {
     const {records} = this.props;
     const {center, zoom} = this.state;
-
-    return (
-      <div className="ecMainMap">
-        {(records && records.length !== 0) && <Map center={center} zoom={zoom}>
-          <TileLayer
-            attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            url="http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
-          />
-          {<Markers records={records}/>}
-        </Map>}
-      </div>
-    )
+    if (__isBrowser__) {
+      const {Map, Marker, Popup, TileLayer} = require('react-leaflet');
+      const L = require('leaflet');
+      const marker = mapMarker(L);
+      return (
+        <div className="ecMainMap">
+          {(records && records.length !== 0) && <Map center={center} zoom={zoom}>
+            <TileLayer
+              attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+              url="http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
+            />
+            {<Markers records={records} Marker={Marker} Popup={Popup} mapMarker={marker}/>}
+          </Map>}
+        </div>
+      )
+    } else {
+      return <div>Server rendering mode</div>;
+    }
   }
 }

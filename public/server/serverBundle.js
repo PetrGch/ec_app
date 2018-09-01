@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 25);
+/******/ 	return __webpack_require__(__webpack_require__.s = 37);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -83,6 +83,54 @@ module.exports = require("react-router-dom");
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-redux");
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.setSize = setSize;
+exports.setStripe = setStripe;
+exports.setHeaderRow = setHeaderRow;
+var sizeType = exports.sizeType = {
+  LG: 'large',
+  MD: 'medium',
+  SM: 'small'
+};
+
+function setSize(blockName, size) {
+  if (size === sizeType.LG) {
+    return blockName + '--size-' + sizeType.LG;
+  } else if (size === sizeType.SM) {
+    return blockName + '--size-' + sizeType.SM;
+  }
+  return blockName + '--size-' + sizeType.MD;
+}
+
+function setStripe(blockName, stripe) {
+  if (stripe) {
+    return blockName + '--stripe-true';
+  }
+  return "";
+}
+
+function setHeaderRow(blockName, isHeader) {
+  if (isHeader) {
+    return blockName + '--isHeader-true';
+  }
+  return blockName + '--isHeader-false';
+}
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -95,13 +143,7 @@ var API_URL = exports.API_URL = 'http://excurrate.com:8080/ec/api';
 var ACCESS_TOKEN = exports.ACCESS_TOKEN = 'accessToken';
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-redux");
-
-/***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -114,10 +156,10 @@ exports.request = exports.TEXT_RES_TYPE = exports.JSON_RES_TYPE = undefined;
 exports.getCurrentUser = getCurrentUser;
 exports.login = login;
 
-var _AppConstance = __webpack_require__(3);
+var _AppConstance = __webpack_require__(5);
 
-var JSON_RES_TYPE = exports.JSON_RES_TYPE = "json";
-var TEXT_RES_TYPE = exports.TEXT_RES_TYPE = "text";
+var JSON_RES_TYPE = exports.JSON_RES_TYPE = 'json';
+var TEXT_RES_TYPE = exports.TEXT_RES_TYPE = 'text';
 
 var request = exports.request = function request(options) {
   var resType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : JSON_RES_TYPE;
@@ -172,16 +214,10 @@ function login(loginRequest) {
 }
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-module.exports = require("antd/lib/index");
-
-/***/ }),
 /* 7 */
 /***/ (function(module, exports) {
 
-module.exports = require("prop-types");
+module.exports = require("antd/lib/index");
 
 /***/ }),
 /* 8 */
@@ -193,287 +229,8 @@ module.exports = require("prop-types");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteCompanyById = deleteCompanyById;
-exports.getAllCompanies = getAllCompanies;
 
-var _admin = __webpack_require__(14);
-
-var _APIUtil = __webpack_require__(5);
-
-var _AppConstance = __webpack_require__(3);
-
-function deleteCompanyById(companyId) {
-  return function (dispatch) {
-    (0, _APIUtil.request)({
-      url: _AppConstance.API_URL + "/company/" + companyId,
-      method: 'DELETE'
-    }).then(function () {
-      dispatch({
-        type: _admin.DELETE_COMPANY_BY_ID,
-        companyId: companyId
-      });
-    });
-  };
-}
-
-function getAllCompanies() {
-  return function (dispatch) {
-    (0, _APIUtil.request)({
-      url: _AppConstance.API_URL + "/company",
-      method: 'GET'
-    }).then(function (companies) {
-      dispatch({
-        type: _admin.GET_ALL_COMPANIES,
-        companies: companies
-      });
-    });
-  };
-}
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.mockData = exports.companyColumnConfig = undefined;
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(2);
-
-var _Actions = __webpack_require__(44);
-
-var _Actions2 = _interopRequireDefault(_Actions);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var companyColumnConfig = exports.companyColumnConfig = function companyColumnConfig(dispatch) {
-  return [{
-    key: "name",
-    title: "Company name",
-    dataIndex: "name",
-    render: function render(text, record) {
-      return _react2.default.createElement(
-        _reactRouterDom.Link,
-        { to: "/admin/company/" + record.id },
-        text
-      );
-    }
-  }, {
-    key: "address",
-    title: "Address",
-    dataIndex: "address"
-  }, {
-    key: "createdAt",
-    title: "Created at",
-    dataIndex: "createdAt"
-  }, {
-    key: "updatedAt",
-    title: "Updated at",
-    dataIndex: "updatedAt"
-  }, {
-    title: "Actions",
-    dataIndex: "actions",
-    render: function render(text, record) {
-      return _react2.default.createElement(_Actions2.default, { record: record, dispatch: dispatch });
-    }
-  }];
-};
-
-var mockData = exports.mockData = [{
-  "id": 1,
-  "key": "f08f61b2-bc76-4919-ab04-1a033eeb6b8e",
-  "uniqueId": "f08f61b2-bc76-4919-ab04-1a033eeb6b8e",
-  "name": "company test 1",
-  "coordinateX": "111111.111",
-  "coordinateY": "111111.111",
-  "address": "address",
-  "rating": 3.5,
-  "createdAt": "2018-07-08T14:55:28Z",
-  "updatedAt": "2018-07-08T14:55:28Z",
-  "exchangeCompanyDetail": {
-    "description": "long long description",
-    "phone": "234234234",
-    "website": "some.com",
-    "email": "some@gmail.com",
-    "exchangeCompany": null
-  },
-  "workingTime": {
-    "mnFrom": "12:00:00",
-    "mnTo": "18:00:00",
-    "tuFrom": "12:00:00",
-    "tuTo": "18:00:00",
-    "weFrom": "12:00:00",
-    "weTo": "18:00:00",
-    "thFrom": "12:00:00",
-    "thTo": "18:00:00",
-    "frFrom": "12:00:00",
-    "frTo": "18:00:00",
-    "stFrom": "12:00:00",
-    "stTo": "18:00:00",
-    "snFrom": "12:00:00",
-    "snTo": "18:00:00"
-  },
-  "comments": [{
-    "id": 1,
-    "name": "name 1",
-    "title": "title 1",
-    "text": "Long long comment",
-    "createdAt": "2018-07-08T14:55:28Z",
-    "updatedAt": "2018-07-08T14:55:28Z",
-    "dislike": true,
-    "liked": false
-  }, {
-    "id": 2,
-    "name": "name 1",
-    "title": "title 1",
-    "text": "Long long comment",
-    "createdAt": "2018-07-08T14:55:28Z",
-    "updatedAt": "2018-07-08T14:55:28Z",
-    "dislike": false,
-    "liked": true
-  }, {
-    "id": 3,
-    "name": "name 1",
-    "title": "title 1",
-    "text": "Long long comment",
-    "createdAt": "2018-07-08T14:55:28Z",
-    "updatedAt": "2018-07-08T14:55:28Z",
-    "dislike": false,
-    "liked": true
-  }, {
-    "id": 4,
-    "name": "name 1",
-    "title": "title 1",
-    "text": "Long long comment Long long comment Long long comment Long long comment Long long comment",
-    "createdAt": "2018-07-08T14:55:28Z",
-    "updatedAt": "2018-07-08T14:55:28Z",
-    "dislike": false,
-    "liked": true
-  }],
-  "currencyRates": [{
-    "id": 1,
-    "currencyName": "Euro",
-    "currencyType": "EUR",
-    "buyPrice": 123.23,
-    "sellPrice": 133.23,
-    "createdAt": "2018-07-08T14:55:28Z",
-    "updatedAt": "2018-07-08T14:55:28Z"
-  }, {
-    "id": 2,
-    "currencyName": "Dollar",
-    "currencyType": "USD",
-    "buyPrice": 123.23,
-    "sellPrice": 133.23,
-    "createdAt": "2018-07-08T14:55:28Z",
-    "updatedAt": "2018-07-08T14:55:28Z"
-  }, {
-    "id": 3,
-    "currencyName": "Funt",
-    "currencyType": "GBR",
-    "buyPrice": 123.23,
-    "sellPrice": 133.23,
-    "createdAt": "2018-07-08T14:55:28Z",
-    "updatedAt": "2018-07-08T14:55:28Z"
-  }],
-  "exchangeCompanyParseData": {
-    "url": "someCompany.com",
-    "parameters": "parameters",
-    "rowSelector": "rowSelector",
-    "currencyAmountSelector": "currencyAmountSelector",
-    "currencyTypeSelector": "currencyTypeSelector",
-    "buySelector": "buySelector",
-    "sellSelector": "sellSelector",
-    "active": false
-  }
-}];
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.changeCompanyMainInfoValue = changeCompanyMainInfoValue;
-exports.setInitialCompanyMainInfoState = setInitialCompanyMainInfoState;
-exports.changeWorkingTimeValue = changeWorkingTimeValue;
-
-var _companyMainInfo = __webpack_require__(16);
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function changeCompanyMainInfoValue(companyId, fieldName, value) {
-  var isNewCompany = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
-
-  return {
-    type: _companyMainInfo.CHANGE_COMPANY_MAIN_INFO_VALUE,
-    companyId: companyId,
-    fieldName: fieldName,
-    value: value,
-    isNewCompany: isNewCompany
-  };
-}
-
-function setInitialCompanyMainInfoState(companyId, companyMainInfo) {
-  var _ref;
-
-  var isNewCompany = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-  return _ref = {
-    type: _companyMainInfo.SET_INITIAL_COMPANY_MAIN_INFO_STATE,
-    companyId: companyId }, _defineProperty(_ref, "companyId", companyId), _defineProperty(_ref, "companyMainInfo", companyMainInfo), _defineProperty(_ref, "isNewCompany", isNewCompany), _ref;
-}
-
-function changeWorkingTimeValue(companyId, fieldName, value) {
-  var isNewCompany = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
-
-  return {
-    type: _companyMainInfo.CHANGE_WORKING_TIME_VALUE,
-    companyId: companyId,
-    fieldName: fieldName,
-    value: value,
-    isNewCompany: isNewCompany
-  };
-}
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.nullValidator = nullValidator;
-function nullValidator(field, subField) {
-  var defaultValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "";
-
-  return field !== null && field !== undefined ? field[subField] : defaultValue;
-}
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -481,11 +238,13 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(64);
+__webpack_require__(61);
 
-var _validationRules = __webpack_require__(65);
+var _validationRules = __webpack_require__(62);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -493,8 +252,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ValidatorInput = function (_React$Component) {
-  _inherits(ValidatorInput, _React$Component);
+var ValidatorInput = function (_React$PureComponent) {
+  _inherits(ValidatorInput, _React$PureComponent);
 
   function ValidatorInput(props) {
     _classCallCheck(this, ValidatorInput);
@@ -521,7 +280,7 @@ var ValidatorInput = function (_React$Component) {
           validationOption = _props.validationOption;
 
 
-      if (typeof onChange === "function") {
+      if (typeof onChange === 'function') {
         if (validationOption && (0, _validationRules.validatorForOnChange)(value, validationOption)) {
           onChange(name, value);
         } else if (!validationOption) {
@@ -554,29 +313,25 @@ var ValidatorInput = function (_React$Component) {
       var _props2 = this.props,
           InputComponent = _props2.InputComponent,
           value = _props2.value,
-          placeholder = _props2.placeholder,
-          name = _props2.name,
-          rows = _props2.rows;
+          rest = _objectWithoutProperties(_props2, ['InputComponent', 'value']);
+
       var isError = this.state.isError;
 
 
       return InputComponent && _react2.default.createElement(
         'div',
         { className: 'validatorInput validatorInput_isError--' + isError },
-        _react2.default.createElement(InputComponent, {
+        _react2.default.createElement(InputComponent, _extends({}, rest, {
           value: value,
-          placeholder: placeholder,
-          name: name,
           onChange: this.handleValueOnChange,
-          onBlur: this.handleValueOnBlur,
-          rows: rows
-        })
+          onBlur: this.handleValueOnBlur
+        }))
       );
     }
   }]);
 
   return ValidatorInput;
-}(_react2.default.Component);
+}(_react2.default.PureComponent);
 
 exports.default = ValidatorInput;
 
@@ -584,7 +339,293 @@ exports.default = ValidatorInput;
 ValidatorInput.defaultProps = { validationOption: {} };
 
 /***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.deleteCompanyById = deleteCompanyById;
+exports.getAllCompanies = getAllCompanies;
+
+var _admin = __webpack_require__(26);
+
+var _APIUtil = __webpack_require__(6);
+
+var _AppConstance = __webpack_require__(5);
+
+function deleteCompanyById(companyId) {
+  return function (dispatch) {
+    (0, _APIUtil.request)({
+      url: _AppConstance.API_URL + '/company/' + companyId,
+      method: 'DELETE'
+    }).then(function () {
+      dispatch({
+        type: _admin.DELETE_COMPANY_BY_ID,
+        companyId: companyId
+      });
+    });
+  };
+}
+
+function getAllCompanies() {
+  return function (dispatch) {
+    (0, _APIUtil.request)({
+      url: _AppConstance.API_URL + '/company',
+      method: 'GET'
+    }).then(function (companies) {
+      dispatch({
+        type: _admin.GET_ALL_COMPANIES,
+        companies: companies
+      });
+    });
+  };
+}
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+module.exports = require("prop-types");
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.mockData = exports.companyColumnConfig = undefined;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(2);
+
+var _Actions = __webpack_require__(95);
+
+var _Actions2 = _interopRequireDefault(_Actions);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var companyColumnConfig = exports.companyColumnConfig = function companyColumnConfig(dispatch) {
+  return [{
+    key: 'name',
+    title: 'Company name',
+    dataIndex: 'name',
+    render: function render(text, record) {
+      return _react2.default.createElement(
+        _reactRouterDom.Link,
+        { to: '/admin/company/' + record.id },
+        text
+      );
+    }
+  }, {
+    key: 'address',
+    title: 'Address',
+    dataIndex: 'address'
+  }, {
+    key: 'createdAt',
+    title: 'Created at',
+    dataIndex: 'createdAt'
+  }, {
+    key: 'updatedAt',
+    title: 'Updated at',
+    dataIndex: 'updatedAt'
+  }, {
+    title: 'Actions',
+    dataIndex: 'actions',
+    render: function render(text, record) {
+      return _react2.default.createElement(_Actions2.default, { record: record, dispatch: dispatch });
+    }
+  }];
+};
+
+var mockData = exports.mockData = [{
+  'id': 1,
+  'key': 'f08f61b2-bc76-4919-ab04-1a033eeb6b8e',
+  'uniqueId': 'f08f61b2-bc76-4919-ab04-1a033eeb6b8e',
+  'name': 'company test 1',
+  'coordinateX': '111111.111',
+  'coordinateY': '111111.111',
+  'address': 'address',
+  'rating': 3.5,
+  'createdAt': '2018-07-08T14:55:28Z',
+  'updatedAt': '2018-07-08T14:55:28Z',
+  'exchangeCompanyDetail': {
+    'description': 'long long description',
+    'phone': '234234234',
+    'website': 'some.com',
+    'email': 'some@gmail.com',
+    'exchangeCompany': null
+  },
+  'workingTime': {
+    'mnFrom': '12:00:00',
+    'mnTo': '18:00:00',
+    'tuFrom': '12:00:00',
+    'tuTo': '18:00:00',
+    'weFrom': '12:00:00',
+    'weTo': '18:00:00',
+    'thFrom': '12:00:00',
+    'thTo': '18:00:00',
+    'frFrom': '12:00:00',
+    'frTo': '18:00:00',
+    'stFrom': '12:00:00',
+    'stTo': '18:00:00',
+    'snFrom': '12:00:00',
+    'snTo': '18:00:00'
+  },
+  'comments': [{
+    'id': 1,
+    'name': 'name 1',
+    'title': 'title 1',
+    'text': 'Long long comment',
+    'createdAt': '2018-07-08T14:55:28Z',
+    'updatedAt': '2018-07-08T14:55:28Z',
+    'dislike': true,
+    'liked': false
+  }, {
+    'id': 2,
+    'name': 'name 1',
+    'title': 'title 1',
+    'text': 'Long long comment',
+    'createdAt': '2018-07-08T14:55:28Z',
+    'updatedAt': '2018-07-08T14:55:28Z',
+    'dislike': false,
+    'liked': true
+  }, {
+    'id': 3,
+    'name': 'name 1',
+    'title': 'title 1',
+    'text': 'Long long comment',
+    'createdAt': '2018-07-08T14:55:28Z',
+    'updatedAt': '2018-07-08T14:55:28Z',
+    'dislike': false,
+    'liked': true
+  }, {
+    'id': 4,
+    'name': 'name 1',
+    'title': 'title 1',
+    'text': 'Long long comment Long long comment Long long comment Long long comment Long long comment',
+    'createdAt': '2018-07-08T14:55:28Z',
+    'updatedAt': '2018-07-08T14:55:28Z',
+    'dislike': false,
+    'liked': true
+  }],
+  'currencyRates': [{
+    'id': 1,
+    'currencyName': 'Euro',
+    'currencyType': 'EUR',
+    'buyPrice': 123.23,
+    'sellPrice': 133.23,
+    'createdAt': '2018-07-08T14:55:28Z',
+    'updatedAt': '2018-07-08T14:55:28Z'
+  }, {
+    'id': 2,
+    'currencyName': 'Dollar',
+    'currencyType': 'USD',
+    'buyPrice': 123.23,
+    'sellPrice': 133.23,
+    'createdAt': '2018-07-08T14:55:28Z',
+    'updatedAt': '2018-07-08T14:55:28Z'
+  }, {
+    'id': 3,
+    'currencyName': 'Funt',
+    'currencyType': 'GBR',
+    'buyPrice': 123.23,
+    'sellPrice': 133.23,
+    'createdAt': '2018-07-08T14:55:28Z',
+    'updatedAt': '2018-07-08T14:55:28Z'
+  }],
+  'exchangeCompanyParseData': {
+    'url': 'someCompany.com',
+    'parameters': 'parameters',
+    'rowSelector': 'rowSelector',
+    'currencyAmountSelector': 'currencyAmountSelector',
+    'currencyTypeSelector': 'currencyTypeSelector',
+    'buySelector': 'buySelector',
+    'sellSelector': 'sellSelector',
+    'active': false
+  }
+}];
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.changeCompanyMainInfoValue = changeCompanyMainInfoValue;
+exports.setInitialCompanyMainInfoState = setInitialCompanyMainInfoState;
+exports.changeWorkingTimeValue = changeWorkingTimeValue;
+
+var _companyMainInfo = __webpack_require__(28);
+
+function changeCompanyMainInfoValue(companyId, fieldName, value) {
+  var isNewCompany = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+  return {
+    type: _companyMainInfo.CHANGE_COMPANY_MAIN_INFO_VALUE,
+    companyId: companyId,
+    fieldName: fieldName,
+    value: value,
+    isNewCompany: isNewCompany
+  };
+}
+
+function setInitialCompanyMainInfoState(companyId, companyMainInfo) {
+  var isNewCompany = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+  return {
+    type: _companyMainInfo.SET_INITIAL_COMPANY_MAIN_INFO_STATE,
+    companyId: companyId,
+    companyMainInfo: companyMainInfo,
+    isNewCompany: isNewCompany
+  };
+}
+
+function changeWorkingTimeValue(companyId, fieldName, value) {
+  var isNewCompany = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+  return {
+    type: _companyMainInfo.CHANGE_WORKING_TIME_VALUE,
+    companyId: companyId,
+    fieldName: fieldName,
+    value: value,
+    isNewCompany: isNewCompany
+  };
+}
+
+/***/ }),
 /* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.nullValidator = nullValidator;
+function nullValidator(field, subField) {
+  var defaultValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+
+  return field !== null && field !== undefined ? field[subField] : defaultValue;
+}
+
+/***/ }),
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -633,7 +674,588 @@ var NotFound = function NotFound() {
 exports.default = NotFound;
 
 /***/ }),
-/* 14 */
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Checkbox = exports.Grid = exports.InputValidator = exports.Input = exports.Button = exports.Dropdown = exports.Radio = undefined;
+
+var _Radio = __webpack_require__(54);
+
+var _Radio2 = _interopRequireDefault(_Radio);
+
+var _Dropdown = __webpack_require__(56);
+
+var _Dropdown2 = _interopRequireDefault(_Dropdown);
+
+var _Button = __webpack_require__(18);
+
+var _Button2 = _interopRequireDefault(_Button);
+
+var _Input = __webpack_require__(59);
+
+var _Input2 = _interopRequireDefault(_Input);
+
+var _ValidatorInput = __webpack_require__(8);
+
+var _ValidatorInput2 = _interopRequireDefault(_ValidatorInput);
+
+var _Grid = __webpack_require__(19);
+
+var _Grid2 = _interopRequireDefault(_Grid);
+
+var _Checkbox = __webpack_require__(68);
+
+var _Checkbox2 = _interopRequireDefault(_Checkbox);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Radio = exports.Radio = _Radio2.default;
+var Dropdown = exports.Dropdown = _Dropdown2.default;
+var Button = exports.Button = _Button2.default;
+var Input = exports.Input = _Input2.default;
+var InputValidator = exports.InputValidator = _ValidatorInput2.default;
+var Grid = exports.Grid = _Grid2.default;
+var Checkbox = exports.Checkbox = _Checkbox2.default;
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = BlockWrapper;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+__webpack_require__(51);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function BlockWrapper(props) {
+  var children = props.children;
+
+
+  return _react2.default.createElement(
+    'div',
+    { className: 'blockWrapper' },
+    children
+  );
+}
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.generateUniqueId = generateUniqueId;
+function generateUniqueId() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+  }
+  return s4() + '-' + s4();
+}
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _util = __webpack_require__(4);
+
+__webpack_require__(58);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Button = function (_React$PureComponent) {
+  _inherits(Button, _React$PureComponent);
+
+  function Button() {
+    _classCallCheck(this, Button);
+
+    return _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).apply(this, arguments));
+  }
+
+  _createClass(Button, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          children = _props.children,
+          className = _props.className,
+          size = _props.size,
+          onClick = _props.onClick,
+          isActive = _props.isActive;
+
+      return _react2.default.createElement(
+        'button',
+        {
+          className: 'ec-button ' + (0, _util.setSize)('ec-button', size) + ' ' + className + ' ec-button--isActive-' + isActive,
+          onClick: onClick
+        },
+        _react2.default.createElement(
+          'span',
+          null,
+          children
+        )
+      );
+    }
+  }]);
+
+  return Button;
+}(_react2.default.PureComponent);
+
+exports.default = Button;
+
+
+Button.defaultProps = {
+  className: '',
+  size: _util.sizeType.MD
+};
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Row = __webpack_require__(63);
+
+var _Row2 = _interopRequireDefault(_Row);
+
+__webpack_require__(67);
+
+var _util = __webpack_require__(4);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Grid = function (_React$PureComponent) {
+  _inherits(Grid, _React$PureComponent);
+
+  function Grid() {
+    _classCallCheck(this, Grid);
+
+    return _possibleConstructorReturn(this, (Grid.__proto__ || Object.getPrototypeOf(Grid)).apply(this, arguments));
+  }
+
+  _createClass(Grid, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          isHeader = _props.isHeader,
+          size = _props.size;
+
+      return _react2.default.createElement(
+        'table',
+        { className: 'ec-grid ' + (0, _util.setSize)('ec-grid', size) },
+        isHeader && _react2.default.createElement(
+          'thead',
+          { className: 'ec-grid__head' },
+          this.header
+        ),
+        _react2.default.createElement(
+          'tbody',
+          { className: 'ec-grid__body' },
+          this.body
+        )
+      );
+    }
+  }, {
+    key: 'header',
+    get: function get() {
+      var _props2 = this.props,
+          config = _props2.config,
+          isHeader = _props2.isHeader,
+          size = _props2.size;
+
+      return config && Array.isArray(config) ? _react2.default.createElement(_Row2.default, { config: config, isHeader: isHeader, size: size }) : null;
+    }
+  }, {
+    key: 'body',
+    get: function get() {
+      var _props3 = this.props,
+          records = _props3.records,
+          config = _props3.config,
+          primaryKey = _props3.primaryKey,
+          size = _props3.size,
+          stripe = _props3.stripe;
+
+      return records && Array.isArray(records) ? records.map(function (record, index) {
+        return _react2.default.createElement(_Row2.default, {
+          key: record[primaryKey] || index,
+          record: record,
+          config: config,
+          size: size,
+          stripe: stripe
+        });
+      }) : null;
+    }
+  }]);
+
+  return Grid;
+}(_react2.default.PureComponent);
+
+exports.default = Grid;
+
+
+Grid.defaultProps = {
+  size: _util.sizeType.MD
+};
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.setBuyStatus = setBuyStatus;
+exports.setSumAmount = setSumAmount;
+
+var _ecHomePage = __webpack_require__(21);
+
+function setBuyStatus(isBuyStatus) {
+  return {
+    isBuyStatus: isBuyStatus,
+    type: _ecHomePage.SET_BUY_STATUS
+  };
+}
+
+function setSumAmount(currencyAmount) {
+  return {
+    currencyAmount: currencyAmount,
+    type: _ecHomePage.SET_SUM_AMOUNT
+  };
+}
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var SET_BUY_STATUS = exports.SET_BUY_STATUS = 'CHANGE_BUY_STATUS';
+var SET_SUM_AMOUNT = exports.SET_SUM_AMOUNT = 'CHANGE_SUM_AMOUNT';
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ecCurrencyMainTableRecord = exports.ecCurrencyMainTableConfig = undefined;
+
+var _ecCurrencyMainTableRender = __webpack_require__(78);
+
+var ecCurrencyMainTableConfig = exports.ecCurrencyMainTableConfig = function ecCurrencyMainTableConfig(isBuy, sumAmount) {
+  var knowMore = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
+  var sortRowsByName = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function () {};
+  var sortRowsByPrice = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : function () {};
+  return isBuy ? ecCurrencyMainTableBuyConfig(sumAmount, knowMore, sortRowsByName, sortRowsByPrice) : ecCurrencyMainTableSumConfig(sumAmount, knowMore, sortRowsByName, sortRowsByPrice);
+};
+
+var ecCurrencyMainTableBuyConfig = function ecCurrencyMainTableBuyConfig(sumAmount, knowMore, sortRowsByName, sortRowsByPrice) {
+  return [{
+    index: 'name',
+    key: 'name',
+    title: 'Currency',
+    renderTitle: function renderTitle(record, config) {
+      return (0, _ecCurrencyMainTableRender.renderTitle)(record, config, sortRowsByName);
+    },
+    renderCell: _ecCurrencyMainTableRender.renderCompanyName
+  }, {
+    index: 'buyPrice',
+    key: 'buyPrice',
+    title: 'Buy',
+    renderTitle: function renderTitle(record, config) {
+      return (0, _ecCurrencyMainTableRender.renderTitle)(record, config, sortRowsByPrice);
+    }
+  }, {
+    index: 'buyPriceSum',
+    key: 'buyPriceSum',
+    renderTitle: function renderTitle() {
+      return (0, _ecCurrencyMainTableRender.renderBuyTitle)(sumAmount);
+    },
+    renderCell: function renderCell(record) {
+      return (0, _ecCurrencyMainTableRender.renderBuyPrice)(record.buyPrice, sumAmount);
+    }
+  }, {
+    index: 'updatedAt',
+    key: 'updatedAt',
+    title: 'Last update',
+    renderCell: function renderCell(record, config) {
+      return (0, _ecCurrencyMainTableRender.renderLastUpdateTime)(record, config.key);
+    }
+  }, {
+    index: 'knowMore',
+    title: 'Info',
+    renderCell: function renderCell(record) {
+      return (0, _ecCurrencyMainTableRender.renderKnowMore)(record.id, record.name, knowMore);
+    }
+  }];
+};
+
+var ecCurrencyMainTableSumConfig = function ecCurrencyMainTableSumConfig(sumAmount, knowMore, sortRowsByName, sortRowsByPrice) {
+  return [{
+    index: 'name',
+    key: 'name',
+    title: 'Currency',
+    renderTitle: function renderTitle(record, config) {
+      return (0, _ecCurrencyMainTableRender.renderTitle)(record, config, sortRowsByName);
+    }
+  }, {
+    index: 'sellPrice',
+    key: 'sellPrice',
+    title: 'Sell',
+    renderTitle: function renderTitle(record, config) {
+      return (0, _ecCurrencyMainTableRender.renderTitle)(record, config, sortRowsByPrice);
+    }
+  }, {
+    index: 'sellPriceSum',
+    key: 'sellPriceSum',
+    renderTitle: function renderTitle() {
+      return (0, _ecCurrencyMainTableRender.renderSellTitle)(sumAmount);
+    },
+    renderCell: function renderCell(record) {
+      return (0, _ecCurrencyMainTableRender.renderSellPrice)(record.sellPrice, sumAmount);
+    }
+  }, {
+    index: 'updatedAt',
+    key: 'updatedAt',
+    title: 'Last update',
+    renderCell: function renderCell(record, config) {
+      return (0, _ecCurrencyMainTableRender.renderLastUpdateTime)(record, config.key);
+    }
+  }, {
+    index: 'knowMore',
+    title: 'Info',
+    renderCell: function renderCell(record) {
+      return (0, _ecCurrencyMainTableRender.renderKnowMore)(record.id, record.name, knowMore);
+    }
+  }];
+};
+
+var ecCurrencyMainTableRecord = exports.ecCurrencyMainTableRecord = [{
+  id: 1,
+  name: "Company 1",
+  address: "some address",
+  buyPrice: "123",
+  sellPrice: "123",
+  updatedAt: "2018-07-08T14:55:28Z",
+  rating: 2.5,
+  coordinateX: null,
+  coordinateY: null
+}, {
+  id: 2,
+  name: "Company 2",
+  buyPrice: "12",
+  sellPrice: "12",
+  updatedAt: "2018-07-08T14:55:28Z",
+  rating: 2,
+  coordinateX: "50.093652",
+  coordinateY: "19.985859"
+}, {
+  id: 3,
+  name: "Company 3",
+  buyPrice: "11",
+  sellPrice: "1200",
+  updatedAt: "2018-07-08T14:55:28Z",
+  rating: 3,
+  address: "somewhere there",
+  coordinateX: "50.094031",
+  coordinateY: "19.983692"
+}, {
+  id: 4,
+  name: "Company 4",
+  buyPrice: "1232",
+  sellPrice: "1232",
+  updatedAt: "2018-07-08T14:55:28Z",
+  rating: 1.5
+}];
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports) {
+
+module.exports = require("moment");
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+exports.sortedWithField = sortedWithField;
+exports.sortedByPrice = sortedByPrice;
+exports.sortByGeolocation = sortByGeolocation;
+exports.filterByName = filterByName;
+
+var _geolocation = __webpack_require__(25);
+
+function sortedWithField(records, isIncrease, fieldName) {
+  if (isIncrease) {
+    return records.sort(function (itemA, itemB) {
+      if (itemA[fieldName] <= itemB[fieldName]) return -1;
+      if (itemA[fieldName] > itemB[fieldName]) return 1;
+    });
+  }
+  return records.sort(function (itemA, itemB) {
+    if (itemA[fieldName] > itemB[fieldName]) return -1;
+    if (itemA[fieldName] <= itemB[fieldName]) return 1;
+  });
+}
+
+function sortedByPrice(records, isIncrease, isBuy) {
+  if (isIncrease) {
+    return records.sort(function (itemA, itemB) {
+      if (isBuy) return itemA.buyPrice - itemB.buyPrice;
+      return itemA.sellPrice - itemB.sellPrice;
+    });
+  }
+  return records.sort(function (itemA, itemB) {
+    if (isBuy) return itemB.buyPrice - itemA.buyPrice;
+    return itemB.sellPrice - itemA.sellPrice;
+  });
+}
+
+function sortByGeolocation(records, lat, lon) {
+  return records.map(function (record) {
+    if (record.coordinateX && record.coordinateY) {
+      return _extends({}, record, { distance: (0, _geolocation.distance)(lat, lon, record.coordinateX, record.coordinateY, "K") });
+    }
+
+    return _extends({}, record, { distance: Infinity });
+  }).sort(function (itemA, itemB) {
+    return itemA.distance - itemB.distance;
+  });
+}
+
+function filterByName(records, filterPattern) {
+  var regExp = RegExp(filterPattern);
+  return records.filter(function (record) {
+    return regExp.test(record.name);
+  });
+}
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defineLocation = defineLocation;
+exports.distance = distance;
+function defineLocation() {
+  if ("geolocation" in navigator) {
+    return new Promise(function (resolve, reject) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        resolve(position);
+      }, function () {
+        reject("Unable to retrieve your location!");
+      });
+    });
+  } else {
+    console.error("Your browser doesn't support geolocation Web API!");
+  }
+}
+
+function distance(lat1, lon1, lat2, lon2, unit) {
+  var radlat1 = Math.PI * lat1 / 180;
+  var radlat2 = Math.PI * lat2 / 180;
+  var theta = lon1 - lon2;
+  var radtheta = Math.PI * theta / 180;
+  var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+
+  if (dist > 1) {
+    dist = 1;
+  }
+  dist = Math.acos(dist);
+  dist = dist * 180 / Math.PI;
+  dist = dist * 60 * 1.1515;
+  if (unit === "K") {
+    dist = dist * 1.609344;
+  }
+  if (unit === "N") {
+    dist = dist * 0.8684;
+  }
+
+  return dist;
+}
+
+/***/ }),
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -646,7 +1268,7 @@ var DELETE_COMPANY_BY_ID = exports.DELETE_COMPANY_BY_ID = 'DELETE_COMPANY_BY_ID'
 var GET_ALL_COMPANIES = exports.GET_ALL_COMPANIES = 'GET_ALL_COMPANIES';
 
 /***/ }),
-/* 15 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -664,17 +1286,17 @@ var _react2 = _interopRequireDefault(_react);
 
 var _antd = __webpack_require__(1);
 
-var _companyMainInfo = __webpack_require__(10);
+var _companyMainInfo = __webpack_require__(12);
 
-__webpack_require__(59);
+__webpack_require__(110);
 
-var _WorkingTime = __webpack_require__(60);
+var _WorkingTime = __webpack_require__(111);
 
 var _WorkingTime2 = _interopRequireDefault(_WorkingTime);
 
-var _valueValidator = __webpack_require__(11);
+var _valueValidator = __webpack_require__(13);
 
-var _ValidatorInput = __webpack_require__(12);
+var _ValidatorInput = __webpack_require__(8);
 
 var _ValidatorInput2 = _interopRequireDefault(_ValidatorInput);
 
@@ -686,8 +1308,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var CompanyMainInfo = function (_React$Component) {
-  _inherits(CompanyMainInfo, _React$Component);
+var CompanyMainInfo = function (_React$PureComponent) {
+  _inherits(CompanyMainInfo, _React$PureComponent);
 
   function CompanyMainInfo(props) {
     _classCallCheck(this, CompanyMainInfo);
@@ -700,7 +1322,7 @@ var CompanyMainInfo = function (_React$Component) {
   }
 
   _createClass(CompanyMainInfo, [{
-    key: "handleValueOnChange",
+    key: 'handleValueOnChange',
     value: function handleValueOnChange(name, value) {
       var _props = this.props,
           dispatch = _props.dispatch,
@@ -710,9 +1332,9 @@ var CompanyMainInfo = function (_React$Component) {
       dispatch((0, _companyMainInfo.changeCompanyMainInfoValue)(companyId, name, value, isNewCompany));
     }
   }, {
-    key: "handleOnChangeForRate",
+    key: 'handleOnChangeForRate',
     value: function handleOnChangeForRate(value) {
-      var NAME = "rating";
+      var NAME = 'rating';
       var _props2 = this.props,
           dispatch = _props2.dispatch,
           companyId = _props2.companyId,
@@ -721,7 +1343,7 @@ var CompanyMainInfo = function (_React$Component) {
       dispatch((0, _companyMainInfo.changeCompanyMainInfoValue)(companyId, NAME, value, isNewCompany));
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       var _props3 = this.props,
           company = _props3.company,
@@ -731,24 +1353,24 @@ var CompanyMainInfo = function (_React$Component) {
 
 
       return _react2.default.createElement(
-        "div",
-        { className: "companyMainInfo" },
+        'div',
+        { className: 'companyMainInfo' },
         _react2.default.createElement(
           _antd.Row,
-          { type: "flex", justify: "space-between", align: "middle" },
+          { type: 'flex', justify: 'space-between', align: 'middle' },
           _react2.default.createElement(
             _antd.Col,
             { span: 4 },
-            "Name*:"
+            'Name*:'
           ),
           _react2.default.createElement(
             _antd.Col,
             { span: 7 },
             _react2.default.createElement(_ValidatorInput2.default, {
               InputComponent: _antd.Input,
-              value: (0, _valueValidator.nullValidator)(company, "name"),
-              placeholder: "Company name",
-              name: "name",
+              value: (0, _valueValidator.nullValidator)(company, 'name'),
+              placeholder: 'Company name',
+              name: 'name',
               onChange: this.handleValueOnChange,
               validationOption: { isRequired: true, length: 120, validateInput: validateInput }
             })
@@ -756,16 +1378,16 @@ var CompanyMainInfo = function (_React$Component) {
           _react2.default.createElement(
             _antd.Col,
             { span: 4 },
-            "Address:"
+            'Address:'
           ),
           _react2.default.createElement(
             _antd.Col,
             { span: 7 },
             _react2.default.createElement(_ValidatorInput2.default, {
               InputComponent: _antd.Input,
-              value: (0, _valueValidator.nullValidator)(company, "address"),
-              placeholder: "Address company",
-              name: "address",
+              value: (0, _valueValidator.nullValidator)(company, 'address'),
+              placeholder: 'Address company',
+              name: 'address',
               onChange: this.handleValueOnChange,
               validationOption: { length: 120 }
             })
@@ -773,20 +1395,20 @@ var CompanyMainInfo = function (_React$Component) {
         ),
         _react2.default.createElement(
           _antd.Row,
-          { type: "flex", justify: "space-between", align: "middle" },
+          { type: 'flex', justify: 'space-between', align: 'middle' },
           _react2.default.createElement(
             _antd.Col,
             { span: 4 },
-            "Coordinate X:"
+            'Coordinate X:'
           ),
           _react2.default.createElement(
             _antd.Col,
             { span: 7 },
             _react2.default.createElement(_ValidatorInput2.default, {
               InputComponent: _antd.Input,
-              value: (0, _valueValidator.nullValidator)(company, "coordinateX"),
-              placeholder: "Coordinate X",
-              name: "coordinateX",
+              value: (0, _valueValidator.nullValidator)(company, 'coordinateX'),
+              placeholder: 'Coordinate X',
+              name: 'coordinateX',
               onChange: this.handleValueOnChange,
               validationOption: { length: 20, isNumeric: true }
             })
@@ -794,16 +1416,16 @@ var CompanyMainInfo = function (_React$Component) {
           _react2.default.createElement(
             _antd.Col,
             { span: 4 },
-            "Coordinate Y:"
+            'Coordinate Y:'
           ),
           _react2.default.createElement(
             _antd.Col,
             { span: 7 },
             _react2.default.createElement(_ValidatorInput2.default, {
               InputComponent: _antd.Input,
-              value: (0, _valueValidator.nullValidator)(company, "coordinateY"),
-              placeholder: "Coordinate Y",
-              name: "coordinateY",
+              value: (0, _valueValidator.nullValidator)(company, 'coordinateY'),
+              placeholder: 'Coordinate Y',
+              name: 'coordinateY',
               onChange: this.handleValueOnChange,
               validationOption: { length: 20, isNumeric: true }
             })
@@ -814,26 +1436,26 @@ var CompanyMainInfo = function (_React$Component) {
           null,
           _react2.default.createElement(_antd.Rate, {
             allowHalf: true,
-            value: (0, _valueValidator.nullValidator)(company, "rating", 0),
+            value: (0, _valueValidator.nullValidator)(company, 'rating', 0),
             onChange: this.handleOnChangeForRate })
         ),
         _react2.default.createElement(_WorkingTime2.default, {
           companyId: company.id,
           dispatch: dispatch,
           isNewCompany: isNewCompany,
-          workingTime: (0, _valueValidator.nullValidator)(company, "workingTime")
+          workingTime: (0, _valueValidator.nullValidator)(company, 'workingTime')
         })
       );
     }
   }]);
 
   return CompanyMainInfo;
-}(_react2.default.Component);
+}(_react2.default.PureComponent);
 
 exports.default = CompanyMainInfo;
 
 /***/ }),
-/* 16 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -842,12 +1464,12 @@ exports.default = CompanyMainInfo;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var CHANGE_COMPANY_MAIN_INFO_VALUE = exports.CHANGE_COMPANY_MAIN_INFO_VALUE = "CHANGE_COMPANY_MAIN_INFO_VALUE";
-var SET_INITIAL_COMPANY_MAIN_INFO_STATE = exports.SET_INITIAL_COMPANY_MAIN_INFO_STATE = "SET_INITIAL_COMPANY_MAIN_INFO_STATE";
-var CHANGE_WORKING_TIME_VALUE = exports.CHANGE_WORKING_TIME_VALUE = "CHANGE_WORKING_TIME_VALUE";
+var CHANGE_COMPANY_MAIN_INFO_VALUE = exports.CHANGE_COMPANY_MAIN_INFO_VALUE = 'CHANGE_COMPANY_MAIN_INFO_VALUE';
+var SET_INITIAL_COMPANY_MAIN_INFO_STATE = exports.SET_INITIAL_COMPANY_MAIN_INFO_STATE = 'SET_INITIAL_COMPANY_MAIN_INFO_STATE';
+var CHANGE_WORKING_TIME_VALUE = exports.CHANGE_WORKING_TIME_VALUE = 'CHANGE_WORKING_TIME_VALUE';
 
 /***/ }),
-/* 17 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -865,13 +1487,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _antd = __webpack_require__(1);
 
-__webpack_require__(66);
+__webpack_require__(114);
 
-var _companyDataInfo = __webpack_require__(67);
+var _companyDataInfo = __webpack_require__(115);
 
-var _valueValidator = __webpack_require__(11);
+var _valueValidator = __webpack_require__(13);
 
-var _ValidatorInput = __webpack_require__(12);
+var _ValidatorInput = __webpack_require__(8);
 
 var _ValidatorInput2 = _interopRequireDefault(_ValidatorInput);
 
@@ -885,8 +1507,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var TextArea = _antd.Input.TextArea;
 
-var CompanyDataInfo = function (_React$Component) {
-  _inherits(CompanyDataInfo, _React$Component);
+var CompanyDataInfo = function (_React$PureComponent) {
+  _inherits(CompanyDataInfo, _React$PureComponent);
 
   function CompanyDataInfo(props) {
     _classCallCheck(this, CompanyDataInfo);
@@ -931,7 +1553,7 @@ var CompanyDataInfo = function (_React$Component) {
             { span: 7 },
             _react2.default.createElement(_ValidatorInput2.default, {
               InputComponent: _antd.Input,
-              value: (0, _valueValidator.nullValidator)(exchangeCompanyDetail, "email"),
+              value: (0, _valueValidator.nullValidator)(exchangeCompanyDetail, 'email'),
               placeholder: 'Email',
               name: 'email',
               validationOption: { length: 50, email: true, validateInput: validateInput },
@@ -954,7 +1576,7 @@ var CompanyDataInfo = function (_React$Component) {
             { span: 7 },
             _react2.default.createElement(_ValidatorInput2.default, {
               InputComponent: _antd.Input,
-              value: (0, _valueValidator.nullValidator)(exchangeCompanyDetail, "phone"),
+              value: (0, _valueValidator.nullValidator)(exchangeCompanyDetail, 'phone'),
               placeholder: 'Phone',
               name: 'phone',
               validationOption: { length: 20, isNumeric: true },
@@ -977,7 +1599,7 @@ var CompanyDataInfo = function (_React$Component) {
             { span: 7 },
             _react2.default.createElement(_ValidatorInput2.default, {
               InputComponent: _antd.Input,
-              value: (0, _valueValidator.nullValidator)(exchangeCompanyDetail, "website"),
+              value: (0, _valueValidator.nullValidator)(exchangeCompanyDetail, 'website'),
               placeholder: 'Website',
               name: 'website',
               validationOption: { length: 50 },
@@ -1000,7 +1622,7 @@ var CompanyDataInfo = function (_React$Component) {
             { span: 7 },
             _react2.default.createElement(_ValidatorInput2.default, {
               InputComponent: TextArea,
-              value: (0, _valueValidator.nullValidator)(exchangeCompanyDetail, "description"),
+              value: (0, _valueValidator.nullValidator)(exchangeCompanyDetail, 'description'),
               rows: 6,
               name: 'description',
               placeholder: 'Description',
@@ -1016,12 +1638,12 @@ var CompanyDataInfo = function (_React$Component) {
   }]);
 
   return CompanyDataInfo;
-}(_react2.default.Component);
+}(_react2.default.PureComponent);
 
 exports.default = CompanyDataInfo;
 
 /***/ }),
-/* 18 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1030,11 +1652,11 @@ exports.default = CompanyDataInfo;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var CHANGE_COMPANY_DATA_INFO_VALUE = exports.CHANGE_COMPANY_DATA_INFO_VALUE = "CHANGE_COMPANY_DATA_INFO_VALUE";
-var SET_INITIAL_COMPANY_DATA_INFO_STATE = exports.SET_INITIAL_COMPANY_DATA_INFO_STATE = "SET_INITIAL_COMPANY_DATA_INFO_STATE";
+var CHANGE_COMPANY_DATA_INFO_VALUE = exports.CHANGE_COMPANY_DATA_INFO_VALUE = 'CHANGE_COMPANY_DATA_INFO_VALUE';
+var SET_INITIAL_COMPANY_DATA_INFO_STATE = exports.SET_INITIAL_COMPANY_DATA_INFO_STATE = 'SET_INITIAL_COMPANY_DATA_INFO_STATE';
 
 /***/ }),
-/* 19 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1047,9 +1669,7 @@ exports.selectUnselectCurrency = selectUnselectCurrency;
 exports.changeCurrencyValue = changeCurrencyValue;
 exports.setInitialCurrencyState = setInitialCurrencyState;
 
-var _currencyRate = __webpack_require__(20);
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+var _currencyRate = __webpack_require__(32);
 
 function selectUnselectCurrency(companyId, selectedCurrency) {
   return {
@@ -1070,15 +1690,15 @@ function changeCurrencyValue(companyId, currencyType, fieldName, value) {
 }
 
 function setInitialCurrencyState(companyId, initialCurrencyRate) {
-  var _ref;
-
-  return _ref = {
+  return {
     type: _currencyRate.SET_INITIAL_CURRENCY_STATE,
-    companyId: companyId }, _defineProperty(_ref, "companyId", companyId), _defineProperty(_ref, "initialCurrencyRate", initialCurrencyRate), _ref;
+    companyId: companyId,
+    initialCurrencyRate: initialCurrencyRate
+  };
 }
 
 /***/ }),
-/* 20 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1087,12 +1707,12 @@ function setInitialCurrencyState(companyId, initialCurrencyRate) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var SELECT_UNSELECT_CURRENCY = exports.SELECT_UNSELECT_CURRENCY = "SELECT_UNSELECT_CURRENCY";
-var CHANGE_CURRENCY_VALUE = exports.CHANGE_CURRENCY_VALUE = "CHANGE_CURRENCY_VALUE";
-var SET_INITIAL_CURRENCY_STATE = exports.SET_INITIAL_CURRENCY_STATE = "SET_INITIAL_CURRENCY_STATE";
+var SELECT_UNSELECT_CURRENCY = exports.SELECT_UNSELECT_CURRENCY = 'SELECT_UNSELECT_CURRENCY';
+var CHANGE_CURRENCY_VALUE = exports.CHANGE_CURRENCY_VALUE = 'CHANGE_CURRENCY_VALUE';
+var SET_INITIAL_CURRENCY_STATE = exports.SET_INITIAL_CURRENCY_STATE = 'SET_INITIAL_CURRENCY_STATE';
 
 /***/ }),
-/* 21 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1104,9 +1724,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.changeParserValue = changeParserValue;
 exports.setInitialParserState = setInitialParserState;
 
-var _parser = __webpack_require__(22);
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+var _parser = __webpack_require__(34);
 
 function changeParserValue(companyId, fieldName, value) {
   return {
@@ -1118,15 +1736,15 @@ function changeParserValue(companyId, fieldName, value) {
 }
 
 function setInitialParserState(companyId, initialParserData) {
-  var _ref;
-
-  return _ref = {
+  return {
     type: _parser.SET_INITIAL_PARSER_STATE,
-    companyId: companyId }, _defineProperty(_ref, "companyId", companyId), _defineProperty(_ref, "initialParserData", initialParserData), _ref;
+    companyId: companyId,
+    initialParserData: initialParserData
+  };
 }
 
 /***/ }),
-/* 22 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1135,11 +1753,11 @@ function setInitialParserState(companyId, initialParserData) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var CHANGE_PARSER_VALUE = exports.CHANGE_PARSER_VALUE = "CHANGE_PARSER_VALUE";
-var SET_INITIAL_PARSER_STATE = exports.SET_INITIAL_PARSER_STATE = "SET_INITIAL_PARSER_STATE";
+var CHANGE_PARSER_VALUE = exports.CHANGE_PARSER_VALUE = 'CHANGE_PARSER_VALUE';
+var SET_INITIAL_PARSER_STATE = exports.SET_INITIAL_PARSER_STATE = 'SET_INITIAL_PARSER_STATE';
 
 /***/ }),
-/* 23 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1148,26 +1766,26 @@ var SET_INITIAL_PARSER_STATE = exports.SET_INITIAL_PARSER_STATE = "SET_INITIAL_P
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var DELETE_COMMENTARY_BY_ID = exports.DELETE_COMMENTARY_BY_ID = "DELETE_COMMENTARY_BY_ID";
+var DELETE_COMMENTARY_BY_ID = exports.DELETE_COMMENTARY_BY_ID = 'DELETE_COMMENTARY_BY_ID';
 
 /***/ }),
-/* 24 */
+/* 36 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux");
 
 /***/ }),
-/* 25 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _path = __webpack_require__(26);
+var _path = __webpack_require__(38);
 
 var _path2 = _interopRequireDefault(_path);
 
-var _fs = __webpack_require__(27);
+var _fs = __webpack_require__(39);
 
 var _fs2 = _interopRequireDefault(_fs);
 
@@ -1175,25 +1793,25 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _express = __webpack_require__(28);
+var _express = __webpack_require__(40);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _server = __webpack_require__(29);
+var _server = __webpack_require__(41);
 
 var _server2 = _interopRequireDefault(_server);
 
-var _App = __webpack_require__(30);
+var _App = __webpack_require__(42);
 
 var _App2 = _interopRequireDefault(_App);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _configureStore = __webpack_require__(103);
+var _configureStore = __webpack_require__(151);
 
 var _configureStore2 = _interopRequireDefault(_configureStore);
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1237,31 +1855,31 @@ app.listen(PORT, function () {
 });
 
 /***/ }),
-/* 26 */
+/* 38 */
 /***/ (function(module, exports) {
 
 module.exports = require("path");
 
 /***/ }),
-/* 27 */
+/* 39 */
 /***/ (function(module, exports) {
 
 module.exports = require("fs");
 
 /***/ }),
-/* 28 */
+/* 40 */
 /***/ (function(module, exports) {
 
 module.exports = require("express");
 
 /***/ }),
-/* 29 */
+/* 41 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
 
 /***/ }),
-/* 30 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1279,7 +1897,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(7);
+var _propTypes = __webpack_require__(10);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -1287,33 +1905,33 @@ var _reactRouterDom = __webpack_require__(2);
 
 var _antd = __webpack_require__(1);
 
-var _ExchangeCompany = __webpack_require__(31);
+var _ExchangeCompany = __webpack_require__(43);
 
 var _ExchangeCompany2 = _interopRequireDefault(_ExchangeCompany);
 
-var _Login = __webpack_require__(36);
+var _Login = __webpack_require__(89);
 
 var _Login2 = _interopRequireDefault(_Login);
 
-var _Admin = __webpack_require__(38);
+var _Admin = __webpack_require__(91);
 
 var _Admin2 = _interopRequireDefault(_Admin);
 
-var _PrivateRoute = __webpack_require__(101);
+var _PrivateRoute = __webpack_require__(149);
 
 var _PrivateRoute2 = _interopRequireDefault(_PrivateRoute);
 
-var _NotFound = __webpack_require__(13);
+var _NotFound = __webpack_require__(14);
 
 var _NotFound2 = _interopRequireDefault(_NotFound);
 
-var _APIUtil = __webpack_require__(5);
+var _APIUtil = __webpack_require__(6);
 
-var _LoadingIndicator = __webpack_require__(102);
+var _LoadingIndicator = __webpack_require__(150);
 
 var _LoadingIndicator2 = _interopRequireDefault(_LoadingIndicator);
 
-var _AppConstance = __webpack_require__(3);
+var _AppConstance = __webpack_require__(5);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1323,8 +1941,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var App = function (_React$Component) {
-  _inherits(App, _React$Component);
+var App = function (_React$PureComponent) {
+  _inherits(App, _React$PureComponent);
 
   function App(props) {
     _classCallCheck(this, App);
@@ -1435,7 +2053,7 @@ var App = function (_React$Component) {
   }]);
 
   return App;
-}(_react2.default.Component);
+}(_react2.default.PureComponent);
 
 App.propTypes = {
   history: _propTypes2.default.object
@@ -1444,7 +2062,7 @@ App.propTypes = {
 exports.default = (0, _reactRouterDom.withRouter)(App);
 
 /***/ }),
-/* 31 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1462,11 +2080,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _NotFound = __webpack_require__(13);
+var _NotFound = __webpack_require__(14);
 
 var _NotFound2 = _interopRequireDefault(_NotFound);
 
-var _EcHomePage = __webpack_require__(32);
+var _EcHomePage = __webpack_require__(44);
 
 var _EcHomePage2 = _interopRequireDefault(_EcHomePage);
 
@@ -1478,8 +2096,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ExchangeCompany = function (_React$Component) {
-  _inherits(ExchangeCompany, _React$Component);
+var ExchangeCompany = function (_React$PureComponent) {
+  _inherits(ExchangeCompany, _React$PureComponent);
 
   function ExchangeCompany() {
     _classCallCheck(this, ExchangeCompany);
@@ -1488,15 +2106,15 @@ var ExchangeCompany = function (_React$Component) {
   }
 
   _createClass(ExchangeCompany, [{
-    key: "render",
+    key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        "div",
-        { className: "exchangeCompany" },
+        'div',
+        { className: 'exchangeCompany' },
         _react2.default.createElement(
           _reactRouterDom.Switch,
           null,
-          _react2.default.createElement(_reactRouterDom.Route, { path: "/", exact: true, component: _EcHomePage2.default }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/', exact: true, component: _EcHomePage2.default }),
           _react2.default.createElement(_reactRouterDom.Route, { component: _NotFound2.default })
         )
       );
@@ -1504,12 +2122,12 @@ var ExchangeCompany = function (_React$Component) {
   }]);
 
   return ExchangeCompany;
-}(_react2.default.Component);
+}(_react2.default.PureComponent);
 
 exports.default = ExchangeCompany;
 
 /***/ }),
-/* 32 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1525,9 +2143,13 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _EcHeader = __webpack_require__(33);
+var _EcHeader = __webpack_require__(45);
 
 var _EcHeader2 = _interopRequireDefault(_EcHeader);
+
+var _ecContentContainer = __webpack_require__(48);
+
+var _ecContentContainer2 = _interopRequireDefault(_ecContentContainer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1537,8 +2159,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var EcHomePage = function (_React$Component) {
-  _inherits(EcHomePage, _React$Component);
+var EcHomePage = function (_React$PureComponent) {
+  _inherits(EcHomePage, _React$PureComponent);
 
   function EcHomePage() {
     _classCallCheck(this, EcHomePage);
@@ -1547,23 +2169,24 @@ var EcHomePage = function (_React$Component) {
   }
 
   _createClass(EcHomePage, [{
-    key: "render",
+    key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        "div",
+        'div',
         null,
-        _react2.default.createElement(_EcHeader2.default, null)
+        _react2.default.createElement(_EcHeader2.default, null),
+        _react2.default.createElement(_ecContentContainer2.default, null)
       );
     }
   }]);
 
   return EcHomePage;
-}(_react2.default.Component);
+}(_react2.default.PureComponent);
 
 exports.default = EcHomePage;
 
 /***/ }),
-/* 33 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1579,9 +2202,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _fa = __webpack_require__(34);
+var _fa = __webpack_require__(46);
 
-__webpack_require__(35);
+__webpack_require__(47);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1591,8 +2214,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var EcHeader = function (_React$Component) {
-  _inherits(EcHeader, _React$Component);
+var EcHeader = function (_React$PureComponent) {
+  _inherits(EcHeader, _React$PureComponent);
 
   function EcHeader() {
     _classCallCheck(this, EcHeader);
@@ -1604,14 +2227,23 @@ var EcHeader = function (_React$Component) {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'div',
+        'header',
         { className: 'ecHeader' },
+        _react2.default.createElement(
+          'div',
+          { className: 'ecHeader__logo ecLogo' },
+          _react2.default.createElement(
+            'strong',
+            null,
+            'ExCurRate'
+          )
+        ),
         _react2.default.createElement(
           'div',
           { className: 'ecHeader__nextBtn' },
           _react2.default.createElement(
             'div',
-            { className: 'nextBtn' },
+            { className: 'ecNextBtn' },
             _react2.default.createElement(_fa.FaAngleDoubleDown, null)
           )
         )
@@ -1620,24 +2252,57 @@ var EcHeader = function (_React$Component) {
   }]);
 
   return EcHeader;
-}(_react2.default.Component);
+}(_react2.default.PureComponent);
 
 exports.default = EcHeader;
 
 /***/ }),
-/* 34 */
+/* 46 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-icons/fa");
 
 /***/ }),
-/* 35 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "static/media/ecHeader.less";
 
 /***/ }),
-/* 36 */
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(3);
+
+var _EcContent = __webpack_require__(49);
+
+var _EcContent2 = _interopRequireDefault(_EcContent);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    ecHomePage: state.ecHomePage
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    dispatch: dispatch
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_EcContent2.default);
+
+/***/ }),
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1653,17 +2318,2172 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(7);
+var _EcMainContent = __webpack_require__(50);
+
+var _EcMainContent2 = _interopRequireDefault(_EcMainContent);
+
+var _EcSideBar = __webpack_require__(84);
+
+var _EcSideBar2 = _interopRequireDefault(_EcSideBar);
+
+__webpack_require__(88);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var EcContent = function (_React$PureComponent) {
+  _inherits(EcContent, _React$PureComponent);
+
+  function EcContent() {
+    _classCallCheck(this, EcContent);
+
+    return _possibleConstructorReturn(this, (EcContent.__proto__ || Object.getPrototypeOf(EcContent)).apply(this, arguments));
+  }
+
+  _createClass(EcContent, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          dispatch = _props.dispatch,
+          _props$ecHomePage = _props.ecHomePage,
+          currencyAmount = _props$ecHomePage.currencyAmount,
+          isBuyStatus = _props$ecHomePage.isBuyStatus;
+
+
+      return _react2.default.createElement(
+        'content',
+        { className: 'ecContent' },
+        _react2.default.createElement(_EcMainContent2.default, {
+          dispatch: dispatch,
+          isBuyStatus: isBuyStatus,
+          currencyAmount: currencyAmount
+        }),
+        _react2.default.createElement(_EcSideBar2.default, {
+          isBuyStatus: isBuyStatus
+        })
+      );
+    }
+  }]);
+
+  return EcContent;
+}(_react2.default.PureComponent);
+
+exports.default = EcContent;
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _BlockWrapper = __webpack_require__(16);
+
+var _BlockWrapper2 = _interopRequireDefault(_BlockWrapper);
+
+var _EcCalculator = __webpack_require__(52);
+
+var _EcCalculator2 = _interopRequireDefault(_EcCalculator);
+
+var _EcCurrencyMainTable = __webpack_require__(77);
+
+var _EcCurrencyMainTable2 = _interopRequireDefault(_EcCurrencyMainTable);
+
+var _ecCurrencyMainTableConfig = __webpack_require__(22);
+
+var _EcMainMap = __webpack_require__(80);
+
+var _EcMainMap2 = _interopRequireDefault(_EcMainMap);
+
+__webpack_require__(83);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var EcMainContent = function (_React$PureComponent) {
+  _inherits(EcMainContent, _React$PureComponent);
+
+  function EcMainContent() {
+    _classCallCheck(this, EcMainContent);
+
+    return _possibleConstructorReturn(this, (EcMainContent.__proto__ || Object.getPrototypeOf(EcMainContent)).apply(this, arguments));
+  }
+
+  _createClass(EcMainContent, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          dispatch = _props.dispatch,
+          currencyAmount = _props.currencyAmount,
+          isBuyStatus = _props.isBuyStatus;
+
+
+      return _react2.default.createElement(
+        'main',
+        { className: 'ecMainContent' },
+        _react2.default.createElement(
+          _BlockWrapper2.default,
+          null,
+          _react2.default.createElement(_EcCalculator2.default, {
+            dispatch: dispatch,
+            isBuyStatus: isBuyStatus,
+            currencyAmount: currencyAmount
+          })
+        ),
+        _react2.default.createElement(
+          _BlockWrapper2.default,
+          null,
+          _react2.default.createElement(_EcCurrencyMainTable2.default, {
+            records: _ecCurrencyMainTableConfig.ecCurrencyMainTableRecord,
+            currencyAmount: currencyAmount,
+            isBuyStatus: isBuyStatus
+          })
+        ),
+        _react2.default.createElement(
+          _BlockWrapper2.default,
+          null,
+          _react2.default.createElement(_EcMainMap2.default, {
+            records: _ecCurrencyMainTableConfig.ecCurrencyMainTableRecord,
+            isBuyStatus: isBuyStatus
+          })
+        )
+      );
+    }
+  }]);
+
+  return EcMainContent;
+}(_react2.default.PureComponent);
+
+exports.default = EcMainContent;
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/media/blockWrapper.less";
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _EcCalculatorNavigation = __webpack_require__(53);
+
+var _EcCalculatorNavigation2 = _interopRequireDefault(_EcCalculatorNavigation);
+
+var _EcCalculatorSlider = __webpack_require__(72);
+
+var _EcCalculatorSlider2 = _interopRequireDefault(_EcCalculatorSlider);
+
+__webpack_require__(76);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var EcCalculator = function (_React$PureComponent) {
+  _inherits(EcCalculator, _React$PureComponent);
+
+  function EcCalculator() {
+    _classCallCheck(this, EcCalculator);
+
+    return _possibleConstructorReturn(this, (EcCalculator.__proto__ || Object.getPrototypeOf(EcCalculator)).apply(this, arguments));
+  }
+
+  _createClass(EcCalculator, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          dispatch = _props.dispatch,
+          currencyAmount = _props.currencyAmount,
+          isBuyStatus = _props.isBuyStatus;
+
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'ecCalculator' },
+        _react2.default.createElement(
+          'h1',
+          { className: 'ecCalculator__title' },
+          'Currency exchange rate'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ecCalculator__content' },
+          _react2.default.createElement(_EcCalculatorNavigation2.default, {
+            dispatch: dispatch,
+            isBuyStatus: isBuyStatus
+          }),
+          _react2.default.createElement(_EcCalculatorSlider2.default, {
+            dispatch: dispatch,
+            currencyAmount: currencyAmount
+          })
+        )
+      );
+    }
+  }]);
+
+  return EcCalculator;
+}(_react2.default.PureComponent);
+
+exports.default = EcCalculator;
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _util = __webpack_require__(4);
+
+var _controlLib = __webpack_require__(15);
+
+__webpack_require__(71);
+
+var _ecHomePage = __webpack_require__(20);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var menu = [{
+  index: 'EUR',
+  value: 'EUR - Dollar USA'
+}, {
+  index: 'USD',
+  value: 'USD'
+}, {
+  index: 'GBR',
+  value: 'GBR'
+}, {
+  index: 'EUR_1',
+  value: 'EUR - Dollar USA'
+}, {
+  index: 'USD_1',
+  value: 'USD'
+}, {
+  index: 'GBR_1',
+  value: 'GBR'
+}];
+
+var EcCalculatorNavigation = function (_React$PureComponent) {
+  _inherits(EcCalculatorNavigation, _React$PureComponent);
+
+  function EcCalculatorNavigation() {
+    _classCallCheck(this, EcCalculatorNavigation);
+
+    return _possibleConstructorReturn(this, (EcCalculatorNavigation.__proto__ || Object.getPrototypeOf(EcCalculatorNavigation)).apply(this, arguments));
+  }
+
+  _createClass(EcCalculatorNavigation, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          dispatch = _props.dispatch,
+          isBuyStatus = _props.isBuyStatus;
+
+      var changeBuyStatus = function changeBuyStatus(event) {
+        if (event.target && event.target.value === "sell") {
+          dispatch((0, _ecHomePage.setBuyStatus)(false));
+        } else if (event.target && event.target.value === "buy") {
+          dispatch((0, _ecHomePage.setBuyStatus)(true));
+        }
+      };
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'ecCalculatorNavigation' },
+        _react2.default.createElement(
+          'div',
+          { className: 'ecCalculatorNavigation__action' },
+          _react2.default.createElement(
+            _controlLib.Radio,
+            {
+              value: 'buy',
+              size: _util.sizeType.LG,
+              checked: isBuyStatus,
+              name: 'sellBuy',
+              onChange: changeBuyStatus
+            },
+            'Buy'
+          ),
+          _react2.default.createElement(
+            _controlLib.Radio,
+            {
+              value: 'sell',
+              size: _util.sizeType.LG,
+              checked: !isBuyStatus,
+              name: 'sellBuy',
+              onChange: changeBuyStatus
+            },
+            'Sell'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ecCalculatorNavigation__currency' },
+          _react2.default.createElement(_controlLib.Dropdown, {
+            size: _util.sizeType.LG,
+            list: menu,
+            selectedIndex: 'GBR'
+          })
+        )
+      );
+    }
+  }]);
+
+  return EcCalculatorNavigation;
+}(_react2.default.PureComponent);
+
+exports.default = EcCalculatorNavigation;
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _autoGenerator = __webpack_require__(17);
+
+__webpack_require__(55);
+
+var _util = __webpack_require__(4);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Radio = function (_React$PureComponent) {
+  _inherits(Radio, _React$PureComponent);
+
+  function Radio() {
+    _classCallCheck(this, Radio);
+
+    return _possibleConstructorReturn(this, (Radio.__proto__ || Object.getPrototypeOf(Radio)).apply(this, arguments));
+  }
+
+  _createClass(Radio, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          name = _props.name,
+          children = _props.children,
+          className = _props.className,
+          size = _props.size,
+          checked = _props.checked,
+          value = _props.value,
+          onChange = _props.onChange;
+
+      var uid = this.uid;
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'ec-radio ' + (0, _util.setSize)('ec-radio', size) + ' ' + className },
+        _react2.default.createElement('input', {
+          id: uid,
+          type: 'radio',
+          value: value,
+          name: name,
+          checked: checked,
+          className: 'ec-radio__input',
+          onChange: onChange
+        }),
+        _react2.default.createElement(
+          'label',
+          { htmlFor: uid },
+          children
+        )
+      );
+    }
+  }, {
+    key: 'uid',
+    get: function get() {
+      return (0, _autoGenerator.generateUniqueId)();
+    }
+  }]);
+
+  return Radio;
+}(_react2.default.PureComponent);
+
+exports.default = Radio;
+
+
+Radio.defaultProps = {
+  className: '',
+  size: _util.sizeType.MD
+};
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/media/radio.less";
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _util = __webpack_require__(4);
+
+__webpack_require__(57);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function Item(_ref) {
+  var index = _ref.index,
+      value = _ref.value,
+      selectedItem = _ref.selectedItem,
+      selectItem = _ref.selectItem;
+
+  var takeSelectData = function takeSelectData() {
+    selectItem({ index: index, value: value });
+  };
+  var isActive = selectedItem.index === index || selectedItem.index === 'DEFAULT';
+  return _react2.default.createElement(
+    'li',
+    {
+      className: 'ec-dropdownList__item ec-dropdownList__item--active-' + isActive,
+      onClick: takeSelectData
+    },
+    value
+  );
+}
+
+function prepopulateSelectedValue(list, selectedIndex) {
+  var selectedItem = { value: 'Select value', index: 'DEFAULT' };
+  if (Array.isArray(list) && list.length !== 0) {
+    if (selectedIndex) {
+      list.some(function (item) {
+        if (item.index === selectedIndex) {
+          selectedItem = item;
+          return true;
+        }
+        return false;
+      });
+    } else {
+      selectedItem = list[0];
+    }
+  }
+
+  return selectedItem;
+}
+
+var Dropdown = function (_React$PureComponent) {
+  _inherits(Dropdown, _React$PureComponent);
+
+  function Dropdown(props) {
+    _classCallCheck(this, Dropdown);
+
+    var _this = _possibleConstructorReturn(this, (Dropdown.__proto__ || Object.getPrototypeOf(Dropdown)).call(this, props));
+
+    _this.state = {
+      isListHidden: true,
+      selectedItem: prepopulateSelectedValue(props.list, props.selectedIndex)
+    };
+
+    _this.mouseOverHandler = _this.mouseOverHandler.bind(_this);
+    _this.mouseOutHandler = _this.mouseOutHandler.bind(_this);
+    _this.selectItem = _this.selectItem.bind(_this);
+    return _this;
+  }
+
+  // todo Define why it staggering constantly
+
+
+  _createClass(Dropdown, [{
+    key: 'mouseOverHandler',
+    value: function mouseOverHandler() {
+      var isListHidden = this.state.isListHidden;
+
+      if (isListHidden) {
+        this.setState({ isListHidden: false });
+      }
+    }
+
+    // todo Define why it staggering constantly
+
+  }, {
+    key: 'mouseOutHandler',
+    value: function mouseOutHandler() {
+      var isListHidden = this.state.isListHidden;
+
+      if (!isListHidden) {
+        this.setState({ isListHidden: true });
+      }
+    }
+  }, {
+    key: 'selectItem',
+    value: function selectItem(item) {
+      this.setState({
+        selectedItem: item
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          children = _props.children,
+          size = _props.size,
+          className = _props.className;
+      var _state = this.state,
+          isListHidden = _state.isListHidden,
+          selectedItem = _state.selectedItem;
+
+
+      return _react2.default.createElement(
+        'div',
+        {
+          className: 'ec-dropdown ' + className,
+          onMouseOverCapture: this.mouseOverHandler,
+          onMouseOut: this.mouseOutHandler
+        },
+        _react2.default.createElement(
+          'div',
+          {
+            className: 'ec-dropdown__handler ec-dropdown__handler--hidden-' + isListHidden + ' ' + (0, _util.setSize)('ec-dropdown__handler', size)
+          },
+          children || selectedItem.value
+        ),
+        _react2.default.createElement(
+          'div',
+          {
+            className: 'ec-dropdown__list ec-dropdown__list--hidden-' + isListHidden
+          },
+          _react2.default.createElement(
+            'ul',
+            { className: 'ec-dropdownList' },
+            this.list
+          )
+        )
+      );
+    }
+  }, {
+    key: 'list',
+    get: function get() {
+      var _this2 = this;
+
+      var list = this.props.list;
+      var selectedItem = this.state.selectedItem;
+
+      if (Array.isArray(list)) {
+
+        return list.map(function (item) {
+          return _react2.default.createElement(Item, {
+            key: item.index,
+            index: item.index,
+            value: item.value,
+            selectItem: _this2.selectItem,
+            selectedItem: selectedItem
+          });
+        });
+      }
+      return list;
+    }
+  }]);
+
+  return Dropdown;
+}(_react2.default.PureComponent);
+
+exports.default = Dropdown;
+
+
+Dropdown.defaultProps = {
+  className: '',
+  size: _util.sizeType.MD
+};
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/media/dropdown.less";
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/media/button.less";
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _util = __webpack_require__(4);
+
+__webpack_require__(60);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Input = function (_React$PureComponent) {
+  _inherits(Input, _React$PureComponent);
+
+  function Input(props) {
+    _classCallCheck(this, Input);
+
+    var _this = _possibleConstructorReturn(this, (Input.__proto__ || Object.getPrototypeOf(Input)).call(this, props));
+
+    _this.state = {
+      value: props.value
+    };
+
+    _this.changeInputValueHandler = _this.changeInputValueHandler.bind(_this);
+    return _this;
+  }
+
+  _createClass(Input, [{
+    key: 'changeInputValueHandler',
+    value: function changeInputValueHandler(event) {
+      var onChange = this.props.onChange;
+
+
+      if (typeof onChange === "function") {
+        onChange(event);
+      }
+
+      this.setState({ value: event.target.value });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          value = _props.value,
+          type = _props.type,
+          disabled = _props.disabled,
+          name = _props.name,
+          formatter = _props.formatter,
+          placeholder = _props.placeholder,
+          size = _props.size;
+
+      return _react2.default.createElement(
+        'label',
+        { className: 'ec-input' },
+        _react2.default.createElement('input', {
+          className: 'ec-input__input ' + (0, _util.setSize)('ec-input__input', size),
+          type: type,
+          value: formatter ? formatter(value) : value,
+          name: name,
+          disabled: disabled,
+          placeholder: placeholder,
+          onChange: this.changeInputValueHandler
+        })
+      );
+    }
+  }]);
+
+  return Input;
+}(_react2.default.PureComponent);
+
+exports.default = Input;
+
+
+Input.defaultProps = {
+  name: '',
+  disabled: false,
+  type: 'text',
+  value: '',
+  className: '',
+  size: _util.sizeType.MD
+};
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/media/input.less";
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/media/validatorInput.less";
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.validatorForOnChange = validatorForOnChange;
+exports.validationForOnBlur = validationForOnBlur;
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var onChangeRules = {
+  length: function length(value, params) {
+    return value.length <= params;
+  },
+  isNumeric: function isNumeric(value) {
+    return (/^$|^[0-9]+(((\.)|(\.[0-9]+)?)|((\,)|(\,[0-9]+)?))$/.test(value)
+    );
+  }
+};
+
+var onBlurRules = {
+  isRequired: function isRequired(value) {
+    return { status: value !== '', message: 'This field is required' };
+  },
+  email: function email(value) {
+    return { status: /^$|^.*@.*\..*$/.test(value), message: 'Incorrect email format' };
+  }
+};
+
+function validatorForOnChange(value, validationOption) {
+  var rulesName = Object.keys(validationOption);
+  return rulesName.every(function (rule) {
+    return onChangeRules[rule] ? onChangeRules[rule](value, validationOption[rule]) : true;
+  });
+}
+
+function validationForOnBlur(value, validationOprion) {
+  var rulesName = Object.keys(validationOprion);
+  return rulesName.reduce(function (ruleAcc, rule) {
+    var validationResult = onBlurRules[rule] ? onBlurRules[rule](value, validationOprion[rule]) : false;
+    if (validationResult && !validationResult.status) {
+      return [].concat(_toConsumableArray(ruleAcc), [validationResult]);
+    }
+
+    return ruleAcc;
+  }, []);
+}
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Cell = __webpack_require__(64);
+
+var _Cell2 = _interopRequireDefault(_Cell);
+
+__webpack_require__(66);
+
+var _util = __webpack_require__(4);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Row = function (_React$PureComponent) {
+  _inherits(Row, _React$PureComponent);
+
+  function Row() {
+    _classCallCheck(this, Row);
+
+    return _possibleConstructorReturn(this, (Row.__proto__ || Object.getPrototypeOf(Row)).apply(this, arguments));
+  }
+
+  _createClass(Row, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          size = _props.size,
+          stripe = _props.stripe,
+          isHeader = _props.isHeader;
+
+
+      return _react2.default.createElement(
+        'tr',
+        {
+          className: 'ec-row ' + (0, _util.setHeaderRow)('ec-row', isHeader) + ' ' + (0, _util.setSize)('ec-row', size) + ' ' + (0, _util.setStripe)('ec-row', stripe)
+        },
+        this.row
+      );
+    }
+  }, {
+    key: 'row',
+    get: function get() {
+      var _props2 = this.props,
+          record = _props2.record,
+          config = _props2.config,
+          isHeader = _props2.isHeader,
+          size = _props2.size;
+
+      return config.map(function (configItem, index) {
+        return _react2.default.createElement(_Cell2.default, {
+          key: configItem.index || index,
+          record: record,
+          isHeader: isHeader,
+          configItem: configItem,
+          size: size
+        });
+      });
+    }
+  }]);
+
+  return Row;
+}(_react2.default.PureComponent);
+
+exports.default = Row;
+
+
+Row.defaultProps = {
+  size: _util.sizeType.MD
+};
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _util = __webpack_require__(4);
+
+__webpack_require__(65);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function renderHeader(record, configItem) {
+  var title = configItem.title,
+      renderTitle = configItem.renderTitle;
+
+
+  if (renderTitle && typeof renderTitle === "function") {
+    return renderTitle(record, configItem);
+  }
+  return title || "";
+}
+
+function renderBody(record, configItem) {
+  var renderCell = configItem.renderCell,
+      key = configItem.key;
+
+
+  if (renderCell && typeof renderCell === "function") {
+    return renderCell(record, configItem);
+  }
+
+  return key && record[key] || "";
+}
+
+var Cell = function (_React$PureComponent) {
+  _inherits(Cell, _React$PureComponent);
+
+  function Cell() {
+    _classCallCheck(this, Cell);
+
+    return _possibleConstructorReturn(this, (Cell.__proto__ || Object.getPrototypeOf(Cell)).apply(this, arguments));
+  }
+
+  _createClass(Cell, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          size = _props.size,
+          isHeader = _props.isHeader;
+
+
+      return isHeader ? _react2.default.createElement(
+        'th',
+        { className: 'ec-cell ' + (0, _util.setHeaderRow)('ec-cell', isHeader) + ' ' + (0, _util.setSize)('ec-cell', size) },
+        this.cell
+      ) : _react2.default.createElement(
+        'td',
+        { className: 'ec-cell ' + (0, _util.setSize)('ec-cell', size) },
+        this.cell
+      );
+    }
+  }, {
+    key: 'cell',
+    get: function get() {
+      var _props2 = this.props,
+          record = _props2.record,
+          configItem = _props2.configItem,
+          isHeader = _props2.isHeader;
+
+      if (isHeader) {
+        return renderHeader(record, configItem);
+      }
+
+      return renderBody(record, configItem);
+    }
+  }]);
+
+  return Cell;
+}(_react2.default.PureComponent);
+
+exports.default = Cell;
+
+
+Cell.defaultProps = {
+  size: _util.sizeType.MD
+};
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/media/cell.less";
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/media/row.less";
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/media/grid.less";
+
+/***/ }),
+/* 68 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _autoGenerator = __webpack_require__(17);
+
+var _util = __webpack_require__(4);
+
+__webpack_require__(69);
+
+var _spinner = __webpack_require__(70);
+
+var _spinner2 = _interopRequireDefault(_spinner);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Checkbox = function (_React$PureComponent) {
+  _inherits(Checkbox, _React$PureComponent);
+
+  function Checkbox(props) {
+    _classCallCheck(this, Checkbox);
+
+    var _this = _possibleConstructorReturn(this, (Checkbox.__proto__ || Object.getPrototypeOf(Checkbox)).call(this, props));
+
+    _this.state = {
+      isLoading: false,
+      isDisable: false
+    };
+
+    _this.onChangeHandler = _this.onChangeHandler.bind(_this);
+    return _this;
+  }
+
+  _createClass(Checkbox, [{
+    key: 'onChangeHandler',
+    value: function onChangeHandler(event) {
+      var _this2 = this;
+
+      var onChange = this.props.onChange;
+
+      var result = onChange(event);
+
+      if (result && result.then) {
+        this.setState({ isLoading: true });
+        result.then(function () {
+          _this2.setState({ isLoading: false });
+        }, function () {
+          _this2.setState({ isDisable: true, isLoading: false });
+        });
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          name = _props.name,
+          children = _props.children,
+          className = _props.className,
+          size = _props.size,
+          checked = _props.checked,
+          value = _props.value;
+      var _state = this.state,
+          isLoading = _state.isLoading,
+          isDisable = _state.isDisable;
+
+      var uid = this.uid;
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'ec-checkbox ' + (0, _util.setSize)('ec-checkbox', size) + ' ' + className },
+        isLoading ? _react2.default.createElement('img', { className: 'ec-checkbox__img', src: _spinner2.default, alt: 'spinner' }) : _react2.default.createElement('input', {
+          id: uid,
+          type: 'checkbox',
+          value: value,
+          name: name,
+          checked: checked,
+          className: 'ec-checkbox__input',
+          disabled: isDisable,
+          onChange: this.onChangeHandler
+        }),
+        _react2.default.createElement(
+          'label',
+          { className: 'ec-checkbox__label', htmlFor: uid },
+          children
+        )
+      );
+    }
+  }, {
+    key: 'uid',
+    get: function get() {
+      return (0, _autoGenerator.generateUniqueId)();
+    }
+  }]);
+
+  return Checkbox;
+}(_react2.default.PureComponent);
+
+exports.default = Checkbox;
+
+
+Checkbox.defaultProps = {
+  className: '',
+  size: _util.sizeType.MD
+};
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/media/checkbox.less";
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/media/spinner.svg";
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/media/ecCalculatorNavigation.less";
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _antd = __webpack_require__(1);
+
+var _controlLib = __webpack_require__(15);
+
+var _formatter = __webpack_require__(73);
+
+var _util = __webpack_require__(4);
+
+var _ecHomePage = __webpack_require__(20);
+
+__webpack_require__(75);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var EcCalculatorSlider = function (_React$PureComponent) {
+  _inherits(EcCalculatorSlider, _React$PureComponent);
+
+  function EcCalculatorSlider(props) {
+    _classCallCheck(this, EcCalculatorSlider);
+
+    var _this = _possibleConstructorReturn(this, (EcCalculatorSlider.__proto__ || Object.getPrototypeOf(EcCalculatorSlider)).call(this, props));
+
+    _this.changeSliderValueHandler = _this.changeSliderValueHandler.bind(_this);
+    _this.changeInputValueHandler = _this.changeInputValueHandler.bind(_this);
+    return _this;
+  }
+
+  _createClass(EcCalculatorSlider, [{
+    key: "changeSliderValueHandler",
+    value: function changeSliderValueHandler(value) {
+      var dispatch = this.props.dispatch;
+
+      dispatch((0, _ecHomePage.setSumAmount)((0, _formatter.cashReformatter)(value)));
+    }
+  }, {
+    key: "changeInputValueHandler",
+    value: function changeInputValueHandler(name, value) {
+      this.changeSliderValueHandler(value);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var currencyAmount = this.props.currencyAmount;
+
+
+      return _react2.default.createElement(
+        "div",
+        { className: "ecCalculatorSlider" },
+        _react2.default.createElement(
+          "div",
+          { className: "ecCalculatorSlider__input" },
+          _react2.default.createElement(_controlLib.InputValidator, {
+            InputComponent: _controlLib.Input,
+            type: "text",
+            value: currencyAmount,
+            placeholder: "1000",
+            validationOption: { length: 7, isNumeric: true },
+            formatter: _formatter.cashFormatter,
+            onChange: this.changeInputValueHandler,
+            size: _util.sizeType.LG
+          })
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "ecCalculatorSlider__slider" },
+          _react2.default.createElement(_antd.Slider, {
+            min: 0,
+            max: 1000,
+            step: 10,
+            onChange: this.changeSliderValueHandler,
+            value: currencyAmount
+          })
+        )
+      );
+    }
+  }]);
+
+  return EcCalculatorSlider;
+}(_react2.default.PureComponent);
+
+exports.default = EcCalculatorSlider;
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.cashFormatter = cashFormatter;
+exports.cashReformatter = cashReformatter;
+var numeral = __webpack_require__(74);
+
+function cashFormatter(value) {
+  return value !== null && value !== undefined && typeof value !== 'string' ? numeral(value).format('0,0') : '';
+}
+
+function cashReformatter(value) {
+  return value !== null && value !== undefined ? numeral(value).value() : '';
+}
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports) {
+
+module.exports = require("numeral");
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/media/ecCalculatorSlider.less";
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/media/ecCalculator.less";
+
+/***/ }),
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ecCurrencyMainTableConfig = __webpack_require__(22);
+
+var _controlLib = __webpack_require__(15);
+
+__webpack_require__(79);
+
+var _ecCurrencyMainTableUtil = __webpack_require__(24);
+
+var _geolocation = __webpack_require__(25);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var EcCurrencyMainTable = function (_React$PureComponent) {
+  _inherits(EcCurrencyMainTable, _React$PureComponent);
+
+  _createClass(EcCurrencyMainTable, null, [{
+    key: "getDerivedStateFromProps",
+    value: function getDerivedStateFromProps(nextProps, prevState) {
+      var records = nextProps.records,
+          isBuyStatus = nextProps.isBuyStatus;
+
+      if (prevState.isIncreasePriceSort || isBuyStatus !== prevState.isBuyStatus) {
+        return _extends({}, prevState, {
+          isBuyStatus: isBuyStatus,
+          records: (0, _ecCurrencyMainTableUtil.filterByName)((0, _ecCurrencyMainTableUtil.sortedByPrice)(records, true, isBuyStatus), prevState.companyFilterName)
+        });
+      }
+      return null;
+    }
+  }]);
+
+  function EcCurrencyMainTable(props) {
+    _classCallCheck(this, EcCurrencyMainTable);
+
+    var _this = _possibleConstructorReturn(this, (EcCurrencyMainTable.__proto__ || Object.getPrototypeOf(EcCurrencyMainTable)).call(this, props));
+
+    _this.state = {
+      isIncreaseNameSort: false,
+      isIncreasePriceSort: true,
+      isIncreaseRecommendedSort: false,
+      isIncreaseGeolocationSort: false,
+      companyFilterName: "",
+      isBuyStatus: true,
+      records: []
+    };
+
+    _this.sortRowsByName = _this.sortRowsByName.bind(_this);
+    _this.sortRowsByPrice = _this.sortRowsByPrice.bind(_this);
+    _this.sortRowsByPriceOnlyBest = _this.sortRowsByPriceOnlyBest.bind(_this);
+    _this.sortRowsByRecommended = _this.sortRowsByRecommended.bind(_this);
+    _this.sortRowsByGeolocation = _this.sortRowsByGeolocation.bind(_this);
+    _this.filterRowsByName = _this.filterRowsByName.bind(_this);
+    _this.knowMore = _this.knowMore.bind(_this);
+    return _this;
+  }
+
+  _createClass(EcCurrencyMainTable, [{
+    key: "knowMore",
+    value: function knowMore() {
+      console.log("knowMore");
+    }
+  }, {
+    key: "sortRowsByName",
+    value: function sortRowsByName() {
+      var _state = this.state,
+          isIncreaseNameSort = _state.isIncreaseNameSort,
+          records = _state.records;
+
+      this.setState({
+        isIncreasePriceSort: false,
+        isIncreaseRecommendedSort: false,
+        isIncreaseGeolocationSort: false,
+        isIncreaseNameSort: !isIncreaseNameSort,
+        records: (0, _ecCurrencyMainTableUtil.sortedWithField)(records, !isIncreaseNameSort, "name")
+      });
+    }
+  }, {
+    key: "sortRowsByPrice",
+    value: function sortRowsByPrice() {
+      var _state2 = this.state,
+          isIncreasePriceSort = _state2.isIncreasePriceSort,
+          records = _state2.records;
+      var isBuyStatus = this.props.isBuyStatus;
+
+      this.setState({
+        isIncreaseNameSort: false,
+        isIncreaseRecommendedSort: false,
+        isIncreaseGeolocationSort: false,
+        isIncreasePriceSort: !isIncreasePriceSort,
+        records: (0, _ecCurrencyMainTableUtil.sortedByPrice)(records, !isIncreasePriceSort, isBuyStatus)
+      });
+    }
+  }, {
+    key: "sortRowsByPriceOnlyBest",
+    value: function sortRowsByPriceOnlyBest() {
+      var records = this.state.records;
+      var isBuyStatus = this.props.isBuyStatus;
+
+      this.setState({
+        isIncreaseNameSort: false,
+        isIncreaseRecommendedSort: false,
+        isIncreaseGeolocationSort: false,
+        isIncreasePriceSort: true,
+        records: (0, _ecCurrencyMainTableUtil.sortedByPrice)(records, true, isBuyStatus)
+      });
+    }
+  }, {
+    key: "sortRowsByRecommended",
+    value: function sortRowsByRecommended() {
+      var records = this.state.records;
+
+      this.setState({
+        isIncreasePriceSort: false,
+        isIncreaseNameSort: false,
+        isIncreaseGeolocationSort: false,
+        isIncreaseRecommendedSort: true,
+        records: (0, _ecCurrencyMainTableUtil.sortedWithField)(records, false, "rating")
+      });
+    }
+  }, {
+    key: "sortRowsByGeolocation",
+    value: function sortRowsByGeolocation(event) {
+      var _this2 = this;
+
+      var checked = event.target.checked;
+      var _props = this.props,
+          records = _props.records,
+          isBuyStatus = _props.isBuyStatus;
+
+      if (checked) {
+        var location = (0, _geolocation.defineLocation)();
+        location.then(function (position) {
+          _this2.setState({
+            isIncreasePriceSort: false,
+            isIncreaseNameSort: false,
+            isIncreaseRecommendedSort: false,
+            isIncreaseGeolocationSort: true,
+            records: (0, _ecCurrencyMainTableUtil.sortByGeolocation)(records, position.coords.latitude, position.coords.longitude)
+          });
+        }, function (error) {
+          console.error(error);
+        });
+        return location;
+      } else {
+        this.setState({
+          isIncreaseNameSort: false,
+          isIncreaseRecommendedSort: false,
+          isIncreaseGeolocationSort: false,
+          isIncreasePriceSort: true,
+          records: (0, _ecCurrencyMainTableUtil.sortedByPrice)(records, true, isBuyStatus)
+        });
+      }
+    }
+  }, {
+    key: "filterRowsByName",
+    value: function filterRowsByName(event) {
+      var value = event.target.value;
+      var records = this.props.records;
+
+
+      this.setState({
+        records: (0, _ecCurrencyMainTableUtil.filterByName)(records, value),
+        companyFilterName: value
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var currencyAmount = this.props.currencyAmount;
+      var _state3 = this.state,
+          records = _state3.records,
+          isIncreasePriceSort = _state3.isIncreasePriceSort,
+          isIncreaseRecommendedSort = _state3.isIncreaseRecommendedSort,
+          isIncreaseGeolocationSort = _state3.isIncreaseGeolocationSort,
+          companyFilterName = _state3.companyFilterName,
+          isBuyStatus = _state3.isBuyStatus;
+
+
+      return _react2.default.createElement(
+        "div",
+        { className: "ecCurrencyMainTable" },
+        _react2.default.createElement(
+          "div",
+          { className: "ecCurrencyMainTable__gridPanel ecCurrencyMainTableGridPanel" },
+          _react2.default.createElement(
+            "div",
+            { className: "ecCurrencyMainTableGridPanel--position-left" },
+            _react2.default.createElement(
+              _controlLib.Button,
+              {
+                isActive: isIncreaseRecommendedSort,
+                onClick: this.sortRowsByRecommended
+              },
+              "Recommended"
+            ),
+            _react2.default.createElement(
+              _controlLib.Button,
+              {
+                isActive: isIncreasePriceSort,
+                onClick: this.sortRowsByPriceOnlyBest
+              },
+              "Best rate"
+            ),
+            _react2.default.createElement(
+              _controlLib.Checkbox,
+              {
+                checked: isIncreaseGeolocationSort,
+                onChange: this.sortRowsByGeolocation
+              },
+              "Close to me"
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "ecCurrencyMainTableGridPanel--position-right" },
+            _react2.default.createElement(_controlLib.Input, {
+              type: "text",
+              value: companyFilterName,
+              placeholder: "Filter by name",
+              onChange: this.filterRowsByName
+            })
+          )
+        ),
+        _react2.default.createElement(_controlLib.Grid, {
+          isHeader: true,
+          stripe: true,
+          records: records,
+          config: (0, _ecCurrencyMainTableConfig.ecCurrencyMainTableConfig)(isBuyStatus, currencyAmount, this.knowMore, this.sortRowsByName, this.sortRowsByPrice)
+        })
+      );
+    }
+  }]);
+
+  return EcCurrencyMainTable;
+}(_react2.default.PureComponent);
+
+exports.default = EcCurrencyMainTable;
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.renderCompanyName = renderCompanyName;
+exports.renderBuyTitle = renderBuyTitle;
+exports.renderSellTitle = renderSellTitle;
+exports.renderBuyPrice = renderBuyPrice;
+exports.renderSellPrice = renderSellPrice;
+exports.renderLastUpdateTime = renderLastUpdateTime;
+exports.renderKnowMore = renderKnowMore;
+exports.renderClass = renderClass;
+exports.renderTitle = renderTitle;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _moment = __webpack_require__(23);
+
+var _moment2 = _interopRequireDefault(_moment);
+
+var _Button = __webpack_require__(18);
+
+var _Button2 = _interopRequireDefault(_Button);
+
+var _util = __webpack_require__(4);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function CompanyInfo(_ref) {
+  var name = _ref.name,
+      address = _ref.address;
+
+  return _react2.default.createElement(
+    'div',
+    { className: 'ecCurrencyMainTable__companyName' },
+    _react2.default.createElement(
+      'span',
+      null,
+      name
+    ),
+    _react2.default.createElement(
+      'span',
+      null,
+      address
+    )
+  );
+}
+
+function renderCompanyName(record) {
+  var name = null;
+  var address = null;
+  if (record && record.name) {
+    name = record.name;
+  }
+  if (record && record.address) {
+    address = record.address;
+  }
+  return _react2.default.createElement(CompanyInfo, { name: name, address: address });
+}
+
+function renderBuyTitle(sumAmount) {
+  return 'Buy ' + (sumAmount || 0);
+}
+
+function renderSellTitle(sumAmount) {
+  return 'Sell ' + (sumAmount || 0);
+}
+
+function renderBuyPrice(buyPrice, sumAmount) {
+  return buyPrice && sumAmount ? buyPrice * sumAmount : '';
+}
+
+function renderSellPrice(sellPrice, sumAmount) {
+  return sellPrice && sumAmount ? sellPrice * sumAmount : '';
+}
+
+function TimeCell(_ref2) {
+  var time = _ref2.time,
+      date = _ref2.date;
+
+  return _react2.default.createElement(
+    'div',
+    { className: 'ecCurrencyMainTable__updateTime' },
+    _react2.default.createElement(
+      'span',
+      null,
+      time
+    ),
+    _react2.default.createElement(
+      'span',
+      null,
+      date
+    )
+  );
+}
+
+function renderLastUpdateTime(record, key) {
+  if (key && record[key]) {
+    var time = (0, _moment2.default)(record[key]).format('LT');
+    var date = (0, _moment2.default)(record[key]).format('L');
+    return _react2.default.createElement(TimeCell, { time: time, date: date });
+  }
+  return "-//-";
+}
+
+function renderKnowMore(id, name, knowMore) {
+  var knowMoreFunction = function knowMoreFunction() {
+    knowMore(id, name);
+  };
+  return _react2.default.createElement(
+    _Button2.default
+    // size={sizeType.LG}
+    ,
+    { className: 'ecCurrencyMainTable__knowMore',
+      onClick: knowMoreFunction
+    },
+    'Know more'
+  );
+}
+
+function renderClass(isHeader, config) {
+  if (isHeader) {
+    return config.className + ' ' + config.className + '--isHeader-true';
+  }
+  return config.className;
+}
+
+function renderTitle(record, config, clickNameEvent) {
+  return _react2.default.createElement(
+    'div',
+    {
+      className: 'ecCurrencyMainTable__titleName',
+      onClick: clickNameEvent
+    },
+    config.title || ''
+  );
+}
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/media/ecCurrencyMainTable.less";
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ecCurrencyMainTableUtil = __webpack_require__(24);
+
+var _mapMarker = __webpack_require__(81);
+
+var _mapMarker2 = _interopRequireDefault(_mapMarker);
+
+__webpack_require__(82);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function mapMarker(L) {
+  return new L.Icon({
+    iconUrl: _mapMarker2.default,
+    iconRetinaUrl: _mapMarker2.default,
+
+    iconSize: [50, 60],
+    iconAnchor: [40, 58],
+    popupAnchor: [-14, -54],
+
+    className: 'ecMainMapMarker'
+  });
+}
+
+function Markers(_ref) {
+  var records = _ref.records,
+      Marker = _ref.Marker,
+      Popup = _ref.Popup,
+      mapMarker = _ref.mapMarker;
+
+  return records.filter(function (record) {
+    return record.coordinateX && record.coordinateY;
+  }).map(function (record) {
+    return _react2.default.createElement(
+      Marker,
+      {
+        key: record.coordinateX + '-' + record.coordinateY,
+        icon: mapMarker,
+        position: [record.coordinateX, record.coordinateY]
+      },
+      _react2.default.createElement(
+        Popup,
+        null,
+        _react2.default.createElement(
+          'div',
+          { className: 'ecMainMap__popup ecMainMapPopup' },
+          _react2.default.createElement(
+            'span',
+            { className: 'ecMainMapPopup__name' },
+            record.name
+          ),
+          _react2.default.createElement(
+            'span',
+            { className: 'ecMainMapPopup__address' },
+            record.address
+          )
+        )
+      )
+    );
+  });
+}
+
+var EcMainMap = function (_React$PureComponent) {
+  _inherits(EcMainMap, _React$PureComponent);
+
+  _createClass(EcMainMap, null, [{
+    key: 'getDerivedStateFromProps',
+    value: function getDerivedStateFromProps(nextProps, prevState) {
+      var records = nextProps.records,
+          isBuyStatus = nextProps.isBuyStatus;
+
+      var propsCenter = (0, _ecCurrencyMainTableUtil.sortedByPrice)(records, true, isBuyStatus)[0] || {};
+      var center = propsCenter.coordinateX && propsCenter.coordinateY ? [propsCenter.coordinateX, propsCenter.coordinateY] : [];
+      if (center[0] !== prevState.center[0]) {
+        return _extends({}, prevState, {
+          center: center
+        });
+      }
+      return null;
+    }
+  }]);
+
+  function EcMainMap(props) {
+    _classCallCheck(this, EcMainMap);
+
+    var _this = _possibleConstructorReturn(this, (EcMainMap.__proto__ || Object.getPrototypeOf(EcMainMap)).call(this, props));
+
+    _this.state = {
+      zoom: 14,
+      center: []
+    };
+    return _this;
+  }
+
+  _createClass(EcMainMap, [{
+    key: 'render',
+    value: function render() {
+      var records = this.props.records;
+      var _state = this.state,
+          center = _state.center,
+          zoom = _state.zoom;
+
+      if (false) {
+        var _require = require('react-leaflet'),
+            _Map = _require.Map,
+            Marker = _require.Marker,
+            Popup = _require.Popup,
+            TileLayer = _require.TileLayer;
+
+        var L = require('leaflet');
+        var marker = mapMarker(L);
+        return _react2.default.createElement(
+          'div',
+          { className: 'ecMainMap' },
+          records && records.length !== 0 && _react2.default.createElement(
+            _Map,
+            { center: center, zoom: zoom },
+            _react2.default.createElement(TileLayer, {
+              attribution: '\xA9 <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+              url: 'http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png'
+            }),
+            _react2.default.createElement(Markers, { records: records, Marker: Marker, Popup: Popup, mapMarker: marker })
+          )
+        );
+      } else {
+        return null;
+      }
+    }
+  }]);
+
+  return EcMainMap;
+}(_react2.default.PureComponent);
+
+exports.default = EcMainMap;
+
+/***/ }),
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/media/map-marker.svg";
+
+/***/ }),
+/* 82 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/media/ecMainMap.less";
+
+/***/ }),
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/media/ecMainContent.less";
+
+/***/ }),
+/* 84 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _BlockWrapper = __webpack_require__(16);
+
+var _BlockWrapper2 = _interopRequireDefault(_BlockWrapper);
+
+__webpack_require__(85);
+
+var _EcBaseCurrency = __webpack_require__(86);
+
+var _EcBaseCurrency2 = _interopRequireDefault(_EcBaseCurrency);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var EcSideBar = function (_React$PureComponent) {
+  _inherits(EcSideBar, _React$PureComponent);
+
+  function EcSideBar() {
+    _classCallCheck(this, EcSideBar);
+
+    return _possibleConstructorReturn(this, (EcSideBar.__proto__ || Object.getPrototypeOf(EcSideBar)).apply(this, arguments));
+  }
+
+  _createClass(EcSideBar, [{
+    key: 'render',
+    value: function render() {
+      var isBuyStatus = this.props.isBuyStatus;
+
+
+      return _react2.default.createElement(
+        'aside',
+        { className: 'ecSideBar' },
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            _BlockWrapper2.default,
+            null,
+            _react2.default.createElement(_EcBaseCurrency2.default, {
+              isBuyStatus: isBuyStatus
+            })
+          )
+        )
+      );
+    }
+  }]);
+
+  return EcSideBar;
+}(_react2.default.PureComponent);
+
+exports.default = EcSideBar;
+
+/***/ }),
+/* 85 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/media/ecSideBar.less";
+
+/***/ }),
+/* 86 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Grid = __webpack_require__(19);
+
+var _Grid2 = _interopRequireDefault(_Grid);
+
+var _baseCurrencyGridConfig = __webpack_require__(87);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var EcBaseCurrency = function (_React$PureComponent) {
+  _inherits(EcBaseCurrency, _React$PureComponent);
+
+  function EcBaseCurrency() {
+    _classCallCheck(this, EcBaseCurrency);
+
+    return _possibleConstructorReturn(this, (EcBaseCurrency.__proto__ || Object.getPrototypeOf(EcBaseCurrency)).apply(this, arguments));
+  }
+
+  _createClass(EcBaseCurrency, [{
+    key: "render",
+    value: function render() {
+      var isBuyStatus = this.props.isBuyStatus;
+
+
+      return _react2.default.createElement(
+        "div",
+        { className: "ecBaseCurrency" },
+        _react2.default.createElement(_Grid2.default, {
+          isHeader: true,
+          records: _baseCurrencyGridConfig.baseCurrencyMockRecord,
+          config: (0, _baseCurrencyGridConfig.baseCurrencyGridConfig)(isBuyStatus)
+        })
+      );
+    }
+  }]);
+
+  return EcBaseCurrency;
+}(_react2.default.PureComponent);
+
+exports.default = EcBaseCurrency;
+
+/***/ }),
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var baseCurrencyGridConfig = exports.baseCurrencyGridConfig = function baseCurrencyGridConfig(isBuy) {
+  return isBuy ? baseCurrencyBuy : baseCurrencySell;
+};
+
+var baseCurrencySell = [{
+  index: "name",
+  key: "name",
+  title: ""
+}, {
+  index: "sellUsd",
+  key: "sellUsd",
+  title: "USD"
+}, {
+  index: "sellEur",
+  key: "sellEur",
+  title: "EUR"
+}];
+
+var baseCurrencyBuy = [{
+  index: "name",
+  key: "name",
+  title: ""
+}, {
+  index: "buyUsd",
+  key: "buyUsd",
+  title: "USD"
+}, {
+  index: "buyEur",
+  key: "buyEur",
+  title: "EUR"
+}];
+
+var baseCurrencyMockRecord = exports.baseCurrencyMockRecord = [{
+  name: "Central bank 1",
+  buyEur: "123",
+  buyUsd: "234",
+  sellEur: "345",
+  sellUsd: "456"
+}, {
+  name: "Central bank 2",
+  buyEur: "123",
+  buyUsd: "234",
+  sellEur: "345",
+  sellUsd: "456"
+}, {
+  name: "Central bank 2",
+  buyEur: "123",
+  buyUsd: "234",
+  sellEur: "345",
+  sellUsd: "456"
+}];
+
+/***/ }),
+/* 88 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "static/media/ecContent.less";
+
+/***/ }),
+/* 89 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(10);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _antd = __webpack_require__(1);
 
-var _APIUtil = __webpack_require__(5);
+var _APIUtil = __webpack_require__(6);
 
-var _AppConstance = __webpack_require__(3);
+var _AppConstance = __webpack_require__(5);
 
-__webpack_require__(37);
+__webpack_require__(90);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1675,8 +4495,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var FormItem = _antd.Form.Item;
 
-var LoginForm = function (_React$Component) {
-  _inherits(LoginForm, _React$Component);
+var LoginForm = function (_React$PureComponent) {
+  _inherits(LoginForm, _React$PureComponent);
 
   function LoginForm(props) {
     _classCallCheck(this, LoginForm);
@@ -1763,7 +4583,7 @@ var LoginForm = function (_React$Component) {
   }]);
 
   return LoginForm;
-}(_react2.default.Component);
+}(_react2.default.PureComponent);
 
 LoginForm.propTypes = {
   form: _propTypes2.default.object,
@@ -1802,13 +4622,13 @@ Login.propTypes = {
 exports.default = Login;
 
 /***/ }),
-/* 37 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "static/media/login.less";
 
 /***/ }),
-/* 38 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1824,7 +4644,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(7);
+var _propTypes = __webpack_require__(10);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -1832,55 +4652,51 @@ var _antd = __webpack_require__(1);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _Sidebar = __webpack_require__(39);
-
-var _Sidebar2 = _interopRequireDefault(_Sidebar);
-
-var _PreviewAdminPage = __webpack_require__(41);
+var _PreviewAdminPage = __webpack_require__(92);
 
 var _PreviewAdminPage2 = _interopRequireDefault(_PreviewAdminPage);
 
-var _CompanyContainer = __webpack_require__(42);
+var _CompanyContainer = __webpack_require__(93);
 
 var _CompanyContainer2 = _interopRequireDefault(_CompanyContainer);
 
-var _CurrencyContainer = __webpack_require__(47);
+var _CurrencyContainer = __webpack_require__(98);
 
 var _CurrencyContainer2 = _interopRequireDefault(_CurrencyContainer);
 
-var _ParserContainer = __webpack_require__(50);
+var _ParserContainer = __webpack_require__(101);
 
 var _ParserContainer2 = _interopRequireDefault(_ParserContainer);
 
-var _CommentaryContainer = __webpack_require__(53);
+var _CommentaryContainer = __webpack_require__(104);
 
 var _CommentaryContainer2 = _interopRequireDefault(_CommentaryContainer);
 
-var _EditedCompanyContainer = __webpack_require__(56);
+var _EditedCompanyContainer = __webpack_require__(107);
 
 var _EditedCompanyContainer2 = _interopRequireDefault(_EditedCompanyContainer);
 
-var _EditedCurrencyContainer = __webpack_require__(69);
+var _EditedCurrencyContainer = __webpack_require__(117);
 
 var _EditedCurrencyContainer2 = _interopRequireDefault(_EditedCurrencyContainer);
 
-var _EditedParserContainer = __webpack_require__(82);
+var _EditedParserContainer = __webpack_require__(130);
 
 var _EditedParserContainer2 = _interopRequireDefault(_EditedParserContainer);
 
-var _EditedCommentaryContainer = __webpack_require__(89);
+var _EditedCommentaryContainer = __webpack_require__(137);
 
 var _EditedCommentaryContainer2 = _interopRequireDefault(_EditedCommentaryContainer);
 
-var _NewCompanyContainer = __webpack_require__(95);
+var _NewCompanyContainer = __webpack_require__(143);
 
 var _NewCompanyContainer2 = _interopRequireDefault(_NewCompanyContainer);
 
-var _NotFound = __webpack_require__(13);
+var _NotFound = __webpack_require__(14);
 
 var _NotFound2 = _interopRequireDefault(_NotFound);
 
-__webpack_require__(100);
+__webpack_require__(148);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1892,8 +4708,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var Content = _antd.Layout.Content;
 
-var Admin = function (_React$Component) {
-  _inherits(Admin, _React$Component);
+var Admin = function (_React$PureComponent) {
+  _inherits(Admin, _React$PureComponent);
 
   function Admin() {
     _classCallCheck(this, Admin);
@@ -1910,24 +4726,24 @@ var Admin = function (_React$Component) {
       return _react2.default.createElement(
         _antd.Layout,
         { className: 'adminPage' },
-        _react2.default.createElement(_Sidebar2.default, { onLogout: onLogout }),
+        _react2.default.createElement(Sidebar, { onLogout: onLogout }),
         _react2.default.createElement(
           Content,
           { className: 'adminPage__content' },
           _react2.default.createElement(
-            _reactRouterDom.Switch,
+            Switch,
             null,
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/admin', exact: true, component: _PreviewAdminPage2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/admin/company', exact: true, component: _CompanyContainer2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/admin/company/:id', exact: true, component: _EditedCompanyContainer2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/admin/newcompany', exact: true, component: _NewCompanyContainer2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/admin/currency', exact: true, component: _CurrencyContainer2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/admin/currency/:id', exact: true, component: _EditedCurrencyContainer2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/admin/parser', exact: true, component: _ParserContainer2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/admin/parser/:id', exact: true, component: _EditedParserContainer2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/admin/commentary', exact: true, component: _CommentaryContainer2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/admin/commentary/:id', exact: true, component: _EditedCommentaryContainer2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { component: _NotFound2.default })
+            _react2.default.createElement(Route, { path: '/admin', exact: true, component: _PreviewAdminPage2.default }),
+            _react2.default.createElement(Route, { path: '/admin/company', exact: true, component: _CompanyContainer2.default }),
+            _react2.default.createElement(Route, { path: '/admin/company/:id', exact: true, component: _EditedCompanyContainer2.default }),
+            _react2.default.createElement(Route, { path: '/admin/newcompany', exact: true, component: _NewCompanyContainer2.default }),
+            _react2.default.createElement(Route, { path: '/admin/currency', exact: true, component: _CurrencyContainer2.default }),
+            _react2.default.createElement(Route, { path: '/admin/currency/:id', exact: true, component: _EditedCurrencyContainer2.default }),
+            _react2.default.createElement(Route, { path: '/admin/parser', exact: true, component: _ParserContainer2.default }),
+            _react2.default.createElement(Route, { path: '/admin/parser/:id', exact: true, component: _EditedParserContainer2.default }),
+            _react2.default.createElement(Route, { path: '/admin/commentary', exact: true, component: _CommentaryContainer2.default }),
+            _react2.default.createElement(Route, { path: '/admin/commentary/:id', exact: true, component: _EditedCommentaryContainer2.default }),
+            _react2.default.createElement(Route, { component: _NotFound2.default })
           )
         )
       );
@@ -1935,7 +4751,7 @@ var Admin = function (_React$Component) {
   }]);
 
   return Admin;
-}(_react2.default.Component);
+}(_react2.default.PureComponent);
 
 Admin.propTypes = {
   onLogout: _propTypes2.default.func.isRequired
@@ -1944,149 +4760,7 @@ Admin.propTypes = {
 exports.default = (0, _reactRouterDom.withRouter)(Admin);
 
 /***/ }),
-/* 39 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _antd = __webpack_require__(1);
-
-var _reactRouterDom = __webpack_require__(2);
-
-var _propTypes = __webpack_require__(7);
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-__webpack_require__(40);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var SubMenu = _antd.Menu.SubMenu,
-    Item = _antd.Menu.Item;
-var Sider = _antd.Layout.Sider;
-
-var Sidebar = function (_React$Component) {
-  _inherits(Sidebar, _React$Component);
-
-  function Sidebar(props) {
-    _classCallCheck(this, Sidebar);
-
-    var _this = _possibleConstructorReturn(this, (Sidebar.__proto__ || Object.getPrototypeOf(Sidebar)).call(this, props));
-
-    _this.handleOnSelect = _this.handleOnSelect.bind(_this);
-    return _this;
-  }
-
-  _createClass(Sidebar, [{
-    key: "handleOnSelect",
-    value: function handleOnSelect(_ref) {
-      var key = _ref.key;
-      var _props = this.props,
-          history = _props.history,
-          onLogout = _props.onLogout;
-
-      switch (key) {
-        case "company":
-        case "currency":
-        case "parser":
-        case "commentary":
-          history.push("/admin/" + key);
-          break;
-        case "logout":
-          onLogout('/');
-          break;
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return _react2.default.createElement(
-        Sider,
-        { width: 260, className: "adminSideBar" },
-        _react2.default.createElement(
-          _antd.Menu,
-          {
-            theme: "dark",
-            mode: "inline",
-            onSelect: this.handleOnSelect
-          },
-          _react2.default.createElement(
-            SubMenu,
-            {
-              key: "sub1",
-              title: _react2.default.createElement(
-                "span",
-                null,
-                _react2.default.createElement(_antd.Icon, { type: "credit-card" }),
-                "Exchange Company"
-              )
-            },
-            _react2.default.createElement(
-              Item,
-              { key: "company" },
-              "Company"
-            ),
-            _react2.default.createElement(
-              Item,
-              { key: "currency" },
-              "Currency"
-            ),
-            _react2.default.createElement(
-              Item,
-              { key: "parser" },
-              "Parser"
-            ),
-            _react2.default.createElement(
-              Item,
-              { key: "commentary" },
-              "Commentaries"
-            )
-          ),
-          _react2.default.createElement(
-            Item,
-            { key: "logout" },
-            "Log out"
-          )
-        )
-      );
-    }
-  }]);
-
-  return Sidebar;
-}(_react2.default.Component);
-
-Sidebar.propTypes = {
-  history: _propTypes2.default.object,
-  onLogout: _propTypes2.default.func.isRequired
-};
-
-exports.default = (0, _reactRouterDom.withRouter)(Sidebar);
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/media/sidebar.less";
-
-/***/ }),
-/* 41 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2107,19 +4781,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function PreviewAdminPage() {
   return _react2.default.createElement(
-    "div",
+    'div',
     null,
     _react2.default.createElement(
-      "h1",
+      'h1',
       null,
-      _react2.default.createElement(_antd.Icon, { type: "form" }),
-      " Exchange company admin page"
+      _react2.default.createElement(_antd.Icon, { type: 'form' }),
+      ' Exchange company admin page'
     )
   );
 }
 
 /***/ }),
-/* 42 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2129,9 +4803,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
-var _Company = __webpack_require__(43);
+var _Company = __webpack_require__(94);
 
 var _Company2 = _interopRequireDefault(_Company);
 
@@ -2152,7 +4826,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Company2.default);
 
 /***/ }),
-/* 43 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2170,11 +4844,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _antd = __webpack_require__(1);
 
-var _companyColumnConfig = __webpack_require__(9);
+var _companyColumnConfig = __webpack_require__(11);
 
-__webpack_require__(46);
+__webpack_require__(97);
 
-var _admin = __webpack_require__(8);
+var _admin = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2184,8 +4858,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Company = function (_React$Component) {
-  _inherits(Company, _React$Component);
+var Company = function (_React$PureComponent) {
+  _inherits(Company, _React$PureComponent);
 
   function Company(props) {
     _classCallCheck(this, Company);
@@ -2251,12 +4925,12 @@ var Company = function (_React$Component) {
   }]);
 
   return Company;
-}(_react2.default.Component);
+}(_react2.default.PureComponent);
 
 exports.default = Company;
 
 /***/ }),
-/* 44 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2274,13 +4948,13 @@ var _reactRouterDom = __webpack_require__(2);
 
 var _antd = __webpack_require__(1);
 
-var _admin = __webpack_require__(8);
+var _admin = __webpack_require__(9);
 
-__webpack_require__(45);
+__webpack_require__(96);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ButtonGroup = _antd.Button.Group;
+/* eslint-enable */
 
 function Actions(_ref) {
   var history = _ref.history,
@@ -2289,7 +4963,7 @@ function Actions(_ref) {
 
 
   function editCompany() {
-    history.push("/admin/company/" + record.id);
+    history.push('/admin/company/' + record.id);
   }
 
   function deleteCompany() {
@@ -2298,40 +4972,39 @@ function Actions(_ref) {
 
   return _react2.default.createElement(
     ButtonGroup,
-    { className: "actionsCompanyTable" },
+    { className: 'actionsCompanyTable' },
     _react2.default.createElement(_antd.Button, {
-      className: "actionsCompanyTable__edit",
-      type: "primary",
-      size: "small",
-      icon: "edit",
+      className: 'actionsCompanyTable__edit',
+      type: 'primary',
+      size: 'small',
+      icon: 'edit',
       onClick: editCompany
     }),
     _react2.default.createElement(_antd.Button, {
-      className: "actionsCompanyTable__delete",
-      type: "primary",
-      size: "small",
-      icon: "delete",
+      className: 'actionsCompanyTable__delete',
+      type: 'primary',
+      size: 'small',
+      icon: 'delete',
       onClick: deleteCompany
     })
   );
-}
-
+} /* eslint-disable */
 exports.default = (0, _reactRouterDom.withRouter)(Actions);
 
 /***/ }),
-/* 45 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "static/media/actions.less";
 
 /***/ }),
-/* 46 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "static/media/company.less";
 
 /***/ }),
-/* 47 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2341,9 +5014,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
-var _Currency = __webpack_require__(48);
+var _Currency = __webpack_require__(99);
 
 var _Currency2 = _interopRequireDefault(_Currency);
 
@@ -2364,7 +5037,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Currency2.default);
 
 /***/ }),
-/* 48 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2382,11 +5055,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _antd = __webpack_require__(1);
 
-var _companyColumnConfig = __webpack_require__(9);
+var _companyColumnConfig = __webpack_require__(11);
 
-var _currencyColumnConfig = __webpack_require__(49);
+var _currencyColumnConfig = __webpack_require__(100);
 
-var _admin = __webpack_require__(8);
+var _admin = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2396,8 +5069,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Currency = function (_React$Component) {
-  _inherits(Currency, _React$Component);
+var Currency = function (_React$PureComponent) {
+  _inherits(Currency, _React$PureComponent);
 
   function Currency(props) {
     _classCallCheck(this, Currency);
@@ -2445,12 +5118,12 @@ var Currency = function (_React$Component) {
   }]);
 
   return Currency;
-}(_react2.default.Component);
+}(_react2.default.PureComponent);
 
 exports.default = Currency;
 
 /***/ }),
-/* 49 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2471,33 +5144,33 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var currencyColumnConfig = exports.currencyColumnConfig = function currencyColumnConfig(dispatch) {
   return [{
-    key: "name",
-    title: "Company name",
-    dataIndex: "name",
+    key: 'name',
+    title: 'Company name',
+    dataIndex: 'name',
     render: function render(text, record) {
       return _react2.default.createElement(
         _reactRouterDom.Link,
-        { to: "/admin/currency/" + record.id },
+        { to: '/admin/currency/' + record.id },
         text
       );
     }
   }, {
-    key: "address",
-    title: "Address",
-    dataIndex: "address"
+    key: 'address',
+    title: 'Address',
+    dataIndex: 'address'
   }, {
-    key: "createdAt",
-    title: "Created at",
-    dataIndex: "createdAt"
+    key: 'createdAt',
+    title: 'Created at',
+    dataIndex: 'createdAt'
   }, {
-    key: "updatedAt",
-    title: "Updated at",
-    dataIndex: "updatedAt"
+    key: 'updatedAt',
+    title: 'Updated at',
+    dataIndex: 'updatedAt'
   }];
 };
 
 /***/ }),
-/* 50 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2507,9 +5180,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
-var _Parser = __webpack_require__(51);
+var _Parser = __webpack_require__(102);
 
 var _Parser2 = _interopRequireDefault(_Parser);
 
@@ -2530,7 +5203,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Parser2.default);
 
 /***/ }),
-/* 51 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2548,11 +5221,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _antd = __webpack_require__(1);
 
-var _companyColumnConfig = __webpack_require__(9);
+var _companyColumnConfig = __webpack_require__(11);
 
-var _admin = __webpack_require__(8);
+var _admin = __webpack_require__(9);
 
-var _parserColumnConfig = __webpack_require__(52);
+var _parserColumnConfig = __webpack_require__(103);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2562,8 +5235,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Parser = function (_React$Component) {
-  _inherits(Parser, _React$Component);
+var Parser = function (_React$PureComponent) {
+  _inherits(Parser, _React$PureComponent);
 
   function Parser(props) {
     _classCallCheck(this, Parser);
@@ -2611,12 +5284,12 @@ var Parser = function (_React$Component) {
   }]);
 
   return Parser;
-}(_react2.default.Component);
+}(_react2.default.PureComponent);
 
 exports.default = Parser;
 
 /***/ }),
-/* 52 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2637,33 +5310,33 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var parserColumnConfig = exports.parserColumnConfig = function parserColumnConfig(dispatch) {
   return [{
-    key: "name",
-    title: "Company name",
-    dataIndex: "name",
+    key: 'name',
+    title: 'Company name',
+    dataIndex: 'name',
     render: function render(text, record) {
       return _react2.default.createElement(
         _reactRouterDom.Link,
-        { to: "/admin/parser/" + record.id },
+        { to: '/admin/parser/' + record.id },
         text
       );
     }
   }, {
-    key: "address",
-    title: "Address",
-    dataIndex: "address"
+    key: 'address',
+    title: 'Address',
+    dataIndex: 'address'
   }, {
-    key: "createdAt",
-    title: "Created at",
-    dataIndex: "createdAt"
+    key: 'createdAt',
+    title: 'Created at',
+    dataIndex: 'createdAt'
   }, {
-    key: "updatedAt",
-    title: "Updated at",
-    dataIndex: "updatedAt"
+    key: 'updatedAt',
+    title: 'Updated at',
+    dataIndex: 'updatedAt'
   }];
 };
 
 /***/ }),
-/* 53 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2673,9 +5346,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
-var _Commentary = __webpack_require__(54);
+var _Commentary = __webpack_require__(105);
 
 var _Commentary2 = _interopRequireDefault(_Commentary);
 
@@ -2696,7 +5369,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Commentary2.default);
 
 /***/ }),
-/* 54 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2714,9 +5387,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _antd = __webpack_require__(1);
 
-var _commentaryColumnConfig = __webpack_require__(55);
+var _commentaryColumnConfig = __webpack_require__(106);
 
-var _admin = __webpack_require__(8);
+var _admin = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2726,8 +5399,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Commentary = function (_React$Component) {
-  _inherits(Commentary, _React$Component);
+var Commentary = function (_React$PureComponent) {
+  _inherits(Commentary, _React$PureComponent);
 
   function Commentary(props) {
     _classCallCheck(this, Commentary);
@@ -2775,12 +5448,12 @@ var Commentary = function (_React$Component) {
   }]);
 
   return Commentary;
-}(_react2.default.Component);
+}(_react2.default.PureComponent);
 
 exports.default = Commentary;
 
 /***/ }),
-/* 55 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2799,35 +5472,38 @@ var _reactRouterDom = __webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/* eslint-enable */
+
+/* eslint-disable */
 var commentaryColumnConfig = exports.commentaryColumnConfig = function commentaryColumnConfig() {
   return [{
-    key: "name",
-    title: "Company name",
-    dataIndex: "name",
+    key: 'name',
+    title: 'Company name',
+    dataIndex: 'name',
     render: function render(text, record) {
       return _react2.default.createElement(
         _reactRouterDom.Link,
-        { to: "/admin/commentary/" + record.id },
+        { to: '/admin/commentary/' + record.id },
         text
       );
     }
   }, {
-    key: "address",
-    title: "Address",
-    dataIndex: "address"
+    key: 'address',
+    title: 'Address',
+    dataIndex: 'address'
   }, {
-    key: "createdAt",
-    title: "Created at",
-    dataIndex: "createdAt"
+    key: 'createdAt',
+    title: 'Created at',
+    dataIndex: 'createdAt'
   }, {
-    key: "updatedAt",
-    title: "Updated at",
-    dataIndex: "updatedAt"
+    key: 'updatedAt',
+    title: 'Updated at',
+    dataIndex: 'updatedAt'
   }];
 };
 
 /***/ }),
-/* 56 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2837,9 +5513,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
-var _EditedCompanyForm = __webpack_require__(57);
+var _EditedCompanyForm = __webpack_require__(108);
 
 var _EditedCompanyForm2 = _interopRequireDefault(_EditedCompanyForm);
 
@@ -2860,7 +5536,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_EditedCompanyForm2.default);
 
 /***/ }),
-/* 57 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2878,21 +5554,21 @@ var _react2 = _interopRequireDefault(_react);
 
 var _antd = __webpack_require__(1);
 
-var _editCompanyService = __webpack_require__(58);
+var _editCompanyService = __webpack_require__(109);
 
-var _CompanyMainInfo = __webpack_require__(15);
+var _CompanyMainInfo = __webpack_require__(27);
 
 var _CompanyMainInfo2 = _interopRequireDefault(_CompanyMainInfo);
 
-var _CompanyDataInfo = __webpack_require__(17);
+var _CompanyDataInfo = __webpack_require__(29);
 
 var _CompanyDataInfo2 = _interopRequireDefault(_CompanyDataInfo);
 
-__webpack_require__(68);
+__webpack_require__(116);
 
-var _companyMainInfo = __webpack_require__(10);
+var _companyMainInfo = __webpack_require__(12);
 
-var _valueValidator = __webpack_require__(11);
+var _valueValidator = __webpack_require__(13);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2904,8 +5580,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var EditedCompanyForm = function (_React$Component) {
-  _inherits(EditedCompanyForm, _React$Component);
+var EditedCompanyForm = function (_React$PureComponent) {
+  _inherits(EditedCompanyForm, _React$PureComponent);
 
   function EditedCompanyForm(props) {
     _classCallCheck(this, EditedCompanyForm);
@@ -3006,7 +5682,7 @@ var EditedCompanyForm = function (_React$Component) {
           }),
           _react2.default.createElement(_CompanyDataInfo2.default, {
             companyId: params.id,
-            exchangeCompanyDetail: (0, _valueValidator.nullValidator)(company, "exchangeCompanyDetail"),
+            exchangeCompanyDetail: (0, _valueValidator.nullValidator)(company, 'exchangeCompanyDetail'),
             dispatch: dispatch,
             validateInput: this.validateInput
           }),
@@ -3072,12 +5748,12 @@ var EditedCompanyForm = function (_React$Component) {
   }]);
 
   return EditedCompanyForm;
-}(_react2.default.Component);
+}(_react2.default.PureComponent);
 
 exports.default = EditedCompanyForm;
 
 /***/ }),
-/* 58 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3088,11 +5764,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.editCompanyService = undefined;
 
-var _index = __webpack_require__(6);
+var _index = __webpack_require__(7);
 
-var _AppConstance = __webpack_require__(3);
+var _AppConstance = __webpack_require__(5);
 
-var _APIUtil = __webpack_require__(5);
+var _APIUtil = __webpack_require__(6);
 
 var editCompanyService = exports.editCompanyService = {
   selectCompanyById: function selectCompanyById(companies, id) {
@@ -3108,7 +5784,7 @@ var editCompanyService = exports.editCompanyService = {
   },
   updateCompanyInfo: function updateCompanyInfo(companyId, companyData) {
     (0, _APIUtil.request)({
-      url: _AppConstance.API_URL + "/company/" + companyId,
+      url: _AppConstance.API_URL + '/company/' + companyId,
       method: 'PUT',
       body: JSON.stringify(companyData)
     }).then(function (response) {
@@ -3126,13 +5802,13 @@ var editCompanyService = exports.editCompanyService = {
 };
 
 /***/ }),
-/* 59 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "static/media/companyMainInfo.less";
 
 /***/ }),
-/* 60 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3148,17 +5824,17 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _moment = __webpack_require__(61);
+var _moment = __webpack_require__(23);
 
 var _moment2 = _interopRequireDefault(_moment);
 
 var _antd = __webpack_require__(1);
 
-var _companyMainInfo = __webpack_require__(10);
+var _companyMainInfo = __webpack_require__(12);
 
-var _workingTimeDays = __webpack_require__(62);
+var _workingTimeDays = __webpack_require__(112);
 
-__webpack_require__(63);
+__webpack_require__(113);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3170,13 +5846,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function nullValidator(field, subField) {
   if (field && field[subField]) {
-    return (0, _moment2.default)(field[subField], "HH:mm:ss");
+    return (0, _moment2.default)(field[subField], 'HH:mm:ss');
   }
   return null;
 }
 
-var WorkingTime = function (_React$Component) {
-  _inherits(WorkingTime, _React$Component);
+var WorkingTime = function (_React$PureComponent) {
+  _inherits(WorkingTime, _React$PureComponent);
 
   function WorkingTime(props) {
     _classCallCheck(this, WorkingTime);
@@ -3188,7 +5864,7 @@ var WorkingTime = function (_React$Component) {
   }
 
   _createClass(WorkingTime, [{
-    key: "handleWorkingTimeChange",
+    key: 'handleWorkingTimeChange',
     value: function handleWorkingTimeChange(timeMoment, time, fieldName) {
       var _props = this.props,
           dispatch = _props.dispatch,
@@ -3198,16 +5874,16 @@ var WorkingTime = function (_React$Component) {
       dispatch((0, _companyMainInfo.changeWorkingTimeValue)(companyId, fieldName, time, isNewCompany));
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        "div",
-        { className: "workingTime" },
+        'div',
+        { className: 'workingTime' },
         this.getWorkingTimeRow
       );
     }
   }, {
-    key: "getWorkingTimeRow",
+    key: 'getWorkingTimeRow',
     get: function get() {
       var _this2 = this;
 
@@ -3219,13 +5895,13 @@ var WorkingTime = function (_React$Component) {
         var valueTo = nullValidator(workingTime, day.typeTo);
         return _react2.default.createElement(
           _antd.Row,
-          { key: index, type: "flex", justify: "space-between", align: "middle" },
+          { key: index, type: 'flex', justify: 'space-between', align: 'middle' },
           _react2.default.createElement(
             _antd.Col,
             { span: 4 },
             day.titleFrom,
-            day.isRequired ? "*" : "",
-            ":"
+            day.isRequired ? '*' : '',
+            ':'
           ),
           _react2.default.createElement(
             _antd.Col,
@@ -3243,8 +5919,8 @@ var WorkingTime = function (_React$Component) {
             _antd.Col,
             { span: 4 },
             day.titleTo,
-            day.isRequired ? "*" : "",
-            ":"
+            day.isRequired ? '*' : '',
+            ':'
           ),
           _react2.default.createElement(
             _antd.Col,
@@ -3264,18 +5940,12 @@ var WorkingTime = function (_React$Component) {
   }]);
 
   return WorkingTime;
-}(_react2.default.Component);
+}(_react2.default.PureComponent);
 
 exports.default = WorkingTime;
 
 /***/ }),
-/* 61 */
-/***/ (function(module, exports) {
-
-module.exports = require("moment");
-
-/***/ }),
-/* 62 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3285,122 +5955,63 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var workingTimeDays = exports.workingTimeDays = [{
-  typeFrom: "mnFrom",
-  titleFrom: "Monday from",
-  typeTo: "mnTo",
-  titleTo: "Monday To",
+  typeFrom: 'mnFrom',
+  titleFrom: 'Monday from',
+  typeTo: 'mnTo',
+  titleTo: 'Monday To',
   isRequired: true
 }, {
-  typeFrom: "tuFrom",
-  titleFrom: "Tuesday from",
-  typeTo: "tuTo",
-  titleTo: "Tuesday To",
+  typeFrom: 'tuFrom',
+  titleFrom: 'Tuesday from',
+  typeTo: 'tuTo',
+  titleTo: 'Tuesday To',
   isRequired: true
 }, {
-  typeFrom: "weFrom",
-  titleFrom: "Wednesday from",
-  typeTo: "weTo",
-  titleTo: "Wednesday To",
+  typeFrom: 'weFrom',
+  titleFrom: 'Wednesday from',
+  typeTo: 'weTo',
+  titleTo: 'Wednesday To',
   isRequired: true
 }, {
-  typeFrom: "thFrom",
-  titleFrom: "Thursday from",
-  typeTo: "thTo",
-  titleTo: "Thursday To",
+  typeFrom: 'thFrom',
+  titleFrom: 'Thursday from',
+  typeTo: 'thTo',
+  titleTo: 'Thursday To',
   isRequired: true
 }, {
-  typeFrom: "frFrom",
-  titleFrom: "Friday from",
-  typeTo: "frTo",
-  titleTo: "Friday To",
+  typeFrom: 'frFrom',
+  titleFrom: 'Friday from',
+  typeTo: 'frTo',
+  titleTo: 'Friday To',
   isRequired: true
 }, {
-  typeFrom: "stFrom",
-  titleFrom: "Saturday from",
-  typeTo: "stTo",
-  titleTo: "Saturday To",
+  typeFrom: 'stFrom',
+  titleFrom: 'Saturday from',
+  typeTo: 'stTo',
+  titleTo: 'Saturday To',
   isRequired: false
 }, {
-  typeFrom: "snFrom",
-  titleFrom: "Sunday from",
-  typeTo: "snTo",
-  titleTo: "Sunday To",
+  typeFrom: 'snFrom',
+  titleFrom: 'Sunday from',
+  typeTo: 'snTo',
+  titleTo: 'Sunday To',
   isRequired: false
 }];
 
 /***/ }),
-/* 63 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "static/media/workingTime.less";
 
 /***/ }),
-/* 64 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "static/media/validatorInput.less";
-
-/***/ }),
-/* 65 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.validatorForOnChange = validatorForOnChange;
-exports.validationForOnBlur = validationForOnBlur;
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var onChangeRules = {
-  length: function length(value, params) {
-    return value.length <= params;
-  },
-  isNumeric: function isNumeric(value) {
-    return (/^$|^[0-9]+((\.)|(\.[0-9]+)?)$/.test(value)
-    );
-  }
-};
-
-var onBlurRules = {
-  isRequired: function isRequired(value) {
-    return { status: value !== "", message: "This field is required" };
-  },
-  email: function email(value) {
-    return { status: /^$|^.*@.*\..*$/.test(value), message: "Incorrect email format" };
-  }
-};
-
-function validatorForOnChange(value, validationOption) {
-  var rulesName = Object.keys(validationOption);
-  return rulesName.every(function (rule) {
-    return onChangeRules[rule] ? onChangeRules[rule](value, validationOption[rule]) : true;
-  });
-}
-
-function validationForOnBlur(value, validationOprion) {
-  var rulesName = Object.keys(validationOprion);
-  return rulesName.reduce(function (ruleAcc, rule) {
-    var validationResult = onBlurRules[rule] ? onBlurRules[rule](value, validationOprion[rule]) : false;
-    if (validationResult && !validationResult.status) {
-      return [].concat(_toConsumableArray(ruleAcc), [validationResult]);
-    }
-
-    return ruleAcc;
-  }, []);
-}
-
-/***/ }),
-/* 66 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "static/media/companyDataInfo.less";
 
 /***/ }),
-/* 67 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3412,9 +6023,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.changeCompanyDataInfoValue = changeCompanyDataInfoValue;
 exports.setInitialCompanyDataInfoState = setInitialCompanyDataInfoState;
 
-var _companyDataInfo = __webpack_require__(18);
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+var _companyDataInfo = __webpack_require__(30);
 
 function changeCompanyDataInfoValue(companyId, fieldName, value, isNewCompany) {
   return {
@@ -3427,21 +6036,22 @@ function changeCompanyDataInfoValue(companyId, fieldName, value, isNewCompany) {
 }
 
 function setInitialCompanyDataInfoState(companyId, companyMainInfo, isNewCompany) {
-  var _ref;
-
-  return _ref = {
+  return {
     type: _companyDataInfo.SET_INITIAL_COMPANY_DATA_INFO_STATE,
-    companyId: companyId }, _defineProperty(_ref, "companyId", companyId), _defineProperty(_ref, "companyMainInfo", companyMainInfo), _defineProperty(_ref, "isNewCompany", isNewCompany), _ref;
+    companyId: companyId,
+    companyMainInfo: companyMainInfo,
+    isNewCompany: isNewCompany
+  };
 }
 
 /***/ }),
-/* 68 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "static/media/editedCompanyForm.less";
 
 /***/ }),
-/* 69 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3451,9 +6061,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
-var _EditedCurrencyForm = __webpack_require__(70);
+var _EditedCurrencyForm = __webpack_require__(118);
 
 var _EditedCurrencyForm2 = _interopRequireDefault(_EditedCurrencyForm);
 
@@ -3474,7 +6084,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_EditedCurrencyForm2.default);
 
 /***/ }),
-/* 70 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3492,13 +6102,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _antd = __webpack_require__(1);
 
-var _editCurrencyService = __webpack_require__(71);
+var _editCurrencyService = __webpack_require__(119);
 
-var _CurrencyRate = __webpack_require__(72);
+var _CurrencyRate = __webpack_require__(120);
 
 var _CurrencyRate2 = _interopRequireDefault(_CurrencyRate);
 
-var _currencyRate = __webpack_require__(19);
+var _currencyRate = __webpack_require__(31);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3508,8 +6118,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var EditedCurrencyForm = function (_React$Component) {
-  _inherits(EditedCurrencyForm, _React$Component);
+var EditedCurrencyForm = function (_React$PureComponent) {
+  _inherits(EditedCurrencyForm, _React$PureComponent);
 
   function EditedCurrencyForm(props) {
     _classCallCheck(this, EditedCurrencyForm);
@@ -3649,12 +6259,12 @@ var EditedCurrencyForm = function (_React$Component) {
   }]);
 
   return EditedCurrencyForm;
-}(_react2.default.Component);
+}(_react2.default.PureComponent);
 
 exports.default = EditedCurrencyForm;
 
 /***/ }),
-/* 71 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3665,11 +6275,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.editCurrencyService = undefined;
 
-var _index = __webpack_require__(6);
+var _index = __webpack_require__(7);
 
-var _AppConstance = __webpack_require__(3);
+var _AppConstance = __webpack_require__(5);
 
-var _APIUtil = __webpack_require__(5);
+var _APIUtil = __webpack_require__(6);
 
 var editCurrencyService = exports.editCurrencyService = {
   selectCompanyById: function selectCompanyById(companies, id) {
@@ -3685,7 +6295,7 @@ var editCurrencyService = exports.editCurrencyService = {
   },
   updateCurrencyRate: function updateCurrencyRate(companyId, currencyRate) {
     (0, _APIUtil.request)({
-      url: _AppConstance.API_URL + "/currency?companyId=" + companyId,
+      url: _AppConstance.API_URL + '/currency?companyId=' + companyId,
       method: 'PUT',
       body: JSON.stringify(currencyRate)
     }).then(function (response) {
@@ -3703,7 +6313,7 @@ var editCurrencyService = exports.editCurrencyService = {
 };
 
 /***/ }),
-/* 72 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3721,17 +6331,17 @@ var _react2 = _interopRequireDefault(_react);
 
 var _antd = __webpack_require__(1);
 
-var _CurrencyFlag = __webpack_require__(73);
+var _CurrencyFlag = __webpack_require__(121);
 
 var _CurrencyFlag2 = _interopRequireDefault(_CurrencyFlag);
 
-var _CurrencyContent = __webpack_require__(80);
+var _CurrencyContent = __webpack_require__(128);
 
 var _CurrencyContent2 = _interopRequireDefault(_CurrencyContent);
 
-__webpack_require__(81);
+__webpack_require__(129);
 
-var _currencyRate = __webpack_require__(19);
+var _currencyRate = __webpack_require__(31);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3741,8 +6351,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var CurrencyRate = function (_React$Component) {
-  _inherits(CurrencyRate, _React$Component);
+var CurrencyRate = function (_React$PureComponent) {
+  _inherits(CurrencyRate, _React$PureComponent);
 
   function CurrencyRate(props) {
     _classCallCheck(this, CurrencyRate);
@@ -3816,12 +6426,12 @@ var CurrencyRate = function (_React$Component) {
   }]);
 
   return CurrencyRate;
-}(_react2.default.Component);
+}(_react2.default.PureComponent);
 
 exports.default = CurrencyRate;
 
 /***/ }),
-/* 73 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3836,9 +6446,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _currencyType = __webpack_require__(74);
+var _currencyType = __webpack_require__(122);
 
-__webpack_require__(79);
+__webpack_require__(127);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3879,7 +6489,7 @@ function CurrencyFlag(_ref) {
 }
 
 /***/ }),
-/* 74 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3890,80 +6500,80 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.currencyType = exports.CHF = exports.GBR = exports.USD = exports.EUR = undefined;
 
-var _flagUe = __webpack_require__(75);
+var _flagUe = __webpack_require__(123);
 
 var _flagUe2 = _interopRequireDefault(_flagUe);
 
-var _flagUs = __webpack_require__(76);
+var _flagUs = __webpack_require__(124);
 
 var _flagUs2 = _interopRequireDefault(_flagUs);
 
-var _flagUk = __webpack_require__(77);
+var _flagUk = __webpack_require__(125);
 
 var _flagUk2 = _interopRequireDefault(_flagUk);
 
-var _flagCh = __webpack_require__(78);
+var _flagCh = __webpack_require__(126);
 
 var _flagCh2 = _interopRequireDefault(_flagCh);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var EUR = exports.EUR = "EUR";
-var USD = exports.USD = "USD";
-var GBR = exports.GBR = "GBR";
-var CHF = exports.CHF = "CHF";
+var EUR = exports.EUR = 'EUR';
+var USD = exports.USD = 'USD';
+var GBR = exports.GBR = 'GBR';
+var CHF = exports.CHF = 'CHF';
 
 var currencyType = exports.currencyType = [{
   currencyType: EUR,
-  currencyName: "European Union",
+  currencyName: 'European Union',
   flagImg: _flagUe2.default
 
 }, {
   currencyType: USD,
-  currencyName: "United States of America",
+  currencyName: 'United States of America',
   flagImg: _flagUs2.default
 }, {
   currencyType: GBR,
-  currencyName: "Great Britain",
+  currencyName: 'Great Britain',
   flagImg: _flagUk2.default
 }, {
   currencyType: CHF,
-  currencyName: "Switzerland",
+  currencyName: 'Switzerland',
   flagImg: _flagCh2.default
 }];
 
 /***/ }),
-/* 75 */
+/* 123 */
 /***/ (function(module, exports) {
 
 module.exports = "data:image/jpeg;base64,/9j/4QDgRXhpZgAASUkqAAgAAAAHABIBAwABAAAAAQAAABoBBQABAAAAYgAAABsBBQABAAAAagAAACgBAwABAAAAAgAAADEBAgAcAAAAcgAAADIBAgAaAAAAjgAAAGmHBAABAAAAqAAAAAAAAAAA4gQAECcAAADiBAAQJwAAQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzADIwMTQtMTAtMjdUMTE6MTY6NDgrMDE6MDAAAwAAkAcABAAAADAyMjACoAQAAQAAACADAAADoAQAAQAAAFgCAAAAAAAAWAIAAAAA/+wAEUR1Y2t5AAEABAAAAFAAAP/hBiRodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcDpDcmVhdGVEYXRlPSIyMDE0LTEwLTI3VDEwOjQwOjE5KzAxOjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDE0LTEwLTI3VDExOjE2OjQ4KzAxOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAxNC0xMC0yN1QxMToxNjo0OCswMTowMCIgZGM6Zm9ybWF0PSJpbWFnZS9qcGVnIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjVDM0VGQ0EwNURDMjExRTRBNjgzRDNFODMyOTA1MDdBIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjVDM0VGQ0ExNURDMjExRTRBNjgzRDNFODMyOTA1MDdBIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6NkM5NDg4NDNCRDVERTQxMTlGMDNEQkM3QjBDNDQ4MTUiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjZDOTQ4ODQzQkQ1REU0MTE5RjAzREJDN0IwQzQ0ODE1IiBzdEV2dDp3aGVuPSIyMDE0LTEwLTI3VDEwOjQwOjE5KzAxOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249InNhdmVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjZEOTQ4ODQzQkQ1REU0MTE5RjAzREJDN0IwQzQ0ODE1IiBzdEV2dDp3aGVuPSIyMDE0LTEwLTI3VDExOjA4OjU4KzAxOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjZEOTQ4ODQzQkQ1REU0MTE5RjAzREJDN0IwQzQ0ODE1IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjZDOTQ4ODQzQkQ1REU0MTE5RjAzREJDN0IwQzQ0ODE1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRh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"
 
 /***/ }),
-/* 76 */
+/* 124 */
 /***/ (function(module, exports) {
 
 module.exports = "data:image/jpeg;base64,/9j/4QDgRXhpZgAASUkqAAgAAAAHABIBAwABAAAAAQAAABoBBQABAAAAYgAAABsBBQABAAAAagAAACgBAwABAAAAAgAAADEBAgAcAAAAcgAAADIBAgAaAAAAjgAAAGmHBAABAAAAqAAAAAAAAAAA4gQAECcAAADiBAAQJwAAQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzADIwMTQtMTAtMjdUMTE6MTY6NDgrMDE6MDAAAwAAkAcABAAAADAyMjACoAQAAQAAACADAAADoAQAAQAAAFgCAAAAAAAAWAIAAAAA/+wAEUR1Y2t5AAEABAAAAFAAAP/hBiRodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcDpDcmVhdGVEYXRlPSIyMDE0LTEwLTI3VDEwOjQwOjE5KzAxOjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDE0LTEwLTI3VDExOjE2OjQ4KzAxOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAxNC0xMC0yN1QxMToxNjo0OCswMTowMCIgZGM6Zm9ybWF0PSJpbWFnZS9qcGVnIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjVDM0VGQ0E0NURDMjExRTRBNjgzRDNFODMyOTA1MDdBIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjVDM0VGQ0E1NURDMjExRTRBNjgzRDNFODMyOTA1MDdBIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6NkM5NDg4NDNCRDVERTQxMTlGMDNEQkM3QjBDNDQ4MTUiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjZDOTQ4ODQzQkQ1REU0MTE5RjAzREJDN0IwQzQ0ODE1IiBzdEV2dDp3aGVuPSIyMDE0LTEwLTI3VDEwOjQwOjE5KzAxOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249InNhdmVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjZEOTQ4ODQzQkQ1REU0MTE5RjAzREJDN0IwQzQ0ODE1IiBzdEV2dDp3aGVuPSIyMDE0LTEwLTI3VDExOjA4OjU4KzAxOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjZEOTQ4ODQzQkQ1REU0MTE5RjAzREJDN0IwQzQ0ODE1IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjZDOTQ4ODQzQkQ1REU0MTE5RjAzREJDN0IwQzQ0ODE1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRh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6X3I+n1XXvIsPiNf2zp3p+F63kjPgKN++l9yH1XXvIsPiNf2zp3p+F63kh4Cjfvpfch9V17yLD4jX9s6d6fhet5IeAo376X3IfVde8iw+I1/bOnen4XreSHgKN++l9yH1XXvIsPiNf2zp3p+F63kh4Cjfvpfch9V17yLD4jX9s6d6fhet5IeAo376X3IfVde8iw+I1/bOnen4XreSHgKN++l9yH1XXvIsPiNf2zp3p+F63kh4Cjfvpfch9V17yLD4jX9s6d6fhet5IeAo376X3IfVde8iw+I1/bOnen4XreSHgKN++l9yH1XXvIsPiNf2zp3p+F63kh4Cjfvpfch9V17yLD4jX9s6d6fhet5IeAo376X3Io07w75Nk64SbOXqopKqLox/H/7euIcIvezMfT2/wDo3Z9B/wBtnPojj+Tnk55N3v3R/a9Y6nvezMZ8Ruz29s59EPk55OeTd790f2vTqe97Mw8Ruz29s59EPk55OeTd790f2vTqe97Mw8Ruz29s59EPk55OeTd790f2vTqe97Mw8Ruz29s59EPk55OeTd790f2vTqe97Mw8Ruz29s59EPk55OeTd790f2vTqe97Mw8Ruz29s59EPk55OeTd790f2vTqe97Mw8Ruz29s59EPk55OeTd790f2vTqe97Mw8Ruz29s59EPk55OeTd790f2vTqe97Mw8Ruz29s59EPk55OeTd790f2vTqe97Mw8Ruz29s59EPk55OeTd790f2vTqe97Mw8Ruz29s59EPk55OeTd790f2vTqe97Mw8Ruz29s59Efpy6+lR+JYdIQ6Qh0hDpCHSEOkIdIQ6Qh0hDpCHSEOkI//2Q=="
 
 /***/ }),
-/* 77 */
+/* 125 */
 /***/ (function(module, exports) {
 
 module.exports = "data:image/jpeg;base64,/9j/4QDgRXhpZgAASUkqAAgAAAAHABIBAwABAAAAAQAAABoBBQABAAAAYgAAABsBBQABAAAAagAAACgBAwABAAAAAgAAADEBAgAcAAAAcgAAADIBAgAaAAAAjgAAAGmHBAABAAAAqAAAAAAAAAAA4gQAECcAAADiBAAQJwAAQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzADIwMTQtMTAtMjdUMTE6MTY6NDgrMDE6MDAAAwAAkAcABAAAADAyMjACoAQAAQAAACADAAADoAQAAQAAAFgCAAAAAAAAWAIAAAAA/+wAEUR1Y2t5AAEABAAAAFAAAP/hBiRodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcDpDcmVhdGVEYXRlPSIyMDE0LTEwLTI3VDEwOjQwOjE5KzAxOjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDE0LTEwLTI3VDExOjE2OjQ4KzAxOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAxNC0xMC0yN1QxMToxNjo0OCswMTowMCIgZGM6Zm9ybWF0PSJpbWFnZS9qcGVnIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjVDNjI2MzlDNURDMjExRTRBNjgzRDNFODMyOTA1MDdBIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjVDNjI2MzlENURDMjExRTRBNjgzRDNFODMyOTA1MDdBIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6NkM5NDg4NDNCRDVERTQxMTlGMDNEQkM3QjBDNDQ4MTUiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjZDOTQ4ODQzQkQ1REU0MTE5RjAzREJDN0IwQzQ0ODE1IiBzdEV2dDp3aGVuPSIyMDE0LTEwLTI3VDEwOjQwOjE5KzAxOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249InNhdmVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjZEOTQ4ODQzQkQ1REU0MTE5RjAzREJDN0IwQzQ0ODE1IiBzdEV2dDp3aGVuPSIyMDE0LTEwLTI3VDExOjA4OjU4KzAxOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjZEOTQ4ODQzQkQ1REU0MTE5RjAzREJDN0IwQzQ0ODE1IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjZDOTQ4ODQzQkQ1REU0MTE5RjAzREJDN0IwQzQ0ODE1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRh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"
 
 /***/ }),
-/* 78 */
+/* 126 */
 /***/ (function(module, exports) {
 
 module.exports = "data:image/jpeg;base64,/9j/4QDgRXhpZgAASUkqAAgAAAAHABIBAwABAAAAAQAAABoBBQABAAAAYgAAABsBBQABAAAAagAAACgBAwABAAAAAgAAADEBAgAcAAAAcgAAADIBAgAaAAAAjgAAAGmHBAABAAAAqAAAAAAAAAAA4gQAECcAAADiBAAQJwAAQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzADIwMTQtMTAtMjdUMTE6MTY6NDgrMDE6MDAAAwAAkAcABAAAADAyMjACoAQAAQAAACADAAADoAQAAQAAAFgCAAAAAAAAWAIAAAAA/+wAEUR1Y2t5AAEABAAAAFAAAP/hBiRodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcDpDcmVhdGVEYXRlPSIyMDE0LTEwLTI3VDEwOjQwOjE5KzAxOjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDE0LTEwLTI3VDExOjE2OjQ4KzAxOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAxNC0xMC0yN1QxMToxNjo0OCswMTowMCIgZGM6Zm9ybWF0PSJpbWFnZS9qcGVnIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjVDNjI2M0EwNURDMjExRTRBNjgzRDNFODMyOTA1MDdBIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjVDNjI2M0ExNURDMjExRTRBNjgzRDNFODMyOTA1MDdBIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6NkM5NDg4NDNCRDVERTQxMTlGMDNEQkM3QjBDNDQ4MTUiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjZDOTQ4ODQzQkQ1REU0MTE5RjAzREJDN0IwQzQ0ODE1IiBzdEV2dDp3aGVuPSIyMDE0LTEwLTI3VDEwOjQwOjE5KzAxOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249InNhdmVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjZEOTQ4ODQzQkQ1REU0MTE5RjAzREJDN0IwQzQ0ODE1IiBzdEV2dDp3aGVuPSIyMDE0LTEwLTI3VDExOjA4OjU4KzAxOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjZEOTQ4ODQzQkQ1REU0MTE5RjAzREJDN0IwQzQ0ODE1IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjZDOTQ4ODQzQkQ1REU0MTE5RjAzREJDN0IwQzQ0ODE1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRh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"
 
 /***/ }),
-/* 79 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "static/media/CurrencyFlag.less";
 
 /***/ }),
-/* 80 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3980,9 +6590,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _antd = __webpack_require__(1);
 
-var _valueValidator = __webpack_require__(11);
+var _valueValidator = __webpack_require__(13);
 
-var _ValidatorInput = __webpack_require__(12);
+var _ValidatorInput = __webpack_require__(8);
 
 var _ValidatorInput2 = _interopRequireDefault(_ValidatorInput);
 
@@ -3999,12 +6609,12 @@ function CurrencyContent(_ref) {
 
     return _react2.default.createElement(
       _antd.Row,
-      { key: (0, _valueValidator.nullValidator)(currency, "currencyType", index) },
+      { key: (0, _valueValidator.nullValidator)(currency, 'currencyType', index) },
       _react2.default.createElement(
         _antd.Col,
         { span: 8 },
         _react2.default.createElement(_antd.Input, {
-          defaultValue: (0, _valueValidator.nullValidator)(currency, "currencyName"),
+          defaultValue: (0, _valueValidator.nullValidator)(currency, 'currencyName'),
           disabled: true
         })
       ),
@@ -4012,7 +6622,7 @@ function CurrencyContent(_ref) {
         _antd.Col,
         { span: 3 },
         _react2.default.createElement(_antd.Input, {
-          defaultValue: (0, _valueValidator.nullValidator)(currency, "currencyType"),
+          defaultValue: (0, _valueValidator.nullValidator)(currency, 'currencyType'),
           disabled: true
         })
       ),
@@ -4021,7 +6631,7 @@ function CurrencyContent(_ref) {
         { span: 4 },
         _react2.default.createElement(_ValidatorInput2.default, {
           InputComponent: _antd.Input,
-          value: (0, _valueValidator.nullValidator)(currency, "buyPrice"),
+          value: (0, _valueValidator.nullValidator)(currency, 'buyPrice'),
           placeholder: 'Buy price',
           name: 'buyPrice',
           validationOption: { length: 7, isNumeric: true },
@@ -4033,7 +6643,7 @@ function CurrencyContent(_ref) {
         { span: 4 },
         _react2.default.createElement(_ValidatorInput2.default, {
           InputComponent: _antd.Input,
-          value: (0, _valueValidator.nullValidator)(currency, "sellPrice"),
+          value: (0, _valueValidator.nullValidator)(currency, 'sellPrice'),
           placeholder: 'Sell price',
           name: 'sellPrice',
           validationOption: { length: 7, isNumeric: true },
@@ -4051,13 +6661,13 @@ function CurrencyContent(_ref) {
 }
 
 /***/ }),
-/* 81 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "static/media/currencyRate.less";
 
 /***/ }),
-/* 82 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4067,9 +6677,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
-var _EditedParserForm = __webpack_require__(83);
+var _EditedParserForm = __webpack_require__(131);
 
 var _EditedParserForm2 = _interopRequireDefault(_EditedParserForm);
 
@@ -4090,7 +6700,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_EditedParserForm2.default);
 
 /***/ }),
-/* 83 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4108,15 +6718,15 @@ var _react2 = _interopRequireDefault(_react);
 
 var _antd = __webpack_require__(1);
 
-var _ParserData = __webpack_require__(84);
+var _ParserData = __webpack_require__(132);
 
 var _ParserData2 = _interopRequireDefault(_ParserData);
 
-var _parser = __webpack_require__(21);
+var _parser = __webpack_require__(33);
 
-var _editCurrencyService = __webpack_require__(87);
+var _editCurrencyService = __webpack_require__(135);
 
-__webpack_require__(88);
+__webpack_require__(136);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4126,8 +6736,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var EditedParserForm = function (_React$Component) {
-  _inherits(EditedParserForm, _React$Component);
+var EditedParserForm = function (_React$PureComponent) {
+  _inherits(EditedParserForm, _React$PureComponent);
 
   function EditedParserForm(props) {
     _classCallCheck(this, EditedParserForm);
@@ -4325,12 +6935,12 @@ var EditedParserForm = function (_React$Component) {
   }]);
 
   return EditedParserForm;
-}(_react2.default.Component);
+}(_react2.default.PureComponent);
 
 exports.default = EditedParserForm;
 
 /***/ }),
-/* 84 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4348,15 +6958,15 @@ var _react2 = _interopRequireDefault(_react);
 
 var _antd = __webpack_require__(1);
 
-var _parser = __webpack_require__(21);
+var _parser = __webpack_require__(33);
 
-__webpack_require__(85);
+__webpack_require__(133);
 
-var _moment = __webpack_require__(86);
+var _moment = __webpack_require__(134);
 
 var _moment2 = _interopRequireDefault(_moment);
 
-var _ValidatorInput = __webpack_require__(12);
+var _ValidatorInput = __webpack_require__(8);
 
 var _ValidatorInput2 = _interopRequireDefault(_ValidatorInput);
 
@@ -4369,7 +6979,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function nullValidator(field, subField) {
-  var defaultValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "";
+  var defaultValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
   if (field && field[subField]) {
     return field[subField];
@@ -4377,8 +6987,8 @@ function nullValidator(field, subField) {
   return defaultValue;
 }
 
-var ParserData = function (_React$Component) {
-  _inherits(ParserData, _React$Component);
+var ParserData = function (_React$PureComponent) {
+  _inherits(ParserData, _React$PureComponent);
 
   function ParserData(props) {
     _classCallCheck(this, ParserData);
@@ -4390,7 +7000,7 @@ var ParserData = function (_React$Component) {
   }
 
   _createClass(ParserData, [{
-    key: "handleValueOnChange",
+    key: 'handleValueOnChange',
     value: function handleValueOnChange(name, value) {
       var _props = this.props,
           dispatch = _props.dispatch,
@@ -4399,42 +7009,42 @@ var ParserData = function (_React$Component) {
       dispatch((0, _parser.changeParserValue)(companyId, name, value || checked));
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       var parserData = this.props.parserData;
 
 
       return _react2.default.createElement(
-        "div",
-        { className: "parserData" },
+        'div',
+        { className: 'parserData' },
         _react2.default.createElement(
-          "div",
-          { className: "parserData__title" },
+          'div',
+          { className: 'parserData__title' },
           _react2.default.createElement(
-            "h2",
+            'h2',
             null,
-            "Parser"
+            'Parser'
           )
         ),
         _react2.default.createElement(
-          "div",
-          { className: "parserData__form parserDataForm" },
+          'div',
+          { className: 'parserData__form parserDataForm' },
           _react2.default.createElement(
             _antd.Row,
-            { type: "flex", justify: "space-between", align: "middle" },
+            { type: 'flex', justify: 'space-between', align: 'middle' },
             _react2.default.createElement(
               _antd.Col,
               { span: 4 },
-              "Url*:"
+              'Url*:'
             ),
             _react2.default.createElement(
               _antd.Col,
               { span: 7 },
               _react2.default.createElement(_ValidatorInput2.default, {
                 InputComponent: _antd.Input,
-                value: nullValidator(parserData, "url"),
-                placeholder: "URL",
-                name: "url",
+                value: nullValidator(parserData, 'url'),
+                placeholder: 'URL',
+                name: 'url',
                 validationOption: { length: 120 },
                 onChange: this.handleValueOnChange
               })
@@ -4442,16 +7052,16 @@ var ParserData = function (_React$Component) {
             _react2.default.createElement(
               _antd.Col,
               { span: 4 },
-              "Parameters:"
+              'Parameters:'
             ),
             _react2.default.createElement(
               _antd.Col,
               { span: 7 },
               _react2.default.createElement(_ValidatorInput2.default, {
                 InputComponent: _antd.Input,
-                value: nullValidator(parserData, "parameters"),
-                placeholder: "Parameters",
-                name: "parameters",
+                value: nullValidator(parserData, 'parameters'),
+                placeholder: 'Parameters',
+                name: 'parameters',
                 validationOption: { length: 120 },
                 onChange: this.handleValueOnChange
               })
@@ -4459,20 +7069,20 @@ var ParserData = function (_React$Component) {
           ),
           _react2.default.createElement(
             _antd.Row,
-            { type: "flex", justify: "space-between", align: "middle" },
+            { type: 'flex', justify: 'space-between', align: 'middle' },
             _react2.default.createElement(
               _antd.Col,
               { span: 4 },
-              "Row selector:"
+              'Row selector:'
             ),
             _react2.default.createElement(
               _antd.Col,
               { span: 7 },
               _react2.default.createElement(_ValidatorInput2.default, {
                 InputComponent: _antd.Input,
-                value: nullValidator(parserData, "rowSelector"),
-                placeholder: "Row selector",
-                name: "rowSelector",
+                value: nullValidator(parserData, 'rowSelector'),
+                placeholder: 'Row selector',
+                name: 'rowSelector',
                 validationOption: { length: 60 },
                 onChange: this.handleValueOnChange
               })
@@ -4482,20 +7092,20 @@ var ParserData = function (_React$Component) {
           ),
           _react2.default.createElement(
             _antd.Row,
-            { type: "flex", justify: "space-between", align: "middle" },
+            { type: 'flex', justify: 'space-between', align: 'middle' },
             _react2.default.createElement(
               _antd.Col,
               { span: 4 },
-              "Currency amount:"
+              'Currency amount:'
             ),
             _react2.default.createElement(
               _antd.Col,
               { span: 7 },
               _react2.default.createElement(_ValidatorInput2.default, {
                 InputComponent: _antd.Input,
-                value: nullValidator(parserData, "currencyAmountSelector"),
-                placeholder: "Currency amount",
-                name: "currencyAmountSelector",
+                value: nullValidator(parserData, 'currencyAmountSelector'),
+                placeholder: 'Currency amount',
+                name: 'currencyAmountSelector',
                 validationOption: { length: 60 },
                 onChange: this.handleValueOnChange
               })
@@ -4503,16 +7113,16 @@ var ParserData = function (_React$Component) {
             _react2.default.createElement(
               _antd.Col,
               { span: 4 },
-              "Currency type:"
+              'Currency type:'
             ),
             _react2.default.createElement(
               _antd.Col,
               { span: 7 },
               _react2.default.createElement(_ValidatorInput2.default, {
                 InputComponent: _antd.Input,
-                value: nullValidator(parserData, "currencyTypeSelector"),
-                placeholder: "Currency type",
-                name: "currencyTypeSelector",
+                value: nullValidator(parserData, 'currencyTypeSelector'),
+                placeholder: 'Currency type',
+                name: 'currencyTypeSelector',
                 validationOption: { length: 60 },
                 onChange: this.handleValueOnChange
               })
@@ -4520,20 +7130,20 @@ var ParserData = function (_React$Component) {
           ),
           _react2.default.createElement(
             _antd.Row,
-            { type: "flex", justify: "space-between", align: "middle" },
+            { type: 'flex', justify: 'space-between', align: 'middle' },
             _react2.default.createElement(
               _antd.Col,
               { span: 4 },
-              "Buy selector:"
+              'Buy selector:'
             ),
             _react2.default.createElement(
               _antd.Col,
               { span: 7 },
               _react2.default.createElement(_ValidatorInput2.default, {
                 InputComponent: _antd.Input,
-                value: nullValidator(parserData, "buySelector"),
-                placeholder: "Buy selector",
-                name: "buySelector",
+                value: nullValidator(parserData, 'buySelector'),
+                placeholder: 'Buy selector',
+                name: 'buySelector',
                 validationOption: { length: 60 },
                 onChange: this.handleValueOnChange
               })
@@ -4541,16 +7151,16 @@ var ParserData = function (_React$Component) {
             _react2.default.createElement(
               _antd.Col,
               { span: 4 },
-              "Sell selector:"
+              'Sell selector:'
             ),
             _react2.default.createElement(
               _antd.Col,
               { span: 7 },
               _react2.default.createElement(_ValidatorInput2.default, {
                 InputComponent: _antd.Input,
-                value: nullValidator(parserData, "sellSelector"),
-                placeholder: "Sell selector",
-                name: "sellSelector",
+                value: nullValidator(parserData, 'sellSelector'),
+                placeholder: 'Sell selector',
+                name: 'sellSelector',
                 validationOption: { length: 60 },
                 onChange: this.handleValueOnChange
               })
@@ -4559,11 +7169,11 @@ var ParserData = function (_React$Component) {
           _react2.default.createElement(
             _antd.Checkbox,
             {
-              name: "active",
+              name: 'active',
               onChange: this.handleValueOnChange,
-              checked: nullValidator(parserData, "active", false)
+              checked: nullValidator(parserData, 'active', false)
             },
-            "Active"
+            'Active'
           )
         )
       );
@@ -4571,24 +7181,24 @@ var ParserData = function (_React$Component) {
   }]);
 
   return ParserData;
-}(_react2.default.Component);
+}(_react2.default.PureComponent);
 
 exports.default = ParserData;
 
 /***/ }),
-/* 85 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "static/media/ParserData.less";
 
 /***/ }),
-/* 86 */
+/* 134 */
 /***/ (function(module, exports) {
 
 module.exports = require("moment/moment");
 
 /***/ }),
-/* 87 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4599,11 +7209,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.editParserService = undefined;
 
-var _index = __webpack_require__(6);
+var _index = __webpack_require__(7);
 
-var _AppConstance = __webpack_require__(3);
+var _AppConstance = __webpack_require__(5);
 
-var _APIUtil = __webpack_require__(5);
+var _APIUtil = __webpack_require__(6);
 
 var editParserService = exports.editParserService = {
   selectCompanyById: function selectCompanyById(companies, id) {
@@ -4619,7 +7229,7 @@ var editParserService = exports.editParserService = {
   },
   updateParserData: function updateParserData(companyId, initialParserData) {
     (0, _APIUtil.request)({
-      url: _AppConstance.API_URL + "/parser?companyId=" + companyId,
+      url: _AppConstance.API_URL + '/parser?companyId=' + companyId,
       method: 'PUT',
       body: JSON.stringify(initialParserData)
     }).then(function (response) {
@@ -4636,20 +7246,20 @@ var editParserService = exports.editParserService = {
   },
   checkParseResult: function checkParseResult(companyId) {
     return (0, _APIUtil.request)({
-      url: _AppConstance.API_URL + "/parser/checkParser?companyId=" + companyId,
+      url: _AppConstance.API_URL + '/parser/checkParser?companyId=' + companyId,
       method: 'GET'
     }, _APIUtil.TEXT_RES_TYPE);
   }
 };
 
 /***/ }),
-/* 88 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "static/media/editedParserForm.less";
 
 /***/ }),
-/* 89 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4659,9 +7269,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
-var _EditedCommentaryForm = __webpack_require__(90);
+var _EditedCommentaryForm = __webpack_require__(138);
 
 var _EditedCommentaryForm2 = _interopRequireDefault(_EditedCommentaryForm);
 
@@ -4682,7 +7292,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_EditedCommentaryForm2.default);
 
 /***/ }),
-/* 90 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4700,9 +7310,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _antd = __webpack_require__(1);
 
-var _editCommentaryService = __webpack_require__(91);
+var _editCommentaryService = __webpack_require__(139);
 
-var _CommentaryData = __webpack_require__(92);
+var _CommentaryData = __webpack_require__(140);
 
 var _CommentaryData2 = _interopRequireDefault(_CommentaryData);
 
@@ -4714,8 +7324,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var EditedCommentaryForm = function (_React$Component) {
-  _inherits(EditedCommentaryForm, _React$Component);
+var EditedCommentaryForm = function (_React$PureComponent) {
+  _inherits(EditedCommentaryForm, _React$PureComponent);
 
   function EditedCommentaryForm() {
     _classCallCheck(this, EditedCommentaryForm);
@@ -4770,12 +7380,12 @@ var EditedCommentaryForm = function (_React$Component) {
   }]);
 
   return EditedCommentaryForm;
-}(_react2.default.Component);
+}(_react2.default.PureComponent);
 
 exports.default = EditedCommentaryForm;
 
 /***/ }),
-/* 91 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4786,11 +7396,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.editCommentaryService = undefined;
 
-var _index = __webpack_require__(6);
+var _index = __webpack_require__(7);
 
-var _AppConstance = __webpack_require__(3);
+var _AppConstance = __webpack_require__(5);
 
-var _APIUtil = __webpack_require__(5);
+var _APIUtil = __webpack_require__(6);
 
 var editCommentaryService = exports.editCommentaryService = {
   selectCompanyById: function selectCompanyById(companies, id) {
@@ -4806,7 +7416,7 @@ var editCommentaryService = exports.editCommentaryService = {
   },
   updateCommentaryData: function updateCommentaryData(companyId, currencyRate) {
     (0, _APIUtil.request)({
-      url: _AppConstance.API_URL + "/currency/" + companyId,
+      url: _AppConstance.API_URL + '/currency/' + companyId,
       method: 'PUT',
       body: JSON.stringify(currencyRate)
     }).then(function (response) {
@@ -4824,7 +7434,7 @@ var editCommentaryService = exports.editCommentaryService = {
 };
 
 /***/ }),
-/* 92 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4841,9 +7451,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _antd = __webpack_require__(1);
 
-__webpack_require__(93);
+__webpack_require__(141);
 
-var _commentary = __webpack_require__(94);
+var _commentary = __webpack_require__(142);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4900,13 +7510,13 @@ function CommentaryData(_ref2) {
 }
 
 /***/ }),
-/* 93 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "static/media/CommentaryData.less";
 
 /***/ }),
-/* 94 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4917,20 +7527,20 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.deleteCommentaryById = deleteCommentaryById;
 
-var _commentary = __webpack_require__(23);
+var _commentary = __webpack_require__(35);
 
-var _index = __webpack_require__(6);
+var _index = __webpack_require__(7);
 
-var _APIUtil = __webpack_require__(5);
+var _APIUtil = __webpack_require__(6);
 
-var _AppConstance = __webpack_require__(3);
+var _AppConstance = __webpack_require__(5);
 
 function deleteCommentaryById(companyId, commentaryId) {
   return function (dispatch) {
     (0, _APIUtil.request)({
-      url: _AppConstance.API_URL + "/commentary/" + commentaryId,
+      url: _AppConstance.API_URL + '/commentary/' + commentaryId,
       method: 'DELETE'
-    }).then(function (response) {
+    }).then(function () {
       dispatch({
         type: _commentary.DELETE_COMMENTARY_BY_ID,
         commentaryId: commentaryId,
@@ -4950,7 +7560,7 @@ function deleteCommentaryById(companyId, commentaryId) {
 }
 
 /***/ }),
-/* 95 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4960,9 +7570,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _reactRedux = __webpack_require__(4);
+var _reactRedux = __webpack_require__(3);
 
-var _NewCompany = __webpack_require__(96);
+var _NewCompany = __webpack_require__(144);
 
 var _NewCompany2 = _interopRequireDefault(_NewCompany);
 
@@ -4983,7 +7593,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_NewCompany2.default);
 
 /***/ }),
-/* 96 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5001,7 +7611,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _antd = __webpack_require__(1);
 
-var _NewCompanyData = __webpack_require__(97);
+var _NewCompanyData = __webpack_require__(145);
 
 var _NewCompanyData2 = _interopRequireDefault(_NewCompanyData);
 
@@ -5013,8 +7623,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var NewCompany = function (_React$Component) {
-  _inherits(NewCompany, _React$Component);
+var NewCompany = function (_React$PureComponent) {
+  _inherits(NewCompany, _React$PureComponent);
 
   function NewCompany() {
     _classCallCheck(this, NewCompany);
@@ -5023,7 +7633,7 @@ var NewCompany = function (_React$Component) {
   }
 
   _createClass(NewCompany, [{
-    key: "render",
+    key: 'render',
     value: function render() {
       var _props = this.props,
           dispatch = _props.dispatch,
@@ -5031,13 +7641,13 @@ var NewCompany = function (_React$Component) {
 
 
       return _react2.default.createElement(
-        "div",
+        'div',
         null,
         _react2.default.createElement(
-          "h1",
+          'h1',
           null,
-          _react2.default.createElement(_antd.Icon, { type: "table" }),
-          " Currency"
+          _react2.default.createElement(_antd.Icon, { type: 'table' }),
+          ' Currency'
         ),
         _react2.default.createElement(_NewCompanyData2.default, {
           dispatch: dispatch,
@@ -5048,12 +7658,12 @@ var NewCompany = function (_React$Component) {
   }]);
 
   return NewCompany;
-}(_react2.default.Component);
+}(_react2.default.PureComponent);
 
 exports.default = NewCompany;
 
 /***/ }),
-/* 97 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5069,19 +7679,19 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _CompanyMainInfo = __webpack_require__(15);
+var _CompanyMainInfo = __webpack_require__(27);
 
 var _CompanyMainInfo2 = _interopRequireDefault(_CompanyMainInfo);
 
 var _antd = __webpack_require__(1);
 
-var _companyMainInfo = __webpack_require__(10);
+var _companyMainInfo = __webpack_require__(12);
 
-var _editNewCompanyService = __webpack_require__(98);
+var _editNewCompanyService = __webpack_require__(146);
 
-__webpack_require__(99);
+__webpack_require__(147);
 
-var _CompanyDataInfo = __webpack_require__(17);
+var _CompanyDataInfo = __webpack_require__(29);
 
 var _CompanyDataInfo2 = _interopRequireDefault(_CompanyDataInfo);
 
@@ -5093,8 +7703,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var NewCompanyData = function (_React$Component) {
-  _inherits(NewCompanyData, _React$Component);
+var NewCompanyData = function (_React$PureComponent) {
+  _inherits(NewCompanyData, _React$PureComponent);
 
   function NewCompanyData(props) {
     _classCallCheck(this, NewCompanyData);
@@ -5111,14 +7721,14 @@ var NewCompanyData = function (_React$Component) {
   }
 
   _createClass(NewCompanyData, [{
-    key: "componentDidMount",
+    key: 'componentDidMount',
     value: function componentDidMount() {
       var newCompany = this.props.newCompany;
 
       this.setState({ initialCompanyMainInfo: JSON.stringify(newCompany) });
     }
   }, {
-    key: "componentWillUnmount",
+    key: 'componentWillUnmount',
     value: function componentWillUnmount() {
       var dispatch = this.props.dispatch;
       var initialCompanyMainInfo = this.state.initialCompanyMainInfo;
@@ -5126,14 +7736,14 @@ var NewCompanyData = function (_React$Component) {
       dispatch((0, _companyMainInfo.setInitialCompanyMainInfoState)(null, initialCompanyMainInfo, true));
     }
   }, {
-    key: "handleCreateButtonClick",
+    key: 'handleCreateButtonClick',
     value: function handleCreateButtonClick() {
       var newCompany = this.props.newCompany;
 
       this.editNewCompanyService.createNewCompany(newCompany);
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       var isUpdateButtonDisable = this.state.isUpdateButtonDisable;
       var _props = this.props,
@@ -5142,8 +7752,8 @@ var NewCompanyData = function (_React$Component) {
 
 
       return _react2.default.createElement(
-        "div",
-        { className: "newCompanyData" },
+        'div',
+        { className: 'newCompanyData' },
         _react2.default.createElement(_CompanyMainInfo2.default, {
           company: newCompany,
           isNewCompany: true,
@@ -5155,27 +7765,27 @@ var NewCompanyData = function (_React$Component) {
           dispatch: dispatch
         }),
         _react2.default.createElement(
-          "div",
-          { className: "newCompanyData__actions" },
+          'div',
+          { className: 'newCompanyData__actions' },
           _react2.default.createElement(
             _antd.Button,
             {
-              type: "primary",
+              type: 'primary',
               disabled: isUpdateButtonDisable,
               onClick: this.handleCreateButtonClick
             },
-            "Create new company"
+            'Create new company'
           )
         )
       );
     }
   }, {
-    key: "editNewCompanyService",
+    key: 'editNewCompanyService',
     get: function get() {
       return _editNewCompanyService.editNewCompanyService;
     }
   }], [{
-    key: "getDerivedStateFromProps",
+    key: 'getDerivedStateFromProps',
     value: function getDerivedStateFromProps(props, state) {
       var newCompany = props.newCompany;
 
@@ -5187,12 +7797,12 @@ var NewCompanyData = function (_React$Component) {
   }]);
 
   return NewCompanyData;
-}(_react2.default.Component);
+}(_react2.default.PureComponent);
 
 exports.default = NewCompanyData;
 
 /***/ }),
-/* 98 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5203,16 +7813,16 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.editNewCompanyService = undefined;
 
-var _index = __webpack_require__(6);
+var _index = __webpack_require__(7);
 
-var _AppConstance = __webpack_require__(3);
+var _AppConstance = __webpack_require__(5);
 
-var _APIUtil = __webpack_require__(5);
+var _APIUtil = __webpack_require__(6);
 
 var editNewCompanyService = exports.editNewCompanyService = {
   createNewCompany: function createNewCompany(newCompany) {
     (0, _APIUtil.request)({
-      url: _AppConstance.API_URL + "/company",
+      url: _AppConstance.API_URL + '/company',
       method: 'POST',
       body: JSON.stringify(newCompany)
     }).then(function (response) {
@@ -5230,19 +7840,19 @@ var editNewCompanyService = exports.editNewCompanyService = {
 };
 
 /***/ }),
-/* 99 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "static/media/newCompanyData.less";
 
 /***/ }),
-/* 100 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "static/media/admin.less";
 
 /***/ }),
-/* 101 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5258,7 +7868,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(7);
+var _propTypes = __webpack_require__(10);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -5294,7 +7904,7 @@ PrivateRoute.propTypes = {
 exports.default = PrivateRoute;
 
 /***/ }),
-/* 102 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5319,7 +7929,7 @@ function LoadingIndicator(props) {
 }
 
 /***/ }),
-/* 103 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5330,17 +7940,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = configureStore;
 
-var _redux = __webpack_require__(24);
+var _redux = __webpack_require__(36);
 
-var _reduxThunk = __webpack_require__(104);
+var _reduxThunk = __webpack_require__(152);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _reducer = __webpack_require__(105);
+var _reducer = __webpack_require__(153);
 
 var _reducer2 = _interopRequireDefault(_reducer);
 
-var _reduxLogger = __webpack_require__(108);
+var _reduxLogger = __webpack_require__(157);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5351,38 +7961,43 @@ function configureStore(preloadedState) {
 }
 
 /***/ }),
-/* 104 */
+/* 152 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-thunk");
 
 /***/ }),
-/* 105 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
-var _redux = __webpack_require__(24);
+var _redux = __webpack_require__(36);
 
-var _admin = __webpack_require__(106);
+var _admin = __webpack_require__(154);
 
 var _admin2 = _interopRequireDefault(_admin);
+
+var _ecHomePage = __webpack_require__(156);
+
+var _ecHomePage2 = _interopRequireDefault(_ecHomePage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var rootReducer = (0, _redux.combineReducers)({
-    admin: _admin2.default
+  admin: _admin2.default,
+  ecHomePage: _ecHomePage2.default
 });
 
 exports.default = rootReducer;
 
 /***/ }),
-/* 106 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5396,21 +8011,21 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 exports.default = admin;
 
-var _admin = __webpack_require__(14);
+var _admin = __webpack_require__(26);
 
-var _companyColumnConfig = __webpack_require__(9);
+var _companyColumnConfig = __webpack_require__(11);
 
-var _currencyRate = __webpack_require__(20);
+var _currencyRate = __webpack_require__(32);
 
-var _dataProcessors = __webpack_require__(107);
+var _dataProcessors = __webpack_require__(155);
 
-var _parser = __webpack_require__(22);
+var _parser = __webpack_require__(34);
 
-var _commentary = __webpack_require__(23);
+var _commentary = __webpack_require__(35);
 
-var _companyMainInfo = __webpack_require__(16);
+var _companyMainInfo = __webpack_require__(28);
 
-var _companyDataInfo = __webpack_require__(18);
+var _companyDataInfo = __webpack_require__(30);
 
 var initialState = {
   companies: [],
@@ -5455,7 +8070,7 @@ function admin() {
     case _companyMainInfo.CHANGE_COMPANY_MAIN_INFO_VALUE:
       if (action.isNewCompany) {
         var newCompany = _extends({}, state.newCompany);
-        if (!!action.value) {
+        if (action.value) {
           newCompany[action.fieldName] = action.value;
         } else {
           delete newCompany[action.fieldName];
@@ -5466,7 +8081,7 @@ function admin() {
     case _companyMainInfo.CHANGE_WORKING_TIME_VALUE:
       if (action.isNewCompany) {
         var _newCompany = _extends({}, state.newCompany);
-        if (!!action.value) {
+        if (action.value) {
           _newCompany.workingTime[action.fieldName] = action.value;
         } else {
           delete _newCompany.workingTime[action.fieldName];
@@ -5477,7 +8092,7 @@ function admin() {
     case _companyDataInfo.CHANGE_COMPANY_DATA_INFO_VALUE:
       if (action.isNewCompany) {
         var _newCompany2 = _extends({}, state.newCompany);
-        if (!!action.value) {
+        if (action.value) {
           _newCompany2.exchangeCompanyDetail[action.fieldName] = action.value;
         } else {
           delete _newCompany2.exchangeCompanyDetail[action.fieldName];
@@ -5491,7 +8106,7 @@ function admin() {
 }
 
 /***/ }),
-/* 107 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5629,7 +8244,43 @@ function changeCompanyDataInfoValue(companies, action) {
 }
 
 /***/ }),
-/* 108 */
+/* 156 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+exports.default = ecHomePage;
+
+var _ecHomePage = __webpack_require__(21);
+
+var initialState = {
+  currencyAmount: 100,
+  isBuyStatus: true
+};
+
+function ecHomePage() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _ecHomePage.SET_BUY_STATUS:
+      return _extends({}, state, { isBuyStatus: action.isBuyStatus });
+    case _ecHomePage.SET_SUM_AMOUNT:
+      return _extends({}, state, { currencyAmount: action.currencyAmount });
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+/* 157 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-logger");
