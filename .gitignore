@@ -4,7 +4,8 @@ public/**/static/
 public/**/index.html
 public/**/service-worker.js
 public/**/asset-manifest.json
-public/server.js
+public/**/*.less
+public/server/
 
 
 !**/favicon.ico
