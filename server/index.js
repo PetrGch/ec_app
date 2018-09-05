@@ -38,8 +38,6 @@ const indexHtml = expressRateLimit({
 app.use("/*", indexHtml);
 // --------- express-rate-limit -----------
 
-app.use("/static", express.static(resolveApp(`./public/${sourceDirectory}/static/`)));
-
 function saveLog (nick, command) {
   const file = `${nick}.log`;
   const datetime = '[' + new Date() + '] ';
@@ -49,6 +47,21 @@ function saveLog (nick, command) {
     console.log('successfully appended "' + text + '"');
   });
 }
+
+app.use("/static", express.static(resolveApp(`./public/${sourceDirectory}/static/`)));
+
+app.get("/service-worker.js", (req, res) => {
+  const indexFile = resolveApp(`./public/${sourceDirectory}/service-worker.js`);
+  fs.readFile(indexFile, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Something went wrong:', err);
+      return res.status(500).send('Oops, better luck next time!');
+    }
+
+    res.type('.js');
+    return res.send(data);
+  });
+});
 
 app.get('*', (req, res) => {
   const context = {};

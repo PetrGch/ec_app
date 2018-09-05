@@ -1,4 +1,3 @@
-const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 
@@ -21,8 +20,6 @@ module.exports = {
   resolve: {
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx']
   },
-
-  watch: true,
 
   module: {
     strictExportPresence: true,
@@ -68,7 +65,7 @@ module.exports = {
 
   plugins: [
     new webpack.DefinePlugin({
-      __isBrowser__: "false"
+      __isBrowser__: 'false'
     })
   ]
 };

@@ -18,179 +18,179 @@ const publicUrl = publicPath.slice(0, -1);
 const shouldUseRelativeAssetPaths = publicPath === './';
 const cssFilename = 'static/css/[name].[contenthash:8].css';
 const extractTextPluginOptions = shouldUseRelativeAssetPaths
-    ? // Making sure that the publicPath goes back to to build folder.
-    {publicPath: Array(cssFilename.split('/').length).join('../')}
-    : {};
+  ? // Making sure that the publicPath goes back to to build folder.
+  {publicPath: Array(cssFilename.split('/').length).join('../')}
+  : {};
 
 module.exports = {
-    bail: true,
+  bail: true,
 
-    devtool: shouldUseSourceMap ? 'source-map' : false,
+  devtool: shouldUseSourceMap ? 'source-map' : false,
 
-    entry: paths.appIndexJs,
+  entry: paths.appIndexJs,
 
-    output: {
-        pathinfo: true,
-        path: paths.appBuildProd,
-        filename: 'static/js/[name].[chunkhash:8].js',
-        chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
-        publicPath: '/'
-    },
+  output: {
+    pathinfo: true,
+    path: paths.appBuildProd,
+    filename: 'static/js/[name].[chunkhash:8].js',
+    chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
+    publicPath: '/'
+  },
 
-    resolve: {
-        modules: ['node_modules', paths.appNodeModules].concat(
-            process.env.NODE_PATH.split(path.delimiter).filter(Boolean)
-        ),
-        extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
-        plugins: [
-            new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
-        ],
-    },
-
-    watchOptions: {
-        aggregateTimeout: 100,
-        ignored: /node_modules/
-    },
-
-    module: {
-        strictExportPresence: true,
-        rules: [
-            {
-                oneOf: [
-                    {
-                        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-                        loader: require.resolve('url-loader'),
-                        options: {
-                            limit: 10000,
-                            name: 'static/media/[name].[hash:8].[ext]',
-                        },
-                    },
-                    {
-                        test: /\.(js|jsx|mjs)$/,
-                        include: paths.appSrc,
-                        exclude: /node_modules/,
-                        loader: require.resolve('babel-loader'),
-                        options: {
-                            compact: true,
-                        },
-                    },
-                    {
-                        test: /\.less$/,
-                        loader: ExtractTextPlugin.extract(
-                            Object.assign(
-                                {
-                                    fallback: {
-                                        loader: require.resolve('style-loader'),
-                                        options: {
-                                            hmr: false,
-                                        },
-                                    },
-                                    use: [
-                                        {
-                                            loader: require.resolve('css-loader'),
-                                            options: {
-                                                importLoaders: 1,
-                                                minimize: true,
-                                                sourceMap: shouldUseSourceMap,
-                                            },
-                                        },
-                                        {
-                                            loader: require.resolve('less-loader'),
-                                            options: {
-                                                javascriptEnabled: true
-                                            },
-                                        },
-                                    ],
-                                },
-                                extractTextPluginOptions
-                            )
-                        ),
-                    },
-                    {
-                        exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
-                        loader: require.resolve('file-loader'),
-                        options: {
-                            name: 'static/media/[name].[hash:8].[ext]',
-                        },
-                    }
-                ]
-            }
-        ]
-    },
-
+  resolve: {
+    modules: ['node_modules', paths.appNodeModules].concat(
+      process.env.NODE_PATH.split(path.delimiter).filter(Boolean)
+    ),
+    extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
     plugins: [
-        new HtmlWebpackPlugin({
-            inject: true,
-            template: paths.appHtml,
-            title: 'Excurrate',
-            PUBLIC_URL: "",
-            minify: {
-                removeComments: true,
-                collapseWhitespace: true,
-                removeRedundantAttributes: true,
-                useShortDoctype: true,
-                removeEmptyAttributes: true,
-                removeStyleLinkTypeAttributes: true,
-                keepClosingSlash: true,
-                minifyJS: true,
-                minifyCSS: true,
-                minifyURLs: true,
-            },
-        }),
-        new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify('production')
-            },
-            __isBrowser__: "true"
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false,
-                comparisons: false,
-            },
-            mangle: {
-                safari10: true,
-            },
-            output: {
-                comments: false,
-                ascii_only: true,
-            },
-            sourceMap: shouldUseSourceMap,
-        }),
-        new ExtractTextPlugin({
-            filename: cssFilename,
-        }),
-        new SWPrecacheWebpackPlugin({
-            dontCacheBustUrlsMatching: /\.\w{8}\./,
-            filename: 'service-worker.js',
-            logger(message) {
-                if (message.indexOf('Total precache size is') === 0) {
-                    return;
-                }
-                if (message.indexOf('Skipping static resource') === 0) {
-                    return;
-                }
-            },
-            minify: true,
-            navigateFallback: publicUrl + '/index.html',
-            navigateFallbackWhitelist: [/^(?!\/__).*/],
-            staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
-        }),
-        new ManifestPlugin({
-            fileName: 'asset-manifest.json',
-        }),
-
-        // new BundleAnalyzerPlugin({
-        //     analyzerPort: 8888
-        // }),
-        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+      new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
     ],
+  },
 
-    node: {
-        dgram: 'empty',
-        fs: 'empty',
-        net: 'empty',
-        tls: 'empty',
-        child_process: 'empty',
-    },
+  watchOptions: {
+    aggregateTimeout: 100,
+    ignored: /node_modules/
+  },
+
+  module: {
+    strictExportPresence: true,
+    rules: [
+      {
+        oneOf: [
+          {
+            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+            loader: require.resolve('url-loader'),
+            options: {
+              limit: 10000,
+              name: 'static/media/[name].[hash:8].[ext]',
+            },
+          },
+          {
+            test: /\.(js|jsx|mjs)$/,
+            include: paths.appSrc,
+            exclude: /node_modules/,
+            loader: require.resolve('babel-loader'),
+            options: {
+              compact: true,
+            },
+          },
+          {
+            test: /\.less$/,
+            loader: ExtractTextPlugin.extract(
+              Object.assign(
+                {
+                  fallback: {
+                    loader: require.resolve('style-loader'),
+                    options: {
+                      hmr: false,
+                    },
+                  },
+                  use: [
+                    {
+                      loader: require.resolve('css-loader'),
+                      options: {
+                        importLoaders: 1,
+                        minimize: true,
+                        sourceMap: shouldUseSourceMap,
+                      },
+                    },
+                    {
+                      loader: require.resolve('less-loader'),
+                      options: {
+                        javascriptEnabled: true
+                      },
+                    },
+                  ],
+                },
+                extractTextPluginOptions
+              )
+            ),
+          },
+          {
+            exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
+            loader: require.resolve('file-loader'),
+            options: {
+              name: 'static/media/[name].[hash:8].[ext]',
+            },
+          }
+        ]
+      }
+    ]
+  },
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: paths.appHtml,
+      title: 'Excurrate',
+      PUBLIC_URL: "",
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      },
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      },
+      __isBrowser__: "true"
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        comparisons: false,
+      },
+      mangle: {
+        safari10: true,
+      },
+      output: {
+        comments: false,
+        ascii_only: true,
+      },
+      sourceMap: shouldUseSourceMap,
+    }),
+    new ExtractTextPlugin({
+      filename: cssFilename,
+    }),
+    new SWPrecacheWebpackPlugin({
+      dontCacheBustUrlsMatching: /\.\w{8}\./,
+      filename: 'service-worker.js',
+      logger(message) {
+        if (message.indexOf('Total precache size is') === 0) {
+          return;
+        }
+        if (message.indexOf('Skipping static resource') === 0) {
+          return;
+        }
+      },
+      minify: true,
+      navigateFallback: publicUrl + '/index.html',
+      navigateFallbackWhitelist: [/^(?!\/__).*/],
+      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+    }),
+    new ManifestPlugin({
+      fileName: 'asset-manifest.json',
+    }),
+
+    // new BundleAnalyzerPlugin({
+    //     analyzerPort: 8888
+    // }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+  ],
+
+  node: {
+    dgram: 'empty',
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
+    child_process: 'empty',
+  },
 };
