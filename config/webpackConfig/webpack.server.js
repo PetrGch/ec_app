@@ -21,6 +21,13 @@ module.exports = {
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx']
   },
 
+  watch: true,
+
+  watchOptions: {
+    aggregateTimeout: 100,
+    ignored: /node_modules/
+  },
+
   module: {
     strictExportPresence: true,
     rules: [

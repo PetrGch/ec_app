@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Layout} from 'antd';
-import {withRouter} from 'react-router-dom';
+import {Route, Switch, withRouter} from 'react-router-dom';
 
 import PreviewAdminPage from './content/PreviewAdminPage';
 import CompanyContainer from './content/company/CompanyContainer';
@@ -14,6 +14,7 @@ import EditedParserContainer from './content/editedParser/EditedParserContainer'
 import EditedCommentaryContainer from './content/editedCommentary/EditedCommentaryContainer';
 import NewCompanyContainer from './content/newCompany/NewCompanyContainer';
 import NotFound from '../common/404/NotFound';
+import Sidebar from "./sidebar/Sidebar";
 
 import './admin.less';
 
