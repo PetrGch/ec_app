@@ -21,7 +21,7 @@ module.exports = {
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx']
   },
 
-  watch: process.env.NODE_ENV === 'production',
+  watch: process.env.NODE_ENV === 'development',
 
   watchOptions: {
     aggregateTimeout: 100,
