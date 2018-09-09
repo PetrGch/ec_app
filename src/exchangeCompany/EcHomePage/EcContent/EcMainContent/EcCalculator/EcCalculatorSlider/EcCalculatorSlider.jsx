@@ -21,7 +21,8 @@ export default class EcCalculatorSlider extends React.PureComponent {
     dispatch(setSumAmount(cashReformatter(value)));
   }
 
-  changeInputValueHandler(name, value) {
+  changeInputValueHandler(event) {
+    const { value } = event.target;
     this.changeSliderValueHandler(value);
   }
 
