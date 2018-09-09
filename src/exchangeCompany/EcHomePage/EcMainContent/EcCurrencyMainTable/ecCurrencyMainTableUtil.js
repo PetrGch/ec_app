@@ -1,4 +1,4 @@
-import { distance } from '../../../../../common/util/geolocation';
+import { distance } from '../../../../common/util/geolocation';
 
 export function sortedWithField(records, isIncrease, fieldName) {
   if (isIncrease) {

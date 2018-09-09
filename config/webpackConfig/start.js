@@ -15,7 +15,7 @@ const {
   prepareProxy,
   prepareUrls,
 } = require('react-dev-utils/WebpackDevServerUtils');
-const paths = require('./webpackConfig/util/paths');
+const paths = require('./util/paths');
 const config = require('./webpack.dev.js');
 const createDevServerConfig = require('./webpackDevServer.config');
 

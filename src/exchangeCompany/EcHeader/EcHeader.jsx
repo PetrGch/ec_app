@@ -5,6 +5,23 @@ import { FaAngleDoubleDown } from 'react-icons/fa';
 import './ecHeader.less';
 
 export default class EcHeader extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.scrollToStart = this.scrollToStart.bind(this);
+  }
+
+  scrollToStart() {
+    const { contentRef } = this.props;
+
+    if (window && contentRef && contentRef.current) {
+      window.scrollTo({
+        top: contentRef.current.offsetTop,
+        behavior: "smooth"
+      });
+    }
+  }
+
   render() {
     return (
       <header className="ecHeader">
@@ -12,7 +29,7 @@ export default class EcHeader extends React.PureComponent {
           <strong>ExCurRate</strong>
         </div>
         <div className="ecHeader__nextBtn">
-          <div className="ecNextBtn">
+          <div className="ecHeaderNextBtn" onClick={this.scrollToStart}>
             <FaAngleDoubleDown/>
           </div>
         </div>

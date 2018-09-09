@@ -1,6 +1,6 @@
 import React from 'react';
 
-import BlockWrapper from "../../../../common/BlockWrapper/BlockWrapper";
+import BlockWrapper from "../../../common/BlockWrapper/BlockWrapper";
 
 import './ecSideBar.less';
 import EcBaseCurrency from "./EcBaseCurrency/EcBaseCurrency";

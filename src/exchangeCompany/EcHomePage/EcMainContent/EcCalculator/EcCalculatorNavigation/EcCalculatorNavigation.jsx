@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {sizeType} from '../../../../../../common/controlLib/util';
-import {Dropdown, Radio} from '../../../../../../common/controlLib';
+import {sizeType} from '../../../../../common/controlLib/util';
+import {Dropdown, Radio} from '../../../../../common/controlLib';
 
 import './ecCalculatorNavigation.less';
-import {setBuyStatus} from "../../../../../../action/ecHomePage";
+import {setBuyStatus} from "../../../../../action/ecHomePage";
 
 const menu = [
   {

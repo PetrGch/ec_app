@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Grid from "../../../../../common/controlLib/Grid/Grid";
+import Grid from "../../../../common/controlLib/Grid/Grid";
 import {baseCurrencyGridConfig, baseCurrencyMockRecord} from "./baseCurrencyGridConfig";
 
 export default class EcBaseCurrency extends React.PureComponent {

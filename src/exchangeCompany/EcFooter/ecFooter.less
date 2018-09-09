@@ -1,9 +1,9 @@
-.ecHeader {
+.ecFooter {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 300px;
+  height: 200px;
   background-color: #69c15b;
   background-image: -moz-linear-gradient(left, #39aa5e, #69c15b);
   background-image: -webkit-gradient(linear, 0 0, 100% 0, from(#39aa5e), to(#69c15b));
@@ -17,23 +17,14 @@
   &:before, &:after {
     content: '';
     position: absolute;
-    bottom: 0px;
+    bottom: 206px;
     width: 50%;
-    padding-top: 4%;
+    padding-bottom: 4%;
     background: #fff;
   }
 
   &:before {
     left: 0;
-    -ms-transform: skew(0, 4.5deg) translate(0, 50%);
-    -webkit-transform: skew(0, 4.5deg) translate(0, 50%);
-    -moz-transform: skew(0, 4.5deg) translate(0, 50%);
-    -o-transform: skew(0, 4.5deg) translate(0, 50%);
-    transform: skew(0, 4.5deg) translate(0, 50%);
-  }
-
-  &:after {
-    right: 0;
     -ms-transform: skew(0, -4.5deg) translate(0, 50%);
     -webkit-transform: skew(0, -4.5deg) translate(0, 50%);
     -moz-transform: skew(0, -4.5deg) translate(0, 50%);
@@ -41,9 +32,18 @@
     transform: skew(0, -4.5deg) translate(0, 50%);
   }
 
-  &__nextBtn {
+  &:after {
+    right: 0;
+    -ms-transform: skew(0, 4.5deg) translate(0, 50%);
+    -webkit-transform: skew(0, 4.5deg) translate(0, 50%);
+    -moz-transform: skew(0, 4.5deg) translate(0, 50%);
+    -o-transform: skew(0, 4.5deg) translate(0, 50%);
+    transform: skew(0, 4.5deg) translate(0, 50%);
+  }
+
+  &__prevBtn {
     position: absolute;
-    bottom: -30px;
+    top: -30px;
     right: 50%;
     display: flex;
     justify-content: center;
@@ -51,15 +51,15 @@
     width: 220px;
     height: 110px;
     margin-right: -110px;
-    border-top-left-radius: 120px;
-    border-top-right-radius: 120px;
+    border-bottom-left-radius: 120px;
+    border-bottom-right-radius: 120px;
     background-color: #fff;
   }
 }
 
-.ecNextBtn {
+.ecFooterPrevBtn {
   position: absolute;
-  top: 64px;
+  top: -22px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,17 +79,3 @@
     background-color: #69c15b;
   }
 }
-
-.ecLogo {
-  display: flex;
-  flex-direction: column;
-  margin-top: -60px;
-  padding: 10px;
-  border: 2px solid;
-  border-radius: 8px;
-  font-size: 50px;
-  text-shadow: 0 0 8px rgba(0,0,0,.5);
-  box-shadow: inset 0 0 8px rgba(0,0,0,.5);
-  background: #f96645;
-}
-

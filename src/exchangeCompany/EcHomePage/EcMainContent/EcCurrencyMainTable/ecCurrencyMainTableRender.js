@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import Button from "../../../../../common/controlLib/Button/Button";
-import {sizeType} from "../../../../../common/controlLib/util";
+import Button from "../../../../common/controlLib/Button/Button";
 
 function CompanyInfo({name, address}) {
   return (<div className="ecCurrencyMainTable__companyName">

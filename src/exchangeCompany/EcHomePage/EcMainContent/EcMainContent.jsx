@@ -1,6 +1,6 @@
 import React from 'react';
 
-import BlockWrapper from '../../../../common/BlockWrapper/BlockWrapper';
+import BlockWrapper from '../../../common/BlockWrapper/BlockWrapper';
 import EcCalculator from './EcCalculator/EcCalculator';
 import EcCurrencyMainTable from "./EcCurrencyMainTable/EcCurrencyMainTable";
 import {ecCurrencyMainTableRecord} from "./EcCurrencyMainTable/ecCurrencyMainTableConfig";

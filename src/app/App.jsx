@@ -7,7 +7,6 @@ import ExchangeCompany from '../exchangeCompany/ExchangeCompany';
 import Login from '../common/AA/Login';
 import Admin from '../admin/Admin';
 import PrivateRoute from '../router/PrivateRoute';
-import NotFound from '../common/404/NotFound';
 import {getCurrentUser} from '../common/util/APIUtil';
 import LoadingIndicator from '../common/LoadingIndicator';
 import {ACCESS_TOKEN} from '../common/util/AppConstance';
@@ -88,13 +87,12 @@ class App extends React.PureComponent {
     }
     return (
       <Switch>
-        <Route path="/" exact component={ExchangeCompany} />
         <Route path="/admin/login"
                render={(props) => <Login onLogin={this.handleLogin} {...props} />}
         />
         <PrivateRoute path="/admin" authenticated={isAuthenticated} component={Admin}
                       onLogout={this.handleLogout} />
-        <Route component={NotFound} />
+        <Route path="/" component={ExchangeCompany} />
       </Switch>
     );  }
 }

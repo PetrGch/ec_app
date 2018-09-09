@@ -1,10 +1,10 @@
 import React from 'react';
 import {Slider} from "antd";
 
-import {InputValidator, Input} from "../../../../../../common/controlLib";
-import {cashFormatter, cashReformatter} from "../../../../../../common/util/formatter/formatter";
-import {sizeType} from "../../../../../../common/controlLib/util";
-import {setSumAmount} from "../../../../../../action/ecHomePage";
+import {InputValidator, Input} from "../../../../../common/controlLib";
+import {cashFormatter, cashReformatter} from "../../../../../common/util/formatter/formatter";
+import {sizeType} from "../../../../../common/controlLib/util";
+import {setSumAmount} from "../../../../../action/ecHomePage";
 
 import './ecCalculatorSlider.less';
 

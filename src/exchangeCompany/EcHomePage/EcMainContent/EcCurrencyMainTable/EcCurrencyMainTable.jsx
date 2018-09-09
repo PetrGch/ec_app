@@ -1,13 +1,14 @@
 import React from 'react';
+import {withRouter} from "react-router-dom";
 
 import {ecCurrencyMainTableConfig} from "./ecCurrencyMainTableConfig";
-import {Button, Checkbox, Grid, Input} from "../../../../../common/controlLib";
+import {Button, Checkbox, Grid, Input} from "../../../../common/controlLib";
+import {filterByName, sortByGeolocation, sortedByPrice, sortedWithField} from "./ecCurrencyMainTableUtil";
+import {defineLocation} from "../../../../common/util/geolocation";
 
 import './ecCurrencyMainTable.less';
-import {filterByName, sortByGeolocation, sortedByPrice, sortedWithField} from "./ecCurrencyMainTableUtil";
-import {defineLocation} from "../../../../../common/util/geolocation";
 
-export default class EcCurrencyMainTable extends React.PureComponent {
+class EcCurrencyMainTable extends React.PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
     const { records, isBuyStatus } = nextProps;
     if (prevState.isIncreasePriceSort || isBuyStatus !== prevState.isBuyStatus ) {
@@ -42,8 +43,9 @@ export default class EcCurrencyMainTable extends React.PureComponent {
     this.knowMore = this.knowMore.bind(this);
   }
 
-  knowMore() {
-    console.log("knowMore")
+  knowMore(id, name) {
+    const { history } = this.props;
+    history.push(`/company/${name}`);
   }
 
   sortRowsByName() {
@@ -178,3 +180,5 @@ export default class EcCurrencyMainTable extends React.PureComponent {
     );
   }
 }
+
+export default withRouter(EcCurrencyMainTable);
