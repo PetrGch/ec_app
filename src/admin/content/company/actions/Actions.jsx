@@ -8,6 +8,8 @@ import {deleteCompanyById} from '../../../../action/admin';
 
 import './actions.less';
 
+const ButtonGroup = Button.Group;
+
 function Actions({history, record, dispatch}) {
 
   function editCompany() {

@@ -94,10 +94,10 @@ module.exports = {
       inject: true,
       template: paths.appHtml,
       title: 'Excurrate',
-      PUBLIC_URL: ""
+      PUBLIC_URL: ''
     }),
     new webpack.DefinePlugin({
-      __isBrowser__: "true"
+      __isBrowser__: 'true'
     }),
     //
     // Analyzer
@@ -122,9 +122,7 @@ module.exports = {
 
   devServer: {
     contentBase: paths.devServerContentBase,
-    proxy: {
-      "/api": "http://localhost:3000"
-    },
+    proxy: {},
     compress: true,
     port: 9000,
   },

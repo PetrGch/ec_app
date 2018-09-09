@@ -39,7 +39,7 @@ module.exports = {
     serverIndexJs: resolveApp('server/index.js'),
     appPublic: resolveApp('public/server'),
     servedPath: getServedPath(resolveApp('package.json')),
-    devServerContentBase: resolveApp('build'),
+    devServerContentBase: resolveApp('public/dev'),
 
 
     appBuild: resolveApp('public'),

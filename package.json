@@ -1,11 +1,11 @@
 {
-  "name": "webpack_server_build",
+  "name": "ExCurRate",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "npm-run-all --parallel dev:*",
-    "dev:build-dev": "webpack-dev-server --config config/webpackConfig/webpack.dev.js",
+    "dev:build-dev": "node config/webpackConfig/start.js",
     "dev:build-server": "webpack --config config/webpackConfig/webpack.server.js",
     "dev:start": "nodemon ./public/server/serverBundle.js",
     "prod": "npm-run-all prod:*",
@@ -47,7 +47,6 @@
     "prop-types": "^15.6.2",
     "pm2": "^3.0.4",
     "react": "^16.4.2",
-    "react-dev-utils": "^5.0.1",
     "react-dom": "^16.4.2",
     "react-icons": "^3.0.5",
     "react-leaflet": "^2.0.1",
@@ -68,6 +67,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
+    "react-dev-utils": "^5.0.2",
     "webpack-dev-server": "^2.9.4"
   }
 }

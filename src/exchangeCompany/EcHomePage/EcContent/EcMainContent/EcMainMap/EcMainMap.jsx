@@ -73,12 +73,13 @@ export default class EcMainMap extends React.PureComponent {
       const {Map, Marker, Popup, TileLayer} = require('react-leaflet');
       const L = require('leaflet');
       const marker = mapMarker(L);
+
       return (
         <div className="ecMainMap">
           {(records && records.length !== 0) && <Map center={center} zoom={zoom}>
             <TileLayer
-              attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-              url="http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a> '
+              url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
             />
             {<Markers records={records} Marker={Marker} Popup={Popup} mapMarker={marker}/>}
           </Map>}

@@ -5,7 +5,8 @@ import ValidatorInput from '../../../../../common/controlLib/ValidatorInput/Vali
 
 export default function CurrencyContent({currencyRate, handleValueOnChange}) {
   const mapedCurrency = currencyRate.map((currency, index) => {
-    const handleOnChange = (name, value) => {
+    const handleOnChange = (event) => {
+      const { name, value } = event.target;
       handleValueOnChange(currency.currencyType, name, value);
     };
 

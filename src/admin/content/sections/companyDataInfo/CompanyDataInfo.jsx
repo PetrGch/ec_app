@@ -1,21 +1,23 @@
 import React from 'react';
 import {Col, Input, Row} from 'antd';
 
-import './companyDataInfo.less';
 import {changeCompanyDataInfoValue} from '../../../../action/companyDataInfo';
 import {nullValidator} from '../../../../common/util/valueValidator';
 import ValidatorInput from '../../../../common/controlLib/ValidatorInput/ValidatorInput';
 
+import './companyDataInfo.less';
+
 const { TextArea } = Input;
 
-export default class CompanyDataInfo extends React.PureComponent {
+export default class CompanyDataInfo extends React.Component {
   constructor(props) {
     super(props);
 
     this.handleValueOnChange = this.handleValueOnChange.bind(this);
   }
 
-  handleValueOnChange(name, value) {
+  handleValueOnChange(event) {
+    const { name, value } = event.target;
     const { dispatch, companyId, isNewCompany } = this.props;
     dispatch(changeCompanyDataInfoValue(companyId, name, value, isNewCompany));
   }

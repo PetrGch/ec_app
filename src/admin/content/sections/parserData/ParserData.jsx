@@ -1,10 +1,10 @@
 import React from 'react';
 import {Input, Row, Col, Checkbox} from 'antd';
+
 import {changeParserValue} from '../../../../action/parser';
+import ValidatorInput from '../../../../common/controlLib/ValidatorInput/ValidatorInput';
 
 import './ParserData.less';
-import moment from 'moment/moment';
-import ValidatorInput from '../../../../common/controlLib/ValidatorInput/ValidatorInput';
 
 function nullValidator(field, subField, defaultValue = '') {
   if (field && field[subField]) {
@@ -13,14 +13,15 @@ function nullValidator(field, subField, defaultValue = '') {
   return defaultValue;
 }
 
-export default class ParserData extends React.PureComponent {
+export default class ParserData extends React.Component {
   constructor(props) {
     super(props);
 
     this.handleValueOnChange = this.handleValueOnChange.bind(this);
   }
 
-  handleValueOnChange(name, value) {
+  handleValueOnChange(event) {
+    const { name, value, checked } = event.target;
     const { dispatch, companyId } = this.props;
     dispatch(changeParserValue(companyId, name, value || checked));
   }

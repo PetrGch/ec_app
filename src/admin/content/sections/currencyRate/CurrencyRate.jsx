@@ -1,5 +1,4 @@
 import React from 'react';
-import {Icon, Button, Row, Col} from 'antd';
 
 import CurrencyFlag from './currencyFlag/CurrencyFlag';
 import CurrencyContent from './currencyContent/CurrencyContent';
@@ -9,7 +8,7 @@ import {
   changeCurrencyValue, selectUnselectCurrency, setInitialCurrencyState
 } from '../../../../action/currencyRate';
 
-export default class CurrencyRate extends React.PureComponent {
+export default class CurrencyRate extends React.Component {
   constructor(props) {
     super(props);
 

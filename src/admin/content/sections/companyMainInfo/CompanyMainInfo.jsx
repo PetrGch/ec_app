@@ -7,7 +7,7 @@ import WorkingTime from './workingTime/WorkingTime';
 import {nullValidator} from '../../../../common/util/valueValidator';
 import ValidatorInput from '../../../../common/controlLib/ValidatorInput/ValidatorInput';
 
-export default class CompanyMainInfo extends React.PureComponent {
+export default class CompanyMainInfo extends React.Component {
   constructor(props) {
     super(props);
 
@@ -15,7 +15,8 @@ export default class CompanyMainInfo extends React.PureComponent {
     this.handleOnChangeForRate = this.handleOnChangeForRate.bind(this);
   }
 
-  handleValueOnChange(name, value) {
+  handleValueOnChange(event) {
+    const { name, value } = event.target;
     const { dispatch, companyId, isNewCompany } = this.props;
     dispatch(changeCompanyMainInfoValue(companyId, name, value, isNewCompany));
   }

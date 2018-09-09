@@ -123,7 +123,7 @@ module.exports = {
       inject: true,
       template: paths.appHtml,
       title: 'Excurrate',
-      PUBLIC_URL: "",
+      PUBLIC_URL: '',
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -141,7 +141,7 @@ module.exports = {
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
       },
-      __isBrowser__: "true"
+      __isBrowser__: 'true'
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {

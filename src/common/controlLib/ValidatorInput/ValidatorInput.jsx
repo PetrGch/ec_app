@@ -16,14 +16,14 @@ export default class ValidatorInput extends React.PureComponent {
   }
 
   handleValueOnChange(event) {
-    const { name, value } = event.target;
+    const { value } = event.target;
     const { onChange, validationOption } = this.props;
 
     if (typeof onChange === 'function') {
       if (validationOption && validatorForOnChange(value, validationOption)) {
-        onChange(name, value);
+        onChange(event);
       } else if (!validationOption) {
-        onChange(name, value);
+        onChange(event);
       }
     }
   }
@@ -36,15 +36,15 @@ export default class ValidatorInput extends React.PureComponent {
 
     if (validationOption && !isError && invalidFileds.length !== 0) {
       this.setState({isError: true});
-      validationOption.validateInput(name, true);
+      validationOption.validateInput && validationOption.validateInput(name, true);
     } else if (validationOption && isError && invalidFileds.length === 0) {
       this.setState({isError: false});
-      validationOption.validateInput(name, false);
+      validationOption.validateInput && validationOption.validateInput(name, false);
     }
   }
 
   render() {
-    const { InputComponent, value, ...rest } = this.props;
+    const { InputComponent, value, validationOption, ...rest } = this.props;
     const { isError } = this.state;
 
     return InputComponent && <div className={`validatorInput validatorInput_isError--${isError}`}>
