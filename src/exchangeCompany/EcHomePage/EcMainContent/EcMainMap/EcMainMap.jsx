@@ -45,10 +45,12 @@ function Markers({records, Marker, Popup, mapMarker}) {
 export default class EcMainMap extends React.PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
     const {records, isBuyStatus} = nextProps;
-    const propsCenter = sortedByPrice(records, true, isBuyStatus)[0] || {};
+    const propsCenter = sortedByPrice(records, true, isBuyStatus)
+      .filter(record => record.coordinateX && record.coordinateY)[0] || {};
     const center = propsCenter.coordinateX && propsCenter.coordinateY
       ? [propsCenter.coordinateX, propsCenter.coordinateY] : [];
-    if (center[0] !== prevState.center[0] ) {
+
+    if (center[0] !== prevState.center[0]) {
       return {
         ...prevState,
         center: center
@@ -69,7 +71,7 @@ export default class EcMainMap extends React.PureComponent {
   render() {
     const {records} = this.props;
     const {center, zoom} = this.state;
-    if (__isBrowser__) {
+    if (__isBrowser__ && center.length !== 0) {
       const {Map, Marker, Popup, TileLayer} = require('react-leaflet');
       const L = require('leaflet');
       const marker = mapMarker(L);

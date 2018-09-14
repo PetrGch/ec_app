@@ -11,7 +11,7 @@ import './ecMainContent.less';
 
 export default class EcMainContent extends React.PureComponent {
   render() {
-    const { dispatch, currencyAmount, isBuyStatus } = this.props;
+    const { dispatch, currencyAmount, isBuyStatus, companies } = this.props;
 
     return (
       <main className="ecMainContent">
@@ -24,7 +24,7 @@ export default class EcMainContent extends React.PureComponent {
         </BlockWrapper>
         <BlockWrapper>
           <EcCurrencyMainTable
-            records={ecCurrencyMainTableRecord}
+            records={companies}
             currencyAmount={currencyAmount}
             isBuyStatus={isBuyStatus}
           />

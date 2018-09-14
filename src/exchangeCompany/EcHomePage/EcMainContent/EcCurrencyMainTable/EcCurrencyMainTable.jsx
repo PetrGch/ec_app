@@ -11,7 +11,7 @@ import './ecCurrencyMainTable.less';
 class EcCurrencyMainTable extends React.PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
     const { records, isBuyStatus } = nextProps;
-    if (prevState.isIncreasePriceSort || isBuyStatus !== prevState.isBuyStatus ) {
+    if (records && (prevState.isIncreasePriceSort || isBuyStatus !== prevState.isBuyStatus)) {
       return {
         ...prevState,
         isBuyStatus,

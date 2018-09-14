@@ -1,10 +1,12 @@
 import {combineReducers} from 'redux';
 import admin from './admin';
-import ecHomePage from "./ecHomePage";
+import companies from './companies';
+import company from './company';
 
 const rootReducer = combineReducers({
   admin,
-  ecHomePage
+  companies,
+  company
 });
 
 export default rootReducer;

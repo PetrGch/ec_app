@@ -1,0 +1,63 @@
+@import "../../../../common/util/variable";
+
+.ecMainCompanyCalculate {
+  border-bottom: 1px solid @primary-gray;
+
+  &__price {
+    display: flex;
+    margin: 20px 0;
+    font-size: 18px;
+    font-weight: 700;
+
+    & span {
+      width: 200px;
+    }
+  }
+
+  &__calculator {
+    margin: 20px 0;
+  }
+}
+
+.ecMainCompanyCalculator {
+  &__action {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    margin-top: 10px;
+    margin-left: 24px;
+    padding: 10px 16px;
+    margin-bottom: 20px;
+    border: 1px solid @primary-gray;
+    border-radius: 6px;
+    transition: border .2s ease;
+
+    &:hover {
+      border: 1px solid @primary-green;
+    }
+  }
+
+  &__inputs {
+    margin-left: 24px;
+  }
+}
+
+.ecMainCompanyCalculatorInputs {
+  display: flex;
+  align-items: flex-end;
+
+  &__amount,
+  &__finalPrice{
+    width: 200px;
+
+    & span {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+  }
+
+  &__icon {
+    margin: 0 16px 12px;
+  }
+}

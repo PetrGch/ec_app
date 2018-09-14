@@ -5,7 +5,7 @@ import NotFound from '../common/404/NotFound';
 import EcHomePage from './EcHomePage/ecHomePageContainer';
 import EcHeader from "./EcHeader/EcHeader";
 import EcFooter from "./EcFooter/EcFooter";
-import EcCompany from "./EcCompany/EcCompany";
+import EcCompany from "./EcCompany/ecCompanyContainer";
 
 import './ecExchangeCompany.less';
 

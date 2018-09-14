@@ -1,10 +1,11 @@
 import React from 'react';
 
 import { FaAngleDoubleDown } from 'react-icons/fa';
+import {withRouter} from "react-router-dom";
 
 import './ecHeader.less';
 
-export default class EcHeader extends React.PureComponent {
+class EcHeader extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -37,3 +38,5 @@ export default class EcHeader extends React.PureComponent {
     );
   }
 }
+
+export default withRouter(EcHeader);

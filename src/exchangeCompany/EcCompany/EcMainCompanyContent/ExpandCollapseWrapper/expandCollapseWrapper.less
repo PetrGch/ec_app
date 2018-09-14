@@ -1,0 +1,19 @@
+@import "../../../../common/util/variable";
+
+.expandCollapseWrapper {
+  &__name {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    transition: color .2s ease;
+
+    &:hover {
+      color: @primary-green;
+    }
+
+    & span {
+      margin-left: 10px;
+      font-size: 18px;
+    }
+  }
+}

@@ -4,7 +4,7 @@ import {Slider} from "antd";
 import {InputValidator, Input} from "../../../../../common/controlLib";
 import {cashFormatter, cashReformatter} from "../../../../../common/util/formatter/formatter";
 import {sizeType} from "../../../../../common/controlLib/util";
-import {setSumAmount} from "../../../../../action/ecHomePage";
+import {setSumAmount} from "../../../../../action/companies";
 
 import './ecCalculatorSlider.less';
 

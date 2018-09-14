@@ -30,16 +30,19 @@ export default class ValidatorInput extends React.PureComponent {
 
   handleValueOnBlur(event) {
     const { value, name } = event.target;
-    const { validationOption } = this.props;
+    const { validationOption, onBlur } = this.props;
     const { isError } = this.state;
     const invalidFileds = validationForOnBlur(value, validationOption);
 
-    if (validationOption && !isError && invalidFileds.length !== 0) {
-      this.setState({isError: true});
-      validationOption.validateInput && validationOption.validateInput(name, true);
-    } else if (validationOption && isError && invalidFileds.length === 0) {
-      this.setState({isError: false});
-      validationOption.validateInput && validationOption.validateInput(name, false);
+    if (typeof onBlur === 'function') {
+      onBlur(event);
+      if (validationOption && !isError && invalidFileds.length !== 0) {
+        this.setState({isError: true});
+        validationOption.validateInput && validationOption.validateInput(name, true);
+      } else if (validationOption && isError && invalidFileds.length === 0) {
+        this.setState({isError: false});
+        validationOption.validateInput && validationOption.validateInput(name, false);
+      }
     }
   }
 

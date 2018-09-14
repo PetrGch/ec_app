@@ -1,12 +1,32 @@
 import React from 'react';
 
-export default class EcCompany extends React.PureComponent {
-  render() {
-    const { match: { params } } = this.props;
+import EcSideBar from "../EcHomePage/EcSideBar/EcSideBar";
+import EcMainCompanyContent from "./EcMainCompanyContent/EcMainCompanyContent";
 
+import './ecCompany.less';
+
+export default class EcCompany extends React.PureComponent {
+  componentDidMount() {
+    const { loadCompany, findCompanyByName, companies, match: { params } } = this.props;
+    if (companies === null) {
+      loadCompany(params.name);
+    } else {
+      findCompanyByName(params.name, companies);
+    }
+  }
+
+  render() {
+    const { company, isBuyStatus, dispatch } = this.props;
     return (
-      <div>
-        <h2>Company {params.name}</h2>
+      <div className="ecCompany">
+        <EcMainCompanyContent
+          dispatch={dispatch}
+          company={company}
+          isBuyStatus={isBuyStatus}
+        />
+        <EcSideBar
+          isBuyStatus={isBuyStatus}
+        />
       </div>
     );
   }

@@ -1,16 +1,22 @@
 import {connect} from 'react-redux';
 
 import EcHomePage from "./EcHomePage";
+import {loadAllCompanies} from "../../action/companies";
 
 const mapStateToProps = state => {
   return {
-    ecHomePage: state.ecHomePage
+    companies: state.companies.companies,
+    currencyAmount: state.companies.currencyAmount,
+    isBuyStatus: state.companies.isBuyStatus
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    dispatch: dispatch
+    dispatch,
+    loadAllCompanies() {
+      dispatch(loadAllCompanies());
+    }
   };
 };
 

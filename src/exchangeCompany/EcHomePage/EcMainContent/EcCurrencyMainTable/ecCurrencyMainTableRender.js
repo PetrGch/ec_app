@@ -30,11 +30,11 @@ export function renderSellTitle(sumAmount) {
 }
 
 export function renderBuyPrice(buyPrice, sumAmount) {
-  return buyPrice && sumAmount ? buyPrice * sumAmount : ''
+  return buyPrice && sumAmount ? (buyPrice * sumAmount).toFixed(2) : ''
 }
 
 export function renderSellPrice(sellPrice, sumAmount) {
-  return sellPrice && sumAmount ? sellPrice * sumAmount : ''
+  return sellPrice && sumAmount ? (sellPrice * sumAmount).toFixed(2) : ''
 }
 
 function TimeCell({time, date}) {

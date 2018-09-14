@@ -1,12 +1,18 @@
 import React from 'react';
+
 import EcMainContent from './EcMainContent/EcMainContent';
 import EcSideBar from './EcSideBar/EcSideBar';
 
 import './ecHomePage.less';
 
 export default class EcHomePage extends React.PureComponent {
+  componentDidMount() {
+    const { loadAllCompanies } = this.props;
+    loadAllCompanies();
+  }
+
   render() {
-    const { dispatch, ecHomePage: { currencyAmount, isBuyStatus } } = this.props;
+    const { dispatch, companies, currencyAmount, isBuyStatus } = this.props;
 
     return (
       <div className="ecHomePage">
@@ -14,6 +20,7 @@ export default class EcHomePage extends React.PureComponent {
           dispatch={dispatch}
           isBuyStatus={isBuyStatus}
           currencyAmount={currencyAmount}
+          companies={companies}
         />
         <EcSideBar
           isBuyStatus={isBuyStatus}

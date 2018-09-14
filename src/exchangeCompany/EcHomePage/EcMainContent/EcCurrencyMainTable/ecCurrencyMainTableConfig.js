@@ -89,8 +89,8 @@ export const ecCurrencyMainTableRecord = [
     id: 1,
     name: "Company 1",
     address: "some address",
-    buyPrice: "123",
-    sellPrice: "123",
+    buyPrice: "2.02",
+    sellPrice: "4.02",
     updatedAt: "2018-07-08T14:55:28Z",
     rating: 2.5,
     coordinateX: null,
@@ -121,7 +121,7 @@ export const ecCurrencyMainTableRecord = [
     id: 4,
     name: "Company 4",
     buyPrice: "1232",
-    sellPrice: "1232",
+    sellPrice: "12.32",
     updatedAt: "2018-07-08T14:55:28Z",
     rating: 1.5
   }
