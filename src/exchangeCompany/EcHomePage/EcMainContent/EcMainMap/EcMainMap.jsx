@@ -1,12 +1,11 @@
 import React from 'react';
 
 import {sortedByPrice} from "../EcCurrencyMainTable/ecCurrencyMainTableUtil";
-
 import mapMarkerIcon from './map-marker.svg';
 
 import './ecMainMap.less';
 
-function mapMarker(L) {
+export function mapMarker(L) {
   return new L.Icon({
   iconUrl: mapMarkerIcon,
   iconRetinaUrl: mapMarkerIcon,

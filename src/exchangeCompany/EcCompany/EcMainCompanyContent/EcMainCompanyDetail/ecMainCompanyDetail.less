@@ -1,0 +1,63 @@
+@import "../../../../common/util/variable";
+
+.ecMainCompanyDetail {
+  display: flex;
+  justify-content: space-between;
+
+  @media screen and (min-width: 30em)) {
+
+  }
+
+  &__column {
+    width: 44%;
+    min-width: 200px;
+    box-sizing: border-box;
+  }
+}
+
+.ecMainCompanyRightDetailColumn {
+  &__title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  &__items {
+    margin-top: 10px;
+  }
+
+  &__item {
+    width: 200px;
+    padding: 4px 10px;
+    font-size: 16px;
+
+    & span {
+      display: inline-block;
+      width: 40px;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    &--active {
+      &-true {
+        color: @primary-green;
+        border: 1px solid @primary-green;
+        border-radius: 6px;
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+.ecMainCompanyRightDetailColumn {
+  &__phone,
+  &__website {
+    font-size: 16px;
+    margin-bottom: 10px;
+
+    & span {
+      display: inline-block;
+      width: 80px;
+      font-weight: 700;
+    }
+  }
+}

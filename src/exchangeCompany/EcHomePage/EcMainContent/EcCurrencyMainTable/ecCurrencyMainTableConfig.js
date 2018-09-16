@@ -115,7 +115,25 @@ export const ecCurrencyMainTableRecord = [
     rating: 3,
     address: "somewhere there",
     coordinateX: "50.094031",
-    coordinateY: "19.983692"
+    coordinateY: "19.983692",
+    phone: "234234234",
+    website: "somesomesomesomesomesome.com",
+    workingTime: {
+      "mnFrom": "22:00",
+      "tuFrom": "22:00",
+      "weFrom": "22:00",
+      "thFrom": "22:00",
+      "frFrom": "22:00",
+      "stFrom": "22:00",
+      "snFrom": null,
+      "mnTo": "22:15",
+      "tuTo": "22:15",
+      "weTo": "22:15",
+      "thTo": "22:15",
+      "frTo": "22:15",
+      "stTo": "22:30",
+      "snTo": "22:30"
+    }
   },
   {
     id: 4,

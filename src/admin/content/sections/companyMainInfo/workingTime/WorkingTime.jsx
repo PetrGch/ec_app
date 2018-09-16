@@ -28,6 +28,7 @@ export default class WorkingTime extends React.Component {
 
   get getWorkingTimeRow() {
     const { workingTime } = this.props;
+    const format = 'HH:mm';
 
     return workingTimeDays.map((day, index) => {
       const valueFrom = nullValidator(workingTime, day.typeFrom);
@@ -38,6 +39,7 @@ export default class WorkingTime extends React.Component {
           <Col span={7}>
             <TimePicker
               value={valueFrom}
+              format={format}
               minuteStep={15}
               secondStep={10}
               onChange={(moment, time) => {this.handleWorkingTimeChange(moment, time, day.typeFrom);}}
@@ -47,6 +49,7 @@ export default class WorkingTime extends React.Component {
           <Col span={7}>
             <TimePicker
               value={valueTo}
+              format={format}
               minuteStep={15}
               secondStep={10}
               onChange={(moment, time) => {this.handleWorkingTimeChange(moment, time, day.typeTo);}}

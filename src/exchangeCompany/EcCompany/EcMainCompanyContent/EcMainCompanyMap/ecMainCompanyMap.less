@@ -1,8 +1,17 @@
-.ecMainCompanyMap {
-  padding: 20px 0;
+@import "../../../../common/util/variable";
 
+.ecMainCompanyMap {
   &__address {
     font-size: 18px;
     margin-bottom: 20px;
+  }
+
+  &__map {
+    & .leaflet-container {
+      height: 400px;
+      margin: 20px 0 0 24px;
+      border: 2px solid @primary-gray;
+      border-radius: 6px;
+    }
   }
 }

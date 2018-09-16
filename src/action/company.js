@@ -22,7 +22,7 @@ export function setSumAmount(currencyAmount) {
 
 export function loadCompanyByName() {
   return {
-    company: ecCurrencyMainTableRecord[0],
+    company: ecCurrencyMainTableRecord[2],
     type: LOAD_COMPANY_BY_NAME
   }
 }
