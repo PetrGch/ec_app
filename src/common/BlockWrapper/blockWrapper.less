@@ -4,8 +4,20 @@
   border-radius: 6px;
   box-shadow: 0 0 10px rgba(204,204,204,1);
 
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
   @media screen and (max-width: 1024px) {
     padding: 20px;
     margin-bottom: 20px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    padding: 10px;
   }
 }

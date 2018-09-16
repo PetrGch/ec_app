@@ -4,6 +4,11 @@
   &__address {
     font-size: 18px;
     margin-bottom: 20px;
+
+    @media screen and (max-width: 1024px) {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
   }
 
   &__map {
@@ -12,6 +17,14 @@
       margin: 20px 0 0 24px;
       border: 2px solid @primary-gray;
       border-radius: 6px;
+
+      @media screen and (max-width: 1024px) {
+        margin-top: 10px;
+      }
+
+      @media screen and (max-width: 650px) {
+        margin-left: 0;
+      }
     }
   }
 }

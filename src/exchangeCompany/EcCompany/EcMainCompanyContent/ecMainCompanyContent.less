@@ -4,6 +4,14 @@
   flex: 3;
   margin-right: 40px;
 
+  @media screen and (max-width: 1024px) {
+    margin-right: 20px;
+  }
+
+  @media screen and (max-width: 900px) {
+    margin-right: 0;
+  }
+
   &__header {
     display: flex;
     justify-content: space-between;
@@ -11,24 +19,46 @@
     padding: 0 20px 20px;
     border-bottom: 1px solid @primary-gray;
 
+    @media screen and (max-width: 1024px) {
+      padding: 0 10px 10px;
+    }
+
+
     & h1 {
       margin: 0;
       font-size: 34px;
       font-weight: 700;
+
+      @media screen and (max-width: 1024px) {
+        font-size: 24px;
+      }
     }
 
     & span {
       font-size: 18px;
+
+      @media screen and (max-width: 1024px) {
+        font-size: 16px;
+      }
     }
   }
 
   &__calculator,
   &__map {
     padding: 20px;
-    border-bottom: 1px solid #d9d9d9
+    border-bottom: 1px solid #d9d9d9;
+
+    @media screen and (max-width: 1024px) {
+      padding: 10px;
+    }
   }
+
 
   &__footer {
     padding: 20px 20px 0;
+
+    @media screen and (max-width: 1024px) {
+      padding: 10px 10px 0;
+    }
   }
 }

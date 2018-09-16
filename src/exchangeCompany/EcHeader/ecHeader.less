@@ -14,10 +14,14 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff39aa5e', endColorstr='#ff69c15b', GradientType=1);
   color: #ffffff;
 
+  @media screen and (max-width: 650px) {
+    height: 200px;
+  }
+
   &:before, &:after {
     content: '';
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
     width: 50%;
     padding-top: 4%;
     background: #fff;
@@ -54,6 +58,14 @@
     border-top-left-radius: 120px;
     border-top-right-radius: 120px;
     background-color: #fff;
+
+    @media screen and (max-width: 650px) {
+      width: 160px;
+      height: 80px;
+      margin-right: -80px;
+      border-top-left-radius: 80px;
+      border-top-right-radius: 80px;
+    }
   }
 }
 
@@ -72,6 +84,12 @@
   color: #69c15b;
   cursor: pointer;
   transition: all 0.5s ease;
+
+  @media screen and (max-width: 650px) {
+    top: 40px;
+    width: 70px;
+    height: 70px;
+  }
 
   &:hover {
     border: 2px solid #69c15b;

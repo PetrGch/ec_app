@@ -34,22 +34,66 @@
 
     & .ec-cell:nth-of-type(2) {
       width: 10%;
+
+      @media screen and (max-width: 650px) {
+        width: 50px;
+      }
     }
 
     & .ec-cell:nth-of-type(3) {
       width: 12%;
+
+      @media screen and (max-width: 650px) {
+        width: 64px;
+      }
     }
 
     & .ec-cell:nth-of-type(4) {
-      width: 16%;
+      width: 100px;
+
+      @media screen and (max-width: 650px) {
+        width: 44px;
+
+        & .ecCurrencyMainTable__updateTime {
+          & span:last-of-type {
+            display: none;
+          }
+        }
+      }
     }
 
     & .ec-cell:nth-of-type(5) {
-      width: 156px;
+      width: 134px;
       text-align: center;
 
       @media screen and (max-width: 1024px) {
         width: 114px;
+      }
+
+      @media screen and (max-width: 650px) {
+        width: 34px;
+
+        & button {
+          position: relative;
+
+          span {
+            display: none;
+          }
+
+          &:after {
+            content: 'i';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            line-height: 26px;
+            text-align: center;
+            font-size: 18px;
+            font-style: italic;
+            font-weight: bold;
+          }
+        }
       }
     }
   }
@@ -59,10 +103,18 @@
   display: flex;
   justify-content: space-between;
 
+  @media screen and (max-width: 650px) {
+    flex-direction: column;
+  }
+
   &--position {
     &-left {
       display: flex;
       align-items: center;
+
+      @media screen and (max-width: 650px) {
+        margin-bottom: 10px;
+      }
 
       & .ec-button {
         margin-right: 20px;
