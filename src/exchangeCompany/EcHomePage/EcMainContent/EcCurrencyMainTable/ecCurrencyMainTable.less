@@ -3,6 +3,10 @@
 .ecCurrencyMainTable {
   &__gridPanel {
     margin-bottom: 20px;
+
+    @media screen and (max-width: 1024px) {
+      margin-bottom: 10px;
+    }
   }
 
   &__companyName, &__updateTime {
@@ -43,6 +47,10 @@
     & .ec-cell:nth-of-type(5) {
       width: 156px;
       text-align: center;
+
+      @media screen and (max-width: 1024px) {
+        width: 114px;
+      }
     }
   }
 }
@@ -58,6 +66,10 @@
 
       & .ec-button {
         margin-right: 20px;
+
+        @media screen and (max-width: 1024px) {
+          margin-right: 10px;
+        }
       }
     }
   }

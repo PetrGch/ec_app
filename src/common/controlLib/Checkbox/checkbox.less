@@ -8,6 +8,11 @@
   box-sizing: border-box;
   font-size: 16px;
 
+  @media screen and (max-width: 1024px) {
+    height: 18px;
+    font-size: 14px;
+  }
+
   &__img {
     position: absolute;
     left: -8px;
@@ -37,6 +42,11 @@
         border-radius: 4px;
         background: @primary-white;
         transition: all .2s ease;
+
+        @media screen and (max-width: 1024px) {
+          width: 18px;
+          height: 18px;
+        }
       }
 
       &:after {
@@ -48,6 +58,11 @@
         height: 8px;
         background: @primary-white;
         transition: all .2s ease;
+
+        @media screen and (max-width: 1024px) {
+          width: 6px;
+          height: 6px;
+        }
       }
     }
 
@@ -69,10 +84,18 @@
   &--size {
     &-large {
       font-size: 18px;
+
+      @media screen and (max-width: 1024px) {
+        font-size: 16px;
+      }
     }
 
     &-small {
       font-size: 14px;
+
+      @media screen and (max-width: 1024px) {
+        font-size: 12px;
+      }
     }
   }
 

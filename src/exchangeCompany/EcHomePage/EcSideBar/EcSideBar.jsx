@@ -11,13 +11,11 @@ export default class EcSideBar extends React.PureComponent {
 
     return (
       <aside className="ecSideBar">
-        <div>
-          <BlockWrapper>
-            <EcBaseCurrency
-              isBuyStatus={isBuyStatus}
-            />
-          </BlockWrapper>
-        </div>
+        <BlockWrapper>
+          <EcBaseCurrency
+            isBuyStatus={isBuyStatus}
+          />
+        </BlockWrapper>
       </aside>
     );
   }

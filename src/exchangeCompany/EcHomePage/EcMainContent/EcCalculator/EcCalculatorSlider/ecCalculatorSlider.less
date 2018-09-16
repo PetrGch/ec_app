@@ -4,9 +4,17 @@
   flex: 1;
   margin-left: 30px;
 
+  @media screen and (max-width: 1024px) {
+    margin-left: 20px;
+  }
+
   &__input {
     width: 200px;
     margin-bottom: 30px;
+
+    @media screen and (max-width: 1024px) {
+      margin-bottom: 16px;
+    }
   }
 
   // todo Delete after antd library will be extract
