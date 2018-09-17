@@ -1,10 +1,12 @@
 import {
-  FIND_COMPANY_BY_NAME,
+  FIND_COMPANY_BY_NAME, LOAD_ALL_COMPANIES,
   LOAD_COMPANY_BY_NAME,
   SET_BUY_STATUS_FOR_COMPANY,
   SET_SUM_AMOUNT
 } from "../constant/ecHomePage";
 import {ecCurrencyMainTableRecord} from "../exchangeCompany/EcHomePage/EcMainContent/EcCurrencyMainTable/ecCurrencyMainTableConfig";
+import {API_URL} from "../common/util/AppConstance";
+import {request} from "../common/util/APIUtil";
 
 export function setBuyStatus(isBuyStatus) {
   return {
@@ -20,11 +22,18 @@ export function setSumAmount(currencyAmount) {
   }
 }
 
-export function loadCompanyByName() {
-  return {
-    company: ecCurrencyMainTableRecord[2],
-    type: LOAD_COMPANY_BY_NAME
-  }
+export function loadCompanyByName(name) {
+  return (dispatch) => {
+    request({
+      url: API_URL + `/company/${name}`,
+      method: 'GET'
+    }).then((data) => {
+      dispatch({
+        company: data,
+        type: LOAD_COMPANY_BY_NAME
+      })
+    });
+  };
 }
 
 export function findCompanyByName(name, companies) {

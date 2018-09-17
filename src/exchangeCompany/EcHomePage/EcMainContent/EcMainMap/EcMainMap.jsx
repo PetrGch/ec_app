@@ -44,7 +44,7 @@ function Markers({records, Marker, Popup, mapMarker}) {
 export default class EcMainMap extends React.PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
     const {records, isBuyStatus} = nextProps;
-    const propsCenter = sortedByPrice(records, true, isBuyStatus)
+    const propsCenter = records && sortedByPrice(records, true, isBuyStatus)
       .filter(record => record.coordinateX && record.coordinateY)[0] || {};
     const center = propsCenter.coordinateX && propsCenter.coordinateY
       ? [propsCenter.coordinateX, propsCenter.coordinateY] : [];
@@ -77,17 +77,19 @@ export default class EcMainMap extends React.PureComponent {
 
       return (
         <div className="ecMainMap">
-          {(records && records.length !== 0) && <Map center={center} zoom={zoom}>
-            <TileLayer
-              attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a> '
-              url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
-            />
-            {<Markers records={records} Marker={Marker} Popup={Popup} mapMarker={marker}/>}
-          </Map>}
+          <div>
+            {(records && records.length !== 0) && <Map center={center} zoom={zoom}>
+              <TileLayer
+                attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a> '
+                url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
+              />
+              {<Markers records={records} Marker={Marker} Popup={Popup} mapMarker={marker}/>}
+            </Map>}
+          </div>
         </div>
       )
     } else {
-      return <div>Server rendering mode</div>;
+      return <div>Sorry! Something goes wrong.</div>;
     }
   }
 }

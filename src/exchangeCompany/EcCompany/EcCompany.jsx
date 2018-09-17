@@ -2,6 +2,7 @@ import React from 'react';
 
 import EcSideBar from "../EcHomePage/EcSideBar/EcSideBar";
 import EcMainCompanyContent from "./EcMainCompanyContent/EcMainCompanyContent";
+import BlockWrapper from "../../common/BlockWrapper/BlockWrapper";
 
 import './ecCompany.less';
 
@@ -17,7 +18,7 @@ export default class EcCompany extends React.PureComponent {
 
   render() {
     const { company, isBuyStatus, dispatch } = this.props;
-    return (
+    return company ? (
       <div className="ecCompany">
         <EcMainCompanyContent
           dispatch={dispatch}
@@ -28,6 +29,10 @@ export default class EcCompany extends React.PureComponent {
           isBuyStatus={isBuyStatus}
         />
       </div>
+    ) : (
+      <BlockWrapper>
+        <div className="ecCompany__noCompany">Sorry! No company have been found</div>
+      </BlockWrapper>
     );
   }
 }
