@@ -1,15 +1,18 @@
 import path from 'path';
 import fs from 'fs';
 import express from 'express';
+import expressRateLimit from "express-rate-limit";
 
 import React from 'react';
+import i18next from "i18next";
 import ReactDOMServer from 'react-dom/server';
 import App from "../src/app/App";
 import {StaticRouter} from "react-router-dom";
 import configureStore from "../src/store/configureStore";
 import {Provider} from "react-redux";
+import i18nextExpress from "i18next-express-middleware";
+import {I18nextProvider} from "react-i18next";
 
-import expressRateLimit from "express-rate-limit";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -37,6 +40,32 @@ const indexHtml = expressRateLimit({
 });
 app.use("/*", indexHtml);
 // --------- express-rate-limit -----------
+
+// --------- i18n -------------------------
+
+i18next.use(i18nextExpress.LanguageDetector).init({
+  preload: ["en", "de", "pl"],
+  resources: {
+    en: {
+      common: require('./translations/en/common')
+    },
+    de: {
+      common: require('./translations/de/common')
+    },
+    pl: {
+      common: require('./translations/pl/common'),
+    },
+  }
+});
+
+app.use(
+  i18nextExpress.handle(i18next, {
+    // ignoreRoutes: ["/foo"],
+    removeLngFromUrl: false
+  })
+);
+
+// --------- i18n -------------------------
 
 function saveLog (nick, command) {
   const file = `${nick}.log`;
@@ -68,7 +97,9 @@ app.get('*', (req, res) => {
   const app = ReactDOMServer.renderToString(
     <Provider store={store}>
       <StaticRouter location={req.url} context={context}>
-        <App/>
+        <I18nextProvider i18n={req.i18n}>
+          <App/>
+        </I18nextProvider>
       </StaticRouter>
     </Provider>
   );

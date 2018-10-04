@@ -72,7 +72,8 @@ module.exports = {
 
   plugins: [
     new webpack.DefinePlugin({
-      __isBrowser__: 'false'
+      __isBrowser__: 'false',
+      NODE_ENV: JSON.stringify('development')
     })
   ]
 };

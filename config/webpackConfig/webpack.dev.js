@@ -97,7 +97,8 @@ module.exports = {
       PUBLIC_URL: ''
     }),
     new webpack.DefinePlugin({
-      __isBrowser__: 'true'
+      __isBrowser__: 'true',
+      NODE_ENV: JSON.stringify('development')
     }),
     //
     // Analyzer

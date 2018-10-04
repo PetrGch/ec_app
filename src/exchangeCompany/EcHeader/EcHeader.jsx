@@ -1,7 +1,8 @@
 import React from 'react';
+import {withRouter} from "react-router-dom";
+import { translate } from 'react-i18next';
 
 import { FaAngleDoubleDown } from 'react-icons/fa';
-import {withRouter} from "react-router-dom";
 
 import './ecHeader.less';
 
@@ -24,8 +25,13 @@ class EcHeader extends React.PureComponent {
   }
 
   render() {
+    const { i18n } = this.props;
+
     return (
       <header className="ecHeader">
+        <button onClick={() => i18n.changeLanguage('de')}>de</button>
+        <button onClick={() => i18n.changeLanguage('en')}>en</button>
+        <button onClick={() => i18n.changeLanguage('pl')}>pl</button>
         <div className="ecHeader__logo ecLogo">
           <strong>ExCurRate</strong>
         </div>
@@ -39,4 +45,4 @@ class EcHeader extends React.PureComponent {
   }
 }
 
-export default withRouter(EcHeader);
+export default withRouter(translate('common')(EcHeader));
