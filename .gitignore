@@ -6,6 +6,7 @@ public/**/service-worker.js
 public/**/asset-manifest.json
 public/**/*.less
 public/server/
+**/*.log
 
 
 !**/favicon.ico
