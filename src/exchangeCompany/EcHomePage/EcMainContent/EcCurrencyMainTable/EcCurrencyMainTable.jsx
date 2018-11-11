@@ -4,7 +4,6 @@ import {withRouter} from "react-router-dom";
 import {ecCurrencyMainTableConfig} from "./ecCurrencyMainTableConfig";
 import {Button, Checkbox, Grid, Input} from "../../../../common/controlLib";
 import {
-  filterByCurrency,
   filterByName,
   sortByGeolocation,
   sortedByPrice,
@@ -103,7 +102,8 @@ class EcCurrencyMainTable extends React.PureComponent {
 
   sortRowsByGeolocation(event) {
     const { checked } = event.target;
-    const { records, isBuyStatus } = this.props;
+    const { isBuyStatus } = this.props;
+    const { records } = this.state;
     if (checked) {
       const location = defineLocation();
       location
@@ -132,7 +132,7 @@ class EcCurrencyMainTable extends React.PureComponent {
 
   filterRowsByName(event) {
     const { value } = event.target;
-    const { records } = this.props;
+    const { records } = this.state;
 
     this.setState({
       records: filterByName(records, value),

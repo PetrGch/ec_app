@@ -28,7 +28,7 @@ export function sortedByPrice(records, isIncrease, isBuy) {
 
 export function sortByGeolocation(records, lat, lng) {
   return records.map(record => {
-            if (record.lat && record.lng) {
+    if (record.lat && record.lng) {
       return {...record, distance: distance(lat, lng, record.lat, record.lng, "K")}
     }
 
