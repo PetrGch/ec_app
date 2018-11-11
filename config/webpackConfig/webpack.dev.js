@@ -125,6 +125,6 @@ module.exports = {
     contentBase: paths.devServerContentBase,
     proxy: {},
     compress: true,
-    port: 9000,
+    port: 3000,
   },
 };

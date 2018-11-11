@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev-node": "node ./config/webpackConfig/start.js",
     "dev": "npm-run-all --parallel dev:*",
-    "dev:build-dev": "webpack -d --config config/webpackConfig/webpack.dev.js",
+    "dev:build-dev": "webpack-dev-server -d --config config/webpackConfig/webpack.dev.js",
     "dev:build-server": "webpack --config config/webpackConfig/webpack.server.js",
     "dev:start": "nodemon ./public/server/serverBundle.js",
     "prod": "npm-run-all prod:*",

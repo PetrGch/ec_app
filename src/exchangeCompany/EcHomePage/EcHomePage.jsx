@@ -12,7 +12,15 @@ export default class EcHomePage extends React.PureComponent {
   }
 
   render() {
-    const { dispatch, companies, currencyAmount, isBuyStatus } = this.props;
+    const {
+      dispatch,
+      companies,
+      filteredCurrencies,
+      currencyAmount,
+      isBuyStatus,
+      currencyTypes,
+      selectedCurrency,
+    } = this.props;
 
     return (
       <div className="ecHomePage">
@@ -21,6 +29,9 @@ export default class EcHomePage extends React.PureComponent {
           isBuyStatus={isBuyStatus}
           currencyAmount={currencyAmount}
           companies={companies}
+          filteredCurrencies={filteredCurrencies}
+          currencyTypes={currencyTypes}
+          selectedCurrency={selectedCurrency}
         />
         <EcSideBar
           isBuyStatus={isBuyStatus}

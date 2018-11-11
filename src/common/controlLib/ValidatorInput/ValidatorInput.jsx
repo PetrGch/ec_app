@@ -13,6 +13,15 @@ export default class ValidatorInput extends React.PureComponent {
 
     this.handleValueOnChange = this.handleValueOnChange.bind(this);
     this.handleValueOnBlur = this.handleValueOnBlur.bind(this);
+    this.handleValueOnFocus = this.handleValueOnFocus.bind(this);
+  }
+
+  handleValueOnFocus(event) {
+    const { onFocus } = this.props;
+
+    if (typeof onFocus === 'function') {
+      onFocus(event);
+    }
   }
 
   handleValueOnChange(event) {
@@ -56,6 +65,7 @@ export default class ValidatorInput extends React.PureComponent {
         value={value}
         onChange={this.handleValueOnChange}
         onBlur={this.handleValueOnBlur}
+        onFocus={this.handleValueOnFocus}
       />
     </div>;
   }

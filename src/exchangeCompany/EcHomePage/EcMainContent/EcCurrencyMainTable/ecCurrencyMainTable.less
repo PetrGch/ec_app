@@ -13,11 +13,23 @@
     display: flex;
     flex-direction: column;
 
-    & span:last-child {
-      font-size: 14px;
+    & span:nth-of-type(2),
+      span:nth-of-type(3) {
+      font-size: 12px;
     }
   }
   
+  &__titleName,
+  &__titleSumAmount {
+    & span {
+      display: block;
+
+      &:nth-of-type(2) {
+        font-size: 12px;
+      }
+    }
+  }
+
   &__titleName {
     cursor: pointer;
     transition: color .2s;

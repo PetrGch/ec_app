@@ -8,22 +8,35 @@ import './ecCompany.less';
 
 export default class EcCompany extends React.PureComponent {
   componentDidMount() {
-    const { loadCompany, findCompanyByName, companies, match: { params } } = this.props;
+    const { loadCompany, selectedCurrency, findCompanyByBranchName, companies, match: { params } } = this.props;
     if (companies === null) {
       loadCompany(params.name);
     } else {
-      findCompanyByName(params.name, companies);
+      findCompanyByBranchName(params.name, companies, selectedCurrency);
     }
   }
 
   render() {
-    const { company, isBuyStatus, dispatch } = this.props;
+    const {
+      company,
+      isBuyStatus,
+      selectedCurrency,
+      selectedCompanyCurrency,
+      currencyTypes,
+      filteredCurrency,
+      dispatch
+    } = this.props;
+
     return company ? (
       <div className="ecCompany">
         <EcMainCompanyContent
           dispatch={dispatch}
           company={company}
           isBuyStatus={isBuyStatus}
+          currencyTypes={currencyTypes}
+          selectedCurrency={selectedCurrency}
+          selectedCompanyCurrency={selectedCompanyCurrency}
+          filteredCurrency={filteredCurrency}
         />
         <EcSideBar
           isBuyStatus={isBuyStatus}

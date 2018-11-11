@@ -8,78 +8,85 @@ import {
 } from "./ecCurrencyMainTableRender";
 
 export const ecCurrencyMainTableConfig = (
-  isBuy, sumAmount, knowMore = () => {}, sortRowsByName = () => {}, sortRowsByPrice = () => {}
+  isBuy, sumAmount, selectedCurrency, knowMore = () => {}, sortRowsByName = () => {}, sortRowsByPrice = () => {}
   ) => (
   isBuy
-    ? ecCurrencyMainTableBuyConfig(sumAmount, knowMore, sortRowsByName, sortRowsByPrice)
-    : ecCurrencyMainTableSumConfig(sumAmount, knowMore, sortRowsByName, sortRowsByPrice)
+    ? ecCurrencyMainTableBuyConfig(sumAmount, knowMore, selectedCurrency, sortRowsByName, sortRowsByPrice)
+    : ecCurrencyMainTableSumConfig(sumAmount, knowMore, selectedCurrency, sortRowsByName, sortRowsByPrice)
 );
 
-const ecCurrencyMainTableBuyConfig = (sumAmount, knowMore, sortRowsByName, sortRowsByPrice) => (
+const ecCurrencyMainTableBuyConfig = (sumAmount, knowMore, selectedCurrency, sortRowsByName, sortRowsByPrice) => (
   [
     {
-      index: 'name',
-      key: 'name',
-      title: 'Currency',
+      index: 'company_name',
+      key: 'company_name',
+      title: 'Exchange offices',
       renderTitle: (record, config) => renderTitle(record, config, sortRowsByName),
       renderCell: renderCompanyName
     },
     {
-      index: 'buyPrice',
-      key: 'buyPrice',
+      index: 'buy_price',
+      key: 'buy_price',
       title: 'Buy',
-      renderTitle: (record, config) => renderTitle(record, config, sortRowsByPrice)
+      subTitle: `(${selectedCurrency})`,
+      renderTitle: (record, config) => renderTitle(record, config, sortRowsByPrice),
+      renderCell: (record) => record.buy_price ? record.buy_price.toFixed(2) : record.buy_price
     },
     {
       index: 'buyPriceSum',
       key: 'buyPriceSum',
-      renderTitle: () => renderBuyTitle(sumAmount),
-      renderCell: (record) => renderBuyPrice(record.buyPrice, sumAmount)
+      subTitle: `(${selectedCurrency})`,
+      renderTitle: (record, config) => renderBuyTitle(sumAmount, config),
+      renderCell: (record) => renderBuyPrice(record.buy_price, sumAmount)
     },
     {
-      index: 'updatedAt',
-      key: 'updatedAt',
+      index: 'updated_at',
+      key: 'updated_at',
       title: 'Last update',
       renderCell: (record, config) => renderLastUpdateTime(record, config.key)
     },
     {
       index: 'knowMore',
       title: 'Info',
-      renderCell: (record) => renderKnowMore(record.id, record.name, knowMore)
+      renderCell: (record) => renderKnowMore(record.id, record.branch_name, knowMore)
     }
   ]
 );
 
-const ecCurrencyMainTableSumConfig = (sumAmount, knowMore, sortRowsByName, sortRowsByPrice) => (
+const ecCurrencyMainTableSumConfig = (sumAmount, knowMore, selectedCurrency, sortRowsByName, sortRowsByPrice) => (
   [
     {
-      index: 'name',
-      key: 'name',
-      title: 'Currency',
+      index: 'company_name',
+      key: 'company_name',
+      title: 'Exchange offices',
       renderTitle: (record, config) => renderTitle(record, config, sortRowsByName),
+      renderCell: renderCompanyName
     },
     {
-      index: 'sellPrice',
-      key: 'sellPrice',
+      index: 'sell_price',
+      key: 'sell_price',
       title: 'Sell',
-      renderTitle: (record, config) => renderTitle(record, config, sortRowsByPrice)
+      subTitle: `(${selectedCurrency})`,
+      renderTitle: (record, config) => renderTitle(record, config, sortRowsByPrice),
+      renderCell: (record) => record.sell_price ? record.sell_price.toFixed(2) : record.sell_price
     },
     {
       index: 'sellPriceSum',
       key: 'sellPriceSum',
-      renderTitle: () => renderSellTitle(sumAmount),
-      renderCell: (record) => renderSellPrice(record.sellPrice, sumAmount)
+      subTitle: `(${selectedCurrency})`,
+      renderTitle: (record, config) => renderSellTitle(sumAmount, config),
+      renderCell: (record) => renderSellPrice(record.sell_price, sumAmount)
     },
     {
-      index: 'updatedAt',
-      key: 'updatedAt',
+      index: 'updated_at',
+      key: 'updated_at',
       title: 'Last update',
       renderCell: (record, config) => renderLastUpdateTime(record, config.key)
     },
     {
       index: 'knowMore',
       title: 'Info',
-      renderCell: (record) => renderKnowMore(record.id, record.name, knowMore)
+      renderCell: (record) => renderKnowMore(record.id, record.branch_name, knowMore)
     }
   ]
 );

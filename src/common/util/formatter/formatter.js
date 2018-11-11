@@ -2,7 +2,7 @@ var numeral = require('numeral');
 
 export function cashFormatter(value) {
   return value !== null && value !== undefined
-    ? numeral(value).format('0,0') : '';
+    ? numeral(value).format('0,0.00') : '';
 }
 
 export function cashReformatter(value) {

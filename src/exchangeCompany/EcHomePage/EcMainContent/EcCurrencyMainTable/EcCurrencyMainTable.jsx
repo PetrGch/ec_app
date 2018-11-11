@@ -3,19 +3,26 @@ import {withRouter} from "react-router-dom";
 
 import {ecCurrencyMainTableConfig} from "./ecCurrencyMainTableConfig";
 import {Button, Checkbox, Grid, Input} from "../../../../common/controlLib";
-import {filterByName, sortByGeolocation, sortedByPrice, sortedWithField} from "./ecCurrencyMainTableUtil";
+import {
+  filterByCurrency,
+  filterByName,
+  sortByGeolocation,
+  sortedByPrice,
+  sortedWithField
+} from "./ecCurrencyMainTableUtil";
 import {defineLocation} from "../../../../common/util/geolocation";
 
 import './ecCurrencyMainTable.less';
 
 class EcCurrencyMainTable extends React.PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { records, isBuyStatus } = nextProps;
-    if (records && (prevState.isIncreasePriceSort || isBuyStatus !== prevState.isBuyStatus)) {
+    const { isBuyStatus, filteredCurrencies } = nextProps;
+
+    if (filteredCurrencies && (prevState.isIncreasePriceSort || isBuyStatus !== prevState.isBuyStatus)) {
       return {
         ...prevState,
         isBuyStatus,
-        records: filterByName(sortedByPrice(records, true, isBuyStatus), prevState.companyFilterName)
+        records: filterByName(sortedByPrice(filteredCurrencies, true, isBuyStatus), prevState.companyFilterName)
       }
     }
     return null;
@@ -55,7 +62,7 @@ class EcCurrencyMainTable extends React.PureComponent {
       isIncreaseRecommendedSort: false,
       isIncreaseGeolocationSort: false,
       isIncreaseNameSort: !isIncreaseNameSort,
-      records: sortedWithField(records, !isIncreaseNameSort, "name")
+      records: sortedWithField(records, !isIncreaseNameSort, "company_name")
     });
   }
 
@@ -134,7 +141,7 @@ class EcCurrencyMainTable extends React.PureComponent {
   }
 
   render() {
-    const { currencyAmount } = this.props;
+    const { currencyAmount, selectedCurrency } = this.props;
     const {
       records,
       isIncreasePriceSort,
@@ -174,7 +181,14 @@ class EcCurrencyMainTable extends React.PureComponent {
           isHeader
           stripe
           records={records}
-          config={ecCurrencyMainTableConfig(isBuyStatus, currencyAmount, this.knowMore, this.sortRowsByName, this.sortRowsByPrice)}
+          config={ecCurrencyMainTableConfig(
+            isBuyStatus,
+            currencyAmount,
+            selectedCurrency,
+            this.knowMore,
+            this.sortRowsByName,
+            this.sortRowsByPrice
+          )}
         />
       </div>
     );

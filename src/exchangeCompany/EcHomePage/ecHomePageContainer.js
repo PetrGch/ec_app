@@ -6,8 +6,11 @@ import {loadAllCompanies} from "../../action/companies";
 const mapStateToProps = state => {
   return {
     companies: state.companies.companies,
+    filteredCurrencies: state.companies.filteredCurrencies,
+    currencyTypes: state.companies.currencyTypes,
     currencyAmount: state.companies.currencyAmount,
-    isBuyStatus: state.companies.isBuyStatus
+    isBuyStatus: state.companies.isBuyStatus,
+    selectedCurrency: state.companies.selectedCurrency
   };
 };
 

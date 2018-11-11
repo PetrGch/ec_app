@@ -71,14 +71,14 @@ function EcMainCompanyRightDetailColumn({company}) {
   );
 }
 
-export default function EcMainCompanyDetail({company}) {
+export default function EcMainCompanyDetail({ filteredCurrency }) {
   return (
     <div className="ecMainCompanyDetail">
       <div className="ecMainCompanyDetail__column ecMainCompanyDetail__column--left">
-        <EcMainCompanyLeftDetailColumn workingTime={nullValidator(company, 'workingTime')}/>
+        <EcMainCompanyLeftDetailColumn workingTime={nullValidator(filteredCurrency, 'workingTime')}/>
       </div>
       <div className="ecMainCompanyDetail__column ecMainCompanyDetail__column--right">
-        <EcMainCompanyRightDetailColumn company={company}/>
+        <EcMainCompanyRightDetailColumn company={filteredCurrency}/>
       </div>
     </div>
   );

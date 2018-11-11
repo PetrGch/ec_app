@@ -29,14 +29,14 @@ function MapMarker({company, Marker, Popup}) {
 
 export default class EcMainCompanyMap extends React.PureComponent {
   get address() {
-    const { company } = this.props;
-    return (company && company.address) || '--//--';
+    const { filteredCurrency } = this.props;
+    return (filteredCurrency && filteredCurrency.address) || '--//--';
   }
 
-  get compnyOnMap() {
-    const { company } = this.props;
+  get companyOnMap() {
+    const { filteredCurrency } = this.props;
     const zoom = 13;
-    const center = [company.coordinateX, company.coordinateY];
+    const center = [filteredCurrency.lat, filteredCurrency.lng];
 
     if (__isBrowser__ && center[0] && center[1]) {
       const {Map, Marker, Popup, TileLayer} = require('react-leaflet');
@@ -46,7 +46,7 @@ export default class EcMainCompanyMap extends React.PureComponent {
             attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a> '
             url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
           />
-            <MapMarker company={company} Marker={Marker} Popup={Popup}/>
+            <MapMarker company={filteredCurrency} Marker={Marker} Popup={Popup}/>
         </Map>
       );
     }
@@ -54,7 +54,7 @@ export default class EcMainCompanyMap extends React.PureComponent {
   }
 
   render() {
-    const { company } = this.props;
+    const { filteredCurrency } = this.props;
 
     return (
       <div className="ecMainCompanyMap">
@@ -63,7 +63,7 @@ export default class EcMainCompanyMap extends React.PureComponent {
         </div>
         <div className="ecMainCompanyMap__map">
           <ExpandCollapseWrapper name="Map">
-            {company && this.compnyOnMap}
+            {filteredCurrency && this.companyOnMap}
           </ExpandCollapseWrapper>
         </div>
       </div>
@@ -72,5 +72,5 @@ export default class EcMainCompanyMap extends React.PureComponent {
 }
 
 EcMainCompanyMap.defaultProps = {
-  company: {}
+  filteredCurrency: {}
 };

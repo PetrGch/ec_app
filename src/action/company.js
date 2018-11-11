@@ -1,6 +1,6 @@
 import {
   FIND_COMPANY_BY_NAME, LOAD_ALL_COMPANIES,
-  LOAD_COMPANY_BY_NAME,
+  LOAD_COMPANY_BY_NAME, SET_ACTIVE_COMPANY_CURRENCY, SET_ACTIVE_CURRENCY,
   SET_BUY_STATUS_FOR_COMPANY,
   SET_SUM_AMOUNT
 } from "../constant/ecHomePage";
@@ -36,11 +36,11 @@ export function loadCompanyByName(name) {
   };
 }
 
-export function findCompanyByName(name, companies) {
+export function findCompanyByBranchName(name, companies, selectedCurrency) {
   let foundCompany = null;
 
   companies && companies.some(company => {
-    if (company.name === name) {
+    if (company.branch_name === name) {
       foundCompany = company;
       return true;
     }
@@ -49,6 +49,14 @@ export function findCompanyByName(name, companies) {
 
   return {
     company: foundCompany,
+    selectedCurrency: selectedCurrency,
     type: FIND_COMPANY_BY_NAME
+  }
+}
+
+export function setActiveCompanyCurrency(selectedCurrency) {
+  return {
+    selectedCurrency,
+    type: SET_ACTIVE_COMPANY_CURRENCY
   }
 }

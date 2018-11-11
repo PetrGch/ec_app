@@ -2,32 +2,52 @@ import React from 'react';
 import moment from 'moment';
 import Button from "../../../../common/controlLib/Button/Button";
 
-function CompanyInfo({name, address}) {
-  return (<div className="ecCurrencyMainTable__companyName">
-    <span>{name}</span>
-    <span>{address}</span>
-  </div>);
+function CompanyInfo({company_name, branch_name, address}) {
+  return (
+    <div className="ecCurrencyMainTable__companyName">
+      {company_name && <strong>{company_name}</strong>}
+      {branch_name && <span>{branch_name}</span>}
+      {address && <span>{address}</span>}
+    </div>
+  );
 }
 
 export function renderCompanyName(record) {
-  let name = null;
+  let company_name = null;
+  let branch_name = null;
   let address = null;
-  if (record && record.name) {
-    name = record.name;
+  if (record) {
+    if (record.company_name) {
+      company_name = record.company_name;
+    }
+    if (record.branch_name) {
+      branch_name = record.branch_name;
+    }
+    if (record.address) {
+      address = record.address;
+    }
   }
-  if (record && record.address) {
-    address = record.address;
-  }
-  return <CompanyInfo name={name} address={address}/>
+  return <CompanyInfo company_name={company_name} branch_name={branch_name} address={address}/>
 }
 
-export function renderBuyTitle(sumAmount) {
-  return `Buy ${sumAmount || 0}`;
+export function renderBuyTitle(sumAmount, config) {
+  return (
+    <div className="ecCurrencyMainTable__titleSumAmount">
+      <span>{`Buy ${sumAmount || 0}`}</span>
+      {config.subTitle && <span>{config.subTitle}</span>}
+    </div>
+  );
 }
 
-export function renderSellTitle(sumAmount) {
-  return `Sell ${sumAmount || 0}`;
+export function renderSellTitle(sumAmount, config) {
+  return (
+    <div className="ecCurrencyMainTable__titleSumAmount">
+      <span>{`Sell ${sumAmount || 0}`}</span>
+      {config.subTitle && <span>{config.subTitle}</span>}
+    </div>
+  );
 }
+
 
 export function renderBuyPrice(buyPrice, sumAmount) {
   return buyPrice && sumAmount ? (buyPrice * sumAmount).toFixed(2) : ''
@@ -74,8 +94,12 @@ export function renderClass(isHeader, config) {
 }
 
 export function renderTitle(record, config, clickNameEvent) {
-  return (<div
-    className="ecCurrencyMainTable__titleName"
-    onClick={clickNameEvent}
-  >{config.title || ''}</div>);
+  return (
+    <div
+      className="ecCurrencyMainTable__titleName"
+      onClick={clickNameEvent}
+    >
+      <span>{config.title || ''}</span>
+      {config.subTitle && <span>{config.subTitle}</span>}
+    </div>);
 }

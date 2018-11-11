@@ -10,7 +10,15 @@ import './ecMainContent.less';
 
 export default class EcMainContent extends React.PureComponent {
   render() {
-    const { dispatch, currencyAmount, isBuyStatus, companies } = this.props;
+    const {
+      dispatch,
+      currencyAmount,
+      isBuyStatus,
+      companies,
+      filteredCurrencies,
+      currencyTypes,
+      selectedCurrency
+    } = this.props;
 
     return (
       <main className="ecMainContent">
@@ -19,13 +27,17 @@ export default class EcMainContent extends React.PureComponent {
             dispatch={dispatch}
             isBuyStatus={isBuyStatus}
             currencyAmount={currencyAmount}
+            currencyTypes={currencyTypes}
+            selectedCurrency={selectedCurrency}
           />
         </BlockWrapper>
         <BlockWrapper>
           <EcCurrencyMainTable
             records={companies}
+            filteredCurrencies={filteredCurrencies}
             currencyAmount={currencyAmount}
             isBuyStatus={isBuyStatus}
+            selectedCurrency={selectedCurrency}
           />
         </BlockWrapper>
         <BlockWrapper>

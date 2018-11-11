@@ -12,21 +12,32 @@ import './ecMainCompanyContent.less';
 export default class EcMainCompanyContent extends React.PureComponent{
   get updateDate() {
     const { company } = this.props;
-    if (company && company.updatedAt) {
-      return moment(company.updatedAt).format('LT');
+    if (company && company.updated_at) {
+      return moment(company.updated_at).format('LT');
     }
 
     return '--//--';
   }
 
   render() {
-    const { company, isBuyStatus, dispatch } = this.props;
+    const {
+      company,
+      isBuyStatus,
+      currencyTypes,
+      selectedCurrency,
+      selectedCompanyCurrency,
+      filteredCurrency,
+      dispatch
+    } = this.props;
 
     return (
       <div className="ecMainCompanyContent">
         <BlockWrapper>
           <div className="ecMainCompanyContent__header">
-            <h1>{nullValidator(company, 'name')}</h1>
+            <div>
+              <h1>{nullValidator(company, 'company_name')}</h1>
+              <h2>{nullValidator(company, 'branch_name')}</h2>
+            </div>
             <span>Last update: {this.updateDate}</span>
           </div>
           <div className="ecMainCompanyContent__calculator">
@@ -34,16 +45,20 @@ export default class EcMainCompanyContent extends React.PureComponent{
               dispatch={dispatch}
               company={company}
               isBuyStatus={isBuyStatus}
+              currencyTypes={currencyTypes}
+              selectedCurrency={selectedCurrency}
+              selectedCompanyCurrency={selectedCompanyCurrency}
+              filteredCurrency={filteredCurrency}
             />
           </div>
           <div className="ecMainCompanyContent__map">
             <EcMainCompanyMap
-              company={company}
+              filteredCurrency={filteredCurrency}
             />
           </div>
           <div className="ecMainCompanyContent__footer">
             <EcMainCompanyDetail
-              company={company}
+              filteredCurrency={filteredCurrency}
             />
           </div>
         </BlockWrapper>

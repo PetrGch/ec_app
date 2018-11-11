@@ -3,6 +3,7 @@ import React from 'react';
 import {setSize, sizeType} from '../util';
 
 import './dropdown.less';
+import {editCompanyService} from "../../../admin/content/editedCompany/editCompanyService";
 
 function Item({index, value, selectedItem, selectItem}) {
   const takeSelectData = () => {
@@ -50,6 +51,13 @@ export default class Dropdown extends React.PureComponent {
     this.selectItem = this.selectItem.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    const { list, selectedIndex } = this.props;
+    if (prevProps.list.length !== list.length) {
+      this.setState({selectedItem: prepopulateSelectedValue(list, selectedIndex)});
+    }
+  }
+
   // todo Define why it staggering constantly
   mouseOverHandler() {
     const { isListHidden } = this.state;
@@ -67,9 +75,14 @@ export default class Dropdown extends React.PureComponent {
   }
 
   selectItem(item) {
+    const { selectItem } = this.props;
     this.setState({
       selectedItem: item
     });
+
+    if (typeof selectItem === "function") {
+      selectItem(item);
+    }
   }
 
   get list() {

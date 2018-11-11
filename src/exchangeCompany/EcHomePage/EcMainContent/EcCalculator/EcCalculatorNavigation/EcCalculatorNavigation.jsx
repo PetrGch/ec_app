@@ -4,38 +4,22 @@ import {sizeType} from '../../../../../common/controlLib/util';
 import {Dropdown, Radio} from '../../../../../common/controlLib';
 
 import './ecCalculatorNavigation.less';
-import {setBuyStatus} from "../../../../../action/companies";
-
-const menu = [
-  {
-    index: 'EUR',
-    value: 'EUR - Dollar USA'
-  },
-  {
-    index: 'USD',
-    value: 'USD'
-  },
-  {
-    index: 'GBR',
-    value: 'GBR'
-  },
-  {
-    index: 'EUR_1',
-    value: 'EUR - Dollar USA'
-  },
-  {
-    index: 'USD_1',
-    value: 'USD'
-  },
-  {
-    index: 'GBR_1',
-    value: 'GBR'
-  }
-];
+import {setActiveCurrency, setBuyStatus} from "../../../../../action/companies";
 
 export default class EcCalculatorNavigation extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.selectedCurrency = this.selectedCurrency.bind(this);
+  }
+
+  selectedCurrency(selectedCurrency) {
+    const { dispatch } = this.props;
+    dispatch(setActiveCurrency(selectedCurrency.value));
+  }
+
   render() {
-    const { dispatch, isBuyStatus } = this.props;
+    const { dispatch, isBuyStatus, currencyTypes, selectedCurrency } = this.props;
     const changeBuyStatus = (event) => {
       if (event.target && event.target.value === "sell") {
         dispatch(setBuyStatus(false));
@@ -65,8 +49,9 @@ export default class EcCalculatorNavigation extends React.PureComponent {
         <div className="ecCalculatorNavigation__currency">
           <Dropdown
             size={sizeType.LG}
-            list={menu}
-            selectedIndex={'GBR'}
+            list={currencyTypes}
+            selectedIndex={selectedCurrency}
+            selectItem={this.selectedCurrency}
           />
         </div>
       </div>
