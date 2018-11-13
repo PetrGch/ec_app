@@ -24,6 +24,8 @@ const backendOption = {
   withCredentials: false,
 };
 
+console.log(NODE_ENV)
+
 i18n
   .use(XHR)
   .use(LanguageDetector)

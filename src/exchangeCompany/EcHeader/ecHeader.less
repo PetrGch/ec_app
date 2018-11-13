@@ -1,3 +1,5 @@
+@import '../../common/util/variable';
+
 .ecHeader {
   position: relative;
   display: flex;
@@ -43,6 +45,82 @@
     -moz-transform: skew(0, -4.5deg) translate(0, 50%);
     -o-transform: skew(0, -4.5deg) translate(0, 50%);
     transform: skew(0, -4.5deg) translate(0, 50%);
+  }
+
+  &__language {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    color: @primary-white;
+
+    & .ec-dropdown {
+      min-width: 60px;
+
+      &__handler {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        border: 2px solid @primary-white;
+        line-height: 1;
+        text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+        box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
+        font-weight: 700;
+        font-size: 16px;
+        color: @primary-white;
+        background: #f96645;
+
+        &--hidden {
+          &-true::after, &-false::after {
+            display: none;
+          }
+        }
+      }
+
+      &__list {
+        top: 31px;
+        border: 2px solid @primary-white;
+        color: @primary-white;
+        text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+        box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
+        background: #f96645;
+      }
+
+      &:hover {
+        color: @primary-white;
+
+        & .ec-dropdown__handler {
+          border: 2px solid @primary-white;
+          color: @primary-white;
+          text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+          box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
+          background: #f96645;
+        }
+
+        & .ec-dropdown__list {
+          border: 2px solid @primary-white;
+        }
+      }
+    }
+
+    & .ec-dropdownList {
+      &__item {
+        display: flex;
+        justify-content: center;
+        padding: 10px 0;
+        background: transparent;
+
+        &--active {
+          &-true {
+            background: @primary-gray;
+          }
+        }
+
+        &:hover {
+          background: @primary-gray;
+        }
+      }
+    }
   }
 
   &__nextBtn {
