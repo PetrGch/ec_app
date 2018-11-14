@@ -7,13 +7,14 @@ import EcBaseCurrency from "./EcBaseCurrency/EcBaseCurrency";
 
 export default class EcSideBar extends React.PureComponent {
   render() {
-    const { isBuyStatus } = this.props;
+    const { isBuyStatus, companies } = this.props;
 
     return (
       <aside className="ecSideBar">
         <BlockWrapper>
           <EcBaseCurrency
             isBuyStatus={isBuyStatus}
+            companies={companies}
           />
         </BlockWrapper>
       </aside>

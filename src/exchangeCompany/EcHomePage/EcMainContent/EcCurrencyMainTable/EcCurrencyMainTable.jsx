@@ -155,10 +155,10 @@ class EcCurrencyMainTable extends React.PureComponent {
       <div className="ecCurrencyMainTable">
         <div className="ecCurrencyMainTable__gridPanel ecCurrencyMainTableGridPanel">
           <div className="ecCurrencyMainTableGridPanel--position-left">
-            <Button
-              isActive={isIncreaseRecommendedSort}
-              onClick={this.sortRowsByRecommended}
-            >Recommended</Button>
+            {/*<Button*/}
+              {/*isActive={isIncreaseRecommendedSort}*/}
+              {/*onClick={this.sortRowsByRecommended}*/}
+            {/*>Recommended</Button>*/}
             <Button
               isActive={isIncreasePriceSort}
               onClick={this.sortRowsByPriceOnlyBest}

@@ -11,12 +11,12 @@ function MapMarker({company, Marker, Popup}) {
   return (
     <Marker
       icon={marker}
-      position={[company.coordinateX, company.coordinateY]}
+      position={[company.lat, company.lng]}
     >
       <Popup>
         <div className="ecMainMap__popup ecMainMapPopup">
           <span className="ecMainMapPopup__name">
-            {company.name}
+            {company.branch_name}
           </span>
           <span className="ecMainMapPopup__address">
             {company.address}
@@ -29,8 +29,8 @@ function MapMarker({company, Marker, Popup}) {
 
 export default class EcMainCompanyMap extends React.PureComponent {
   get address() {
-    const { filteredCurrency } = this.props;
-    return (filteredCurrency && filteredCurrency.address) || '--//--';
+    const { company } = this.props;
+    return (company && company.address) || '--//--';
   }
 
   get companyOnMap() {

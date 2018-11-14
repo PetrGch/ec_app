@@ -2,7 +2,7 @@ import React from 'react';
 import {Slider} from "antd";
 
 import {InputValidator, Input} from "../../../../../common/controlLib";
-import {cashFormatter, cashReformatter} from "../../../../../common/util/formatter/formatter";
+import {cashReformatter, numberFormatter} from "../../../../../common/util/formatter/formatter";
 import {sizeType} from "../../../../../common/controlLib/util";
 import {setSumAmount} from "../../../../../action/companies";
 
@@ -38,7 +38,7 @@ export default class EcCalculatorSlider extends React.PureComponent {
             value={currencyAmount}
             placeholder="1000"
             validationOption={{length: 7, isNumeric: true}}
-            formatter={cashFormatter}
+            formatter={numberFormatter}
             onChange={this.changeInputValueHandler}
             size={sizeType.LG}
           />

@@ -42,7 +42,7 @@ export default class EcMainContent extends React.PureComponent {
         </BlockWrapper>
         <BlockWrapper>
           <EcMainMap
-            records={companies}
+            records={filteredCurrencies}
             isBuyStatus={isBuyStatus}
           />
         </BlockWrapper>

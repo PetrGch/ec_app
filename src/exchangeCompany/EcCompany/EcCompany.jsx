@@ -19,6 +19,7 @@ export default class EcCompany extends React.PureComponent {
   render() {
     const {
       company,
+      companies,
       isBuyStatus,
       selectedCurrency,
       selectedCompanyCurrency,
@@ -39,6 +40,7 @@ export default class EcCompany extends React.PureComponent {
           filteredCurrency={filteredCurrency}
         />
         <EcSideBar
+          companies={companies}
           isBuyStatus={isBuyStatus}
         />
       </div>

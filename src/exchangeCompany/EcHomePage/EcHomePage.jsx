@@ -34,6 +34,7 @@ export default class EcHomePage extends React.PureComponent {
           selectedCurrency={selectedCurrency}
         />
         <EcSideBar
+          companies={companies}
           isBuyStatus={isBuyStatus}
         />
       </div>

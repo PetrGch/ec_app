@@ -54,11 +54,13 @@ export default class EcMainCompanyContent extends React.PureComponent{
           <div className="ecMainCompanyContent__map">
             <EcMainCompanyMap
               filteredCurrency={filteredCurrency}
+              company={company}
             />
           </div>
           <div className="ecMainCompanyContent__footer">
             <EcMainCompanyDetail
               filteredCurrency={filteredCurrency}
+              company={company}
             />
           </div>
         </BlockWrapper>

@@ -84,25 +84,28 @@ export function filterCurrency(record, currencyType, currencyAmount) {
 }
 
 function filterAmounts(currency, currencyAmount) {
-  let buy_price = null;
-  let sell_price = null;
+  let buy_price = 0;
+  let sell_price = 0;
 
   if (currency && currency.exchange_currency_amounts
     && currency.exchange_currency_amounts.length !== 0) {
-    currency.exchange_currency_amounts.some(amount => {
+    currency.exchange_currency_amounts.forEach(amount => {
       if (amount.currency_amount_from && amount.currency_amount_to) {
-        if (currencyAmount >= amount.currency_amount_from && currencyAmount <= amount.currency_amount_to) {
+        if (currencyAmount >= parseInt(amount.currency_amount_from)
+          && currencyAmount <= parseInt(amount.currency_amount_to)) {
           buy_price = amount.buy_price;
           sell_price = amount.sell_price;
-          return true
         }
       }
       if (amount.currency_amount_from && !amount.currency_amount_to) {
-        buy_price = amount.buy_price;
-        sell_price = amount.sell_price;
-        return true
+        if (currencyAmount >= parseInt(amount.currency_amount_from)) {
+          buy_price = amount.buy_price;
+          sell_price = amount.sell_price;
+        } else if (!buy_price && !sell_price && currencyAmount < parseInt(amount.currency_amount_from)) {
+          buy_price = 0;
+          sell_price = 0;
+        }
       }
-      return false;
     })
   }
 

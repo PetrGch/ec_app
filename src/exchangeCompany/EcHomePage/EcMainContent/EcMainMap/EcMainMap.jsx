@@ -20,17 +20,17 @@ export function mapMarker(L) {
 
 function Markers({records, Marker, Popup, mapMarker}) {
   return records.filter(record => {
-    return record.coordinateX && record.coordinateY;
+    return record.lat && record.lng;
   }).map(record => (
     <Marker
-      key={`${record.coordinateX}-${record.coordinateY}`}
+      key={`${record.lat}-${record.lng}`}
       icon={ mapMarker }
-      position={[record.coordinateX, record.coordinateY]}
+      position={[record.lat, record.lng]}
     >
       <Popup>
         <div className="ecMainMap__popup ecMainMapPopup">
           <span className="ecMainMapPopup__name">
-            {record.name}
+            {record.branch_name}
           </span>
           <span className="ecMainMapPopup__address">
             {record.address}
@@ -45,9 +45,9 @@ export default class EcMainMap extends React.PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
     const {records, isBuyStatus} = nextProps;
     const propsCenter = records && sortedByPrice(records, true, isBuyStatus)
-      .filter(record => record.coordinateX && record.coordinateY)[0] || {};
-    const center = propsCenter.coordinateX && propsCenter.coordinateY
-      ? [propsCenter.coordinateX, propsCenter.coordinateY] : [];
+      .filter(record => record.lat && record.lng)[0] || {};
+    const center = propsCenter.lat && propsCenter.lng
+      ? [propsCenter.lat, propsCenter.lng] : [];
 
     if (center[0] !== prevState.center[0]) {
       return {
@@ -70,6 +70,7 @@ export default class EcMainMap extends React.PureComponent {
   render() {
     const {records} = this.props;
     const {center, zoom} = this.state;
+
     if (__isBrowser__ && center.length !== 0) {
       const {Map, Marker, Popup, TileLayer} = require('react-leaflet');
       const L = require('leaflet');
