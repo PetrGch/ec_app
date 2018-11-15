@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 300px;
   background-color: #69c15b;
   background-image: -moz-linear-gradient(left, #39aa5e, #69c15b);
@@ -120,6 +121,24 @@
           background: @primary-gray;
         }
       }
+    }
+  }
+
+  &__breadCrumb {
+    margin-top: 10px;
+    font-size: 15px;
+
+    &--rout {
+      cursor: pointer;
+      transition: all .2s ease-in-out;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &--active {
+      font-weight: 700;
     }
   }
 

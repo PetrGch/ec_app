@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import {ACCESS_TOKEN, API_URL} from './AppConstance';
 import spinner from "./spinner-white.svg";
 
 export const JSON_RES_TYPE = 'json';
@@ -39,10 +38,6 @@ export const request = (options, resType = JSON_RES_TYPE) => {
     'Content-Type': 'application/json',
   });
 
-  if (localStorage.getItem(ACCESS_TOKEN)) {
-    headers.append('Authorization', 'Bearer ' + localStorage.getItem(ACCESS_TOKEN));
-  }
-
   const defaults = {headers: headers};
   options = Object.assign({}, defaults, options);
 
@@ -62,27 +57,8 @@ export const request = (options, resType = JSON_RES_TYPE) => {
         }
         return json;
       });
-    });
+    }, ex => console.log(ex)).catch(ex => console.error(ex));
   fetchSpinner(fetchRef);
 
   return fetchRef;
 };
-
-export function getCurrentUser() {
-  if (!localStorage.getItem(ACCESS_TOKEN)) {
-    return Promise.reject('No access token set.');
-  }
-
-  return request({
-    url: API_URL + '/user/me',
-    method: 'GET'
-  });
-}
-
-export function login(loginRequest) {
-  return request({
-    url: API_URL + '/auth/signin',
-    method: 'POST',
-    body: JSON.stringify(loginRequest)
-  });
-}

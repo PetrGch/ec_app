@@ -8,12 +8,18 @@ import './ecCompany.less';
 
 export default class EcCompany extends React.PureComponent {
   componentDidMount() {
-    const { loadCompany, selectedCurrency, findCompanyByBranchName, companies, match: { params } } = this.props;
-    if (companies === null) {
-      loadCompany(params.name);
+    const {
+      loadCompany, loadAllCompanies, selectedCurrency, setBranchRout,
+      findCompanyByBranchName, companies, match: { params }
+    } = this.props;
+
+    if (companies === null || companies.length === 0) {
+      loadCompany(params.branch_name);
+      loadAllCompanies();
     } else {
-      findCompanyByBranchName(params.name, companies, selectedCurrency);
+      findCompanyByBranchName(params.branch_name, companies, selectedCurrency);
     }
+    setBranchRout(params.branch_name);
   }
 
   render() {

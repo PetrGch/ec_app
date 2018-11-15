@@ -59,13 +59,15 @@ function EcMainCompanyLeftDetailColumn({workingTime}) {
 }
 
 function EcMainCompanyRightDetailColumn({company = {}}) {
+  const websiteLink = nullValidator(company.exchange_company_detail, 'website', null);
   return (
     <div className="ecMainCompanyRightDetailColumn">
       <div className="ecMainCompanyRightDetailColumn__phone">
         <span>Phone: </span>{nullValidator(company.exchange_company_detail, 'phone', '--//--')}
       </div>
       <div className="ecMainCompanyRightDetailColumn__website">
-        <span>Website: </span>{nullValidator(company.exchange_company_detail, 'website', '--//--')}
+        <span>Website: </span>
+        {websiteLink ? <a href={websiteLink} target="_blank">https://{websiteLink}</a> : '--//--'}
       </div>
     </div>
   );

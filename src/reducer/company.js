@@ -1,10 +1,9 @@
 import {
   FIND_COMPANY_BY_NAME,
-  LOAD_COMPANY_BY_NAME, SET_ACTIVE_COMPANY_CURRENCY, SET_ACTIVE_CURRENCY,
+  LOAD_COMPANY_BY_NAME, SET_ACTIVE_COMPANY_CURRENCY,
   SET_BUY_STATUS_FOR_COMPANY
-} from "../constant/ecHomePage";
+} from "../constant/companies";
 import {
-  filterByCurrency,
   filterCurrency
 } from "../exchangeCompany/EcHomePage/EcMainContent/EcCurrencyMainTable/ecCurrencyMainTableUtil";
 

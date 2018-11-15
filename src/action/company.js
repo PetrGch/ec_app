@@ -3,7 +3,7 @@ import {
   LOAD_COMPANY_BY_NAME, SET_ACTIVE_COMPANY_CURRENCY, SET_ACTIVE_CURRENCY,
   SET_BUY_STATUS_FOR_COMPANY,
   SET_SUM_AMOUNT
-} from "../constant/ecHomePage";
+} from "../constant/companies";
 import {ecCurrencyMainTableRecord} from "../exchangeCompany/EcHomePage/EcMainContent/EcCurrencyMainTable/ecCurrencyMainTableConfig";
 import {API_URL} from "../common/util/AppConstance";
 import {request} from "../common/util/APIUtil";
@@ -22,10 +22,10 @@ export function setSumAmount(currencyAmount) {
   }
 }
 
-export function loadCompanyByName(name) {
+export function loadCompanyByBranchName(branch_name) {
   return (dispatch) => {
     request({
-      url: API_URL + `/company/${name}`,
+      url: API_URL + `/exCompany/branch/${branch_name}`,
       method: 'GET'
     }).then((data) => {
       dispatch({

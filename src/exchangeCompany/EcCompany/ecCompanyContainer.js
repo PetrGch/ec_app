@@ -1,7 +1,9 @@
 import {connect} from 'react-redux';
 
 import EcCompany from "./EcCompany";
-import {findCompanyByBranchName, loadCompanyByName} from "../../action/company";
+import {findCompanyByBranchName, loadCompanyByBranchName} from "../../action/company";
+import {loadAllCompanies} from "../../action/companies";
+import {setBranchRout} from "../../action/rout";
 
 const mapStateToProps = state => {
   return {
@@ -19,11 +21,17 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     dispatch,
-    loadCompany(name) {
-      dispatch(loadCompanyByName(name))
+    loadCompany(branch_name) {
+      dispatch(loadCompanyByBranchName(branch_name))
+    },
+    loadAllCompanies() {
+      dispatch(loadAllCompanies());
     },
     findCompanyByBranchName(name, companies, selectedCurrency) {
       dispatch(findCompanyByBranchName(name, companies, selectedCurrency));
+    },
+    setBranchRout(branchRout) {
+      dispatch(setBranchRout(branchRout))
     }
   };
 };

@@ -4,7 +4,7 @@ import {
   SET_ACTIVE_CURRENCY,
   SET_BUY_STATUS,
   SET_SUM_AMOUNT
-} from "../constant/ecHomePage";
+} from "../constant/companies";
 import {ecCurrencyMainTableRecord} from "../exchangeCompany/EcHomePage/EcMainContent/EcCurrencyMainTable/ecCurrencyMainTableConfig";
 import {request} from "../common/util/APIUtil";
 import {API_URL} from "../common/util/AppConstance";

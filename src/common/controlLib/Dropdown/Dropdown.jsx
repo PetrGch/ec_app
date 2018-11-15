@@ -3,7 +3,6 @@ import React from 'react';
 import {setSize, sizeType} from '../util';
 
 import './dropdown.less';
-import {editCompanyService} from "../../../admin/content/editedCompany/editCompanyService";
 
 function Item({index, value, selectedItem, selectItem}) {
   const takeSelectData = () => {

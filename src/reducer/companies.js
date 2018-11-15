@@ -1,4 +1,4 @@
-import {LOAD_ALL_COMPANIES, SET_ACTIVE_CURRENCY, SET_BUY_STATUS, SET_SUM_AMOUNT} from "../constant/ecHomePage";
+import {LOAD_ALL_COMPANIES, SET_ACTIVE_CURRENCY, SET_BUY_STATUS, SET_SUM_AMOUNT} from "../constant/companies";
 import {filterByCurrency} from "../exchangeCompany/EcHomePage/EcMainContent/EcCurrencyMainTable/ecCurrencyMainTableUtil";
 
 const initialState = {

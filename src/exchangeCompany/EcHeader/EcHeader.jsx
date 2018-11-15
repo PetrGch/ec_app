@@ -30,6 +30,7 @@ class EcHeader extends React.PureComponent {
 
     this.scrollToStart = this.scrollToStart.bind(this);
     this.selectLanguage = this.selectLanguage.bind(this);
+    this.navigateToHomePage = this.navigateToHomePage.bind(this);
   }
 
   scrollToStart() {
@@ -43,11 +44,37 @@ class EcHeader extends React.PureComponent {
     }
   }
 
+  navigateToHomePage() {
+    const { history, homeRout, setBranchRout } = this.props;
+    setBranchRout(null);
+    history.push(homeRout);
+  }
+
   selectLanguage(language) {
     const { i18n } = this.props;
     const { index } = language;
 
     i18n.changeLanguage(index);
+  }
+
+  get breadcrumb() {
+    const { branchRout } = this.props;
+
+    if (branchRout) {
+      return (
+        <div className="ecHeader__breadCrumb">
+          <span
+            className="ecHeader__breadCrumb--rout"
+            onClick={this.navigateToHomePage}
+          >
+            Home
+          </span> | <span className="ecHeader__breadCrumb--active">
+            {branchRout}
+          </span>
+        </div>
+      )
+    }
+    return null;
   }
 
   render() {
@@ -66,6 +93,7 @@ class EcHeader extends React.PureComponent {
         <div className="ecHeader__logo ecLogo">
           <strong>ExCurRate</strong>
         </div>
+        {this.breadcrumb}
         <div className="ecHeader__nextBtn">
           <div className="ecHeaderNextBtn" onClick={this.scrollToStart}>
             <FaAngleDoubleDown/>

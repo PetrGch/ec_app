@@ -1,12 +1,13 @@
-import {combineReducers} from 'redux';
-import admin from './admin';
+import { combineReducers } from 'redux';
+
 import companies from './companies';
 import company from './company';
+import rout from './rout';
 
 const rootReducer = combineReducers({
-  admin,
   companies,
-  company
+  company,
+  rout
 });
 
 export default rootReducer;
