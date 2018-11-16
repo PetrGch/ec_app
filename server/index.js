@@ -49,12 +49,9 @@ i18next.use(i18nextExpress.LanguageDetector).init({
     en: {
       common: require('./translations/en/common')
     },
-    de: {
-      common: require('./translations/de/common')
-    },
-    pl: {
-      common: require('./translations/pl/common'),
-    },
+    th: {
+      common: require('./translations/th/common')
+    }
   }
 });
 
