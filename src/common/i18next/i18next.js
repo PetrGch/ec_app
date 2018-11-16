@@ -24,8 +24,6 @@ const backendOption = {
   withCredentials: false,
 };
 
-console.log(NODE_ENV)
-
 i18n
   .use(XHR)
   .use(LanguageDetector)
@@ -39,12 +37,9 @@ i18n
       en: {
         common: require('./translations/en/common')
       },
-      de: {
-        common: require('./translations/de/common')
-      },
-      pl: {
-        common: require('./translations/pl/common'),
-      },
+      th: {
+        common: require('./translations/th/common')
+      }
     } : null,
     react: {
       wait: false,

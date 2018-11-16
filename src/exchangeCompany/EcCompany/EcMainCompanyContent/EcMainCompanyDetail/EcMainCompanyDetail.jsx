@@ -5,82 +5,106 @@ import {nullValidator} from "../../../../common/util/valueValidator";
 import './ecMainCompanyDetail.less';
 import moment from "moment";
 
-function checkWorkingDays(from, to) {
+function checkWorkingDays(from, to, translate) {
   if (from && to) {
     return `${moment(from).format("HH:mm")} - ${moment(to).format("HH:mm")}`;
   }
 
-  return "not working day";
+  return translate("warning.notWorkingDay");
+}
+
+function DayOfWeek({ workingTime, day, isActive }) {
+  return (
+    <div
+      className={`ecMainCompanyRightDetailColumn__item ecMainCompanyRightDetailColumn__item--active-${isActive}`}
+    >
+      <span>{day}: </span>
+      {workingTime}
+    </div>
+  );
 }
 
 /**
  * @return {null}
  */
-function EcMainCompanyLeftDetailColumn({workingTime}) {
+function EcMainCompanyLeftDetailColumn({ workingTime, translate}) {
   const dayOfWeek = moment().format("e");
 
   return workingTime ? (
     <div className="ecMainCompanyRightDetailColumn">
         <span className="ecMainCompanyRightDetailColumn__title">
-          Working time:
+          {translate("company.workingTime")}:
         </span>
       <div className="ecMainCompanyRightDetailColumn__items">
-        <div
-          className={`ecMainCompanyRightDetailColumn__item ecMainCompanyRightDetailColumn__item--active-${dayOfWeek === '1'}`}
-        >
-          <span>Mn:</span> {checkWorkingDays(workingTime.mn_from, workingTime.mn_to)}</div>
-        <div
-          className={`ecMainCompanyRightDetailColumn__item ecMainCompanyRightDetailColumn__item--active-${dayOfWeek === '2'}`}
-        >
-          <span>Tu:</span> {checkWorkingDays(workingTime.tu_from, workingTime.tu_to)}</div>
-        <div
-          className={`ecMainCompanyRightDetailColumn__item ecMainCompanyRightDetailColumn__item--active-${dayOfWeek === '3'}`}
-        >
-          <span>We:</span> {checkWorkingDays(workingTime.we_from, workingTime.we_to)}</div>
-        <div
-          className={`ecMainCompanyRightDetailColumn__item ecMainCompanyRightDetailColumn__item--active-${dayOfWeek === '4'}`}
-        >
-          <span>Th:</span> {checkWorkingDays(workingTime.th_from, workingTime.th_to)}</div>
-        <div
-          className={`ecMainCompanyRightDetailColumn__item ecMainCompanyRightDetailColumn__item--active-${dayOfWeek === '5'}`}
-        >
-          <span>Fr:</span> {checkWorkingDays(workingTime.fr_from, workingTime.fr_to)}</div>
-        <div
-          className={`ecMainCompanyRightDetailColumn__item ecMainCompanyRightDetailColumn__item--active-${dayOfWeek === '6'}`}
-        >
-          <span>St:</span> {checkWorkingDays(workingTime.st_from, workingTime.st_to)}</div>
-        <div
-          className={`ecMainCompanyRightDetailColumn__item ecMainCompanyRightDetailColumn__item--active-${dayOfWeek === '0'}`}
-        >
-          <span>Sn:</span> {checkWorkingDays(workingTime.sn_from, workingTime.sn_to)}</div>
+        <DayOfWeek
+          day={translate(`company.mn`)}
+          workingTime={checkWorkingDays(workingTime.mn_from, workingTime.mn_to, translate)}
+          isActive={dayOfWeek === '1'}
+        />
+        <DayOfWeek
+          day={translate(`company.tu`)}
+          workingTime={checkWorkingDays(workingTime.tu_from, workingTime.tu_to, translate)}
+          isActive={dayOfWeek === '2'}
+        />
+        <DayOfWeek
+          day={translate(`company.we`)}
+          workingTime={checkWorkingDays(workingTime.we_from, workingTime.we_to, translate)}
+          isActive={dayOfWeek === '3'}
+        />
+        <DayOfWeek
+          day={translate(`company.th`)}
+          workingTime={checkWorkingDays(workingTime.th_from, workingTime.th_to, translate)}
+          isActive={dayOfWeek === '4'}
+        />
+        <DayOfWeek
+          day={translate(`company.fr`)}
+          workingTime={checkWorkingDays(workingTime.fr_from, workingTime.fr_to, translate)}
+          isActive={dayOfWeek === '5'}
+        />
+        <DayOfWeek
+          day={translate(`company.st`)}
+          workingTime={checkWorkingDays(workingTime.st_from, workingTime.st_to, translate)}
+          isActive={dayOfWeek === '6'}
+        />
+        <DayOfWeek
+          day={translate(`company.sn`)}
+          workingTime={checkWorkingDays(workingTime.sn_from, workingTime.sn_to, translate)}
+          isActive={dayOfWeek === '7'}
+        />
       </div>
     </div>
   ) : null;
 }
 
-function EcMainCompanyRightDetailColumn({company = {}}) {
+function EcMainCompanyRightDetailColumn({company = {}, translate}) {
   const websiteLink = nullValidator(company.exchange_company_detail, 'website', null);
   return (
     <div className="ecMainCompanyRightDetailColumn">
       <div className="ecMainCompanyRightDetailColumn__phone">
-        <span>Phone: </span>{nullValidator(company.exchange_company_detail, 'phone', '--//--')}
+        <span>{translate("company.phone")}: </span>{nullValidator(company.exchange_company_detail, 'phone', '--//--')}
       </div>
       <div className="ecMainCompanyRightDetailColumn__website">
-        <span>Website: </span>
-        {websiteLink ? <a href={websiteLink} target="_blank">https://{websiteLink}</a> : '--//--'}
+        <span>{translate("company.website")}: </span>
+        {websiteLink ? <a href={websiteLink} target="_blank">{websiteLink}</a> : '--//--'}
       </div>
     </div>
   );
 }
 
-export default function EcMainCompanyDetail({ filteredCurrency, company }) {
+export default function EcMainCompanyDetail({ filteredCurrency, company, translate }) {
   return (
     <div className="ecMainCompanyDetail">
       <div className="ecMainCompanyDetail__column ecMainCompanyDetail__column--left">
-        <EcMainCompanyLeftDetailColumn workingTime={nullValidator(company, 'exchange_company_working_time', {})}/>
+        <EcMainCompanyLeftDetailColumn
+          workingTime={nullValidator(company, 'exchange_company_working_time', {})}
+          translate={translate}
+        />
       </div>
       <div className="ecMainCompanyDetail__column ecMainCompanyDetail__column--right">
-        <EcMainCompanyRightDetailColumn company={company}/>
+        <EcMainCompanyRightDetailColumn
+          company={company}
+          translate={translate}
+        />
       </div>
     </div>
   );

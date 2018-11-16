@@ -52,7 +52,7 @@ export default class Dropdown extends React.PureComponent {
 
   componentDidUpdate(prevProps) {
     const { list, selectedIndex } = this.props;
-    if (prevProps.list.length !== list.length) {
+    if (prevProps.list.length !== list.length || selectedIndex !== prevProps.selectedIndex) {
       this.setState({selectedItem: prepopulateSelectedValue(list, selectedIndex)});
     }
   }
@@ -76,6 +76,7 @@ export default class Dropdown extends React.PureComponent {
   selectItem(item) {
     const { selectItem } = this.props;
     this.setState({
+      isListHidden: true,
       selectedItem: item
     });
 
@@ -109,7 +110,7 @@ export default class Dropdown extends React.PureComponent {
     return (
       <div
         className={`ec-dropdown ${className}`}
-        onMouseOverCapture={this.mouseOverHandler}
+        onMouseOver={this.mouseOverHandler}
         onMouseOut={this.mouseOutHandler}
       >
         <div

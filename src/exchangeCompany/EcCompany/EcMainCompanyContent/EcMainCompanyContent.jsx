@@ -8,8 +8,9 @@ import EcMainCompanyMap from "./EcMainCompanyMap/EcMainCompanyMap";
 import EcMainCompanyDetail from "./EcMainCompanyDetail/EcMainCompanyDetail";
 
 import './ecMainCompanyContent.less';
+import {translate} from "react-i18next";
 
-export default class EcMainCompanyContent extends React.PureComponent{
+class EcMainCompanyContent extends React.PureComponent{
   get updateDate() {
     const { company } = this.props;
     if (company && company.updated_at) {
@@ -27,7 +28,8 @@ export default class EcMainCompanyContent extends React.PureComponent{
       selectedCurrency,
       selectedCompanyCurrency,
       filteredCurrency,
-      dispatch
+      dispatch,
+      t
     } = this.props;
 
     return (
@@ -38,7 +40,7 @@ export default class EcMainCompanyContent extends React.PureComponent{
               <h1>{nullValidator(company, 'company_name')}</h1>
               <h2>{nullValidator(company, 'branch_name')}</h2>
             </div>
-            <span>Last update: {this.updateDate}</span>
+            <span>{t("companies.lastUpdate")}: {this.updateDate}</span>
           </div>
           <div className="ecMainCompanyContent__calculator">
             <EcMainCompanyCalculate
@@ -49,18 +51,21 @@ export default class EcMainCompanyContent extends React.PureComponent{
               selectedCurrency={selectedCurrency}
               selectedCompanyCurrency={selectedCompanyCurrency}
               filteredCurrency={filteredCurrency}
+              translate={t}
             />
           </div>
           <div className="ecMainCompanyContent__map">
             <EcMainCompanyMap
               filteredCurrency={filteredCurrency}
               company={company}
+              translate={t}
             />
           </div>
           <div className="ecMainCompanyContent__footer">
             <EcMainCompanyDetail
               filteredCurrency={filteredCurrency}
               company={company}
+              translate={t}
             />
           </div>
         </BlockWrapper>
@@ -68,3 +73,5 @@ export default class EcMainCompanyContent extends React.PureComponent{
     );
   }
 }
+
+export default translate('common')(EcMainCompanyContent);

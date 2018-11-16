@@ -1,5 +1,6 @@
 import React from 'react';
 import {withRouter} from "react-router-dom";
+import {translate} from "react-i18next";
 
 import {ecCurrencyMainTableConfig} from "./ecCurrencyMainTableConfig";
 import {Button, Checkbox, Grid, Input} from "../../../../common/controlLib";
@@ -47,6 +48,7 @@ class EcCurrencyMainTable extends React.PureComponent {
     this.sortRowsByGeolocation = this.sortRowsByGeolocation.bind(this);
     this.filterRowsByName = this.filterRowsByName.bind(this);
     this.knowMore = this.knowMore.bind(this);
+    this.onRowHover = this.onRowHover.bind(this);
   }
 
   knowMore(id, name) {
@@ -140,12 +142,16 @@ class EcCurrencyMainTable extends React.PureComponent {
     });
   }
 
+  onRowHover(record) {
+    const { onRowHover } = this.props;
+    onRowHover(record)
+  }
+
   render() {
-    const { currencyAmount, selectedCurrency } = this.props;
+    const { currencyAmount, selectedCurrency, t } = this.props;
     const {
       records,
       isIncreasePriceSort,
-      isIncreaseRecommendedSort,
       isIncreaseGeolocationSort,
       companyFilterName,
       isBuyStatus
@@ -162,17 +168,17 @@ class EcCurrencyMainTable extends React.PureComponent {
             <Button
               isActive={isIncreasePriceSort}
               onClick={this.sortRowsByPriceOnlyBest}
-            >Best rate</Button>
+            >{t("companies.bestRate")}</Button>
             <Checkbox
               checked={isIncreaseGeolocationSort}
               onChange={this.sortRowsByGeolocation}
-            >Close to me</Checkbox>
+            >{t("companies.closeToMe")}</Checkbox>
           </div>
           <div className="ecCurrencyMainTableGridPanel--position-right">
             <Input
               type="text"
               value={companyFilterName}
-              placeholder="Filter by name"
+              placeholder={t("companies.filterBuyName")}
               onChange={this.filterRowsByName}
             />
           </div>
@@ -181,13 +187,15 @@ class EcCurrencyMainTable extends React.PureComponent {
           isHeader
           stripe
           records={records}
+          onMouseOver={this.onRowHover}
           config={ecCurrencyMainTableConfig(
             isBuyStatus,
             currencyAmount,
             selectedCurrency,
             this.knowMore,
             this.sortRowsByName,
-            this.sortRowsByPrice
+            this.sortRowsByPrice,
+            t
           )}
         />
       </div>
@@ -195,4 +203,4 @@ class EcCurrencyMainTable extends React.PureComponent {
   }
 }
 
-export default withRouter(EcCurrencyMainTable);
+export default translate('common')(withRouter(EcCurrencyMainTable));

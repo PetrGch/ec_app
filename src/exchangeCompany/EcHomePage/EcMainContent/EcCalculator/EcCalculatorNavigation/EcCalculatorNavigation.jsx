@@ -19,7 +19,7 @@ export default class EcCalculatorNavigation extends React.PureComponent {
   }
 
   render() {
-    const { dispatch, isBuyStatus, currencyTypes, selectedCurrency } = this.props;
+    const { dispatch, isBuyStatus, currencyTypes, selectedCurrency, translate } = this.props;
     const changeBuyStatus = (event) => {
       if (event.target && event.target.value === "sell") {
         dispatch(setBuyStatus(false));
@@ -37,14 +37,14 @@ export default class EcCalculatorNavigation extends React.PureComponent {
             checked={isBuyStatus}
             name={'sellBuy'}
             onChange={changeBuyStatus}
-          >Buy</Radio>
+          >{translate('companies.buy')}</Radio>
           <Radio
             value="sell"
             size={sizeType.LG}
             checked={!isBuyStatus}
             name={'sellBuy'}
             onChange={changeBuyStatus}
-          >Sell</Radio>
+          >{translate('companies.sell')}</Radio>
         </div>
         <div className="ecCalculatorNavigation__currency">
           <Dropdown

@@ -15,12 +15,8 @@ const LANGUAGES = [
     value: "EN"
   },
   {
-    index: "de",
-    value: "DE"
-  },
-  {
-    index: "pl",
-    value: "PL"
+    index: "th",
+    value: "TH"
   }
 ];
 
@@ -31,6 +27,14 @@ class EcHeader extends React.PureComponent {
     this.scrollToStart = this.scrollToStart.bind(this);
     this.selectLanguage = this.selectLanguage.bind(this);
     this.navigateToHomePage = this.navigateToHomePage.bind(this);
+  }
+
+  componentDidMount() {
+    const { i18n, lng } = this.props;
+
+    if (lng === "dev") {
+      i18n.changeLanguage("en");
+    }
   }
 
   scrollToStart() {
@@ -79,7 +83,7 @@ class EcHeader extends React.PureComponent {
 
   render() {
     const { lng } = this.props;
-
+    console.log(lng)
     return (
       <header className="ecHeader">
         <div className="ecHeader__language">

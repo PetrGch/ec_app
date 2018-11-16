@@ -149,14 +149,14 @@ export default class EcMainCompanyCalculate extends React.PureComponent {
   }
 
   render() {
-    const { currencyTypes } = this.props;
+    const { currencyTypes, translate } = this.props;
     const { selectedCurrency, isBuyStatus } = this.state;
 
     return (
       <div className="ecMainCompanyCalculate">
         <div className="ecMainCompanyCalculate__price">
-          <span>Buy: {this.buyPrice}</span>
-          <span>Sell: {this.sellPrice}</span>
+          <span>{translate("companies.buy")}: {this.buyPrice}</span>
+          <span>{translate("companies.sell")}: {this.sellPrice}</span>
         </div>
         <div className="ecMainCompanyCalculate__calculator ecMainCompanyCalculator">
           <ExpandCollapseWrapper name="Calculator" isExpand>
@@ -167,14 +167,14 @@ export default class EcMainCompanyCalculate extends React.PureComponent {
                 checked={isBuyStatus}
                 name='sellBuy'
                 onChange={this.changeBuyStatus}
-              >Buy</Radio>
+              >{translate("companies.buy")}</Radio>
               <Radio
                 value="sell"
                 size={sizeType.LG}
                 checked={!isBuyStatus}
                 name='sellBuy'
                 onChange={this.changeBuyStatus}
-              >Sell</Radio>
+              >{translate("companies.sell")}</Radio>
             </div>
             <div className="ecMainCompanyCalculator__currency">
               <Dropdown
@@ -186,7 +186,7 @@ export default class EcMainCompanyCalculate extends React.PureComponent {
             </div>
             <div className="ecMainCompanyCalculator__inputs ecMainCompanyCalculatorInputs">
               <div className="ecMainCompanyCalculatorInputs__amount">
-                <span>Amount ({selectedCurrency})</span>
+                <span>{translate("company.amount")} ({selectedCurrency})</span>
                 <InputValidator
                   InputComponent={Input}
                   type="text"
@@ -203,7 +203,7 @@ export default class EcMainCompanyCalculate extends React.PureComponent {
                 <FaExchangeAlt/>
               </span>
               <div className="ecMainCompanyCalculatorInputs__finalPrice">
-                <span>Final price ({selectedCurrency})</span>
+                <span>{translate("company.finalPrice")} ({selectedCurrency})</span>
                 <InputValidator
                   InputComponent={Input}
                   type="text"

@@ -54,15 +54,15 @@ export default class EcMainCompanyMap extends React.PureComponent {
   }
 
   render() {
-    const { filteredCurrency } = this.props;
+    const { filteredCurrency, translate }  = this.props;
 
     return (
       <div className="ecMainCompanyMap">
         <div className="ecMainCompanyMap__address">
-          <span>Address: {this.address}</span>
+          <span>{translate("company.address")}: {this.address}</span>
         </div>
         <div className="ecMainCompanyMap__map">
-          <ExpandCollapseWrapper name="Map">
+          <ExpandCollapseWrapper name={translate("company.map")}>
             {filteredCurrency && this.companyOnMap}
           </ExpandCollapseWrapper>
         </div>

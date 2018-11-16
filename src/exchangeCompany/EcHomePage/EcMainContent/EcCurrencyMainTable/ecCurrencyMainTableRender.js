@@ -30,19 +30,19 @@ export function renderCompanyName(record) {
   return <CompanyInfo company_name={company_name} branch_name={branch_name} address={address}/>
 }
 
-export function renderBuyTitle(sumAmount, config) {
+export function renderBuyTitle(sumAmount, config, translate) {
   return (
     <div className="ecCurrencyMainTable__titleSumAmount">
-      <span>{`Buy ${sumAmount || 0}`}</span>
+      <span>{translate("companies.buy")} {sumAmount || 0}</span>
       {config.subTitle && <span>{config.subTitle}</span>}
     </div>
   );
 }
 
-export function renderSellTitle(sumAmount, config) {
+export function renderSellTitle(sumAmount, config, translate) {
   return (
     <div className="ecCurrencyMainTable__titleSumAmount">
-      <span>{`Sell ${sumAmount || 0}`}</span>
+      <span>{translate("companies.sell")} {sumAmount || 0}</span>
       {config.subTitle && <span>{config.subTitle}</span>}
     </div>
   );
@@ -73,16 +73,15 @@ export function renderLastUpdateTime(record, key) {
   return "-//-"
 }
 
-export function renderKnowMore(id, name, knowMore) {
+export function renderKnowMore(id, name, knowMore, translate) {
   const knowMoreFunction = () => {
     knowMore(id, name);
   };
   return (<Button
-    // size={sizeType.LG}
     className="ecCurrencyMainTable__knowMore"
     onClick={knowMoreFunction}
   >
-    Know more
+    {translate("companies.knowMore")}
   </Button>)
 }
 

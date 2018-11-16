@@ -9,6 +9,23 @@ import './ecMainContent.less';
 
 
 export default class EcMainContent extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      hoveredRowRecord: null
+    };
+
+    this.onRowHover = this.onRowHover.bind(this);
+  }
+
+  onRowHover(record) {
+    const { hoveredRowRecord } = this.state;
+    if (!hoveredRowRecord || hoveredRowRecord.id !== record.id) {
+      this.setState({ hoveredRowRecord: record });
+    }
+  }
+
   render() {
     const {
       dispatch,
@@ -19,6 +36,7 @@ export default class EcMainContent extends React.PureComponent {
       currencyTypes,
       selectedCurrency
     } = this.props;
+    const { hoveredRowRecord } = this.state;
 
     return (
       <main className="ecMainContent">
@@ -38,12 +56,14 @@ export default class EcMainContent extends React.PureComponent {
             currencyAmount={currencyAmount}
             isBuyStatus={isBuyStatus}
             selectedCurrency={selectedCurrency}
+            onRowHover={this.onRowHover}
           />
         </BlockWrapper>
         <BlockWrapper>
           <EcMainMap
             records={filteredCurrencies}
             isBuyStatus={isBuyStatus}
+            hoveredRowRecord={hoveredRowRecord}
           />
         </BlockWrapper>
       </main>

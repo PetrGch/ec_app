@@ -14,7 +14,7 @@ export default class Grid extends React.PureComponent {
   }
 
   get body() {
-    const { records, config, primaryKey, size, stripe } = this.props;
+    const { records, config, primaryKey, size, stripe, onMouseOver } = this.props;
     return records && Array.isArray(records)
       ? records.map((record, index) => (
         <Row
@@ -23,6 +23,7 @@ export default class Grid extends React.PureComponent {
           config={config}
           size={size}
           stripe={stripe}
+          onMouseOver={onMouseOver}
         />
       ))
       : null;

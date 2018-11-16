@@ -33,23 +33,25 @@
   }
 
   &__item {
-    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
     padding: 4px 10px;
     font-size: 16px;
 
     & span {
       display: inline-block;
-      width: 40px;
       font-weight: 700;
       font-size: 16px;
     }
 
     &--active {
       &-true {
-        color: @primary-green;
+        width: 256px;
         border: 1px solid @primary-green;
         border-radius: 6px;
         font-size: 18px;
+        color: @primary-green;
       }
     }
   }

@@ -27,4 +27,38 @@
       }
     }
   }
+
+  & .leaflet-container {
+    height: 400px;
+    width: 100%;
+  }
+
+  & .leaflet-popup-content {
+    margin: 10px;
+  }
+
+  & .leaflet-popup-content-wrapper {
+    position: relative;
+    border: 1px solid @primary-green;
+    border-radius: 6px;
+
+    &:after {
+      content: '';
+      position: absolute;
+      border: 0;
+      left: 50%;
+      width: 19px;
+      height: 4px;
+      margin-left: -10px;
+      background: @primary-white;
+    }
+  }
+
+  & .leaflet-popup-tip {
+    border: 1px solid @primary-green;
+  }
+
+  & .leaflet-marker-icon {
+    transition: all .1s ease;
+  }
 }

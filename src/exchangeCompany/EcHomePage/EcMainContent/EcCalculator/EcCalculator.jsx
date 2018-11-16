@@ -6,6 +6,10 @@ import EcCalculatorSlider from "./EcCalculatorSlider/EcCalculatorSlider";
 
 import './ecCalculator.less';
 
+const cities = {
+  th: "กรุงเทพฯ",
+  en: "Bangkok"
+};
 
 class EcCalculator extends React.Component {
   render() {
@@ -15,13 +19,14 @@ class EcCalculator extends React.Component {
       isBuyStatus,
       currencyTypes,
       selectedCurrency,
+      lng,
       t
     } = this.props;
 
     return (
       <div className="ecCalculator">
         <h1 className="ecCalculator__title">
-          { t('excurrate.title', { city: "London" }) }
+          { t('companies.title', { city: cities[lng] }) }
         </h1>
         <div className="ecCalculator__content">
           <EcCalculatorNavigation
@@ -29,10 +34,12 @@ class EcCalculator extends React.Component {
             isBuyStatus={isBuyStatus}
             currencyTypes={currencyTypes}
             selectedCurrency={selectedCurrency}
+            translate={t}
           />
           <EcCalculatorSlider
             dispatch={dispatch}
             currencyAmount={currencyAmount}
+            translate={t}
           />
         </div>
       </div>

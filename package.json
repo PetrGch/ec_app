@@ -11,7 +11,7 @@
     "dev:start": "nodemon ./public/server/serverBundle.js",
     "prod": "npm-run-all prod:*",
     "prod:stop": "pm2 stop serverBundle",
-    "prod:build-prod": "webpack --config config/webpackConfig/webpack.prod.js",
+    "prod:build-prod": "webpack -p --config config/webpackConfig/webpack.prod.js",
     "prod:build-server": "webpack -p --config config/webpackConfig/webpack.server.js",
     "prod:start": "pm2 start ./public/server/serverBundle.js",
     "lint": "./node_modules/.bin/eslint -c ./config/.eslintrc.js --ext .js --ext .jsx src",

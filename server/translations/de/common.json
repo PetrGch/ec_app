@@ -1,5 +1,5 @@
 {
-  "excurrate": {
+  "companies": {
     "title": "Wechselkurs in {{city}}",
     "intro": "Zum Loslegen editiere <1><0></0></1>. Beim Speichern wird die App im Browser automatisch neu geladen."
   }
