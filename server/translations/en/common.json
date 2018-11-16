@@ -1,6 +1,35 @@
 {
   "companies": {
-    "title": "Currency exchange rate in {{city}}",
-    "intro": "To get started, edit <1><0></0></1> and save to reload."
+    "title": "Currency exchange rates in {{city}}",
+    "buy": "Buy",
+    "sell": "Sell",
+    "bestRate": "Best rate",
+    "closeToMe": "Close to me",
+    "filterBuyName": "Filter by name",
+    "gridBranchName": "Exchange offices",
+    "lastUpdate": "Last update",
+    "info": "Info",
+    "knowMore": "Know more"
+  },
+  "company": {
+    "calculator": "Calculator",
+    "amount": "Amount",
+    "finalPrice": "Final price",
+    "address": "Address",
+    "map": "Map",
+    "workingTime": "Working hours",
+    "phone": "Phone",
+    "website": "Website",
+    "mn": "Mn",
+    "tu": "Tu",
+    "we": "We",
+    "th": "Th",
+    "fr": "Fr",
+    "st": "St",
+    "sn": "Sn"
+  },
+  "warning": {
+    "notWorkingDay": "not working day"
   }
+
 }
