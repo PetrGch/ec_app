@@ -8,6 +8,7 @@ function Item({index, value, selectedItem, selectItem}) {
   const takeSelectData = () => {
     selectItem({index, value});
   };
+
   const isActive = selectedItem.index === index || selectedItem.index === 'DEFAULT';
   return (
     <li
@@ -42,12 +43,19 @@ export default class Dropdown extends React.PureComponent {
 
     this.state = {
       isListHidden: true,
-      selectedItem: prepopulateSelectedValue(props.list, props.selectedIndex)
+      selectedItem: null
     };
 
     this.mouseOverHandler = this.mouseOverHandler.bind(this);
     this.mouseOutHandler = this.mouseOutHandler.bind(this);
     this.selectItem = this.selectItem.bind(this);
+  }
+
+  componentDidMount() {
+    const { list, selectedIndex } = this.props;
+    this.setState({
+      selectedItem: prepopulateSelectedValue(list, selectedIndex)
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -116,13 +124,13 @@ export default class Dropdown extends React.PureComponent {
         <div
           className={`ec-dropdown__handler ec-dropdown__handler--hidden-${isListHidden} ${setSize('ec-dropdown__handler', size)}`}
         >
-          {children || selectedItem.value}
+          {children || selectedItem && selectedItem.value}
         </div>
         <div
           className={`ec-dropdown__list ec-dropdown__list--hidden-${isListHidden}`}
         >
           <ul className="ec-dropdownList">
-            {this.list}
+            {selectedItem && this.list}
           </ul>
         </div>
       </div>

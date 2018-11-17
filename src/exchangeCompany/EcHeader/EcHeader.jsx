@@ -83,14 +83,14 @@ class EcHeader extends React.PureComponent {
 
   render() {
     const { lng } = this.props;
-    console.log(lng)
+
     return (
       <header className="ecHeader">
         <div className="ecHeader__language">
           <Dropdown
             size={sizeType.MD}
             list={LANGUAGES}
-            selectedIndex={lng}
+            selectedIndex={lng || "en"}
             selectItem={this.selectLanguage}
           />
         </div>
