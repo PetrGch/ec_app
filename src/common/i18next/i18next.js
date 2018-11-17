@@ -33,6 +33,7 @@ i18n
     debug: NODE_ENV === 'development',
     defaultNS: 'common',
     ns: 'common',
+    fallbackLng: 'en',
     resources: NODE_ENV === 'development' ? {
       en: {
         common: require('./translations/en/common')

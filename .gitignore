@@ -11,3 +11,5 @@ public/server/
 
 !**/favicon.ico
 !**/manifest.json
+!**/translations
+!**/translations/**/*.json
