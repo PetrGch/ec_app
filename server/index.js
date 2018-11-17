@@ -44,7 +44,7 @@ app.use("/*", indexHtml);
 // --------- i18n -------------------------
 
 i18next.use(i18nextExpress.LanguageDetector).init({
-  preload: ["en", "de", "pl"],
+  preload: ["en", "th"],
   resources: {
     en: {
       common: require('./translations/en/common')
