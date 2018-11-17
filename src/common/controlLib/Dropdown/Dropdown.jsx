@@ -8,6 +8,7 @@ function Item({index, value, selectedItem, selectItem}) {
   const takeSelectData = () => {
     selectItem({index, value});
   };
+
   const isActive = selectedItem.index === index || selectedItem.index === 'DEFAULT';
   return (
     <li
