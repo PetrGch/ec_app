@@ -87,21 +87,19 @@ export default class EcMainMap extends React.PureComponent {
 
       return (
         <div className="ecMainMap">
-          <div>
-            {(records && records.length !== 0) && <Map center={center} zoom={zoom}>
-              <TileLayer
-                attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a> '
-                url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
-              />
-              <Markers
-                records={records}
-                Marker={Marker}
-                Popup={Popup}
-                mapMarker={marker}
-                selectedRowRecord={selectedRowRecord}
-              />
-            </Map>}
-          </div>
+          {(records && records.length !== 0) && <Map center={center} zoom={zoom}>
+            <TileLayer
+              attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a> '
+              url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
+            />
+            <Markers
+              records={records}
+              Marker={Marker}
+              Popup={Popup}
+              mapMarker={marker}
+              selectedRowRecord={selectedRowRecord}
+            />
+          </Map>}
         </div>
       )
     } else {

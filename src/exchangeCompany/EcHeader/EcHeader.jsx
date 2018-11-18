@@ -63,7 +63,7 @@ class EcHeader extends React.Component {
 
   get breadcrumb() {
     const { branchRout, path } = this.props;
-console.log(path)
+
     if (branchRout && path !== "/") {
       return (
         <div className="ecHeader__breadCrumb">
