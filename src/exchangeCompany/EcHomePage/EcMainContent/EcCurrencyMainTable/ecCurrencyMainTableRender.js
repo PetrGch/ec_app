@@ -2,20 +2,18 @@ import React from 'react';
 import moment from 'moment';
 import Button from "../../../../common/controlLib/Button/Button";
 
-function CompanyInfo({company_name, branch_name, address}) {
+function CompanyInfo({company_name, branch_name, onNameClickEvent}) {
   return (
-    <div className="ecCurrencyMainTable__companyName">
+    <div className="ecCurrencyMainTable__companyName" onClick={onNameClickEvent}>
       {company_name && <strong>{company_name}</strong>}
       {branch_name && <span>{branch_name}</span>}
-      {address && <span>{address}</span>}
     </div>
   );
 }
 
-export function renderCompanyName(record) {
+export function renderCompanyName(record, onNameClick) {
   let company_name = null;
   let branch_name = null;
-  let address = null;
   if (record) {
     if (record.company_name) {
       company_name = record.company_name;
@@ -23,11 +21,16 @@ export function renderCompanyName(record) {
     if (record.branch_name) {
       branch_name = record.branch_name;
     }
-    if (record.address) {
-      address = record.address;
-    }
   }
-  return <CompanyInfo company_name={company_name} branch_name={branch_name} address={address}/>
+  const onNameClickEvent = () => {
+    onNameClick(record)
+  };
+
+  return <CompanyInfo
+    company_name={company_name}
+    branch_name={branch_name}
+    onNameClickEvent={onNameClickEvent}
+  />
 }
 
 export function renderBuyTitle(sumAmount, config, translate) {

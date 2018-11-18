@@ -72,7 +72,9 @@ export function filterCurrency(record, currencyType, currencyAmount) {
           lat: record.lat,
           lng: record.lng,
           buy_price: filteredAmount.buy_price,
-          sell_price: filteredAmount.sell_price
+          sell_price: filteredAmount.sell_price,
+          address: record.address,
+          google_map_url: record.google_map_url
         };
         return true;
       }

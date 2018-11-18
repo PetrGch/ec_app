@@ -14,11 +14,14 @@ export const ecCurrencyMainTableConfig = (
   knowMore = () => {},
   sortRowsByName = () => {},
   sortRowsByPrice = () => {},
+  onNameClick,
   translate
 ) => (
   isBuy
-    ? ecCurrencyMainTableBuyConfig(sumAmount, knowMore, selectedCurrency, sortRowsByName, sortRowsByPrice, translate)
-    : ecCurrencyMainTableSumConfig(sumAmount, knowMore, selectedCurrency, sortRowsByName, sortRowsByPrice, translate)
+    ? ecCurrencyMainTableBuyConfig(
+      sumAmount, knowMore, selectedCurrency, sortRowsByName, sortRowsByPrice, onNameClick, translate)
+    : ecCurrencyMainTableSumConfig(
+      sumAmount, knowMore, selectedCurrency, sortRowsByName, sortRowsByPrice, onNameClick, translate)
 );
 
 const ecCurrencyMainTableBuyConfig = (
@@ -27,6 +30,7 @@ const ecCurrencyMainTableBuyConfig = (
   selectedCurrency,
   sortRowsByName,
   sortRowsByPrice,
+  onNameClick,
   translate
 ) => (
   [
@@ -35,7 +39,7 @@ const ecCurrencyMainTableBuyConfig = (
       key: 'company_name',
       title: translate("companies.gridBranchName"),
       renderTitle: (record, config) => renderTitle(record, config, sortRowsByName),
-      renderCell: renderCompanyName
+      renderCell: (record) => renderCompanyName(record, onNameClick)
     },
     {
       index: 'buy_price',
@@ -72,6 +76,7 @@ const ecCurrencyMainTableSumConfig = (
   selectedCurrency,
   sortRowsByName,
   sortRowsByPrice,
+  onNameClick,
   translate
 ) => (
   [
@@ -80,7 +85,7 @@ const ecCurrencyMainTableSumConfig = (
       key: 'company_name',
       title: translate("companies.gridBranchName"),
       renderTitle: (record, config) => renderTitle(record, config, sortRowsByName),
-      renderCell: renderCompanyName
+      renderCell: (record) => renderCompanyName(record, onNameClick)
     },
     {
       index: 'sell_price',

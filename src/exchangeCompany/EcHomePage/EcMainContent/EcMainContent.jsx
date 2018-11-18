@@ -13,16 +13,16 @@ export default class EcMainContent extends React.PureComponent {
     super(props);
 
     this.state = {
-      hoveredRowRecord: null
+      selectedRowRecord: null
     };
 
-    this.onRowHover = this.onRowHover.bind(this);
+    this.onNameClick = this.onNameClick.bind(this);
   }
 
-  onRowHover(record) {
-    const { hoveredRowRecord } = this.state;
-    if (!hoveredRowRecord || hoveredRowRecord.id !== record.id) {
-      this.setState({ hoveredRowRecord: record });
+  onNameClick(record) {
+    const { selectedRowRecord } = this.state;
+    if (!selectedRowRecord || selectedRowRecord.id !== record.id) {
+      this.setState({ selectedRowRecord: record });
     }
   }
 
@@ -36,7 +36,7 @@ export default class EcMainContent extends React.PureComponent {
       currencyTypes,
       selectedCurrency
     } = this.props;
-    const { hoveredRowRecord } = this.state;
+    const { selectedRowRecord } = this.state;
 
     return (
       <main className="ecMainContent">
@@ -56,14 +56,14 @@ export default class EcMainContent extends React.PureComponent {
             currencyAmount={currencyAmount}
             isBuyStatus={isBuyStatus}
             selectedCurrency={selectedCurrency}
-            onRowHover={this.onRowHover}
+            onNameClick={this.onNameClick}
           />
         </BlockWrapper>
         <BlockWrapper>
           <EcMainMap
             records={filteredCurrencies}
             isBuyStatus={isBuyStatus}
-            hoveredRowRecord={hoveredRowRecord}
+            selectedRowRecord={selectedRowRecord}
           />
         </BlockWrapper>
       </main>

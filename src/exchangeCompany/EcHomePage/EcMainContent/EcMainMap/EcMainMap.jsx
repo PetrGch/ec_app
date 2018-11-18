@@ -18,11 +18,11 @@ export function mapMarker(L) {
   });
 }
 
-function Markers({records, Marker, Popup, mapMarker, hoveredRowRecord}) {
+function Markers({records, Marker, Popup, mapMarker, selectedRowRecord}) {
   return records
     .filter(record => record.lat && record.lng)
     .map(record => {
-      const isRecordIdMach = hoveredRowRecord && hoveredRowRecord.id === record.id;
+      const isRecordIdMach = selectedRowRecord && selectedRowRecord.id === record.id;
       if (isRecordIdMach) {
         mapMarker.options.iconSize = [50, 60];
         mapMarker.options.iconAnchor = [25, 60];
@@ -55,16 +55,13 @@ function Markers({records, Marker, Popup, mapMarker, hoveredRowRecord}) {
 
 export default class EcMainMap extends React.PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
-    const {records, isBuyStatus} = nextProps;
-    const propsCenter = records && sortedByPrice(records, true, isBuyStatus)
-      .filter(record => record.lat && record.lng)[0] || {};
-    const center = propsCenter.lat && propsCenter.lng
-      ? [propsCenter.lat, propsCenter.lng] : [];
+    const { selectedRowRecord } = nextProps;
+    const selectedCoordinates = selectedRowRecord && selectedRowRecord.lat && selectedRowRecord.lng
+      ? [selectedRowRecord.lat, selectedRowRecord.lng] : null;
 
-    if (center[0] !== prevState.center[0]) {
+    if (selectedCoordinates && JSON.stringify(prevState.center) !== JSON.stringify(selectedCoordinates)) {
       return {
-        ...prevState,
-        center: center
+        center: selectedCoordinates
       }
     }
     return null;
@@ -75,12 +72,12 @@ export default class EcMainMap extends React.PureComponent {
 
     this.state = {
       zoom: 14,
-      center: [],
+      center: ["13.7563", "100.5018"]
     }
   }
 
   render() {
-    const {records, hoveredRowRecord} = this.props;
+    const {records, selectedRowRecord} = this.props;
     const {center, zoom} = this.state;
 
     if (__isBrowser__ && center.length !== 0) {
@@ -101,7 +98,7 @@ export default class EcMainMap extends React.PureComponent {
                 Marker={Marker}
                 Popup={Popup}
                 mapMarker={marker}
-                hoveredRowRecord={hoveredRowRecord}
+                selectedRowRecord={selectedRowRecord}
               />
             </Map>}
           </div>

@@ -18,11 +18,10 @@ class EcCurrencyMainTable extends React.PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
     const { isBuyStatus, filteredCurrencies } = nextProps;
 
-    if (filteredCurrencies && (prevState.isIncreasePriceSort || isBuyStatus !== prevState.isBuyStatus)) {
+    if (prevState.companyFilterName === '' && ((isBuyStatus !== prevState.isBuyStatus) || filteredCurrencies.length !== prevState.records.length)) {
       return {
-        ...prevState,
         isBuyStatus,
-        records: filterByName(sortedByPrice(filteredCurrencies, true, isBuyStatus), prevState.companyFilterName)
+        records: sortedByPrice(filteredCurrencies, true, isBuyStatus)
       }
     }
     return null;
@@ -48,7 +47,18 @@ class EcCurrencyMainTable extends React.PureComponent {
     this.sortRowsByGeolocation = this.sortRowsByGeolocation.bind(this);
     this.filterRowsByName = this.filterRowsByName.bind(this);
     this.knowMore = this.knowMore.bind(this);
-    this.onRowHover = this.onRowHover.bind(this);
+    this.onNameClick = this.onNameClick.bind(this);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { companyFilterName } = this.state;
+    const { isBuyStatus, filteredCurrencies } = this.props;
+
+    if (companyFilterName !== prevState.companyFilterName) {
+      this.setState({
+        records: filterByName(sortedByPrice(filteredCurrencies, true, isBuyStatus), prevState.companyFilterName)
+      });
+    }
   }
 
   knowMore(id, name) {
@@ -142,9 +152,9 @@ class EcCurrencyMainTable extends React.PureComponent {
     });
   }
 
-  onRowHover(record) {
-    const { onRowHover } = this.props;
-    onRowHover(record)
+  onNameClick(record) {
+    const { onNameClick } = this.props;
+    onNameClick(record)
   }
 
   render() {
@@ -187,7 +197,6 @@ class EcCurrencyMainTable extends React.PureComponent {
           isHeader
           stripe
           records={records}
-          onMouseOver={this.onRowHover}
           config={ecCurrencyMainTableConfig(
             isBuyStatus,
             currencyAmount,
@@ -195,6 +204,7 @@ class EcCurrencyMainTable extends React.PureComponent {
             this.knowMore,
             this.sortRowsByName,
             this.sortRowsByPrice,
+            this.onNameClick,
             t
           )}
         />
