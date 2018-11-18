@@ -29,8 +29,14 @@
   }
 
   &__googleMapUrl {
+    display: block;
+    margin-top: 4px;
     font-size: 14px;
     transition: all .2s ease;
+
+    @media screen and (max-width: 650px) {
+      font-size: 12px;
+    }
 
     &:hover {
       text-decoration: underline;
