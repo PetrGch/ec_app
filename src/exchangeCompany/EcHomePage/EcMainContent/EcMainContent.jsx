@@ -16,6 +16,8 @@ export default class EcMainContent extends React.PureComponent {
       selectedRowRecord: null
     };
 
+    this.mapRef = React.createRef();
+
     this.onNameClick = this.onNameClick.bind(this);
   }
 
@@ -23,6 +25,12 @@ export default class EcMainContent extends React.PureComponent {
     const { selectedRowRecord } = this.state;
     if (!selectedRowRecord || selectedRowRecord.id !== record.id) {
       this.setState({ selectedRowRecord: record });
+      if (window && this.mapRef && this.mapRef.current) {
+        window.scrollTo({
+          top: this.mapRef.current.offsetTop,
+          behavior: "smooth"
+        });
+      }
     }
   }
 
@@ -60,11 +68,15 @@ export default class EcMainContent extends React.PureComponent {
           />
         </BlockWrapper>
         <BlockWrapper>
-          <EcMainMap
-            records={filteredCurrencies}
-            isBuyStatus={isBuyStatus}
-            selectedRowRecord={selectedRowRecord}
-          />
+          <div
+            ref={this.mapRef}
+          >
+            <EcMainMap
+              records={filteredCurrencies}
+              isBuyStatus={isBuyStatus}
+              selectedRowRecord={selectedRowRecord}
+            />
+          </div>
         </BlockWrapper>
       </main>
     );

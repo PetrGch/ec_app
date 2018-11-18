@@ -17,9 +17,11 @@ class App extends React.PureComponent {
   }
 
   render() {
+    const { location: { pathname } } = this.props;
+
     return (
       <div className="app">
-        <EcHeader contentRef={this.contentRef}/>
+        <EcHeader path={pathname} contentRef={this.contentRef}/>
         <div className="app__content" ref={this.contentRef}>
           <Switch>
             <Route exact path="/" component={EcHomePage} />

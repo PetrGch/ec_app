@@ -2,24 +2,40 @@ import React from 'react';
 import moment from 'moment';
 import Button from "../../../../common/controlLib/Button/Button";
 
-function CompanyInfo({company_name, branch_name, onNameClickEvent}) {
+function CompanyInfo({companyName, branchName, googleMapUrl, onNameClickEvent}) {
   return (
-    <div className="ecCurrencyMainTable__companyName" onClick={onNameClickEvent}>
-      {company_name && <strong>{company_name}</strong>}
-      {branch_name && <span>{branch_name}</span>}
+    <div className="ecCurrencyMainTable__companyDetail">
+      <div
+        onClick={onNameClickEvent}
+        className="ecCurrencyMainTable__companyName"
+      >
+        {companyName && <strong>{companyName}</strong>}
+        {branchName && <span>{branchName}</span>}
+      </div>
+      <a
+        className="ecCurrencyMainTable__googleMapUrl"
+        href={googleMapUrl}
+        target="_blank"
+      >
+        GOOGLE MAP
+      </a>
     </div>
   );
 }
 
 export function renderCompanyName(record, onNameClick) {
-  let company_name = null;
-  let branch_name = null;
+  let companyName = null;
+  let branchName = null;
+  let googleMapUrl = null;
   if (record) {
     if (record.company_name) {
-      company_name = record.company_name;
+      companyName = record.company_name;
     }
     if (record.branch_name) {
-      branch_name = record.branch_name;
+      branchName = record.branch_name;
+    }
+    if (record.google_map_url) {
+      googleMapUrl = record.google_map_url;
     }
   }
   const onNameClickEvent = () => {
@@ -27,8 +43,9 @@ export function renderCompanyName(record, onNameClick) {
   };
 
   return <CompanyInfo
-    company_name={company_name}
-    branch_name={branch_name}
+    companyName={companyName}
+    branchName={branchName}
+    googleMapUrl={googleMapUrl}
     onNameClickEvent={onNameClickEvent}
   />
 }

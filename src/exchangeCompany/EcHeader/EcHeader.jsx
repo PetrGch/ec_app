@@ -20,7 +20,7 @@ const LANGUAGES = [
   }
 ];
 
-class EcHeader extends React.PureComponent {
+class EcHeader extends React.Component {
   constructor(props) {
     super(props);
 
@@ -62,9 +62,9 @@ class EcHeader extends React.PureComponent {
   }
 
   get breadcrumb() {
-    const { branchRout } = this.props;
-
-    if (branchRout) {
+    const { branchRout, path } = this.props;
+console.log(path)
+    if (branchRout && path !== "/") {
       return (
         <div className="ecHeader__breadCrumb">
           <span
