@@ -1,1 +1,1 @@
-export const API_URL = 'http://excurrate.com:3001';
+export const API_URL = 'https://api.excurrate.com';
