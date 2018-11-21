@@ -32,13 +32,14 @@ const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 module.exports = {
     appIndexJs: resolveApp('src/index.js'),
     appBuildDev: resolveApp('public/dev'),
-    appBuildProd: resolveApp('public/prod'),
+    appBuildProd: resolveApp('dist'),
+    serverBuildProd: resolveApp('dist'),
+    serverBuildDev: resolveApp('public/server'),
     appSrc: resolveApp('src'),
     appHtml: resolveApp('src/sources/index.html'),
     appDevHtml: resolveApp('public/dev/index.html'),
     buildHtml: resolveApp('src/sources/index.html'),
     serverIndexJs: resolveApp('server/index.js'),
-    appPublic: resolveApp('public/server'),
     servedPath: getServedPath(resolveApp('package.json')),
     devServerContentBase: resolveApp('public/dev'),
 
