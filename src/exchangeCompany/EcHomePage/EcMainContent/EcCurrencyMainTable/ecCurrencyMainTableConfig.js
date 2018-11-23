@@ -1,7 +1,6 @@
 import {
-  KnowMore,
   renderBuyPrice,
-  renderBuyTitle, renderCompanyName, renderKnowMore,
+  renderBuyTitle, renderCompanyName,
   renderLastUpdateTime,
   renderSellPrice,
   renderSellTitle, renderTitle
@@ -11,7 +10,6 @@ export const ecCurrencyMainTableConfig = (
   isBuy,
   sumAmount,
   selectedCurrency,
-  knowMore = () => {},
   sortRowsByName = () => {},
   sortRowsByPrice = () => {},
   onNameClick,
@@ -19,14 +17,13 @@ export const ecCurrencyMainTableConfig = (
 ) => (
   isBuy
     ? ecCurrencyMainTableBuyConfig(
-      sumAmount, knowMore, selectedCurrency, sortRowsByName, sortRowsByPrice, onNameClick, translate)
+      sumAmount, selectedCurrency, sortRowsByName, sortRowsByPrice, onNameClick, translate)
     : ecCurrencyMainTableSumConfig(
-      sumAmount, knowMore, selectedCurrency, sortRowsByName, sortRowsByPrice, onNameClick, translate)
+      sumAmount, selectedCurrency, sortRowsByName, sortRowsByPrice, onNameClick, translate)
 );
 
 const ecCurrencyMainTableBuyConfig = (
   sumAmount,
-  knowMore,
   selectedCurrency,
   sortRowsByName,
   sortRowsByPrice,
@@ -61,18 +58,12 @@ const ecCurrencyMainTableBuyConfig = (
       key: 'updated_at',
       title: translate("companies.lastUpdate"),
       renderCell: (record, config) => renderLastUpdateTime(record, config.key)
-    },
-    {
-      index: 'knowMore',
-      title: translate("companies.info"),
-      renderCell: (record) => renderKnowMore(record.id, record.branch_name, knowMore, translate)
     }
   ]
 );
 
 const ecCurrencyMainTableSumConfig = (
   sumAmount,
-  knowMore,
   selectedCurrency,
   sortRowsByName,
   sortRowsByPrice,
@@ -107,11 +98,6 @@ const ecCurrencyMainTableSumConfig = (
       key: 'updated_at',
       title: translate("companies.lastUpdate"),
       renderCell: (record, config) => renderLastUpdateTime(record, config.key)
-    },
-    {
-      index: 'knowMore',
-      title: translate("companies.info"),
-      renderCell: (record) => renderKnowMore(record.id, record.branch_name, knowMore, translate)
     }
   ]
 );

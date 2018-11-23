@@ -13,13 +13,22 @@ function CompanyInfo({companyName, branchName, googleMapUrl, onNameClickEvent}) 
         {companyName && <strong>{companyName}</strong>}
         {branchName && <span>{branchName}</span>}
       </div>
-      <a
-        className="ecCurrencyMainTable__googleMapUrl"
-        href={googleMapUrl}
-        target="_blank"
-      >
-        GOOGLE MAP
-      </a>
+      <div className="ecCurrencyMainTable__companyAction">
+        <Link
+          rel="nofollow"
+          to={`/company/${branchName}`}
+        >
+          KNOW MORE
+        </Link>
+        <a
+          className="ecCurrencyMainTable__googleMapUrl"
+          href={googleMapUrl}
+          target="_blank"
+          rel="nofollow"
+        >
+          GOOGLE MAP
+        </a>
+      </div>
     </div>
   );
 }
@@ -92,18 +101,6 @@ export function renderLastUpdateTime(record, key) {
     return <TimeCell time={time} date={date}/>
   }
   return "-//-"
-}
-
-export function renderKnowMore(id, name, knowMore, translate) {
-  return (
-    <Button>
-      <Link to={`/company/${name}`}>
-        <span className="ecCurrencyMainTable__knowMore">
-          {translate("companies.knowMore")}
-        </span>
-      </Link>
-    </Button>
-  )
 }
 
 export function renderClass(isHeader, config) {

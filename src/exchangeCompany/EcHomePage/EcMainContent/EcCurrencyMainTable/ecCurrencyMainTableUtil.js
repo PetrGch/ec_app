@@ -14,16 +14,19 @@ export function sortedWithField(records, isIncrease, fieldName) {
 }
 
 export function sortedByPrice(records, isIncrease, isBuy) {
-  if (isIncrease) {
-    return records.sort((itemA, itemB) => {
-      if (isBuy) return itemA.buy_price - itemB.buy_price;
-      return itemA.sell_price - itemB.sell_price
-    })
-  }
+  let a;
+  let b;
+
   return records.sort((itemA, itemB) => {
-    if (isBuy) return itemB.buy_price - itemA.buy_price;
-    return itemB.sell_price - itemA.sell_price
-  })
+    if (isBuy) {
+      a = !isNaN(itemA.buy_price) && !!itemA.buy_price ? itemA.buy_price : Infinity;
+      b = !isNaN(itemB.buy_price) && !!itemB.buy_price ? itemB.buy_price : Infinity;
+      return isIncrease ? a - b : b - a;
+    }
+    a = !isNaN(itemA.sell_price) && !!itemA.sell_price ? itemA.sell_price : Infinity;
+    b = !isNaN(itemB.sell_price) && !!itemB.sell_price ? itemB.sell_price : Infinity;
+    return isIncrease ? a - b : b - a;
+  });
 }
 
 export function sortByGeolocation(records, lat, lng) {

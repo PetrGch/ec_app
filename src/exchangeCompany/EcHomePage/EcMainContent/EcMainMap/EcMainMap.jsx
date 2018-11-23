@@ -18,15 +18,10 @@ export function mapMarker(L) {
   });
 }
 
-function Markers({records, Marker, Popup, mapMarker, selectedRowRecord}) {
+function Markers({records, Marker, Popup, mapMarker}) {
   return records
     .filter(record => record.lat && record.lng)
     .map(record => {
-      const isRecordIdMach = selectedRowRecord && selectedRowRecord.id === record.id;
-      if (isRecordIdMach) {
-        mapMarker.options.iconSize = [50, 60];
-        mapMarker.options.iconAnchor = [25, 60];
-      }
       return (
         <Marker
           key={`${record.lat}-${record.lng}`}
@@ -61,7 +56,8 @@ export default class EcMainMap extends React.PureComponent {
 
     if (selectedCoordinates && JSON.stringify(prevState.center) !== JSON.stringify(selectedCoordinates)) {
       return {
-        center: selectedCoordinates
+        center: selectedCoordinates,
+        zoom: 16
       }
     }
     return null;
@@ -77,7 +73,7 @@ export default class EcMainMap extends React.PureComponent {
   }
 
   render() {
-    const {records, selectedRowRecord} = this.props;
+    const {records} = this.props;
     const {center, zoom} = this.state;
 
     if (__isBrowser__ && center.length !== 0) {
@@ -97,7 +93,6 @@ export default class EcMainMap extends React.PureComponent {
               Marker={Marker}
               Popup={Popup}
               mapMarker={marker}
-              selectedRowRecord={selectedRowRecord}
             />
           </Map>}
         </div>

@@ -18,7 +18,8 @@ class EcCurrencyMainTable extends React.PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
     const { isBuyStatus, filteredCurrencies } = nextProps;
 
-    if (prevState.companyFilterName === '' && ((isBuyStatus !== prevState.isBuyStatus) || filteredCurrencies.length !== prevState.records.length)) {
+    if (prevState.companyFilterName === ''
+      && ((isBuyStatus !== prevState.isBuyStatus) || JSON.stringify(filteredCurrencies) !== JSON.stringify(prevState.records))) {
       return {
         isBuyStatus,
         records: sortedByPrice(filteredCurrencies, true, isBuyStatus)
@@ -46,7 +47,6 @@ class EcCurrencyMainTable extends React.PureComponent {
     this.sortRowsByRecommended = this.sortRowsByRecommended.bind(this);
     this.sortRowsByGeolocation = this.sortRowsByGeolocation.bind(this);
     this.filterRowsByName = this.filterRowsByName.bind(this);
-    this.knowMore = this.knowMore.bind(this);
     this.onNameClick = this.onNameClick.bind(this);
   }
 
@@ -59,11 +59,6 @@ class EcCurrencyMainTable extends React.PureComponent {
         records: filterByName(sortedByPrice(filteredCurrencies, true, isBuyStatus), prevState.companyFilterName)
       });
     }
-  }
-
-  knowMore(id, name) {
-    const { history } = this.props;
-    history.push(`/company/${name}`);
   }
 
   sortRowsByName() {
@@ -201,7 +196,6 @@ class EcCurrencyMainTable extends React.PureComponent {
             isBuyStatus,
             currencyAmount,
             selectedCurrency,
-            this.knowMore,
             this.sortRowsByName,
             this.sortRowsByPrice,
             this.onNameClick,
