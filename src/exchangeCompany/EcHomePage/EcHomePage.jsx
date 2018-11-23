@@ -1,4 +1,5 @@
 import React from 'react';
+import {Helmet} from "react-helmet";
 
 import EcMainContent from './EcMainContent/EcMainContent';
 import EcSideBar from './EcSideBar/EcSideBar';
@@ -24,6 +25,10 @@ export default class EcHomePage extends React.PureComponent {
 
     return (
       <div className="ecHomePage">
+        <Helmet>
+          <title>Compare foreign currency rates | ExCurRate</title>
+        </Helmet>
+
         <EcMainContent
           dispatch={dispatch}
           isBuyStatus={isBuyStatus}

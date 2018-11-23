@@ -122,7 +122,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       template: paths.appHtml,
-      title: 'Compare currency exchange rates | ExCurRate',
+      title: 'Compare foreign currency rates | ExCurRate',
       PUBLIC_URL: '',
       minify: {
         removeComments: true,

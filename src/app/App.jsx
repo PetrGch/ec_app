@@ -24,8 +24,8 @@ class App extends React.PureComponent {
         <EcHeader path={pathname} contentRef={this.contentRef}/>
         <div className="app__content" ref={this.contentRef}>
           <Switch>
+            <Route exact path="/company/:branch_name" component={EcCompany} />
             <Route exact path="/" component={EcHomePage} />
-            <Route path="/company/:branch_name" exact component={EcCompany} />
             <Route component={NotFound}/>
           </Switch>
         </div>

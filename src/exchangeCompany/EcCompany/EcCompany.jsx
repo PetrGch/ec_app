@@ -1,8 +1,8 @@
 import React from 'react';
+import {Helmet} from "react-helmet";
 
 import EcSideBar from "../EcHomePage/EcSideBar/EcSideBar";
 import EcMainCompanyContent from "./EcMainCompanyContent/EcMainCompanyContent";
-import BlockWrapper from "../../common/BlockWrapper/BlockWrapper";
 
 import './ecCompany.less';
 
@@ -31,11 +31,16 @@ export default class EcCompany extends React.PureComponent {
       selectedCompanyCurrency,
       currencyTypes,
       filteredCurrency,
-      dispatch
+      dispatch,
+      match: { params }
     } = this.props;
 
-    return company ? (
+    return (
       <div className="ecCompany">
+        <Helmet>
+          <title>Foreign currency rates {`in ${params.branch_name}` || ""} | ExCurRate</title>
+        </Helmet>
+
         <EcMainCompanyContent
           dispatch={dispatch}
           company={company}
@@ -45,15 +50,12 @@ export default class EcCompany extends React.PureComponent {
           selectedCompanyCurrency={selectedCompanyCurrency}
           filteredCurrency={filteredCurrency}
         />
+
         <EcSideBar
           companies={companies}
           isBuyStatus={isBuyStatus}
         />
       </div>
-    ) : (
-      <BlockWrapper>
-        <div className="ecCompany__noCompany">Sorry! No company have been found</div>
-      </BlockWrapper>
     );
   }
 }

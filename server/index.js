@@ -4,6 +4,7 @@ import express from 'express';
 import expressRateLimit from "express-rate-limit";
 
 import React from 'react';
+import {Helmet} from "react-helmet";
 import i18next from "i18next";
 import ReactDOMServer from 'react-dom/server';
 import App from "../src/app/App";
@@ -89,38 +90,6 @@ app.get("/service-worker.js", (req, res) => {
   });
 });
 
-app.get('/company/:companyName', (req, res) => {
-  const context = {};
-  const app = ReactDOMServer.renderToString(
-    <Provider store={store}>
-      <StaticRouter location={req.url} context={context}>
-        <I18nextProvider i18n={req.i18n}>
-          <App/>
-        </I18nextProvider>
-      </StaticRouter>
-    </Provider>
-  );
-  const indexFile = resolveApp(`./public/${sourceDirectory}/index.html`);
-  fs.readFile(indexFile, 'utf8', (err, data) => {
-    if (err) {
-      console.error('Something went wrong:', err);
-      return res.status(500).send('Oops, better luck next time!');
-    }
-
-    console.log(req.params);
-    if (req.params && req.params.companyName) {
-      data = data.replace(
-        '<title>Compare currency exchange rates | ExCurRate</title>',
-        `<title>Foreign currency rates in ${req.params.companyName} | ExCurRate</title>`
-      );
-    }
-
-    return res.send(
-      data.replace('<div id="root"></div>', `<div id="root">${app}</div>`)
-    );
-  });
-});
-
 app.get('*', (req, res) => {
   const context = {};
   const app = ReactDOMServer.renderToString(
@@ -132,6 +101,9 @@ app.get('*', (req, res) => {
       </StaticRouter>
     </Provider>
   );
+
+  const helmet = Helmet.renderStatic();
+
   const indexFile = resolveApp(`./public/${sourceDirectory}/index.html`);
   fs.readFile(indexFile, 'utf8', (err, data) => {
     if (err) {
@@ -140,7 +112,12 @@ app.get('*', (req, res) => {
     }
 
     return res.send(
-      data.replace('<div id="root"></div>', `<div id="root">${app}</div>`)
+      data
+        .replace(
+          /<title([a-z\s-="]*)?>([a-zA-Z\s|]*)?<\/title>/,
+          helmet.title.toString()
+        )
+        .replace('<div id="root"></div>', `<div id="root">${app}</div>`)
     );
   });
 });

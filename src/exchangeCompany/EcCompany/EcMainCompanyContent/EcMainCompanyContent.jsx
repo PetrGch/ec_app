@@ -42,32 +42,36 @@ class EcMainCompanyContent extends React.PureComponent{
             </div>
             <span>{t("companies.lastUpdate")}: {this.updateDate}</span>
           </div>
-          <div className="ecMainCompanyContent__calculator">
-            <EcMainCompanyCalculate
-              dispatch={dispatch}
-              company={company}
-              isBuyStatus={isBuyStatus}
-              currencyTypes={currencyTypes}
-              selectedCurrency={selectedCurrency}
-              selectedCompanyCurrency={selectedCompanyCurrency}
-              filteredCurrency={filteredCurrency}
-              translate={t}
-            />
-          </div>
-          <div className="ecMainCompanyContent__map">
-            <EcMainCompanyMap
-              filteredCurrency={filteredCurrency}
-              company={company}
-              translate={t}
-            />
-          </div>
-          <div className="ecMainCompanyContent__footer">
-            <EcMainCompanyDetail
-              filteredCurrency={filteredCurrency}
-              company={company}
-              translate={t}
-            />
-          </div>
+          { company ?
+            <div>
+              <div className="ecMainCompanyContent__calculator">
+                <EcMainCompanyCalculate
+                  dispatch={dispatch}
+                  company={company}
+                  isBuyStatus={isBuyStatus}
+                  currencyTypes={currencyTypes}
+                  selectedCurrency={selectedCurrency}
+                  selectedCompanyCurrency={selectedCompanyCurrency}
+                  filteredCurrency={filteredCurrency}
+                  translate={t}
+                />
+              </div>
+              <div className="ecMainCompanyContent__map">
+                <EcMainCompanyMap
+                  filteredCurrency={filteredCurrency}
+                  company={company}
+                  translate={t}
+                />
+              </div>
+              <div className="ecMainCompanyContent__footer">
+                <EcMainCompanyDetail
+                  filteredCurrency={filteredCurrency}
+                  company={company}
+                  translate={t}
+                />
+              </div>
+            </div> : null
+          }
         </BlockWrapper>
       </div>
     );
