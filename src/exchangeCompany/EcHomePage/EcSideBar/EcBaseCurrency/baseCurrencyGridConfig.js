@@ -1,6 +1,4 @@
-export const baseCurrencyGridConfig = () => baseCurrency;
-
-const baseCurrency = [
+export const baseCurrency = [
   {
     index: "company_name",
     key: "company_name",

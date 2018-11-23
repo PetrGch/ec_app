@@ -89,6 +89,38 @@ app.get("/service-worker.js", (req, res) => {
   });
 });
 
+app.get('/company/:companyName', (req, res) => {
+  const context = {};
+  const app = ReactDOMServer.renderToString(
+    <Provider store={store}>
+      <StaticRouter location={req.url} context={context}>
+        <I18nextProvider i18n={req.i18n}>
+          <App/>
+        </I18nextProvider>
+      </StaticRouter>
+    </Provider>
+  );
+  const indexFile = resolveApp(`./public/${sourceDirectory}/index.html`);
+  fs.readFile(indexFile, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Something went wrong:', err);
+      return res.status(500).send('Oops, better luck next time!');
+    }
+
+    console.log(req.params);
+    if (req.params && req.params.companyName) {
+      data = data.replace(
+        '<title>Compare currency exchange rates | ExCurRate</title>',
+        `<title>Foreign currency rates in ${req.params.companyName} | ExCurRate</title>`
+      );
+    }
+
+    return res.send(
+      data.replace('<div id="root"></div>', `<div id="root">${app}</div>`)
+    );
+  });
+});
+
 app.get('*', (req, res) => {
   const context = {};
   const app = ReactDOMServer.renderToString(

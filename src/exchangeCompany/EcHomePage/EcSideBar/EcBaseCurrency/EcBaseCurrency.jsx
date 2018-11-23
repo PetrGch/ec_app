@@ -1,8 +1,10 @@
 import React from 'react';
 
 import Grid from "../../../../common/controlLib/Grid/Grid";
-import {baseCurrencyGridConfig, baseCurrencyMockRecord} from "./baseCurrencyGridConfig";
+import {baseCurrency} from "./baseCurrencyGridConfig";
 import {filterByCurrency} from "../../EcMainContent/EcCurrencyMainTable/ecCurrencyMainTableUtil";
+
+import './ecBaseCurrency.less';
 
 export default class EcBaseCurrency extends React.PureComponent {
   get usdCurrency() {
@@ -38,13 +40,13 @@ export default class EcBaseCurrency extends React.PureComponent {
 
     if (usd && eur) {
       return [{
-        company_name: `${usd.company_name} (sell)`,
-        usd: usd.sell_price.toFixed(2),
-        eur: eur.sell_price.toFixed(2)
-      }, {
-        company_name: `${usd.company_name} (buy)`,
+        company_name: "Buy",
         usd: usd.buy_price.toFixed(2),
         eur: eur.buy_price.toFixed(2)
+      }, {
+        company_name: "Sell",
+        usd: usd.sell_price.toFixed(2),
+        eur: eur.sell_price.toFixed(2)
       }]
     }
     return null;
@@ -52,13 +54,15 @@ export default class EcBaseCurrency extends React.PureComponent {
 
   render() {
     const centralBank = this.centralBank;
+    const usd = this.usdCurrency;
 
     return centralBank ? (
       <div className="ecBaseCurrency">
+        <h3 className="ecBaseCurrency__title">{usd.company_name}</h3>
         <Grid
           isHeader
           records={centralBank}
-          config={baseCurrencyGridConfig()}
+          config={baseCurrency}
         />
       </div>
     ) : null;

@@ -93,7 +93,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       template: paths.appHtml,
-      title: 'Excurrate',
+      title: 'Compare currency exchange rates | ExCurRate',
       PUBLIC_URL: ''
     }),
     new webpack.DefinePlugin({

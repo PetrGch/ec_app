@@ -52,13 +52,14 @@ function prepopulateCurrencyType(companies) {
     })
   });
 
-  const mapedCurrencyTypes = currencyTypes
+  const mappedCurrencyTypes = currencyTypes
+    .filter(currencyType => !!currencyType)
     .map(currencyType => ({index: currencyType, value: currencyType}))
     .sort((a, b) => a.value >= b.value ? 1 : -1);
-  const mapedMainCurrencyTypes = mainCurrencyType
+  const mappedMainCurrencyTypes = mainCurrencyType
     .map(currencyType => ({index: currencyType, value: currencyType}));
 
-  return mapedMainCurrencyTypes.concat(mapedCurrencyTypes);
+  return mappedMainCurrencyTypes.concat(mappedCurrencyTypes);
 }
 
 export function setActiveCurrency(selectedCurrency) {

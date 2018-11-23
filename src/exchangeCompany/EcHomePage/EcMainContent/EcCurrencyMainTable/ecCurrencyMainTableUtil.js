@@ -68,11 +68,11 @@ export function filterCurrency(record, currencyType, currencyAmount) {
           company_name: record.company_name,
           branch_name: record.branch_name,
           is_central_bank: record.is_central_bank,
-          updated_at: record.updated_at,
           lat: record.lat,
           lng: record.lng,
           buy_price: filteredAmount.buy_price,
           sell_price: filteredAmount.sell_price,
+          updated_at: filteredAmount.updated_at,
           address: record.address,
           google_map_url: record.google_map_url
         };
@@ -88,10 +88,12 @@ export function filterCurrency(record, currencyType, currencyAmount) {
 function filterAmounts(currency, currencyAmount) {
   let buy_price = 0;
   let sell_price = 0;
+  let updated_at = null;
 
   if (currency && currency.exchange_currency_amounts
     && currency.exchange_currency_amounts.length !== 0) {
     currency.exchange_currency_amounts.forEach(amount => {
+      updated_at = amount.updated_at;
       if (amount.currency_amount_from && amount.currency_amount_to) {
         if (currencyAmount >= parseInt(amount.currency_amount_from)
           && currencyAmount <= parseInt(amount.currency_amount_to)) {
@@ -113,6 +115,7 @@ function filterAmounts(currency, currencyAmount) {
 
   return {
     buy_price,
-    sell_price
+    sell_price,
+    updated_at
   }
 }

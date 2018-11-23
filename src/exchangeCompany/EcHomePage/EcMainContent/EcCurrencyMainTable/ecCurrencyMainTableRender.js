@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import Button from "../../../../common/controlLib/Button/Button";
+import {Link} from "react-router-dom";
 
 function CompanyInfo({companyName, branchName, googleMapUrl, onNameClickEvent}) {
   return (
@@ -94,15 +95,15 @@ export function renderLastUpdateTime(record, key) {
 }
 
 export function renderKnowMore(id, name, knowMore, translate) {
-  const knowMoreFunction = () => {
-    knowMore(id, name);
-  };
-  return (<Button
-    className="ecCurrencyMainTable__knowMore"
-    onClick={knowMoreFunction}
-  >
-    {translate("companies.knowMore")}
-  </Button>)
+  return (
+    <Button>
+      <Link to={`/company/${name}`}>
+        <span className="ecCurrencyMainTable__knowMore">
+          {translate("companies.knowMore")}
+        </span>
+      </Link>
+    </Button>
+  )
 }
 
 export function renderClass(isHeader, config) {
