@@ -75,10 +75,10 @@ function saveLog (nick, command) {
   });
 }
 
-app.use("/static", express.static(resolveApp(`./public/${sourceDirectory}/static/`)));
+app.use("/static", express.static(resolveApp(`./dist/static/`)));
 
 app.get("/service-worker.js", (req, res) => {
-  const indexFile = resolveApp(`./public/${sourceDirectory}/service-worker.js`);
+  const indexFile = resolveApp(`./dist/service-worker.js`);
   fs.readFile(indexFile, 'utf8', (err, data) => {
     if (err) {
       console.error('Something went wrong:', err);
@@ -104,7 +104,7 @@ app.get('*', (req, res) => {
 
   const helmet = Helmet.renderStatic();
 
-  const indexFile = resolveApp(`./public/${sourceDirectory}/index.html`);
+  const indexFile = resolveApp(`./dist/index.html`);
   fs.readFile(indexFile, 'utf8', (err, data) => {
     if (err) {
       console.error('Something went wrong:', err);
