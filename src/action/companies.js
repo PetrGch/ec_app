@@ -1,5 +1,4 @@
 import {
-  FIND_COMPANY_BY_NAME,
   LOAD_ALL_COMPANIES,
   SET_ACTIVE_CURRENCY,
   SET_BUY_STATUS,
@@ -38,7 +37,7 @@ export function loadAllCompanies() {
   }
 }
 
-function prepopulateCurrencyType(companies) {
+export function prepopulateCurrencyType(companies) {
   let currencyTypes = [];
   let mainCurrencyType = ['EUR', 'USD', 'GBP'];
 
