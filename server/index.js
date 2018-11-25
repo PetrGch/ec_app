@@ -106,7 +106,7 @@ app.get('*', (req, res) => {
   const helmet = Helmet.renderStatic();
 
   const indexFile = resolveApp(`./dist/indexRoot.html`);
-  res.send(indexFile);
+  res.send(indexFile + ", " + __dirname);
   // saveLog("logs", indexFile);
   // fs.readFile(indexFile, 'utf8', (err, data) => {
   //   if (err) {
