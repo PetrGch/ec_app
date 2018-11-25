@@ -3,15 +3,13 @@ const nodeExternals = require('webpack-node-externals');
 
 const paths = require('./util/paths');
 
-const devMode = process.env.NODE_ENV === 'development';
-
 process.env.NODE_PATH = (process.env.NODE_PATH || '');
 
 module.exports = {
   entry: paths.serverIndexJs,
 
   output: {
-    path: devMode ? paths.serverBuildDev : paths.serverBuildProd,
+    path: paths.serverBuildProd,
     filename: 'serverBundle.js'
   },
 
