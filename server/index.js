@@ -69,7 +69,8 @@ function saveLog (nick, command) {
   const file = `${nick}.log`;
   const datetime = '[' + new Date() + '] ';
   const text = datetime + command + '\r\n';
-  fs.appendFile(file, text, function (err) {
+  const dirPath = resolveApp(`./dist/`);
+  fs.appendFile(dirPath + '/' + file, text, function (err) {
     if (err) return console.log(err);
     console.log('successfully appended "' + text + '"');
   });
@@ -82,7 +83,7 @@ app.get("/service-worker.js", (req, res) => {
   fs.readFile(indexFile, 'utf8', (err, data) => {
     if (err) {
       console.error('Something went wrong:', err);
-      return res.status(500).send('Oops, better luck next time!');
+      return res.status(500).send('Oops, better luck next time!', err);
     }
 
     res.type('.js');
@@ -109,7 +110,7 @@ app.get('*', (req, res) => {
   fs.readFile(indexFile, 'utf8', (err, data) => {
     if (err) {
       console.error('Something went wrong:', err);
-      return res.status(500).send('Oops, better luck next time!');
+      return res.status(500).send('Oops, better luck next time!', err);
     }
 
     return res.send(
