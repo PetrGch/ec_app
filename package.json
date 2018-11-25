@@ -8,7 +8,7 @@
     "dev": "npm-run-all --parallel dev:*",
     "dev:build-dev": "NODE_ENV=development webpack -w --config config/webpackConfig/webpack.dev.js",
     "dev:build-server": "NODE_ENV=development webpack -w --config config/webpackConfig/webpack.server.js",
-    "dev:start": "nodemon --delay 5 ./public/server/serverBundle.js",
+    "dev:start": "nodemon --delay 5 ./dist/serverBundle.js",
     "prod": "npm-run-all prod:*",
     "prod:stop": "pm2 stop serverBundle",
     "prod:build-prod": "webpack -p --config config/webpackConfig/webpack.prod.js",

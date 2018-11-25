@@ -122,6 +122,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       template: paths.appHtml,
+      filename: 'indexRoot.html',
       title: 'Compare foreign currency rates | ExCurRate',
       PUBLIC_URL: '',
       minify: {
@@ -170,7 +171,7 @@ module.exports = {
         }
       },
       minify: true,
-      navigateFallback: publicUrl + '/index.html',
+      navigateFallback: publicUrl + '/indexRoot.html',
       navigateFallbackWhitelist: [/^(?!\/__).*/],
       staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
     }),
