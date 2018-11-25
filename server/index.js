@@ -106,22 +106,23 @@ app.get('*', (req, res) => {
   const helmet = Helmet.renderStatic();
 
   const indexFile = resolveApp(`./dist/indexRoot.html`);
-  saveLog("logs", indexFile);
-  fs.readFile(indexFile, 'utf8', (err, data) => {
-    if (err) {
-      console.error('Something went wrong:', err);
-      return res.status(500).send('Oops, better luck next time!', err);
-    }
-
-    return res.send(
-      data
-        .replace(
-          /<title([a-z\s-="]*)?>([a-zA-Z\s|]*)?<\/title>/,
-          helmet.title.toString()
-        )
-        .replace('<div id="root"></div>', `<div id="root">${app}</div>`)
-    );
-  });
+  res.send(indexFile);
+  // saveLog("logs", indexFile);
+  // fs.readFile(indexFile, 'utf8', (err, data) => {
+  //   if (err) {
+  //     console.error('Something went wrong:', err);
+  //     return res.status(500).send('Oops, better luck next time!', err);
+  //   }
+  //
+  //   return res.send(
+  //     data
+  //       .replace(
+  //         /<title([a-z\s-="]*)?>([a-zA-Z\s|]*)?<\/title>/,
+  //         helmet.title.toString()
+  //       )
+  //       .replace('<div id="root"></div>', `<div id="root">${app}</div>`)
+  //   );
+  // });
 });
 
 app.listen(PORT, () => {
