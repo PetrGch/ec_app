@@ -14,7 +14,7 @@ import './index.less';
 
 const store = configureStore();
 
-ReactDOM.render(
+ReactDOM.hydrate(
   <Provider store={store}>
     <Router>
       <ScrollToTop>

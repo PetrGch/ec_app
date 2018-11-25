@@ -7,8 +7,9 @@ import EcCalculatorSlider from "./EcCalculatorSlider/EcCalculatorSlider";
 import './ecCalculator.less';
 
 const cities = {
-  th: "กรุงเทพฯ",
-  en: "Bangkok"
+  "th": "กรุงเทพฯ",
+  "en": "Bangkok",
+  "en-US": "Bangkok"
 };
 
 class EcCalculator extends React.Component {

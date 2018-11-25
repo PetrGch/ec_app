@@ -62,30 +62,29 @@ router.get('/company/*', (req, res) => {
 });
 
 router.get('*', (req, res) => {
-  request('https://api.excurrate.com/excompany', function (error, response, companiesString) {
-    if (!error) {
-      store = createStoreWithCompanies(companiesString)
+  const calculatedStore = createStoreWithCompanies();
+  if (calculatedStore) {
+    store = createStoreWithCompanies();
+  }
+
+  const app = renderReactAppAsString(req.url, store, req.i18n);
+  const helmet = Helmet.renderStatic();
+
+  const indexFile = isProdMode ? resolveApp(`./indexRoot.html`) : resolveApp(`./dist/indexRoot.html`);
+  fs.readFile(indexFile, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Something went wrong:', err);
+      return res.status(500).send('Something went wrong:', err);
     }
 
-    const app = renderReactAppAsString(req.url, store, req.i18n);
-    const helmet = Helmet.renderStatic();
-
-    const indexFile = isProdMode ? resolveApp(`./indexRoot.html`) : resolveApp(`./dist/indexRoot.html`);
-    fs.readFile(indexFile, 'utf8', (err, data) => {
-      if (err) {
-        console.error('Something went wrong:', err);
-        return res.status(500).send('Something went wrong:', err);
-      }
-
-      return res.send(
-        data
-          .replace(
-            /<title([a-z\s-="]*)?>([a-zA-Z\s|]*)?<\/title>/,
-            helmet.title.toString()
-          )
-          .replace('<div id="root"></div>', `<div id="root">${app}</div>`)
-      );
-    });
+    return res.send(
+      data
+        .replace(
+          /<title([a-z\s-="]*)?>([a-zA-Z\s|]*)?<\/title>/,
+          helmet.title.toString()
+        )
+        .replace('<div id="root"></div>', `<div id="root">${app}</div>`)
+    );
   });
 });
 
