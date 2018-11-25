@@ -69,21 +69,21 @@ function saveLog (nick, command) {
   const file = `${nick}.log`;
   const datetime = '[' + new Date() + '] ';
   const text = datetime + command + '\r\n';
-  const dirPath = resolveApp(`./dist/`);
+  const dirPath = resolveApp(`./`);
   fs.appendFile(dirPath + '/' + file, text, function (err) {
     if (err) return console.log(err);
     console.log('successfully appended "' + text + '"');
   });
 }
 
-app.use("/static", express.static(resolveApp(`./dist/static/`)));
+app.use("/static", express.static(resolveApp(`./static/`)));
 
 app.get("/service-worker.js", (req, res) => {
-  const indexFile = resolveApp(`./dist/service-worker.js`);
+  const indexFile = resolveApp(`./service-worker.js`);
   fs.readFile(indexFile, 'utf8', (err, data) => {
     if (err) {
       console.error('Something went wrong:', err);
-      return res.status(500).send('Oops, better luck next time!', err);
+      return res.status(500).send('Something went wrong:', err);
     }
 
     res.type('.js');
@@ -105,24 +105,23 @@ app.get('*', (req, res) => {
 
   const helmet = Helmet.renderStatic();
 
-  const indexFile = resolveApp(`./dist/indexRoot.html`);
-  res.send(indexFile + ", " + __dirname);
-  // saveLog("logs", indexFile);
-  // fs.readFile(indexFile, 'utf8', (err, data) => {
-  //   if (err) {
-  //     console.error('Something went wrong:', err);
-  //     return res.status(500).send('Oops, better luck next time!', err);
-  //   }
-  //
-  //   return res.send(
-  //     data
-  //       .replace(
-  //         /<title([a-z\s-="]*)?>([a-zA-Z\s|]*)?<\/title>/,
-  //         helmet.title.toString()
-  //       )
-  //       .replace('<div id="root"></div>', `<div id="root">${app}</div>`)
-  //   );
-  // });
+  const indexFile = resolveApp(`./indexRoot.html`);
+
+  fs.readFile(indexFile, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Something went wrong:', err);
+      return res.status(500).send('Something went wrong:', err);
+    }
+
+    return res.send(
+      data
+        .replace(
+          /<title([a-z\s-="]*)?>([a-zA-Z\s|]*)?<\/title>/,
+          helmet.title.toString()
+        )
+        .replace('<div id="root"></div>', `<div id="root">${app}</div>`)
+    );
+  });
 });
 
 app.listen(PORT, () => {
