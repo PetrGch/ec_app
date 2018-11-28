@@ -1,5 +1,5 @@
 import {
-  LOAD_ALL_COMPANIES,
+  LOAD_ALL_COMPANIES, LOAD_CENTRAL_BANK_DATA, LOAD_COMPANY_BY_NAME,
   SET_ACTIVE_CURRENCY,
   SET_BUY_STATUS,
   SET_SUM_AMOUNT
@@ -66,4 +66,18 @@ export function setActiveCurrency(selectedCurrency) {
     selectedCurrency,
     type: SET_ACTIVE_CURRENCY
   }
+}
+
+export function loadDataOfCentralBank(countryName) {
+  return (dispatch) => {
+    request({
+      url: API_URL + `/exCompany/centralBank/${countryName}`,
+      method: 'GET'
+    }).then((centralBank) => {
+      dispatch({
+        centralBank,
+        type: LOAD_CENTRAL_BANK_DATA
+      })
+    });
+  };
 }

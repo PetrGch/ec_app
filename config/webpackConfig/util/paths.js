@@ -37,7 +37,7 @@ module.exports = {
     serverBuildDev: resolveApp('dist'),
     appSrc: resolveApp('src'),
     appHtml: resolveApp('src/sources/indexRoot.html'),
-    appDevHtml: resolveApp('public/dev/indexRoot.html'),
+    appDevHtml: resolveApp('dist/indexRoot.html'),
     buildHtml: resolveApp('src/sources/indexRoot.html'),
     serverIndexJs: resolveApp('server/index.js'),
     servedPath: getServedPath(resolveApp('package.json')),

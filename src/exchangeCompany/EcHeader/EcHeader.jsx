@@ -7,9 +7,8 @@ import { FaAngleDoubleDown } from 'react-icons/fa';
 import './ecHeader.less';
 import {sizeType} from "../../common/controlLib/util";
 import {Dropdown} from "../../common/controlLib";
-import ReactDOM from "react-dom";
 
-const LANGUAGES = [
+const languages = [
   {
     index: "en",
     value: "EN"
@@ -89,7 +88,7 @@ class EcHeader extends React.Component {
         <div className="ecHeader__language">
           <Dropdown
             size={sizeType.MD}
-            list={LANGUAGES}
+            list={languages}
             selectedIndex={lng || "en"}
             selectItem={this.selectLanguage}
           />

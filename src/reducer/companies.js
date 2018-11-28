@@ -1,4 +1,10 @@
-import {LOAD_ALL_COMPANIES, SET_ACTIVE_CURRENCY, SET_BUY_STATUS, SET_SUM_AMOUNT} from "../constant/companies";
+import {
+  LOAD_ALL_COMPANIES,
+  LOAD_CENTRAL_BANK_DATA,
+  SET_ACTIVE_CURRENCY,
+  SET_BUY_STATUS,
+  SET_SUM_AMOUNT
+} from "../constant/companies";
 import {filterByCurrency} from "../exchangeCompany/EcHomePage/EcMainContent/EcCurrencyMainTable/ecCurrencyMainTableUtil";
 
 const initialState = {
@@ -7,7 +13,8 @@ const initialState = {
   companies: [],
   currencyTypes: [],
   selectedCurrency: 'EUR',
-  filteredCurrencies: []
+  filteredCurrencies: [],
+  centralBank: null
 };
 
 export default function companies(state = initialState, action) {
@@ -32,6 +39,11 @@ export default function companies(state = initialState, action) {
         ...state,
         selectedCurrency: action.selectedCurrency,
         filteredCurrencies: filterByCurrency(state.companies, action.selectedCurrency, state.currencyAmount)
+      };
+    case LOAD_CENTRAL_BANK_DATA:
+      return {
+        ...state,
+        centralBank: action.centralBank
       };
     default:
       return state;

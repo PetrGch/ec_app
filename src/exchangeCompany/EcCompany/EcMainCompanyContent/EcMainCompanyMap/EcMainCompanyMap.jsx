@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ExpandCollapseWrapper from "../ExpandCollapseWrapper/ExpandCollapseWrapper";
-import {mapMarker} from "../../../EcHomePage/EcMainContent/EcMainMap/EcMainMap";
+import {mapMarker} from "../../../EcHomePage/AdditionalContent/EcMainMap/EcMainMap";
 
 import './ecMainCompanyMap.less';
 
