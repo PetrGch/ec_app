@@ -1,17 +1,17 @@
 import React from 'react';
 
 import BlockWrapper from "../../../common/BlockWrapper/BlockWrapper";
+import EcBaseCurrency from "./EcBaseCurrency/EcBaseCurrency";
 
 import './ecSideBar.less';
-import EcBaseCurrency from "./EcBaseCurrency/EcBaseCurrency";
 
 export default class EcSideBar extends React.PureComponent {
   render() {
-    const { isBuyStatus, companies } = this.props;
+    const { isBuyStatus, companies, isCompaniesLoading } = this.props;
 
     return (
       <aside className="ecSideBar">
-        <BlockWrapper>
+        <BlockWrapper isLoad={isCompaniesLoading}>
           <EcBaseCurrency
             isBuyStatus={isBuyStatus}
             companies={companies}

@@ -1,39 +1,11 @@
 import React from 'react';
 
-import {Dropdown} from "../../../../common/controlLib";
-import {sizeType} from "../../../../common/controlLib/util";
+import {CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
+import CentralBankChartHeader from "./CentralBankChartHeader/CentralBankChartHeader";
 
 import './centralBankChart.less';
-import {Brush, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
-import {mockData} from "./CentralBankChartMockData";
 
-export const RANGE_TYPE = {
-  DAILY: "DAILY",
-  MONTHLY: "MONTHLY",
-  QUARTERLY: "QUARTERLY",
-  ANNUAL: "ANNUAL"
-};
-
-const colors = ["#85bf4b", "#50bfbf", "#272727", "#f27b38"];
-
-const rangeTypeList = [
-  {
-    index: "week",
-    value: "Week"
-  },
-  {
-    index: "month",
-    value: "Month"
-  },
-  {
-    index: "quarter",
-    value: "Quarter"
-  },
-  {
-    index: "year",
-    value: "Year"
-  }
-];
+const colors = ["#85bf4b", "#50bfbf"];
 
 function CustomLabel(props) {
   const { x, y, value } = props;
@@ -69,27 +41,11 @@ function CustomXAxisTick(props) {
 }
 
 export default class CentralBankChart extends React.PureComponent {
-  constructor() {
-    super();
-
-    this.state = {
-      selectedRange: "daily"
-    };
-
-    this.selectRange = this.selectRange.bind(this);
-  }
-  componentDidMount() {
-    const { dispatch } = this.props;
-  }
-
-  selectRange(range) {
-    const { index } = range;
-    this.setState({ selectedRange: index });
-  }
-
   get chartData() {
+    const { centralBank } = this.props;
     const lineData = [];
-    const chartData = mockData.data.map(data => {
+
+    const chartData = centralBank.dataDetail ? centralBank.dataDetail.map(data => {
       const parsedData = {period: data.period};
       Object.keys(data.lines).forEach(key => {
         const newField = key.replace("_", " ");
@@ -100,27 +56,27 @@ export default class CentralBankChart extends React.PureComponent {
       });
 
       return parsedData;
-    });
+    }) : [];
 
     return { lineData, chartData }
   }
 
   render() {
-    const { selectedRange } = this.state;
+    const { lng, centralBank, selectedRange, dispatch } = this.props;
     const data = this.chartData;
+
+    if (!centralBank.dataHeader || data.chartData.length === 0) {
+      return null;
+    }
 
     return (
       <div className="centralBankChart">
-        <div className="centralBankChart__header centralBankChartHeader">
-          <div className="centralBankChartHeader__dropdown">
-            <Dropdown
-              size={sizeType.MD}
-              list={rangeTypeList}
-              selectedIndex={selectedRange}
-              selectItem={this.selectRange}
-            />
-          </div>
-        </div>
+        <CentralBankChartHeader
+          lng={lng}
+          selectedRange={selectedRange}
+          dataHeader={centralBank.dataHeader}
+          dispatch={dispatch}
+        />
         <div className="centralBankChart__chart centralBankLineChart">
           <ResponsiveContainer width="100%" height={320}>
             <LineChart
@@ -133,7 +89,7 @@ export default class CentralBankChart extends React.PureComponent {
               />
               <XAxis
                 dataKey="period"
-                tick={<CustomXAxisTick/>}
+                tick={ <CustomXAxisTick/>}
               />
               <YAxis
                 domain={['auto', 'auto']}
@@ -147,7 +103,8 @@ export default class CentralBankChart extends React.PureComponent {
                 data.lineData.map((line, index) =>
                   (<Line
                     key={line}
-                    label={<CustomLabel/>}
+                    dot={selectedRange !== "all"}
+                    label={selectedRange !== "all" ? <CustomLabel/> : false}
                     dataKey={line}
                     stroke={colors[index]}
                     fill={colors[index]}

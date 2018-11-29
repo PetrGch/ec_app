@@ -1,35 +1,57 @@
 import React from 'react';
+import {translate} from "react-i18next";
 
 import BlockWrapper from "../../../common/BlockWrapper/BlockWrapper";
 import EcMainMap from "./EcMainMap/EcMainMap";
-
-import './additionalContent.less';
 import CentralBankChart from "./CentralBankChart/CentralBankChart";
 
-export default class AdditionalContent extends React.PureComponent {
+import './additionalContent.less';
+import {loadDataOfCentralBank} from "../../../action/companies";
+
+class AdditionalContent extends React.PureComponent {
+  componentDidMount() {
+    const { dispatch, selectedRange } = this.props;
+    dispatch(loadDataOfCentralBank("USD", selectedRange));
+  }
+
   render() {
     const {
       dispatch,
       filteredCurrencies,
       isBuyStatus,
-      selectedRowRecord
+      selectedRowRecord,
+      centralBank,
+      selectedRange,
+      isCentralBankLoading,
+      isCompaniesLoading,
+      lng,
+      t
     } = this.props;
 
     return (
       <div className="additionalContent">
-        <BlockWrapper>
+        <BlockWrapper isLoad={isCompaniesLoading}>
           <EcMainMap
             records={filteredCurrencies}
             isBuyStatus={isBuyStatus}
             selectedRowRecord={selectedRowRecord}
           />
         </BlockWrapper>
-        <BlockWrapper>
-          <CentralBankChart
-            dispatch={dispatch}
-          />
-        </BlockWrapper>
+        {
+          centralBank && (
+            <BlockWrapper isLoad={isCentralBankLoading}>
+              <CentralBankChart
+                dispatch={dispatch}
+                centralBank={centralBank}
+                selectedRange={selectedRange}
+                lng={lng}
+              />
+            </BlockWrapper>
+          )
+        }
       </div>
     );
   }
 }
+
+export default translate('common')(AdditionalContent)

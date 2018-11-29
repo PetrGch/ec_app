@@ -1,4 +1,5 @@
 import {
+  CHANGE_SELECTED_RANGE,
   LOAD_ALL_COMPANIES,
   LOAD_CENTRAL_BANK_DATA,
   SET_ACTIVE_CURRENCY,
@@ -14,7 +15,8 @@ const initialState = {
   currencyTypes: [],
   selectedCurrency: 'EUR',
   filteredCurrencies: [],
-  centralBank: null
+  centralBank: null,
+  selectedRange: "7"
 };
 
 export default function companies(state = initialState, action) {
@@ -43,7 +45,8 @@ export default function companies(state = initialState, action) {
     case LOAD_CENTRAL_BANK_DATA:
       return {
         ...state,
-        centralBank: action.centralBank
+        centralBank: action.centralBank,
+        selectedRange: action.selectedRange
       };
     default:
       return state;

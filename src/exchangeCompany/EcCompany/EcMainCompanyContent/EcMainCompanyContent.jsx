@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from "moment/moment";
+import {translate} from "react-i18next";
 
 import BlockWrapper from "../../../common/BlockWrapper/BlockWrapper";
 import {nullValidator} from "../../../common/util/valueValidator";
@@ -8,7 +9,6 @@ import EcMainCompanyMap from "./EcMainCompanyMap/EcMainCompanyMap";
 import EcMainCompanyDetail from "./EcMainCompanyDetail/EcMainCompanyDetail";
 
 import './ecMainCompanyContent.less';
-import {translate} from "react-i18next";
 
 class EcMainCompanyContent extends React.PureComponent{
   get updateDate() {
@@ -28,13 +28,14 @@ class EcMainCompanyContent extends React.PureComponent{
       selectedCurrency,
       selectedCompanyCurrency,
       filteredCurrency,
+      isLoad,
       dispatch,
       t
     } = this.props;
 
     return (
-      <div className="ecMainCompanyContent">
-        <BlockWrapper>
+      <main className="ecMainCompanyContent">
+        <BlockWrapper isLoad={isLoad}>
           <div className="ecMainCompanyContent__header">
             <div>
               <h1>{nullValidator(company, 'company_name')}</h1>
@@ -73,7 +74,7 @@ class EcMainCompanyContent extends React.PureComponent{
             </div> : null
           }
         </BlockWrapper>
-      </div>
+      </main>
     );
   }
 }

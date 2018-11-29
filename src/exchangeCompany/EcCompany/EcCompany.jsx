@@ -31,6 +31,8 @@ export default class EcCompany extends React.PureComponent {
       selectedCompanyCurrency,
       currencyTypes,
       filteredCurrency,
+      isCompanyLoading,
+      isCompaniesLoading,
       dispatch,
       match: { params }
     } = this.props;
@@ -49,11 +51,13 @@ export default class EcCompany extends React.PureComponent {
           selectedCurrency={selectedCurrency}
           selectedCompanyCurrency={selectedCompanyCurrency}
           filteredCurrency={filteredCurrency}
+          isLoad={isCompaniesLoading || isCompanyLoading}
         />
 
         <EcSideBar
           companies={companies}
           isBuyStatus={isBuyStatus}
+          isCompaniesLoading={isCompaniesLoading}
         />
       </div>
     );

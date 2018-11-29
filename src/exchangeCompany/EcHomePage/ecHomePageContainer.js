@@ -10,7 +10,11 @@ const mapStateToProps = state => {
     currencyTypes: state.companies.currencyTypes,
     currencyAmount: state.companies.currencyAmount,
     isBuyStatus: state.companies.isBuyStatus,
-    selectedCurrency: state.companies.selectedCurrency
+    selectedCurrency: state.companies.selectedCurrency,
+    centralBank: state.companies.centralBank,
+    selectedRange: state.companies.selectedRange,
+    isCompaniesLoading: state.load.isCompaniesLoading,
+    isCentralBankLoading: state.load.isCentralBankLoading
   };
 };
 

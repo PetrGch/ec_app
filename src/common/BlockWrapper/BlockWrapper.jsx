@@ -3,11 +3,11 @@ import React from 'react';
 import './blockWrapper.less';
 
 export default function BlockWrapper(props) {
-  const { children } = props;
+  const { children, isLoad } = props;
 
   return (
-    <div className="blockWrapper">
+    <section className={`blockWrapper blockWrapper--isLoaded-${isLoad}`}>
       {children}
-    </div>
+    </section>
   );
 }

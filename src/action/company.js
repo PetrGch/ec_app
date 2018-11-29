@@ -7,6 +7,7 @@ import {
 import {ecCurrencyMainTableRecord} from "../exchangeCompany/EcHomePage/EcMainContent/EcCurrencyMainTable/ecCurrencyMainTableConfig";
 import {API_URL} from "../common/util/AppConstance";
 import {request} from "../common/util/APIUtil";
+import {isCompanyLoading} from "./load";
 
 export function setBuyStatus(isBuyStatus) {
   return {
@@ -24,6 +25,7 @@ export function setSumAmount(currencyAmount) {
 
 export function loadCompanyByBranchName(branch_name) {
   return (dispatch) => {
+    dispatch(isCompanyLoading(true));
     request({
       url: API_URL + `/exCompany/branch/${branch_name}`,
       method: 'GET'
@@ -32,6 +34,8 @@ export function loadCompanyByBranchName(branch_name) {
         company: data,
         type: LOAD_COMPANY_BY_NAME
       })
+    }).finally(() => {
+      dispatch(isCompanyLoading(false));
     });
   };
 }

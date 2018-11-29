@@ -1,5 +1,6 @@
 import {
-  LOAD_ALL_COMPANIES, LOAD_CENTRAL_BANK_DATA, LOAD_COMPANY_BY_NAME,
+  CHANGE_SELECTED_RANGE,
+  LOAD_ALL_COMPANIES, LOAD_CENTRAL_BANK_DATA,
   SET_ACTIVE_CURRENCY,
   SET_BUY_STATUS,
   SET_SUM_AMOUNT
@@ -7,6 +8,7 @@ import {
 import {ecCurrencyMainTableRecord} from "../exchangeCompany/EcHomePage/EcMainContent/EcCurrencyMainTable/ecCurrencyMainTableConfig";
 import {request} from "../common/util/APIUtil";
 import {API_URL} from "../common/util/AppConstance";
+import {isCentralBankLoading, isCompaniesLoading} from "./load";
 
 export function setBuyStatus(isBuyStatus) {
   return {
@@ -24,6 +26,7 @@ export function setSumAmount(currencyAmount) {
 
 export function loadAllCompanies() {
   return (dispatch) => {
+    dispatch(isCompaniesLoading(true));
     request({
       url: API_URL + '/exCompany',
       method: 'GET'
@@ -33,6 +36,8 @@ export function loadAllCompanies() {
         currencyTypes: prepopulateCurrencyType(companies),
         type: LOAD_ALL_COMPANIES
       })
+    }).finally(() => {
+      dispatch(isCompaniesLoading(false));
     });
   }
 }
@@ -68,16 +73,24 @@ export function setActiveCurrency(selectedCurrency) {
   }
 }
 
-export function loadDataOfCentralBank(countryName) {
+export function loadDataOfCentralBank(currencyType, period = "all", selectedRangeCB) {
   return (dispatch) => {
+    dispatch(isCentralBankLoading(true));
     request({
-      url: API_URL + `/exCompany/centralBank/${countryName}`,
+      url: API_URL + `/centralBank?currencyType=${currencyType}&period=${period}`,
       method: 'GET'
     }).then((centralBank) => {
+      if (typeof selectedRangeCB === "function") {
+        selectedRangeCB();
+      }
+
       dispatch({
         centralBank,
+        selectedRange: period,
         type: LOAD_CENTRAL_BANK_DATA
       })
+    }).finally(() => {
+      dispatch(isCentralBankLoading(false));
     });
   };
 }

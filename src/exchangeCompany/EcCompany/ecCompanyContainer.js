@@ -14,7 +14,9 @@ const mapStateToProps = state => {
     currencyAmount: state.company.currencyAmount,
     currencyTypes: state.companies.currencyTypes,
     selectedCurrency: state.companies.selectedCurrency,
-    selectedCompanyCurrency: state.company.selectedCompanyCurrency
+    selectedCompanyCurrency: state.company.selectedCompanyCurrency,
+    isCompaniesLoading: state.load.isCompaniesLoading,
+    isCompanyLoading: state.load.isCompanyLoading,
   };
 };
 

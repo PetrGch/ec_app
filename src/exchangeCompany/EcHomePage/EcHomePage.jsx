@@ -47,13 +47,17 @@ export default class EcHomePage extends React.PureComponent {
       isBuyStatus,
       currencyTypes,
       selectedCurrency,
+      centralBank,
+      selectedRange,
+      isCompaniesLoading,
+      isCentralBankLoading
     } = this.props;
     const { selectedRowRecord } = this.state;
 
     return (
       <div className="ecHomePage">
         <Helmet>
-          <title>Compare foreign currency rates | ExCurRate</title>
+          <title>Compare foreign currency rates in Bangkok | ExCurRate</title>
         </Helmet>
 
         <div className="ecHomePage__content ecHomePage__content--position-one">
@@ -66,10 +70,12 @@ export default class EcHomePage extends React.PureComponent {
             currencyTypes={currencyTypes}
             selectedCurrency={selectedCurrency}
             onNameClick={this.onNameClick}
+            isCompaniesLoading={isCompaniesLoading}
           />
           <EcSideBar
             companies={companies}
             isBuyStatus={isBuyStatus}
+            isCompaniesLoading={isCompaniesLoading}
           />
         </div>
 
@@ -82,6 +88,10 @@ export default class EcHomePage extends React.PureComponent {
             filteredCurrencies={filteredCurrencies}
             isBuyStatus={isBuyStatus}
             selectedRowRecord={selectedRowRecord}
+            centralBank={centralBank}
+            selectedRange={selectedRange}
+            isCentralBankLoading={isCentralBankLoading}
+            isCompaniesLoading={isCompaniesLoading}
           />
         </div>
       </div>
