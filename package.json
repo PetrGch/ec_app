@@ -32,6 +32,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "compression": "^1.7.3",
     "css-loader": "^1.0.0",
+    "currency-flags": "git+https://github.com/transferwise/currency-flags.git",
     "eslint": "^5.4.0",
     "eslint-plugin-react": "^7.11.1",
     "express": "^4.16.3",

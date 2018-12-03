@@ -2,9 +2,9 @@ import React from 'react';
 
 import {sizeType} from '../../../../../common/controlLib/util';
 import {Dropdown, Radio} from '../../../../../common/controlLib';
+import {setActiveCurrency, setBuyStatus} from "../../../../../action/companies";
 
 import './ecCalculatorNavigation.less';
-import {setActiveCurrency, setBuyStatus} from "../../../../../action/companies";
 
 export default class EcCalculatorNavigation extends React.PureComponent {
   constructor(props) {
@@ -15,11 +15,25 @@ export default class EcCalculatorNavigation extends React.PureComponent {
 
   selectedCurrency(selectedCurrency) {
     const { dispatch } = this.props;
-    dispatch(setActiveCurrency(selectedCurrency.value));
+    dispatch(setActiveCurrency(selectedCurrency.index));
+  }
+
+  get currencyList() {
+    const { currencyTypes } = this.props;
+    return currencyTypes ? currencyTypes.map((currency) => ({
+        index: currency.index,
+        value: (
+          <div className="ecCalculatorNavigation__currencyItem">
+            <span className={`currency-flag currency-flag-${currency.index.toLowerCase()}`}/>
+            <span>{currency.value}</span>
+          </div>
+        )
+      })
+    ) : [];
   }
 
   render() {
-    const { dispatch, isBuyStatus, currencyTypes, selectedCurrency, translate } = this.props;
+    const { dispatch, isBuyStatus, selectedCurrency, translate } = this.props;
     const changeBuyStatus = (event) => {
       if (event.target && event.target.value === "sell") {
         dispatch(setBuyStatus(false));
@@ -49,7 +63,7 @@ export default class EcCalculatorNavigation extends React.PureComponent {
         <div className="ecCalculatorNavigation__currency">
           <Dropdown
             size={sizeType.LG}
-            list={currencyTypes}
+            list={this.currencyList}
             selectedIndex={selectedCurrency}
             selectItem={this.selectedCurrency}
           />

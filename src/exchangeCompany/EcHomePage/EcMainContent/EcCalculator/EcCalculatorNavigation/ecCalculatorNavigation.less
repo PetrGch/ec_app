@@ -27,7 +27,33 @@
     }
   }
 
+  &__currencyItem {
+    display: flex;
+    align-items: center;
+
+    & > span {
+      margin-left: 8px;
+    }
+
+    & .currency-flag {
+      width: 44px;
+      height: 26px;
+      border-radius: 4px;
+      background-position: center;
+    }
+  }
+
   &__currency {
+    & .ec-dropdownList__item {
+      padding: 6px;
+    }
+
+    & .ec-dropdown__handler {
+      & .currency-flag {
+        margin-left: -1px;
+      }
+    }
+
     @media screen and (max-width: 650px) {
       margin-bottom: 10px;
     }
