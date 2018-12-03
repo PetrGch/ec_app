@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
@@ -143,10 +144,6 @@ module.exports = {
       NODE_ENV: JSON.stringify('production')
     }),
     new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        comparisons: false,
-      },
       mangle: {
         safari10: true,
       },
@@ -183,13 +180,6 @@ module.exports = {
     //     analyzerPort: 8888
     // }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new CompressionPlugin()
   ],
-
-  node: {
-    dgram: 'empty',
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
-    child_process: 'empty',
-  },
 };
