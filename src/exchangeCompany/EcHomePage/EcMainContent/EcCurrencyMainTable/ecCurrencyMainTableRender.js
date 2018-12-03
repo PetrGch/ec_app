@@ -1,11 +1,66 @@
 import React from 'react';
 import moment from 'moment';
-import Button from "../../../../common/controlLib/Button/Button";
 import {Link} from "react-router-dom";
 
-function CompanyInfo({companyName, branchName, googleMapUrl, onNameClickEvent}) {
+function findWorkingDay(workingTimeList) {
+  const dayOfWeek = moment().format("e");
+  if (!workingTimeList) {
+    return null
+  }
+
+  switch (dayOfWeek) {
+    case "0":
+      return { from: workingTimeList.sn_from, to: workingTimeList.sn_to };
+    case "1":
+      return { from: workingTimeList.mn_from, to: workingTimeList.mn_to };
+    case "2":
+      return { from: workingTimeList.tu_from, to: workingTimeList.tu_to };
+    case "3":
+      return { from: workingTimeList.we_from, to: workingTimeList.we_to };
+    case "4":
+      return { from: workingTimeList.th_from, to: workingTimeList.th_to };
+    case "5":
+      return { from: workingTimeList.fr_from, to: workingTimeList.fr_to };
+    case "6":
+      return { from: workingTimeList.st_from, to: workingTimeList.st_to };
+    default:
+      return null;
+  }
+}
+
+function findWorkingTimeOfCurrentDay(workingTime) {
+  const workingDayTime = findWorkingDay(workingTime);
+  return isWorkingNow(workingDayTime);
+}
+
+function isWorkingNow(workingDayTime) {
+  if (!workingDayTime
+    || !moment(workingDayTime.from, "HH:mm").isValid()
+    || !moment(workingDayTime.to, "HH:mm").isValid()) {
+    return null;
+  }
+  const utcFrom = moment.utc(workingDayTime.from, "HH:mm");
+  const utcTo = moment.utc(workingDayTime.to, "HH:mm");
+
+  const startTime = moment(utcFrom).local().valueOf();
+  const endTime = moment(utcTo).local().valueOf();
+  const currentTime = moment().local().valueOf();
+
+  return startTime <= currentTime && currentTime < endTime;
+}
+
+function CompanyInfo({companyName, branchName, googleMapUrl, workingTime, onNameClickEvent}) {
+  const isWorkingNow = findWorkingTimeOfCurrentDay(workingTime);
+
+
   return (
     <div className="ecCurrencyMainTable__companyDetail">
+      {
+        isWorkingNow !== null &&
+        <div className={`ecCurrencyMainTable__workingTime ecCurrencyMainTable__workingTime--isWorking-${isWorkingNow}`}>
+          <span>{isWorkingNow ? "Open" : "Close"}</span>
+        </div>
+      }
       <div
         onClick={onNameClickEvent}
         className="ecCurrencyMainTable__companyName"
@@ -37,6 +92,8 @@ export function renderCompanyName(record, onNameClick) {
   let companyName = null;
   let branchName = null;
   let googleMapUrl = null;
+  let workingTime = null;
+
   if (record) {
     if (record.company_name) {
       companyName = record.company_name;
@@ -46,6 +103,9 @@ export function renderCompanyName(record, onNameClick) {
     }
     if (record.google_map_url) {
       googleMapUrl = record.google_map_url;
+    }
+    if (record.workingTime) {
+      workingTime = record.workingTime;
     }
   }
   const onNameClickEvent = () => {
@@ -57,6 +117,7 @@ export function renderCompanyName(record, onNameClick) {
     branchName={branchName}
     googleMapUrl={googleMapUrl}
     onNameClickEvent={onNameClickEvent}
+    workingTime={workingTime}
   />
 }
 
@@ -78,13 +139,36 @@ export function renderSellTitle(sumAmount, config, translate) {
   );
 }
 
-
-export function renderBuyPrice(buyPrice, sumAmount) {
-  return buyPrice && sumAmount ? (buyPrice * sumAmount).toFixed(2) : ''
+export function renderSumPrice(price, sumAmount, currencyMark) {
+  const sumPrice = price && sumAmount ? (price * sumAmount).toFixed(2) : 0;
+  return `${sumPrice} ${currencyMark}`
 }
 
-export function renderSellPrice(sellPrice, sumAmount) {
-  return sellPrice && sumAmount ? (sellPrice * sumAmount).toFixed(2) : ''
+export function renderPrice(price, currencyMark, trend) {
+  let trendRow = null;
+  if (trend !== 0) {
+    if (trend > 0) {
+      trendRow = (
+        <span className="ecCurrencyMainTable__trendDirection ecCurrencyMainTable__trendDirection--up">
+          +{trend}
+        </span>)
+    } else {
+      trendRow = (
+        <span className="ecCurrencyMainTable__trendDirection ecCurrencyMainTable__trendDirection--down">
+          {trend}
+        </span>
+      )
+    }
+  }
+
+  return (
+    <div className="ecCurrencyMainTable__priceTrend">
+      <span>
+        {`${price} ${currencyMark}`}
+      </span>
+      {trendRow}
+    </div>
+  );
 }
 
 function TimeCell({time, date}) {

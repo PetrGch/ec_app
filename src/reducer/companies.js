@@ -6,7 +6,7 @@ import {
   SET_BUY_STATUS,
   SET_SUM_AMOUNT
 } from "../constant/companies";
-import {filterByCurrency} from "../exchangeCompany/EcHomePage/EcMainContent/EcCurrencyMainTable/ecCurrencyMainTableUtil";
+import {currencyMark, filterByCurrency} from "./util";
 
 const initialState = {
   currencyAmount: 100,
@@ -16,7 +16,8 @@ const initialState = {
   selectedCurrency: 'EUR',
   filteredCurrencies: [],
   centralBank: null,
-  selectedRange: "7"
+  selectedRange: "7",
+  currencyMark: currencyMark["EUR"],
 };
 
 export default function companies(state = initialState, action) {
@@ -39,6 +40,7 @@ export default function companies(state = initialState, action) {
     case SET_ACTIVE_CURRENCY:
       return {
         ...state,
+        currencyMark: currencyMark[action.selectedCurrency],
         selectedCurrency: action.selectedCurrency,
         filteredCurrencies: filterByCurrency(state.companies, action.selectedCurrency, state.currencyAmount)
       };

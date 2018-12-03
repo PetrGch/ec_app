@@ -149,14 +149,15 @@ export default class EcMainCompanyCalculate extends React.PureComponent {
   }
 
   render() {
-    const { currencyTypes, translate } = this.props;
+    const { currencyTypes, translate, filteredCurrency } = this.props;
     const { selectedCurrency, isBuyStatus } = this.state;
+    const currencyMark = filteredCurrency ? filteredCurrency.currencyMark : "";
 
     return (
       <div className="ecMainCompanyCalculate">
         <div className="ecMainCompanyCalculate__price">
-          <span>{translate("companies.buy")}: {this.buyPrice}</span>
-          <span>{translate("companies.sell")}: {this.sellPrice}</span>
+          <span>{translate("companies.buy")}: {this.buyPrice} {currencyMark}</span>
+          <span>{translate("companies.sell")}: {this.sellPrice} {currencyMark}</span>
         </div>
         <div className="ecMainCompanyCalculate__calculator ecMainCompanyCalculator">
           <ExpandCollapseWrapper name="Calculator" isExpand>

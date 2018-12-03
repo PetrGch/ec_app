@@ -13,6 +13,7 @@
   }
 
   &__input {
+    display: flex;
     width: 200px;
     margin-bottom: 30px;
 
@@ -21,8 +22,22 @@
     }
 
     @media screen and (max-width: 650px) {
-      width: 100%;
       margin-bottom: 10px;
+    }
+
+    & input {
+      width: 200px;
+      text-align: right;
+
+      @media screen and (max-width: 650px) {
+        width: 100%;
+      }
+    }
+
+    & span {
+      font-size: 24px;
+      line-height: 40px;
+      margin-left: 6px;
     }
   }
 

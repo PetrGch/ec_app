@@ -35,7 +35,7 @@ export default class EcMainCompanyMap extends React.PureComponent {
 
   get companyOnMap() {
     const { filteredCurrency } = this.props;
-    const zoom = 13;
+    const zoom = 16;
     const center = [filteredCurrency.lat, filteredCurrency.lng];
 
     if (__isBrowser__ && center[0] && center[1]) {

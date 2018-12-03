@@ -3,9 +3,7 @@ import {
   LOAD_COMPANY_BY_NAME, SET_ACTIVE_COMPANY_CURRENCY,
   SET_BUY_STATUS_FOR_COMPANY
 } from "../constant/companies";
-import {
-  filterCurrency
-} from "../exchangeCompany/EcHomePage/EcMainContent/EcCurrencyMainTable/ecCurrencyMainTableUtil";
+import {filterCurrency} from "./util";
 
 const initialState = {
   currencyAmount: 100,

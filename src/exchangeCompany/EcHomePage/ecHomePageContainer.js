@@ -13,6 +13,7 @@ const mapStateToProps = state => {
     selectedCurrency: state.companies.selectedCurrency,
     centralBank: state.companies.centralBank,
     selectedRange: state.companies.selectedRange,
+    currencyMark: state.companies.currencyMark,
     isCompaniesLoading: state.load.isCompaniesLoading,
     isCentralBankLoading: state.load.isCentralBankLoading
   };

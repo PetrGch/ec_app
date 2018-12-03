@@ -2,9 +2,9 @@ import React from 'react';
 
 import Grid from "../../../../common/controlLib/Grid/Grid";
 import {baseCurrency} from "./baseCurrencyGridConfig";
-import {filterByCurrency} from "../../EcMainContent/EcCurrencyMainTable/ecCurrencyMainTableUtil";
 
 import './ecBaseCurrency.less';
+import {filterByCurrency} from "../../../../reducer/util";
 
 export default class EcBaseCurrency extends React.PureComponent {
   get usdCurrency() {

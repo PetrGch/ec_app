@@ -7,11 +7,13 @@ export const baseCurrency = [
   {
     index: "usd",
     key: "usd",
-    title: "USD"
+    title: "USD",
+    renderCell: (record, config) => (`${record[config.key]} $`)
   },
   {
     index: "eur",
     key: "eur",
-    title: "EUR"
+    title: "EUR",
+    renderCell: (record, config) => (`${record[config.key]} €`)
   }
 ];

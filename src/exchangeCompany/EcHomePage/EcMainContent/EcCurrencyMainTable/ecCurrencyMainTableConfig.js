@@ -1,9 +1,7 @@
 import {
-  renderBuyPrice,
   renderBuyTitle, renderCompanyName,
-  renderLastUpdateTime,
-  renderSellPrice,
-  renderSellTitle, renderTitle
+  renderLastUpdateTime, renderPrice,
+  renderSellTitle, renderSumPrice, renderTitle
 } from "./ecCurrencyMainTableRender";
 
 export const ecCurrencyMainTableConfig = (
@@ -44,14 +42,19 @@ const ecCurrencyMainTableBuyConfig = (
       title: translate("companies.buy"),
       subTitle: `(${selectedCurrency})`,
       renderTitle: (record, config) => renderTitle(record, config, sortRowsByPrice),
-      renderCell: (record) => record.buy_price ? record.buy_price.toFixed(2) : record.buy_price
+      renderCell: (record) => {
+        const price = record.buy_price ? record.buy_price.toFixed(2) : 0;
+        const trend = record.buy_trend ? record.buy_trend.toFixed(2) : 0;
+
+        return renderPrice(price, record.currencyMark, trend);
+      }
     },
     {
       index: 'buyPriceSum',
       key: 'buyPriceSum',
       subTitle: `(${selectedCurrency})`,
       renderTitle: (record, config) => renderBuyTitle(sumAmount, config, translate),
-      renderCell: (record) => renderBuyPrice(record.buy_price, sumAmount)
+      renderCell: (record) => renderSumPrice(record.buy_price, sumAmount, record.currencyMark)
     },
     {
       index: 'updated_at',
@@ -84,14 +87,19 @@ const ecCurrencyMainTableSumConfig = (
       title: translate("companies.sell"),
       subTitle: `(${selectedCurrency})`,
       renderTitle: (record, config) => renderTitle(record, config, sortRowsByPrice),
-      renderCell: (record) => record.sell_price ? record.sell_price.toFixed(2) : record.sell_price
+      renderCell: (record) => {
+        const price = record.sell_price ? record.sell_price.toFixed(2) : 0;
+        const trend = record.sell_trend ? record.sell_trend.toFixed(2) : 0;
+
+        return renderPrice(price, record.currencyMark, trend);
+      }
     },
     {
       index: 'sellPriceSum',
       key: 'sellPriceSum',
       subTitle: `(${selectedCurrency})`,
       renderTitle: (record, config) => renderSellTitle(sumAmount, config, translate),
-      renderCell: (record) => renderSellPrice(record.sell_price, sumAmount)
+      renderCell: (record) => renderSumPrice(record.sell_price, sumAmount, record.currencyMark)
     },
     {
       index: 'updated_at',

@@ -9,12 +9,14 @@ const mapStateToProps = state => {
   return {
     company: state.company.company,
     filteredCurrency: state.company.filteredCurrency,
-    companies: state.companies.companies,
     isBuyStatus: state.company.isBuyStatus,
     currencyAmount: state.company.currencyAmount,
+    selectedCompanyCurrency: state.company.selectedCompanyCurrency,
+
+    companies: state.companies.companies,
     currencyTypes: state.companies.currencyTypes,
     selectedCurrency: state.companies.selectedCurrency,
-    selectedCompanyCurrency: state.company.selectedCompanyCurrency,
+
     isCompaniesLoading: state.load.isCompaniesLoading,
     isCompanyLoading: state.load.isCompanyLoading,
   };

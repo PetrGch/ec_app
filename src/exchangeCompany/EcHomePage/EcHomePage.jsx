@@ -50,7 +50,8 @@ export default class EcHomePage extends React.PureComponent {
       centralBank,
       selectedRange,
       isCompaniesLoading,
-      isCentralBankLoading
+      isCentralBankLoading,
+      currencyMark
     } = this.props;
     const { selectedRowRecord } = this.state;
 
@@ -71,6 +72,7 @@ export default class EcHomePage extends React.PureComponent {
             selectedCurrency={selectedCurrency}
             onNameClick={this.onNameClick}
             isCompaniesLoading={isCompaniesLoading}
+            currencyMark={currencyMark}
           />
           <EcSideBar
             companies={companies}

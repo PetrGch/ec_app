@@ -27,7 +27,7 @@ export default class EcCalculatorSlider extends React.PureComponent {
   }
 
   render() {
-    const { currencyAmount } = this.props;
+    const { currencyAmount, currencyMark } = this.props;
 
     return (
       <div className="ecCalculatorSlider">
@@ -42,6 +42,7 @@ export default class EcCalculatorSlider extends React.PureComponent {
             onChange={this.changeInputValueHandler}
             size={sizeType.LG}
           />
+          <span>{currencyMark}</span>
         </div>
         <div className="ecCalculatorSlider__slider">
           <Slider

@@ -1,13 +1,13 @@
 import React from 'react';
+import moment from "moment";
 
 import {nullValidator} from "../../../../common/util/valueValidator";
 
 import './ecMainCompanyDetail.less';
-import moment from "moment";
 
 function checkWorkingDays(from, to, translate) {
   if (from && to) {
-    return `${moment(from).format("HH:mm")} - ${moment(to).format("HH:mm")}`;
+    return `${moment(from, "HH:mm").format("HH:mm")} - ${moment(to, "HH:mm").format("HH:mm")}`;
   }
 
   return translate("warning.notWorkingDay");
@@ -69,7 +69,7 @@ function EcMainCompanyLeftDetailColumn({ workingTime, translate}) {
         <DayOfWeek
           day={translate(`company.sn`)}
           workingTime={checkWorkingDays(workingTime.sn_from, workingTime.sn_to, translate)}
-          isActive={dayOfWeek === '7'}
+          isActive={dayOfWeek === '0'}
         />
       </div>
     </div>

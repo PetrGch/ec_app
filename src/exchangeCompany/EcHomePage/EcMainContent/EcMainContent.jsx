@@ -17,7 +17,8 @@ export default class EcMainContent extends React.PureComponent {
       currencyTypes,
       selectedCurrency,
       onNameClick,
-      isCompaniesLoading
+      isCompaniesLoading,
+      currencyMark
     } = this.props;
 
     return (
@@ -29,6 +30,7 @@ export default class EcMainContent extends React.PureComponent {
             currencyAmount={currencyAmount}
             currencyTypes={currencyTypes}
             selectedCurrency={selectedCurrency}
+            currencyMark={currencyMark}
           />
         </BlockWrapper>
         <BlockWrapper isLoad={isCompaniesLoading}>
@@ -39,6 +41,7 @@ export default class EcMainContent extends React.PureComponent {
             isBuyStatus={isBuyStatus}
             selectedCurrency={selectedCurrency}
             onNameClick={onNameClick}
+            currencyMark={currencyMark}
           />
         </BlockWrapper>
       </main>

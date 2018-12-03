@@ -43,6 +43,49 @@
     }
   }
 
+  &__workingTime {
+    margin-bottom: 6px;
+    font-size: 14px;
+
+    & span {
+      position: relative;
+      margin-left: 10px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: -10px;
+        width: 6px;
+        height: 6px;
+        margin-top: -3px;
+        border-radius: 50%;
+      }
+    }
+
+    &--isWorking {
+      &-true {
+        & span {
+          color: @primary-greenDark;
+
+          &::before {
+            background-color: @primary-greenDark;
+          }
+        }
+      }
+
+      &-false {
+        & span {
+          color: @primary-orange                                                                                                                                                                                      ;
+
+          &::before {
+            background-color: @primary-orange;
+          }
+        }
+      }
+    }
+  }
+
   &__companyAction {
     display: flex;
     align-items: flex-end;
@@ -68,6 +111,47 @@
 
     @media screen and (max-width: 460px) {
       margin-left: 10px;
+    }
+  }
+
+  &__priceTrend {
+    display: flex;
+    flex-direction: column;
+    height: 16px;
+  }
+
+  &__trendDirection {
+    position: relative;
+    margin-left: 12px;
+    margin-top: 4px;
+    font-size: 12px;
+    color: transparent !important;
+
+    &::before {
+      position: absolute;
+      top: 1px;
+      left: -12px;
+      font-size: 10px;
+    }
+
+    &--up {
+      color: @primary-greenDark;
+
+      &::before {
+        content: '▲';
+        color: transparent !important;
+        //color: @primary-greenDark;
+      }
+    }
+
+    &--down {
+      color: @primary-orange;
+
+      &::before {
+        content: '▼';
+        color: transparent !important;
+        //color: @primary-orange;
+      }
     }
   }
   

@@ -32,7 +32,8 @@ export const initialStore = {
     companies: [],
     currencyTypes: [],
     selectedCurrency: 'EUR',
-    filteredCurrencies: []
+    filteredCurrencies: [],
+    currencyMark: "€"
   },
   company: {
     currencyAmount: 100,
@@ -44,5 +45,10 @@ export const initialStore = {
   rout: {
     homeRout: '/',
     branchRout: null
+  },
+  load: {
+    isCompaniesLoading: false,
+    isCompanyLoading: false,
+    isCentralBankLoading: false
   }
 };

@@ -20,6 +20,7 @@ class EcCalculator extends React.Component {
       isBuyStatus,
       currencyTypes,
       selectedCurrency,
+      currencyMark,
       lng,
       t
     } = this.props;
@@ -40,6 +41,7 @@ class EcCalculator extends React.Component {
           <EcCalculatorSlider
             dispatch={dispatch}
             currencyAmount={currencyAmount}
+            currencyMark={currencyMark}
             translate={t}
           />
         </div>
