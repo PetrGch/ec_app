@@ -143,6 +143,10 @@ module.exports = {
       NODE_ENV: JSON.stringify('production')
     }),
     new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        comparisons: false,
+      },
       mangle: {
         safari10: true,
       },
@@ -180,4 +184,12 @@ module.exports = {
     // }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],
+
+  node: {
+    dgram: 'empty',
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
+    child_process: 'empty',
+  },
 };
