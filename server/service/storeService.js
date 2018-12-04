@@ -1,18 +1,15 @@
 import {prepopulateCurrencyType} from "../../src/action/companies";
-import {
-  filterByCurrency,
-  filterCurrency
-} from "../../src/exchangeCompany/EcHomePage/EcMainContent/EcCurrencyMainTable/ecCurrencyMainTableUtil";
 import configureStore, {initialStore} from "../../src/store/configureStore";
 import request from "request";
 import {API_URL} from "../../src/common/util/AppConstance";
+import {filterByCurrency, filterCurrency} from "../../src/reducer/util";
 
 let companies = null;
 
 (function() {
-  companiesRequest();
-  setInterval(function() {
+  setTimeout(function tick() {
     companiesRequest();
+    setTimeout(tick, 600000);
   }, 600000);
 })();
 
