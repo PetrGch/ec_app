@@ -38,7 +38,7 @@ class AdditionalContent extends React.PureComponent {
           />
         </BlockWrapper>
         {
-          centralBank && (
+          centralBank && centralBank.central_bank_details && (
             <BlockWrapper isLoad={isCentralBankLoading}>
               <CentralBankChart
                 dispatch={dispatch}
