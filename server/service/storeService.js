@@ -9,8 +9,8 @@ let companies = null;
 (function() {
   setTimeout(function tick() {
     companiesRequest();
-    setTimeout(tick, 600000);
-  }, 600000);
+    setTimeout(tick, 7200000);
+  }, 7200000);
 })();
 
 function companiesRequest() {
