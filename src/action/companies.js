@@ -73,11 +73,11 @@ export function setActiveCurrency(selectedCurrency) {
   }
 }
 
-export function loadDataOfCentralBank(currencyType, period = "all", selectedRangeCB) {
+export function loadDataOfCentralBank(currencyType, period, selectedRangeCB) {
   return (dispatch) => {
     dispatch(isCentralBankLoading(true));
     request({
-      url: API_URL + `/centralBank?currencyType=${currencyType}&period=${period}`,
+      url: API_URL + `/centralBank?currencyType=${currencyType.toUpperCase()}&period=${period}`,
       method: 'GET'
     }).then((centralBank) => {
       if (typeof selectedRangeCB === "function") {
