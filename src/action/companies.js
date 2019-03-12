@@ -47,7 +47,7 @@ export function prepopulateCurrencyType(companies) {
   let mainCurrencyType = ['EUR', 'USD', 'GBP'];
 
   companies.forEach(company => {
-    company.exchange_currencies.forEach(currency => {
+    company.currencies.forEach(currency => {
       const currencyIndex = currencyTypes.indexOf(currency.currency_type);
       const mainCurrencyIndex = mainCurrencyType.indexOf(currency.currency_type);
       if (currencyIndex === -1 && mainCurrencyIndex === -1) {

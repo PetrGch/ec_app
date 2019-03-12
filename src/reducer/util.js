@@ -54,8 +54,8 @@ function filterAmounts(currency, currencyAmount) {
 
 export function filterCurrency(record, currencyType, currencyAmount) {
   let filteredRecord = null;
-  if (record.exchange_currencies.length !== 0) {
-    record.exchange_currencies.some(currency => {
+  if (record.currencies.length !== 0) {
+    record.currencies.some(currency => {
       if (currency.currency_type === currencyType) {
         const filteredAmount = filterAmounts(currency, currencyAmount);
         filteredRecord = {
