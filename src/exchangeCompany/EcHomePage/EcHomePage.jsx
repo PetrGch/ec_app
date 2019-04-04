@@ -21,8 +21,9 @@ export default class EcHomePage extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { loadAllCompanies } = this.props;
-    loadAllCompanies();
+    const { loadAllCompaniesByCurrencyType, loadAllCurrencyTypes } = this.props;
+    loadAllCompaniesByCurrencyType("EUR");
+    loadAllCurrencyTypes();
   }
 
   onNameClick(record) {
@@ -51,7 +52,11 @@ export default class EcHomePage extends React.PureComponent {
       selectedRange,
       isCompaniesLoading,
       isCentralBankLoading,
-      currencyMark
+      currencyMark,
+      sortType,
+      filteringNameValue,
+      currentPage,
+      amountOfPage
     } = this.props;
     const { selectedRowRecord } = this.state;
 
@@ -66,13 +71,16 @@ export default class EcHomePage extends React.PureComponent {
             dispatch={dispatch}
             isBuyStatus={isBuyStatus}
             currencyAmount={currencyAmount}
-            companies={companies}
             filteredCurrencies={filteredCurrencies}
             currencyTypes={currencyTypes}
             selectedCurrency={selectedCurrency}
-            onNameClick={this.onNameClick}
             isCompaniesLoading={isCompaniesLoading}
             currencyMark={currencyMark}
+            sortType={sortType}
+            filteringNameValue={filteringNameValue}
+            currentPage={currentPage}
+            amountOfPage={amountOfPage}
+            onNameClick={this.onNameClick}
           />
           <EcSideBar
             companies={companies}

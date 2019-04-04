@@ -45,7 +45,7 @@ export default class Checkbox extends React.PureComponent {
     return (
       <div className={`ec-checkbox ${setSize('ec-checkbox', size)} ${className}`}>
         {isLoading
-          ? <img className="ec-checkbox__img" src={spinner} alt="spinner"/>
+          ? <img className="ec-checkbox__img" src={spinner}/>
           : <input
           id={uid}
           type="checkbox"

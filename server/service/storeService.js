@@ -5,8 +5,11 @@ import {API_URL} from "../../src/common/util/AppConstance";
 import {filterByCurrency, filterCurrency} from "../../src/reducer/util";
 
 let companies = null;
+let centralBank = null;
+let currencyType = ["EUR", "USD", "GBP"];
 
 (function() {
+  companiesRequest();
   setTimeout(function tick() {
     companiesRequest();
     setTimeout(tick, 7200000);
@@ -14,9 +17,10 @@ let companies = null;
 })();
 
 function companiesRequest() {
-  request(`${API_URL}/exCompany`, function (error, response, companiesResponse) {
+  request(`${API_URL}/exCompany/snapshot`, function (error, response, companiesResponse) {
     if (!error) {
-      companies = JSON.parse(companiesResponse);
+      companies = JSON.parse(companiesResponse).company;
+      centralBank = JSON.parse(companiesResponse).centralBank;
     }
   });
 }
@@ -29,7 +33,8 @@ export function createStoreWithCompanies() {
         companies: {
           ...initialStore.companies,
           companies: companies,
-          currencyTypes: prepopulateCurrencyType(companies),
+          centralBank: centralBank,
+          currencyTypes: prepopulateCurrencyType(currencyType),
           filteredCurrencies: filterByCurrency(companies, "USD", 100)
         }
       })

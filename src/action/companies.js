@@ -1,11 +1,9 @@
 import {
-  CHANGE_SELECTED_RANGE,
-  LOAD_ALL_COMPANIES, LOAD_CENTRAL_BANK_DATA,
-  SET_ACTIVE_CURRENCY,
-  SET_BUY_STATUS,
+  CHANGE_PAGE, FILTER_COMPANIES_BY_NAME,
+  LOAD_ALL_COMPANIES, LOAD_ALL_CURRENCIES, LOAD_CENTRAL_BANK_DATA,
+  SET_BUY_STATUS, SET_SORTING_TYPE,
   SET_SUM_AMOUNT
 } from "../constant/companies";
-import {ecCurrencyMainTableRecord} from "../exchangeCompany/EcHomePage/EcMainContent/EcCurrencyMainTable/ecCurrencyMainTableConfig";
 import {request} from "../common/util/APIUtil";
 import {API_URL} from "../common/util/AppConstance";
 import {isCentralBankLoading, isCompaniesLoading} from "./load";
@@ -24,16 +22,16 @@ export function setSumAmount(currencyAmount) {
   }
 }
 
-export function loadAllCompanies() {
+export function loadAllCompaniesByCurrencyType(currencyType) {
   return (dispatch) => {
     dispatch(isCompaniesLoading(true));
     request({
-      url: API_URL + '/exCompany',
+      url: API_URL + `/exCompany?currencyType=${currencyType}`,
       method: 'GET'
-    }).then(companies => {
+    }).then((companies) => {
       dispatch({
         companies,
-        currencyTypes: prepopulateCurrencyType(companies),
+        selectedCurrency: currencyType,
         type: LOAD_ALL_COMPANIES
       })
     }).finally(() => {
@@ -42,35 +40,27 @@ export function loadAllCompanies() {
   }
 }
 
-export function prepopulateCurrencyType(companies) {
-  let currencyTypes = [];
-  let mainCurrencyType = ['EUR', 'USD', 'GBP'];
-
-  companies.forEach(company => {
-    company.currencies.forEach(currency => {
-      const currencyIndex = currencyTypes.indexOf(currency.currency_type);
-      const mainCurrencyIndex = mainCurrencyType.indexOf(currency.currency_type);
-      if (currencyIndex === -1 && mainCurrencyIndex === -1) {
-        currencyTypes.push(currency.currency_type);
-      }
-    })
-  });
-
-  const mappedCurrencyTypes = currencyTypes
-    .filter(currencyType => !!currencyType)
-    .map(currencyType => ({index: currencyType, value: currencyType}))
-    .sort((a, b) => a.value >= b.value ? 1 : -1);
-  const mappedMainCurrencyTypes = mainCurrencyType
-    .map(currencyType => ({index: currencyType, value: currencyType}));
-
-  return mappedMainCurrencyTypes.concat(mappedCurrencyTypes);
+export function loadAllCurrencyTypes() {
+  return (dispatch) => {
+    request({
+      url: API_URL + `/exCurrency/types`,
+      method: 'GET'
+    }).then((currencyTypes) => {
+      dispatch({
+        currencyTypes: currencyTypes,
+        type: LOAD_ALL_CURRENCIES
+      })
+    });
+  }
 }
 
-export function setActiveCurrency(selectedCurrency) {
-  return {
-    selectedCurrency,
-    type: SET_ACTIVE_CURRENCY
-  }
+export function prepopulateCurrencyType(currencyTypes) {
+  return currencyTypes.map((currencyType) => {
+    return {
+      index: currencyType,
+      value: currencyType
+    }
+  })
 }
 
 export function loadDataOfCentralBank(currencyType, period, selectedRangeCB) {
@@ -93,4 +83,26 @@ export function loadDataOfCentralBank(currencyType, period, selectedRangeCB) {
       dispatch(isCentralBankLoading(false));
     });
   };
+}
+
+export function setSortingType(sortingType, parameters = {}) {
+  return {
+    sortingType,
+    parameters,
+    type: SET_SORTING_TYPE
+  }
+}
+
+export function filterCompanyByName(nameValue) {
+  return {
+    nameValue,
+    type: FILTER_COMPANIES_BY_NAME
+  }
+}
+
+export function changePage(pageNumber) {
+  return {
+    pageNumber,
+    type: CHANGE_PAGE
+  }
 }

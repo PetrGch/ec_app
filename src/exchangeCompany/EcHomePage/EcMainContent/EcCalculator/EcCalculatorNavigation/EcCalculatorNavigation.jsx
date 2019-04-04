@@ -2,7 +2,7 @@ import React from 'react';
 
 import {sizeType} from '../../../../../common/controlLib/util';
 import {Dropdown, Radio} from '../../../../../common/controlLib';
-import {setActiveCurrency, setBuyStatus} from "../../../../../action/companies";
+import {loadAllCompaniesByCurrencyType, setBuyStatus} from "../../../../../action/companies";
 
 import './ecCalculatorNavigation.less';
 
@@ -15,7 +15,7 @@ export default class EcCalculatorNavigation extends React.PureComponent {
 
   selectedCurrency(selectedCurrency) {
     const { dispatch } = this.props;
-    dispatch(setActiveCurrency(selectedCurrency.index));
+    dispatch(loadAllCompaniesByCurrencyType(selectedCurrency.index));
   }
 
   get currencyList() {

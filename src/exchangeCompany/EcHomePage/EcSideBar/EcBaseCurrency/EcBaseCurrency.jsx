@@ -2,9 +2,10 @@ import React from 'react';
 
 import Grid from "../../../../common/controlLib/Grid/Grid";
 import {baseCurrency} from "./baseCurrencyGridConfig";
+import {filterByCurrency} from "../../../../reducer/util";
+import BlockWrapper from "../../../../common/BlockWrapper/BlockWrapper";
 
 import './ecBaseCurrency.less';
-import {filterByCurrency} from "../../../../reducer/util";
 
 export default class EcBaseCurrency extends React.PureComponent {
   get usdCurrency() {
@@ -53,18 +54,21 @@ export default class EcBaseCurrency extends React.PureComponent {
   }
 
   render() {
+    const { isLoading } = this.props;
     const centralBank = this.centralBank;
     const usd = this.usdCurrency;
 
     return centralBank ? (
-      <div className="ecBaseCurrency">
-        <h3 className="ecBaseCurrency__title">{usd.company_name}</h3>
-        <Grid
-          isHeader
-          records={centralBank}
-          config={baseCurrency}
-        />
-      </div>
+      <BlockWrapper isLoad={isLoading}>
+        <div className="ecBaseCurrency">
+          <h3 className="ecBaseCurrency__title">{usd.company_name}</h3>
+          <Grid
+            isHeader
+            records={centralBank}
+            config={baseCurrency}
+          />
+        </div>
+      </BlockWrapper>
     ) : null;
   }
 }

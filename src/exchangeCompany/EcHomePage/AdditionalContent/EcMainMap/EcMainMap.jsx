@@ -1,6 +1,5 @@
 import React from 'react';
 
-import {sortedByPrice} from "../../EcMainContent/EcCurrencyMainTable/ecCurrencyMainTableUtil";
 import mapMarkerIcon from './map-marker.svg';
 
 import './ecMainMap.less';

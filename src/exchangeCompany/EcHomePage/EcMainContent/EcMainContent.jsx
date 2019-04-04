@@ -12,13 +12,16 @@ export default class EcMainContent extends React.PureComponent {
       dispatch,
       currencyAmount,
       isBuyStatus,
-      companies,
       filteredCurrencies,
       currencyTypes,
       selectedCurrency,
       onNameClick,
       isCompaniesLoading,
-      currencyMark
+      currencyMark,
+      sortType,
+      filteringNameValue,
+      currentPage,
+      amountOfPage
     } = this.props;
 
     return (
@@ -35,13 +38,17 @@ export default class EcMainContent extends React.PureComponent {
         </BlockWrapper>
         <BlockWrapper isLoad={isCompaniesLoading}>
           <EcCurrencyMainTable
-            records={companies}
-            filteredCurrencies={filteredCurrencies}
+            dispatch={dispatch}
+            records={filteredCurrencies}
             currencyAmount={currencyAmount}
             isBuyStatus={isBuyStatus}
             selectedCurrency={selectedCurrency}
             onNameClick={onNameClick}
             currencyMark={currencyMark}
+            sortType={sortType}
+            filteringNameValue={filteringNameValue}
+            currentPage={currentPage}
+            amountOfPage={amountOfPage}
           />
         </BlockWrapper>
       </main>
