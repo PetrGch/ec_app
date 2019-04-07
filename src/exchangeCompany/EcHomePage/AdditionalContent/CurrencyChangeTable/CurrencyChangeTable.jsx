@@ -15,7 +15,10 @@ export default class CurrencyChangeTable extends React.PureComponent {
     const { centralBank } = this.props;
 
     if (centralBank && centralBank.central_bank_details) {
-      return centralBank.central_bank_details.map((price, index) => {
+      let slicedCentralBankDetails = centralBank.central_bank_details.length > 30
+        ? centralBank.central_bank_details.slice(0, 30) : centralBank.central_bank_details;
+
+      return slicedCentralBankDetails.map((price, index) => {
         const buyPriceChange = index !== 0
           ? calculatePriceDifferences(price.buy_price, centralBank.central_bank_details[index - 1].buy_price) : "-";
         const sellPriceChange = index !== 0
@@ -32,7 +35,7 @@ export default class CurrencyChangeTable extends React.PureComponent {
     return null;
   }
   render() {
-    const { selectedRange, centralBank, translate } = this.props;
+    const { centralBank, translate } = this.props;
     const centralBankRecords = this.centralBankRecords;
 
     return centralBankRecords && (
@@ -42,7 +45,7 @@ export default class CurrencyChangeTable extends React.PureComponent {
           <h3>
             {translate('companies.currencyChangesSubTitle', {
               currencyType: centralBank.currency_id,
-              period: selectedRange
+              period: centralBankRecords.length
             })}
           </h3>
         </div>

@@ -1,6 +1,7 @@
 {
   "companies": {
     "title": "Currency exchange rates in {{city}}",
+    "centralBankTitle": "Bank of Thailand",
     "buy": "Buy",
     "sell": "Sell",
     "bestRate": "Best rate",
@@ -9,7 +10,13 @@
     "gridBranchName": "Exchange offices",
     "lastUpdate": "Last update",
     "info": "Info",
-    "knowMore": "Know more"
+    "knowMore": "Know more",
+    "mapTitle": "Map of exchange offices",
+    "currencyChangesTitle": "Currency changes",
+    "currencyChangesSubTitle": "Table of {{currencyType}} change for last {{period}} days",
+    "currencyChangesPeriod": "Period",
+    "currencyChangesBuyPrice": "Buy price changes",
+    "currencyChangesSellPrice": "Sell price changes"
   },
   "company": {
     "calculator": "Calculator",
@@ -31,5 +38,4 @@
   "warning": {
     "notWorkingDay": "not working day"
   }
-
 }
