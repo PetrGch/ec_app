@@ -2,66 +2,42 @@ import React from 'react';
 
 import Grid from "../../../../common/controlLib/Grid/Grid";
 import {baseCurrency} from "./baseCurrencyGridConfig";
-import {filterByCurrency} from "../../../../reducer/util";
 import BlockWrapper from "../../../../common/BlockWrapper/BlockWrapper";
 
 import './ecBaseCurrency.less';
 
 export default class EcBaseCurrency extends React.PureComponent {
-  get usdCurrency() {
-    const { companies } = this.props;
-    let usd = null;
-
-    filterByCurrency(companies, "USD", 1).some(filteredCompanies => {
-      if (filteredCompanies.is_central_bank) {
-        usd = filteredCompanies;
-        return true;
-      }
-      return false;
-    });
-    return usd;
-  }
-
-  get eurCurrency() {
-    const { companies } = this.props;
-    let eur = null;
-    filterByCurrency(companies, "EUR", 1).some(filteredCompanies => {
-      if (filteredCompanies.is_central_bank) {
-        eur = filteredCompanies;
-        return true;
-      }
-      return false;
-    });
-    return eur;
-  }
-
   get centralBank() {
-    const usd = this.usdCurrency;
-    const eur = this.eurCurrency;
+    const { centralBankEurUsd, translate } = this.props;
 
-    if (usd && eur) {
-      return [{
-        company_name: "Buy",
-        usd: usd.buy_price.toFixed(2),
-        eur: eur.buy_price.toFixed(2)
-      }, {
-        company_name: "Sell",
-        usd: usd.sell_price.toFixed(2),
-        eur: eur.sell_price.toFixed(2)
-      }]
+    if (centralBankEurUsd && centralBankEurUsd.length === 2
+      && !isNaN(centralBankEurUsd[0].buy_price) && !isNaN(centralBankEurUsd[1].buy_price)) {
+      try {
+        return [{
+          operation: translate("companies.buy"),
+          [centralBankEurUsd[0].central_bank.currency_id]: (+centralBankEurUsd[0].buy_price).toFixed(2),
+          [centralBankEurUsd[1].central_bank.currency_id]: (+centralBankEurUsd[1].buy_price).toFixed(2)
+        }, {
+          operation: translate("companies.sell"),
+          [centralBankEurUsd[0].central_bank.currency_id]: (+centralBankEurUsd[0].sell_price).toFixed(2),
+          [centralBankEurUsd[1].central_bank.currency_id]: (+centralBankEurUsd[1].sell_price).toFixed(2)
+        }]
+      } catch (ex) {
+        console.error(ex);
+      }
     }
+
     return null;
   }
 
   render() {
-    const { isLoading } = this.props;
+    const { isLoading, translate } = this.props;
     const centralBank = this.centralBank;
-    const usd = this.usdCurrency;
 
     return centralBank ? (
       <BlockWrapper isLoad={isLoading}>
         <div className="ecBaseCurrency">
-          <h3 className="ecBaseCurrency__title">{usd.company_name}</h3>
+          <h3 className="ecBaseCurrency__title">{translate("companies.centralBankTitle")}</h3>
           <Grid
             isHeader
             records={centralBank}

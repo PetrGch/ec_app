@@ -21,8 +21,9 @@ export default class EcHomePage extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { loadAllCompaniesByCurrencyType, loadAllCurrencyTypes } = this.props;
+    const { loadAllCompaniesByCurrencyType, loadAllCurrencyTypes, loadCentralBankEurUsdData } = this.props;
     loadAllCompaniesByCurrencyType("EUR");
+    loadCentralBankEurUsdData();
     loadAllCurrencyTypes();
   }
 
@@ -42,7 +43,6 @@ export default class EcHomePage extends React.PureComponent {
   render() {
     const {
       dispatch,
-      companies,
       filteredCurrencies,
       currencyAmount,
       isBuyStatus,
@@ -50,13 +50,16 @@ export default class EcHomePage extends React.PureComponent {
       selectedCurrency,
       centralBank,
       selectedRange,
-      isCompaniesLoading,
-      isCentralBankLoading,
       currencyMark,
       sortType,
       filteringNameValue,
       currentPage,
-      amountOfPage
+      amountOfPage,
+      centralBankEurUsd,
+
+      isCompaniesLoading,
+      isCentralBankLoading,
+      isCentralBankEurUsdLoading
     } = this.props;
     const { selectedRowRecord } = this.state;
 
@@ -83,9 +86,9 @@ export default class EcHomePage extends React.PureComponent {
             onNameClick={this.onNameClick}
           />
           <EcSideBar
-            companies={companies}
+            centralBankEurUsd={centralBankEurUsd}
             isBuyStatus={isBuyStatus}
-            isCompaniesLoading={isCompaniesLoading}
+            isLoading={isCentralBankEurUsdLoading}
           />
         </div>
 

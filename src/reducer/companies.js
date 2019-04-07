@@ -2,7 +2,7 @@ import {
   CHANGE_PAGE,
   FILTER_COMPANIES_BY_NAME,
   LOAD_ALL_COMPANIES, LOAD_ALL_CURRENCIES,
-  LOAD_CENTRAL_BANK_DATA,
+  LOAD_CENTRAL_BANK_DATA, LOAD_CENTRAL_BANK_EUR_USD,
   SET_BUY_STATUS, SET_SORTING_TYPE,
   SET_SUM_AMOUNT, sortingType
 } from "../constant/companies";
@@ -19,6 +19,7 @@ const initialState = {
   selectedCurrency: 'EUR',
   filteredCurrencies: [],
   centralBank: null,
+  centralBankEurUsd: [],
   selectedRange: "7",
   currencyMark: currencyMark["EUR"],
   currentPage: 1,
@@ -82,6 +83,11 @@ export default function companies(state = initialState, action) {
         ...state,
         centralBank: action.centralBank,
         selectedRange: action.selectedRange
+      };
+    case LOAD_CENTRAL_BANK_EUR_USD:
+      return {
+        ...state,
+        centralBankEurUsd: action.centralBankEurUsd
       };
     case LOAD_ALL_CURRENCIES:
       return {

@@ -1,12 +1,12 @@
 import {
   CHANGE_PAGE, FILTER_COMPANIES_BY_NAME,
-  LOAD_ALL_COMPANIES, LOAD_ALL_CURRENCIES, LOAD_CENTRAL_BANK_DATA,
+  LOAD_ALL_COMPANIES, LOAD_ALL_CURRENCIES, LOAD_CENTRAL_BANK_DATA, LOAD_CENTRAL_BANK_EUR_USD,
   SET_BUY_STATUS, SET_SORTING_TYPE,
   SET_SUM_AMOUNT
 } from "../constant/companies";
 import {request} from "../common/util/APIUtil";
 import {API_URL} from "../common/util/AppConstance";
-import {isCentralBankLoading, isCompaniesLoading} from "./load";
+import {isCentralBankEurUsdLoading, isCentralBankLoading, isCompaniesLoading} from "./load";
 
 export function setBuyStatus(isBuyStatus) {
   return {
@@ -46,10 +46,29 @@ export function loadAllCurrencyTypes() {
       url: API_URL + `/exCurrency/types`,
       method: 'GET'
     }).then((currencyTypes) => {
+      if (currencyTypes) {
+        dispatch({
+          currencyTypes: currencyTypes,
+          type: LOAD_ALL_CURRENCIES
+        })
+      }
+    });
+  }
+}
+
+export function loadCentralBankEurUsdData() {
+  return (dispatch) => {
+    dispatch(isCentralBankEurUsdLoading(true));
+    request({
+      url: API_URL + `/centralBank/eurusd`,
+      method: 'GET'
+    }).then((centralBankEurUsd) => {
       dispatch({
-        currencyTypes: currencyTypes,
-        type: LOAD_ALL_CURRENCIES
+        centralBankEurUsd,
+        type: LOAD_CENTRAL_BANK_EUR_USD
       })
+    }).finally(() => {
+      dispatch(isCentralBankEurUsdLoading(false));
     });
   }
 }

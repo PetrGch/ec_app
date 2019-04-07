@@ -4,9 +4,10 @@ import {translate} from "react-i18next";
 import BlockWrapper from "../../../common/BlockWrapper/BlockWrapper";
 import EcMainMap from "./EcMainMap/EcMainMap";
 import CentralBankChart from "./CentralBankChart/CentralBankChart";
+import {loadDataOfCentralBank} from "../../../action/companies";
+import CurrencyChangeTable from "./CurrencyChangeTable/CurrencyChangeTable";
 
 import './additionalContent.less';
-import {loadDataOfCentralBank} from "../../../action/companies";
 
 class AdditionalContent extends React.PureComponent {
   componentDidMount() {
@@ -32,6 +33,7 @@ class AdditionalContent extends React.PureComponent {
       <div className="additionalContent">
         <BlockWrapper isLoad={isCompaniesLoading}>
           <EcMainMap
+            translate={t}
             records={filteredCurrencies}
             isBuyStatus={isBuyStatus}
             selectedRowRecord={selectedRowRecord}
@@ -49,6 +51,13 @@ class AdditionalContent extends React.PureComponent {
             </BlockWrapper>
           )
         }
+        <BlockWrapper isLoad={isCentralBankLoading}>
+          <CurrencyChangeTable
+            translate={t}
+            selectedRange={selectedRange}
+            centralBank={centralBank}
+          />
+        </BlockWrapper>
       </div>
     );
   }

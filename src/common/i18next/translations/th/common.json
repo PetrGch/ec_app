@@ -1,6 +1,7 @@
 {
   "companies": {
     "title": "อัตราแลกเปลี่ยนเงินตราต่างประเทศใน{{city}}",
+    "centralBankTitle": "ธนาคารแห่งประเทศไทย",
     "buy": "ซื้อ",
     "sell": "ขาย",
     "bestRate": "อัตราที่ดีที่สุด",
@@ -9,7 +10,13 @@
     "gridBranchName": "สำนักงานแลกเปลี่ยนเงินตราต่างประเทศ",
     "lastUpdate": "การปรับปรุงครั้งล่าสุด",
     "info": "ข้อมูล",
-    "knowMore": "รู้เพิ่มเติม"
+    "knowMore": "รู้เพิ่มเติม",
+    "mapTitle": "แผนที่สำนักงานแลกเปลี่ยน",
+    "currencyChangesTitle": "การเปลี่ยนแปลงสกุลเงิน",
+    "currencyChangesSubTitle": "การเปลี่ยนแปลงสกุลเงิน ({{currencyType}}) ใน {{period}} วันล่าสุด",
+    "currencyChangesPeriod": "ช่วงเวลา",
+    "currencyChangesBuyPrice": "ซื้อการเปลี่ยนแปลงราคา",
+    "currencyChangesSellPrice": "การเปลี่ยนแปลงราคาขาย"
   },
   "company": {
     "calculator": "เครื่องคิดเลข",

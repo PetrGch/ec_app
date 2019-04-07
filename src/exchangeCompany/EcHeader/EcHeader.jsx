@@ -1,12 +1,12 @@
 import React from 'react';
 import {withRouter} from "react-router-dom";
 import { translate } from 'react-i18next';
-
 import { FaAngleDoubleDown } from 'react-icons/fa';
 
+import { sizeType } from "../../common/controlLib/util";
+import { Dropdown } from "../../common/controlLib";
+
 import './ecHeader.less';
-import {sizeType} from "../../common/controlLib/util";
-import {Dropdown} from "../../common/controlLib";
 
 const languages = [
   {

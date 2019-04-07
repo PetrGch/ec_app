@@ -9,13 +9,22 @@ import './ecCompany.less';
 export default class EcCompany extends React.PureComponent {
   componentDidMount() {
     const {
-      loadCompany, loadAllCompanies, selectedCurrency, setBranchRout,
-      findCompanyByBranchName, companies, match: { params }
+      loadCompany,
+      loadAllCompaniesByCurrencyType,
+      loadCentralBankEurUsdData,
+      loadAllCurrencyTypes,
+      selectedCurrency,
+      setBranchRout,
+      findCompanyByBranchName,
+      companies,
+      match: { params }
     } = this.props;
 
     if (companies === null || companies.length === 0) {
       loadCompany(params.branch_name);
-      loadAllCompanies();
+      loadAllCompaniesByCurrencyType("EUR");
+      loadCentralBankEurUsdData();
+      loadAllCurrencyTypes();
     } else {
       findCompanyByBranchName(params.branch_name, companies, selectedCurrency);
     }
@@ -25,7 +34,7 @@ export default class EcCompany extends React.PureComponent {
   render() {
     const {
       company,
-      companies,
+      centralBankEurUsd,
       isBuyStatus,
       selectedCurrency,
       selectedCompanyCurrency,
@@ -33,6 +42,7 @@ export default class EcCompany extends React.PureComponent {
       filteredCurrency,
       isCompanyLoading,
       isCompaniesLoading,
+      isCentralBankEurUsdLoading,
       dispatch,
       match: { params }
     } = this.props;
@@ -55,9 +65,9 @@ export default class EcCompany extends React.PureComponent {
         />
 
         <EcSideBar
-          companies={companies}
+          centralBankEurUsd={centralBankEurUsd}
           isBuyStatus={isBuyStatus}
-          isCompaniesLoading={isCompaniesLoading}
+          isLoading={isCentralBankEurUsdLoading}
         />
       </div>
     );

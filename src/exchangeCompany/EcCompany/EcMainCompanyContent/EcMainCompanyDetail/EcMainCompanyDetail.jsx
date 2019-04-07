@@ -5,9 +5,11 @@ import {nullValidator} from "../../../../common/util/valueValidator";
 
 import './ecMainCompanyDetail.less';
 
+const thaiUTCDiff = 7;
+
 function checkWorkingDays(from, to, translate) {
   if (from && to) {
-    return `${moment(from, "HH:mm").format("HH:mm")} - ${moment(to, "HH:mm").format("HH:mm")}`;
+    return `${moment(from, "HH:mm").add(thaiUTCDiff, "hour").format("HH:mm")} - ${moment(to, "HH:mm").add(thaiUTCDiff, "hour").local().format("HH:mm")}`;
   }
 
   return translate("warning.notWorkingDay");

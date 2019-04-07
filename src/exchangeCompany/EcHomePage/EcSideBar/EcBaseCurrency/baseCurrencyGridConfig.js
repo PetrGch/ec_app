@@ -1,18 +1,18 @@
 export const baseCurrency = [
   {
-    index: "company_name",
-    key: "company_name",
+    index: "operation",
+    key: "operation",
     title: ""
   },
   {
-    index: "usd",
-    key: "usd",
+    index: "USD",
+    key: "USD",
     title: "USD",
     renderCell: (record, config) => (`${record[config.key]} $`)
   },
   {
-    index: "eur",
-    key: "eur",
+    index: "EUR",
+    key: "EUR",
     title: "EUR",
     renderCell: (record, config) => (`${record[config.key]} €`)
   }

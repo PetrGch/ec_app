@@ -5,9 +5,10 @@ import {nullValidator} from "../../../../common/util/valueValidator";
 import ExpandCollapseWrapper from "../ExpandCollapseWrapper/ExpandCollapseWrapper";
 import {sizeType} from "../../../../common/controlLib/util";
 import {Dropdown, Input, InputValidator, Radio} from "../../../../common/controlLib";
-import {setActiveCompanyCurrency, setBuyStatus} from "../../../../action/company";
+import {setBuyStatus} from "../../../../action/company";
 import {cashFormatter, cashReformatter} from "../../../../common/util/formatter/formatter";
 import {calculateFinalResultValue, calculateSumValue} from "./prepopulateMainCompanyCalculateValue";
+import {loadAllCompaniesByCurrencyType} from "../../../../action/companies";
 
 import './ecMainCompanyCalculate.less';
 
@@ -116,7 +117,7 @@ export default class EcMainCompanyCalculate extends React.PureComponent {
 
   selectCurrency(selectedCurrency) {
     const { dispatch } = this.props;
-    dispatch(setActiveCompanyCurrency(selectedCurrency.value));
+    dispatch(loadAllCompaniesByCurrencyType(selectedCurrency.index));
   }
 
   get finalResultValue() {

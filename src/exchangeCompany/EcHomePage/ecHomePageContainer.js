@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 
 import EcHomePage from "./EcHomePage";
-import {loadAllCompaniesByCurrencyType, loadAllCurrencyTypes} from "../../action/companies";
+import {loadAllCompaniesByCurrencyType, loadAllCurrencyTypes, loadCentralBankEurUsdData} from "../../action/companies";
 
 const mapStateToProps = state => {
   return {
@@ -18,8 +18,10 @@ const mapStateToProps = state => {
     filteringNameValue: state.companies.filteringNameValue,
     currentPage: state.companies.currentPage,
     amountOfPage: state.companies.amountOfPage,
+    centralBankEurUsd: state.companies.centralBankEurUsd,
     isCompaniesLoading: state.load.isCompaniesLoading,
-    isCentralBankLoading: state.load.isCentralBankLoading
+    isCentralBankLoading: state.load.isCentralBankLoading,
+    isCentralBankEurUsdLoading: state.load.isCentralBankEurUsdLoading
   };
 };
 
@@ -31,6 +33,9 @@ const mapDispatchToProps = dispatch => {
     },
     loadAllCurrencyTypes() {
       dispatch(loadAllCurrencyTypes());
+    },
+    loadCentralBankEurUsdData() {
+      dispatch(loadCentralBankEurUsdData());
     }
   };
 };

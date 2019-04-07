@@ -1,0 +1,49 @@
+@import "../../../../common/util/variable";
+
+.currencyChangeTable {
+  &__header {
+    & h2 {
+      margin-bottom: 10px;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    & h3 {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__table {
+    & th {
+      text-align: right;
+
+      &:first-of-type {
+        text-align: left;
+      }
+    }
+
+    & td {
+      text-align: right;
+
+      &:first-of-type {
+        text-align: left;
+      }
+    }
+  }
+
+  &__price {
+    & svg {
+      margin-left: 8px;
+    }
+
+    &--trend {
+      &-up {
+        color: @primary-greenDark
+      }
+
+      &-down {
+        color: @primary-orange
+      }
+    }
+  }
+}

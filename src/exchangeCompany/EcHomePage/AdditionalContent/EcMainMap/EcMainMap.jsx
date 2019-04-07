@@ -72,8 +72,8 @@ export default class EcMainMap extends React.PureComponent {
   }
 
   render() {
-    const {records} = this.props;
-    const {center, zoom} = this.state;
+    const { records, translate } = this.props;
+    const { center, zoom } = this.state;
 
     if (__isBrowser__ && center.length !== 0) {
       const {Map, Marker, Popup, TileLayer} = require('react-leaflet');
@@ -82,6 +82,9 @@ export default class EcMainMap extends React.PureComponent {
 
       return (
         <div className="ecMainMap">
+          <div className="ecMainMap__header">
+            <h2>{translate("companies.mapTitle")}</h2>
+          </div>
           {(records && records.length !== 0) && <Map center={center} zoom={zoom}>
             <TileLayer
               attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a> '
